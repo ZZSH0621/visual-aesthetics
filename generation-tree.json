@@ -1,0 +1,52 @@
+{
+  "root": {
+    "nodeId": "gen-project-shell",
+    "kind": "project-shell",
+    "output": "partials/project-shell.html",
+    "sharedRegions": ["header nav", "footer", "brand CSS", "typography", "radius"],
+    "privateRegions": [],
+    "status": "planned",
+    "children": [
+      {
+        "nodeId": "gen-page-index",
+        "kind": "page-leaf",
+        "pageIds": ["page-index"],
+        "output": "pages/index.html",
+        "sharedRegions": [],
+        "privateRegions": ["hero section", "featured modules", "call to action"],
+        "status": "planned",
+        "children": []
+      },
+      {
+        "nodeId": "gen-page-courses",
+        "kind": "page-leaf",
+        "pageIds": ["page-courses"],
+        "output": "pages/courses.html",
+        "sharedRegions": [],
+        "privateRegions": ["course grid", "filter bar", "sidebar"],
+        "status": "planned",
+        "children": []
+      },
+      {
+        "nodeId": "gen-page-multimodal-light",
+        "kind": "page-leaf",
+        "pageIds": ["page-multimodal-light"],
+        "output": "pages/multimodal-light.html",
+        "sharedRegions": [],
+        "privateRegions": ["module hero", "lesson grid", "gallery"],
+        "status": "planned",
+        "children": []
+      },
+      {
+        "nodeId": "gen-page-lens-language",
+        "kind": "page-leaf",
+        "pageIds": ["page-lens-language"],
+        "output": "pages/lens-language.html",
+        "sharedRegions": [],
+        "privateRegions": ["technique cards", "case studies", "cinematic hero"],
+        "status": "planned",
+        "children": []
+      }
+    ]
+  }
+}

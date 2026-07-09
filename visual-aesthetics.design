@@ -1,0 +1,166 @@
+{
+  "data": [
+    {
+      "id": "page-index",
+      "title": "首页",
+      "type": "page",
+      "version": 1,
+      "createdAt": 1751817600000,
+      "canvasData": {
+        "x": 0,
+        "y": 0,
+        "group": 0
+      },
+      "devMetadata": {
+        "htmlSrc": "pages/index.html",
+        "interactions": [
+          {
+            "domId": "cta-courses",
+            "targetPageId": "page-courses"
+          },
+          {
+            "domId": "nav-multimodal",
+            "targetPageId": "page-multimodal-light"
+          },
+          {
+            "domId": "nav-lens",
+            "targetPageId": "page-lens-language"
+          }
+        ]
+      }
+    },
+    {
+      "id": "page-courses",
+      "title": "课程中心",
+      "type": "page",
+      "version": 1,
+      "createdAt": 1751817600000,
+      "canvasData": {
+        "x": 620,
+        "y": 0,
+        "group": 0
+      },
+      "devMetadata": {
+        "htmlSrc": "pages/courses.html",
+        "interactions": [
+          {
+            "domId": "cta-multimodal",
+            "targetPageId": "page-multimodal-light"
+          },
+          {
+            "domId": "cta-lens",
+            "targetPageId": "page-lens-language"
+          }
+        ]
+      }
+    },
+    {
+      "id": "page-multimodal-light",
+      "title": "多模态光影",
+      "type": "page",
+      "version": 1,
+      "createdAt": 1751817600000,
+      "canvasData": {
+        "x": 1240,
+        "y": 0,
+        "group": 0
+      },
+      "devMetadata": {
+        "htmlSrc": "pages/multimodal-light.html",
+        "interactions": []
+      }
+    },
+    {
+      "id": "page-lens-language",
+      "title": "镜头语言",
+      "type": "page",
+      "version": 1,
+      "createdAt": 1751817600000,
+      "canvasData": {
+        "x": 1240,
+        "y": 3466,
+        "group": 0
+      },
+      "devMetadata": {
+        "htmlSrc": "pages/lens-language.html",
+        "interactions": []
+      }
+    },
+    {
+      "id": "image-001",
+      "title": "首页主视觉",
+      "type": "image",
+      "version": 1,
+      "createdAt": 1751817600000,
+      "canvasData": {
+        "x": 0,
+        "y": 5648
+      },
+      "devMetadata": {
+        "imageSrc": "assets/hero-main.jpg"
+      }
+    },
+    {
+      "id": "image-002",
+      "title": "光影课程封面",
+      "type": "image",
+      "version": 1,
+      "createdAt": 1751817600000,
+      "canvasData": {
+        "x": 620,
+        "y": 5648
+      },
+      "devMetadata": {
+        "imageSrc": "assets/course-light.jpg"
+      }
+    },
+    {
+      "id": "image-003",
+      "title": "镜头课程封面",
+      "type": "image",
+      "version": 1,
+      "createdAt": 1751817600000,
+      "canvasData": {
+        "x": 1240,
+        "y": 5648
+      },
+      "devMetadata": {
+        "imageSrc": "assets/course-lens.jpg"
+      }
+    },
+    {
+      "id": "image-004",
+      "title": "光影课程主图",
+      "type": "image",
+      "version": 1,
+      "createdAt": 1751817600000,
+      "canvasData": {
+        "x": 1860,
+        "y": 5648
+      },
+      "devMetadata": {
+        "imageSrc": "assets/light-shadow.jpg"
+      }
+    },
+    {
+      "id": "image-005",
+      "title": "镜头语言主图",
+      "type": "image",
+      "version": 1,
+      "createdAt": 1751817600000,
+      "canvasData": {
+        "x": 2480,
+        "y": 5648
+      },
+      "devMetadata": {
+        "imageSrc": "assets/cinematic-lens.jpg"
+      }
+    }
+  ],
+  "config": {
+    "autoLayout": true,
+    "deviceType": "desktop",
+    "projectName": "视觉美学学习网站",
+    "designLibrary": null
+  }
+}

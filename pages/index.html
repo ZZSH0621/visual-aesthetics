@@ -1,0 +1,535 @@
+<!DOCTYPE html>
+<html lang="zh-CN" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Visual Aesthetics — 探索视觉的无限可能</title>
+    <style id="theme-vars">
+/* Visual Aesthetics Learning Site — Brand CSS */
+/* Art Gallery + Magazine Style — Dark Sophisticated */
+
+:root {
+  /* — Brand Primary — */
+  --color-brand: #C9A96E;
+  --color-brand-light: #DBC99E;
+  --color-brand-dark: #A68B5B;
+
+  /* — Neutral Surface — */
+  --color-bg-primary: #0A0A0A;
+  --color-bg-secondary: #141414;
+  --color-bg-surface: #1A1A1A;
+  --color-bg-elevated: #222222;
+  --color-bg-sunken: #111111;
+
+  /* — Text — */
+  --color-text-primary: #F0EDE8;
+  --color-text-secondary: #9B9590;
+  --color-text-tertiary: #6B6662;
+  --color-text-inverse: #0A0A0A;
+
+  /* — State Colors — */
+  --state-success: #4ADE80;
+  --state-warning: #FBBF24;
+  --state-error: #F87171;
+  --state-info: #60A5FA;
+
+  /* — Border — */
+  --color-border-default: rgba(255, 255, 255, 0.08);
+  --color-border-strong: rgba(255, 255, 255, 0.15);
+  --color-border-brand: rgba(201, 169, 110, 0.3);
+
+  /* — Radius — */
+  --radius-sm: 2px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+  --radius-full: 9999px;
+
+  /* — Shadow — */
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.3);
+  --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.3);
+  --shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.4);
+  --shadow-float: 0 16px 48px rgba(0, 0, 0, 0.5);
+
+  /* — Typography — */
+  --font-display: 'Playfair Display', 'Noto Serif SC', 'Georgia', serif;
+  --font-body: 'Inter', 'Noto Sans SC', 'Helvetica Neue', sans-serif;
+  --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
+
+  /* — Spacing Scale — */
+  --space-xs: 4px;
+  --space-sm: 8px;
+  --space-md: 16px;
+  --space-lg: 24px;
+  --space-xl: 32px;
+  --space-2xl: 48px;
+  --space-3xl: 64px;
+  --space-4xl: 96px;
+}
+
+/* Light mode overrides (reserved) */
+html.light {
+  --color-bg-primary: #FAF8F5;
+  --color-bg-secondary: #F0EDE8;
+  --color-bg-surface: #FFFFFF;
+  --color-bg-elevated: #FFFFFF;
+  --color-bg-sunken: #EDE9E3;
+  --color-text-primary: #1A1A1A;
+  --color-text-secondary: #6B6662;
+  --color-text-tertiary: #9B9590;
+  --color-text-inverse: #FAF8F5;
+  --color-border-default: rgba(0, 0, 0, 0.08);
+  --color-border-strong: rgba(0, 0, 0, 0.15);
+  --color-border-brand: rgba(166, 139, 91, 0.3);
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.08);
+  --shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.1);
+  --shadow-float: 0 16px 48px rgba(0, 0, 0, 0.12);
+}
+
+    </style>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4.3.1/dist/index.global.js"></script>
+    <style type="text/tailwindcss">
+    @theme inline {
+      --color-brand: var(--color-brand);
+      --color-brand-light: var(--color-brand-light);
+      --color-brand-dark: var(--color-brand-dark);
+      --color-bg-primary: var(--color-bg-primary);
+      --color-bg-secondary: var(--color-bg-secondary);
+      --color-bg-surface: var(--color-bg-surface);
+      --color-bg-elevated: var(--color-bg-elevated);
+      --color-text-primary: var(--color-text-primary);
+      --color-text-secondary: var(--color-text-secondary);
+      --color-text-tertiary: var(--color-text-tertiary);
+    }
+    </style>
+    <script src="https://unpkg.com/lucide@1.8.0/dist/umd/lucide.min.js"></script>
+    <style type="text/tailwindcss">
+  
+  @layer base {
+    body { background: var(--color-bg-primary); color: var(--color-text-primary); }
+    td, th { @apply break-words; word-break: break-all; word-break: auto-phrase; }
+    th { @apply whitespace-nowrap; }
+  }
+    </style>
+    <style>
+      .no-scrollbar::-webkit-scrollbar { display: none; }
+      .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+      [data-icon] {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        -webkit-mask-size: contain;
+        mask-size: contain;
+        -webkit-mask-repeat: no-repeat;
+        mask-repeat: no-repeat;
+        -webkit-mask-position: center;
+        mask-position: center;
+        background-color: currentColor;
+      }
+    </style>
+</head>
+<body style="margin: 0; padding: 0; background: var(--color-bg-primary); color: var(--color-text-primary);">
+
+  <!-- ===== HEADER (from shell template) ===== -->
+  <header class="fixed top-0 left-0 right-0 z-50" style="background: rgba(10,10,10,0.85); backdrop-filter: blur(20px); border-bottom: 1px solid var(--color-border-default);">
+    <nav class="max-w-7xl mx-auto px-6 lg:px-8 h-16 flex items-center justify-between">
+      <a href="index.html" data-dom-id="nav-home" class="flex items-center gap-2" style="font-family: var(--font-display); color: var(--color-brand); font-size: 20px; font-weight: 600; text-decoration: none; letter-spacing: 0.02em;">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><path d="M12 2v20M2 12h20" opacity="0.3"/><circle cx="12" cy="12" r="4" fill="currentColor" opacity="0.4"/></svg>
+        Visual Aesthetics
+      </a>
+      <div class="hidden md:flex items-center gap-8">
+        <a href="index.html" data-dom-id="nav-home" class="nav-link" style="color: var(--color-brand); font-family: var(--font-body); font-size: 13px; text-decoration: none; letter-spacing: 0.08em; text-transform: uppercase; transition: color 0.2s;">首页</a>
+        <a href="courses.html" data-dom-id="nav-courses" class="nav-link" style="color: var(--color-text-secondary); font-family: var(--font-body); font-size: 13px; text-decoration: none; letter-spacing: 0.08em; text-transform: uppercase; transition: color 0.2s;">课程中心</a>
+        <a href="multimodal-light.html" data-dom-id="nav-multimodal" class="nav-link" style="color: var(--color-text-secondary); font-family: var(--font-body); font-size: 13px; text-decoration: none; letter-spacing: 0.08em; text-transform: uppercase; transition: color 0.2s;">多模态光影</a>
+        <a href="lens-language.html" data-dom-id="nav-lens" class="nav-link" style="color: var(--color-text-secondary); font-family: var(--font-body); font-size: 13px; text-decoration: none; letter-spacing: 0.08em; text-transform: uppercase; transition: color 0.2s;">镜头语言</a>
+      </div>
+      <button class="md:hidden" style="color: var(--color-text-primary); background: none; border: none; cursor: pointer;" aria-label="Menu">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
+      </button>
+    </nav>
+  </header>
+
+  <main class="pt-16 min-h-screen" style="background: var(--color-bg-primary);">
+
+    <!-- ===== SECTION 1: FULL-BLEED HERO ===== -->
+    <section class="relative w-full overflow-hidden" style="min-height: 100vh; display: flex; align-items: center;">
+      <!-- Background image -->
+      <div class="absolute inset-0">
+        <img
+          src="../assets/hero-main.jpg"
+          alt="Hero background"
+          class="w-full h-full object-cover"
+          style="filter: brightness(0.35) contrast(1.1);"
+        >
+      </div>
+      <!-- Dark gradient overlay -->
+      <div class="absolute inset-0" style="background: linear-gradient(135deg, rgba(10,10,10,0.7) 0%, rgba(10,10,10,0.4) 50%, rgba(10,10,10,0.8) 100%);"></div>
+      <!-- Cinematic light beam -->
+      <div class="hero-light-beam"></div>
+      <!-- Bottom fade -->
+      <div class="absolute bottom-0 left-0 right-0 h-32" style="background: linear-gradient(to top, var(--color-bg-primary), transparent);"></div>
+
+      <!-- Hero content -->
+      <div class="relative z-10 max-w-7xl mx-auto px-6 lg:px-8 w-full py-24 lg:py-32">
+        <div class="max-w-3xl">
+          <!-- Small label -->
+          <p class="mb-6" style="font-family: var(--font-body); font-size: 12px; text-transform: uppercase; letter-spacing: 0.2em; color: var(--color-brand); font-weight: 500;">
+            Visual Aesthetics Learning
+          </p>
+          <!-- Headline -->
+          <h1 style="font-family: var(--font-display); font-size: clamp(36px, 6vw, 72px); font-weight: 500; line-height: 1.1; color: var(--color-text-primary); margin: 0 0 24px 0;">
+            探索视觉的<br>
+            <span style="color: var(--color-brand); font-style: italic;">无限可能</span>
+          </h1>
+          <!-- Subtitle -->
+          <p class="mb-10" style="font-family: var(--font-body); font-size: 16px; line-height: 1.8; color: var(--color-text-secondary); max-width: 520px;">
+            从光影的本质到镜头的叙事，深入理解视觉美学的底层逻辑。在这里，技术成为语言，感知成为能力。
+          </p>
+          <!-- CTA Button -->
+          <a
+            href="#"
+            data-dom-id="cta-courses"
+            class="cta-gold inline-flex items-center gap-3"
+            style="display: inline-flex; align-items: center; gap: 10px; padding: 14px 36px; background: var(--color-brand); color: var(--color-text-inverse); font-family: var(--font-body); font-size: 14px; font-weight: 500; letter-spacing: 0.06em; text-transform: uppercase; text-decoration: none; border-radius: var(--radius-sm);"
+          >
+            开始学习
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
+          </a>
+        </div>
+      </div>
+
+      <!-- Scroll indicator -->
+      <div class="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-10 hidden lg:block" style="opacity: 0.4;">
+        <div style="width: 1px; height: 48px; background: linear-gradient(to bottom, var(--color-brand), transparent); margin: 0 auto;"></div>
+      </div>
+    </section>
+
+    <!-- ===== SECTION 2: FEATURED MODULES (Asymmetric 2-Column) ===== -->
+    <section class="fade-in-section" style="padding: 96px 0; background: var(--color-bg-primary);">
+      <div class="max-w-7xl mx-auto px-6 lg:px-8">
+        <!-- Section label -->
+        <div class="mb-12 lg:mb-16">
+          <p style="font-family: var(--font-body); font-size: 12px; text-transform: uppercase; letter-spacing: 0.2em; color: var(--color-brand); font-weight: 500; margin-bottom: 12px;">
+            Featured Modules
+          </p>
+          <h2 style="font-family: var(--font-display); font-size: clamp(28px, 4vw, 48px); font-weight: 500; line-height: 1.15; color: var(--color-text-primary); margin: 0;">
+            核心学习模块
+          </h2>
+        </div>
+
+        <!-- Asymmetric grid -->
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-8">
+
+          <!-- Left card: 多模态光影 (taller) -->
+          <a href="multimodal-light.html" data-dom-id="nav-multimodal" class="feature-card block relative overflow-hidden rounded-sm lg:rounded-md" style="border: 1px solid var(--color-border-default); text-decoration: none; min-height: 480px;">
+            <div class="absolute inset-0">
+              <img
+                src="../assets/light-shadow.jpg"
+                alt="多模态光影"
+                class="w-full h-full object-cover"
+                style="filter: brightness(0.45) saturate(0.9);"
+              >
+            </div>
+            <div class="feature-card-overlay absolute inset-0" style="background: linear-gradient(to top, rgba(10,10,10,0.95) 0%, rgba(10,10,10,0.5) 50%, rgba(10,10,10,0.2) 100%); transition: opacity 0.4s ease;"></div>
+            <!-- Gold accent line -->
+            <div class="absolute top-0 left-0 w-full h-px" style="background: linear-gradient(to right, transparent, var(--color-brand), transparent); opacity: 0.5;"></div>
+            <div class="relative z-10 flex flex-col justify-end h-full p-8 lg:p-10" style="min-height: 480px;">
+              <p style="font-family: var(--font-body); font-size: 11px; text-transform: uppercase; letter-spacing: 0.2em; color: var(--color-brand); font-weight: 500; margin-bottom: 12px;">
+                Module 01
+              </p>
+              <h3 class="feature-card-title" style="font-family: var(--font-display); font-size: clamp(24px, 3vw, 36px); font-weight: 500; color: var(--color-text-primary); margin: 0 0 12px 0; line-height: 1.2; transition: color 0.3s ease;">
+                多模态光影
+              </h3>
+              <p style="font-family: var(--font-body); font-size: 14px; line-height: 1.7; color: var(--color-text-secondary); max-width: 400px; margin-bottom: 20px;">
+                深入探索光影、色彩与多模态视觉表达的底层原理。理解光线如何塑造空间，色彩如何传达情感，构建系统的视觉感知能力。
+              </p>
+              <span class="feature-card-arrow inline-flex items-center gap-2" style="font-family: var(--font-body); font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--color-brand); opacity: 0.7; transition: all 0.3s ease;">
+                探索模块
+                <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 7h10M8 3l4 4-4 4"/></svg>
+              </span>
+            </div>
+          </a>
+
+          <!-- Right card: 镜头语言 (slightly shorter) -->
+          <a href="lens-language.html" data-dom-id="nav-lens" class="feature-card block relative overflow-hidden rounded-sm lg:rounded-md" style="border: 1px solid var(--color-border-default); text-decoration: none; min-height: 420px;">
+            <div class="absolute inset-0">
+              <img
+                src="../assets/cinematic-lens.jpg"
+                alt="镜头语言"
+                class="w-full h-full object-cover"
+                style="filter: brightness(0.4) saturate(0.85);"
+              >
+            </div>
+            <div class="feature-card-overlay absolute inset-0" style="background: linear-gradient(to top, rgba(10,10,10,0.95) 0%, rgba(10,10,10,0.5) 50%, rgba(10,10,10,0.2) 100%); transition: opacity 0.4s ease;"></div>
+            <!-- Gold accent line -->
+            <div class="absolute top-0 left-0 w-full h-px" style="background: linear-gradient(to right, transparent, var(--color-brand), transparent); opacity: 0.5;"></div>
+            <div class="relative z-10 flex flex-col justify-end h-full p-8 lg:p-10" style="min-height: 420px;">
+              <p style="font-family: var(--font-body); font-size: 11px; text-transform: uppercase; letter-spacing: 0.2em; color: var(--color-brand); font-weight: 500; margin-bottom: 12px;">
+                Module 02
+              </p>
+              <h3 class="feature-card-title" style="font-family: var(--font-display); font-size: clamp(24px, 3vw, 36px); font-weight: 500; color: var(--color-text-primary); margin: 0 0 12px 0; line-height: 1.2; transition: color 0.3s ease;">
+                镜头语言
+              </h3>
+              <p style="font-family: var(--font-body); font-size: 14px; line-height: 1.7; color: var(--color-text-secondary); max-width: 400px; margin-bottom: 20px;">
+                掌握电影级镜头技术、构图法则与视觉叙事方法。从焦段选择到运动轨迹，让每一帧画面都成为有力的表达。
+              </p>
+              <span class="feature-card-arrow inline-flex items-center gap-2" style="font-family: var(--font-body); font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--color-brand); opacity: 0.7; transition: all 0.3s ease;">
+                探索模块
+                <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 7h10M8 3l4 4-4 4"/></svg>
+              </span>
+            </div>
+          </a>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== SECTION 3: PHILOSOPHY / PULL QUOTE ===== -->
+    <section class="fade-in-section" style="padding: 96px 0; background: var(--color-bg-secondary);">
+      <div class="max-w-7xl mx-auto px-6 lg:px-8">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
+          <!-- Left spacer / decorative -->
+          <div class="hidden lg:block lg:col-span-3">
+            <div class="w-full h-px" style="background: linear-gradient(to right, transparent, var(--color-border-brand));"></div>
+          </div>
+
+          <!-- Main content -->
+          <div class="lg:col-span-6">
+            <!-- Pull quote -->
+            <div class="pull-quote relative" style="padding-left: 40px; margin-bottom: 48px;">
+              <blockquote style="margin: 0;">
+                <p style="font-family: var(--font-display); font-size: clamp(24px, 3.5vw, 42px); font-weight: 400; font-style: italic; line-height: 1.35; color: var(--color-text-primary);">
+                  光是视觉的语言，<br>镜头是叙事的眼睛
+                </p>
+              </blockquote>
+              <div style="margin-top: 16px;">
+                <div style="width: 48px; height: 1px; background: var(--color-brand);"></div>
+              </div>
+            </div>
+
+            <!-- Philosophy paragraph -->
+            <div style="max-width: 560px;">
+              <p style="font-family: var(--font-body); font-size: 15px; line-height: 1.9; color: var(--color-text-secondary); margin: 0 0 20px 0;">
+                我们相信，视觉美学不仅是审美的追求，更是思维的延伸。每一个光影的明暗变化、每一次镜头的运动转换，都承载着创作者对世界的理解与表达。
+              </p>
+              <p style="font-family: var(--font-body); font-size: 15px; line-height: 1.9; color: var(--color-text-secondary); margin: 0;">
+                在这里，你将从底层原理出发，系统学习视觉构成的每一个维度——从光线的物理特性到色彩的心理效应，从镜头的光学语言到构图的空间逻辑。最终，将这些知识转化为直觉般的创作能力。
+              </p>
+            </div>
+          </div>
+
+          <!-- Right spacer / decorative -->
+          <div class="hidden lg:block lg:col-span-3">
+            <div class="w-full h-px" style="background: linear-gradient(to left, transparent, var(--color-border-brand));"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== SECTION 4: CALL TO ACTION ===== -->
+    <section class="fade-in-section relative" style="padding: 96px 0; background: var(--color-bg-primary);">
+      <div class="max-w-7xl mx-auto px-6 lg:px-8">
+        <div class="relative overflow-hidden rounded-sm lg:rounded-md" style="background: var(--color-bg-surface); border: 1px solid var(--color-border-brand); padding: 64px 32px;">
+          <!-- Gold corner accents -->
+          <div class="absolute top-0 left-0 w-16 h-px" style="background: var(--color-brand);"></div>
+          <div class="absolute top-0 left-0 w-px h-16" style="background: var(--color-brand);"></div>
+          <div class="absolute bottom-0 right-0 w-16 h-px" style="background: var(--color-brand);"></div>
+          <div class="absolute bottom-0 right-0 w-px h-16" style="background: var(--color-brand);"></div>
+
+          <!-- Subtle radial glow -->
+          <div class="absolute inset-0" style="background: radial-gradient(ellipse at center, rgba(201, 169, 110, 0.04) 0%, transparent 70%);"></div>
+
+          <div class="relative z-10 text-center max-w-2xl mx-auto">
+            <h2 style="font-family: var(--font-display); font-size: clamp(28px, 4vw, 44px); font-weight: 500; line-height: 1.2; color: var(--color-text-primary); margin: 0 0 16px 0;">
+              开启你的<span style="color: var(--color-brand); font-style: italic;">视觉美学</span>之旅
+            </h2>
+            <p class="mb-10" style="font-family: var(--font-body); font-size: 15px; line-height: 1.8; color: var(--color-text-secondary); max-width: 480px; margin-left: auto; margin-right: auto;">
+              从现在开始，构建系统的视觉认知与表达能力。无论你是创作者、设计师还是影像爱好者，这里都有属于你的学习路径。
+            </p>
+            <a
+              href="#"
+              data-dom-id="cta-courses"
+              class="cta-gold inline-flex items-center gap-3"
+              style="display: inline-flex; align-items: center; gap: 10px; padding: 14px 40px; background: var(--color-brand); color: var(--color-text-inverse); font-family: var(--font-body); font-size: 14px; font-weight: 500; letter-spacing: 0.06em; text-transform: uppercase; text-decoration: none; border-radius: var(--radius-sm);"
+            >
+              开始学习
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ===== FOOTER (from shell template) ===== -->
+  <footer style="background: var(--color-bg-secondary); border-top: 1px solid var(--color-border-default);">
+    <div class="max-w-7xl mx-auto px-6 lg:px-8 py-16">
+      <div class="grid grid-cols-1 md:grid-cols-4 gap-12">
+        <div class="md:col-span-2">
+          <h3 style="font-family: var(--font-display); color: var(--color-brand); font-size: 22px; font-weight: 600; margin-bottom: 12px;">Visual Aesthetics</h3>
+          <p style="color: var(--color-text-secondary); font-family: var(--font-body); font-size: 14px; line-height: 1.7; max-width: 360px;">探索视觉美学的深层原理，从光影到镜头，从理论到实践，构建系统的视觉表达能力。</p>
+        </div>
+        <div>
+          <h4 style="font-family: var(--font-body); color: var(--color-text-primary); font-size: 12px; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 16px; font-weight: 600;">学习模块</h4>
+          <ul style="list-style: none; padding: 0; margin: 0;">
+            <li style="margin-bottom: 10px;"><a href="multimodal-light.html" style="color: var(--color-text-secondary); text-decoration: none; font-size: 14px; font-family: var(--font-body);">多模态光影</a></li>
+            <li style="margin-bottom: 10px;"><a href="lens-language.html" style="color: var(--color-text-secondary); text-decoration: none; font-size: 14px; font-family: var(--font-body);">镜头语言</a></li>
+            <li style="margin-bottom: 10px;"><a href="#" style="color: var(--color-text-secondary); text-decoration: none; font-size: 14px; font-family: var(--font-body);">色彩理论</a></li>
+            <li><a href="#" style="color: var(--color-text-secondary); text-decoration: none; font-size: 14px; font-family: var(--font-body);">构图法则</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4 style="font-family: var(--font-body); color: var(--color-text-primary); font-size: 12px; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 16px; font-weight: 600;">关于</h4>
+          <ul style="list-style: none; padding: 0; margin: 0;">
+            <li style="margin-bottom: 10px;"><a href="#" style="color: var(--color-text-secondary); text-decoration: none; font-size: 14px; font-family: var(--font-body);">设计理念</a></li>
+            <li style="margin-bottom: 10px;"><a href="#" style="color: var(--color-text-secondary); text-decoration: none; font-size: 14px; font-family: var(--font-body);">学习路径</a></li>
+            <li><a href="#" style="color: var(--color-text-secondary); text-decoration: none; font-size: 14px; font-family: var(--font-body);">联系我们</a></li>
+          </ul>
+        </div>
+      </div>
+      <div style="margin-top: 48px; padding-top: 24px; border-top: 1px solid var(--color-border-default); text-align: center;">
+        <p style="color: var(--color-text-tertiary); font-size: 12px; font-family: var(--font-body); letter-spacing: 0.05em;">Visual Aesthetics Learning Platform. Designed for creators.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scroll animation observer -->
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const observer = new IntersectionObserver(function(entries) {
+        entries.forEach(function(entry) {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+          }
+        });
+      }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+
+      document.querySelectorAll('.fade-in-section').forEach(function(el) {
+        observer.observe(el);
+      });
+    });
+  </script>
+
+
+    <style>
+    /* Hero cinematic light beam effect */
+    .hero-light-beam {
+      position: absolute;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 2px;
+      height: 100%;
+      background: linear-gradient(
+        to bottom,
+        transparent 0%,
+        rgba(201, 169, 110, 0.08) 20%,
+        rgba(201, 169, 110, 0.15) 45%,
+        rgba(201, 169, 110, 0.25) 50%,
+        rgba(201, 169, 110, 0.15) 55%,
+        rgba(201, 169, 110, 0.08) 80%,
+        transparent 100%
+      );
+      z-index: 2;
+    }
+
+    .hero-light-beam::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 180px;
+      height: 100%;
+      background: linear-gradient(
+        to bottom,
+        transparent 0%,
+        rgba(201, 169, 110, 0.02) 20%,
+        rgba(201, 169, 110, 0.04) 45%,
+        rgba(201, 169, 110, 0.06) 50%,
+        rgba(201, 169, 110, 0.04) 55%,
+        rgba(201, 169, 110, 0.02) 80%,
+        transparent 100%
+      );
+    }
+
+    .hero-light-beam::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 400px;
+      height: 100%;
+      background: linear-gradient(
+        to bottom,
+        transparent 0%,
+        rgba(201, 169, 110, 0.008) 30%,
+        rgba(201, 169, 110, 0.02) 50%,
+        rgba(201, 169, 110, 0.008) 70%,
+        transparent 100%
+      );
+    }
+
+    .nav-link:hover { color: var(--color-brand) !important; }
+    a { transition: color 0.2s ease; }
+
+    .feature-card {
+      transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94), box-shadow 0.4s ease;
+    }
+    .feature-card:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-float);
+    }
+    .feature-card:hover .feature-card-overlay {
+      opacity: 0.7;
+    }
+    .feature-card:hover .feature-card-title {
+      color: var(--color-brand);
+    }
+    .feature-card:hover .feature-card-arrow {
+      transform: translateX(6px);
+      opacity: 1;
+    }
+
+    .cta-gold {
+      transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+    .cta-gold:hover {
+      background: var(--color-brand-light);
+      box-shadow: 0 0 24px rgba(201, 169, 110, 0.3);
+      transform: translateY(-1px);
+    }
+
+    /* Pull quote decorative elements */
+    .pull-quote::before {
+      content: '';
+      position: absolute;
+      left: -24px;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 3px;
+      height: 80px;
+      background: linear-gradient(to bottom, transparent, var(--color-brand), transparent);
+    }
+
+    @media (max-width: 768px) {
+      .pull-quote::before {
+        left: 0;
+      }
+    }
+
+    /* Scroll-triggered fade-in */
+    .fade-in-section {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.8s ease, transform 0.8s ease;
+    }
+    .fade-in-section.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  </style>
+</body>
+</html>

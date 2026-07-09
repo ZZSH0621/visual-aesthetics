@@ -1,0 +1,1652 @@
+<!DOCTYPE html>
+<html lang="zh-CN" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>镜头语言 — Visual Aesthetics</title>
+    <style id="theme-vars">
+/* Visual Aesthetics Learning Site — Brand CSS */
+/* Art Gallery + Magazine Style — Dark Sophisticated */
+
+:root {
+  /* — Brand Primary — */
+  --color-brand: #C9A96E;
+  --color-brand-light: #DBC99E;
+  --color-brand-dark: #A68B5B;
+
+  /* — Neutral Surface — */
+  --color-bg-primary: #0A0A0A;
+  --color-bg-secondary: #141414;
+  --color-bg-surface: #1A1A1A;
+  --color-bg-elevated: #222222;
+  --color-bg-sunken: #111111;
+
+  /* — Text — */
+  --color-text-primary: #F0EDE8;
+  --color-text-secondary: #9B9590;
+  --color-text-tertiary: #6B6662;
+  --color-text-inverse: #0A0A0A;
+
+  /* — State Colors — */
+  --state-success: #4ADE80;
+  --state-warning: #FBBF24;
+  --state-error: #F87171;
+  --state-info: #60A5FA;
+
+  /* — Border — */
+  --color-border-default: rgba(255, 255, 255, 0.08);
+  --color-border-strong: rgba(255, 255, 255, 0.15);
+  --color-border-brand: rgba(201, 169, 110, 0.3);
+
+  /* — Radius — */
+  --radius-sm: 2px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+  --radius-full: 9999px;
+
+  /* — Shadow — */
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.3);
+  --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.3);
+  --shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.4);
+  --shadow-float: 0 16px 48px rgba(0, 0, 0, 0.5);
+
+  /* — Typography — */
+  --font-display: 'Playfair Display', 'Noto Serif SC', 'Georgia', serif;
+  --font-body: 'Inter', 'Noto Sans SC', 'Helvetica Neue', sans-serif;
+  --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
+
+  /* — Spacing Scale — */
+  --space-xs: 4px;
+  --space-sm: 8px;
+  --space-md: 16px;
+  --space-lg: 24px;
+  --space-xl: 32px;
+  --space-2xl: 48px;
+  --space-3xl: 64px;
+  --space-4xl: 96px;
+}
+
+/* Light mode overrides (reserved) */
+html.light {
+  --color-bg-primary: #FAF8F5;
+  --color-bg-secondary: #F0EDE8;
+  --color-bg-surface: #FFFFFF;
+  --color-bg-elevated: #FFFFFF;
+  --color-bg-sunken: #EDE9E3;
+  --color-text-primary: #1A1A1A;
+  --color-text-secondary: #6B6662;
+  --color-text-tertiary: #9B9590;
+  --color-text-inverse: #FAF8F5;
+  --color-border-default: rgba(0, 0, 0, 0.08);
+  --color-border-strong: rgba(0, 0, 0, 0.15);
+  --color-border-brand: rgba(166, 139, 91, 0.3);
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.08);
+  --shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.1);
+  --shadow-float: 0 16px 48px rgba(0, 0, 0, 0.12);
+}
+
+    </style>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4.3.1/dist/index.global.js"></script>
+    <style type="text/tailwindcss">
+    @theme inline {
+      --color-brand: var(--color-brand);
+      --color-brand-light: var(--color-brand-light);
+      --color-brand-dark: var(--color-brand-dark);
+      --color-bg-primary: var(--color-bg-primary);
+      --color-bg-secondary: var(--color-bg-secondary);
+      --color-bg-surface: var(--color-bg-surface);
+      --color-bg-elevated: var(--color-bg-elevated);
+      --color-text-primary: var(--color-text-primary);
+      --color-text-secondary: var(--color-text-secondary);
+      --color-text-tertiary: var(--color-text-tertiary);
+    }
+    </style>
+    <script src="https://unpkg.com/lucide@1.8.0/dist/umd/lucide.min.js"></script>
+    <style type="text/tailwindcss">
+  
+  @layer base {
+    body { background: var(--color-bg-primary); color: var(--color-text-primary); }
+    td, th { @apply break-words; word-break: break-all; word-break: auto-phrase; }
+    th { @apply whitespace-nowrap; }
+  }
+    </style>
+    <style>
+      .no-scrollbar::-webkit-scrollbar { display: none; }
+      .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+      [data-icon] {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        -webkit-mask-size: contain;
+        mask-size: contain;
+        -webkit-mask-repeat: no-repeat;
+        mask-repeat: no-repeat;
+        -webkit-mask-position: center;
+        mask-position: center;
+        background-color: currentColor;
+      }
+    </style>
+</head>
+
+<body style="background: var(--color-bg-primary); color: var(--color-text-primary);">
+
+  <!-- ===== HEADER ===== -->
+  <header class="fixed top-0 left-0 right-0 z-50" style="background: rgba(10,10,10,0.85); backdrop-filter: blur(20px); border-bottom: 1px solid var(--color-border-default);">
+    <nav class="max-w-7xl mx-auto px-6 lg:px-8 h-16 flex items-center justify-between">
+      <a href="index.html" class="flex items-center gap-2" style="font-family: var(--font-display); color: var(--color-brand); font-size: 20px; font-weight: 600; text-decoration: none; letter-spacing: 0.02em;">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><path d="M12 2v20M2 12h20" opacity="0.3"/><circle cx="12" cy="12" r="4" fill="currentColor" opacity="0.4"/></svg>
+        Visual Aesthetics
+      </a>
+      <div class="hidden md:flex items-center gap-8">
+        <a href="index.html" class="nav-link" style="color: var(--color-text-secondary); font-family: var(--font-body); font-size: 13px; text-decoration: none; letter-spacing: 0.08em; text-transform: uppercase; transition: color 0.2s;">首页</a>
+        <a href="courses.html" class="nav-link" style="color: var(--color-text-secondary); font-family: var(--font-body); font-size: 13px; text-decoration: none; letter-spacing: 0.08em; text-transform: uppercase; transition: color 0.2s;">课程中心</a>
+        <a href="multimodal-light.html" class="nav-link" style="color: var(--color-text-secondary); font-family: var(--font-body); font-size: 13px; text-decoration: none; letter-spacing: 0.08em; text-transform: uppercase; transition: color 0.2s;">多模态光影</a>
+        <a href="lens-language.html" class="nav-link nav-active" style="font-family: var(--font-body); font-size: 13px; text-decoration: none; letter-spacing: 0.08em; text-transform: uppercase; transition: color 0.2s;">镜头语言</a>
+      </div>
+      <button class="md:hidden" style="color: var(--color-text-primary); background: none; border: none; cursor: pointer;">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
+      </button>
+    </nav>
+  </header>
+
+  <!-- ===== MAIN CONTENT ===== -->
+  <main class="pt-16 min-h-screen" style="background: var(--color-bg-primary);">
+
+    <!-- ===== HERO SECTION ===== -->
+    <section class="relative w-full" style="min-height: 70vh; min-height: 600px;">
+      <!-- Background image -->
+      <div class="absolute inset-0 bg-cover bg-center bg-no-repeat" style="background-image: url('../assets/cinematic-lens.jpg');"></div>
+      <!-- Dark gradient overlay -->
+      <div class="hero-overlay absolute inset-0"></div>
+
+      <!-- Hero content -->
+      <div class="relative z-10 max-w-7xl mx-auto px-6 lg:px-8 flex flex-col justify-end" style="min-height: inherit; padding-top: 120px; padding-bottom: 64px;">
+        <div class="max-w-3xl">
+          <!-- Module label -->
+          <div class="flex items-center gap-3 mb-6">
+            <span style="font-family: var(--font-body); font-size: 11px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--color-brand); font-weight: 500;">Module</span>
+            <div style="width: 24px; height: 1px; background: var(--color-brand); opacity: 0.5;"></div>
+            <span style="font-family: var(--font-body); font-size: 11px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--color-text-secondary);">02</span>
+          </div>
+
+          <!-- Title -->
+          <h1 style="font-family: var(--font-display); font-size: clamp(40px, 7vw, 80px); font-weight: 700; color: var(--color-text-primary); line-height: 1.1; margin-bottom: 20px; letter-spacing: -0.01em;">
+            镜头语言
+          </h1>
+
+          <!-- Subtitle -->
+          <p style="font-family: var(--font-display); font-size: clamp(16px, 2.5vw, 22px); color: var(--color-text-secondary); line-height: 1.6; margin-bottom: 32px; font-style: italic;">
+            用镜头叙事，让每一帧都有意义
+          </p>
+
+          <!-- Module info tags -->
+          <div class="flex flex-wrap items-center gap-4">
+            <div class="flex items-center gap-2 px-4 py-2" style="border: 1px solid var(--color-border-strong); border-radius: var(--radius-full);">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--color-brand)" stroke-width="1.5"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>
+              <span style="font-family: var(--font-body); font-size: 13px; color: var(--color-text-secondary);">8 经典技法</span>
+            </div>
+            <div class="flex items-center gap-2 px-4 py-2" style="border: 1px solid var(--color-border-strong); border-radius: var(--radius-full);">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--color-brand)" stroke-width="1.5"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+              <span style="font-family: var(--font-body); font-size: 13px; color: var(--color-text-secondary);">进阶难度</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Bottom fade -->
+      <div class="absolute bottom-0 left-0 right-0 h-24" style="background: linear-gradient(to top, var(--color-bg-primary), transparent);"></div>
+    </section>
+
+    <!-- ======================================================= -->
+    <!--  TECHNIQUES 1-4: EDITORIAL SECTIONS                     -->
+    <!-- ======================================================= -->
+
+    <!-- ===== TECHNIQUE 01: 希区柯克变焦 — Image Left / Text Right ===== -->
+    <section class="fade-in-section" style="background: var(--color-bg-secondary);">
+      <div class="max-w-7xl mx-auto">
+        <div class="grid grid-cols-1 lg:grid-cols-5 gap-0">
+          <!-- Image side: 60% = 3 cols -->
+          <div class="lg:col-span-3 img-placeholder-01" style="min-height: 480px; display: flex; align-items: center; justify-content: center; position: relative; overflow: hidden;">
+            <div style="text-align: center; opacity: 0.12;">
+              <svg width="100" height="100" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="0.5"><circle cx="12" cy="12" r="3"/><circle cx="12" cy="12" r="8" stroke-dasharray="4 3"/><path d="M12 2v4M12 18v4M2 12h4M18 12h4"/></svg>
+            </div>
+            <!-- Large number watermark -->
+            <span class="editorial-num">01</span>
+            <!-- Video overlay -->
+            <div style="position: absolute; inset: 0; z-index: 5; border-radius: 0; overflow: hidden;">
+              <iframe src="https://player.bilibili.com/player.html?isOutside=true&aid=0&bvid=BV1tBbreFEKV&cid=0&p=1&high_quality=1&autoplay=0"
+                style="width: 100%; height: 100%; border: none; display: block;"
+                allowfullscreen="true"
+                scrolling="no"
+                sandbox="allow-top-navigation allow-same-origin allow-forms allow-scripts">
+              </iframe>
+            </div>
+          </div>
+          <!-- Text side: 40% = 2 cols -->
+          <div class="lg:col-span-2 flex items-center" style="padding: 48px 40px;">
+            <div style="max-width: 420px;">
+              <div class="flex items-center gap-3 mb-4">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--color-brand)" stroke-width="1.5"><circle cx="12" cy="12" r="3"/><circle cx="12" cy="12" r="8" stroke-dasharray="4 3"/></svg>
+                <span style="font-family: var(--font-body); font-size: 11px; letter-spacing: 0.12em; color: var(--color-brand); text-transform: uppercase;">Technique 01</span>
+              </div>
+              <h2 style="font-family: var(--font-display); font-size: clamp(22px, 3vw, 32px); font-weight: 600; color: var(--color-text-primary); line-height: 1.3; margin: 0 0 4px 0;">
+                希区柯克变焦
+              </h2>
+              <p style="font-family: var(--font-display); font-size: 15px; color: var(--color-text-tertiary); font-style: italic; margin: 0 0 20px 0;">Dolly Zoom / Vertigo Effect</p>
+              <p style="font-family: var(--font-body); font-size: 14px; color: var(--color-text-secondary); line-height: 1.8; margin: 0 0 20px 0;">
+                在保持主体人物大小基本不变的前提下，让背景被急剧拉伸或压缩，产生空间扭曲、心理压迫的视觉特效。焦距与摄影机位置的反向联动。
+              </p>
+              <!-- Key features pills -->
+              <div class="flex flex-wrap gap-2 mb-5">
+                <span class="feature-pill">空间扭曲</span>
+                <span class="feature-pill">心理压迫</span>
+                <span class="feature-pill">透视畸变</span>
+              </div>
+              <!-- Films -->
+              <div class="mb-5">
+                <p style="font-family: var(--font-body); font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--color-text-tertiary); margin: 0 0 8px 0; font-weight: 600;">经典影片</p>
+                <p style="font-family: var(--font-body); font-size: 13px; color: var(--color-text-secondary); margin: 0; line-height: 1.8;">
+                  《迷魂记》(1958) / 《大白鲨》 / 《好家伙》 / 《指环王》
+                </p>
+              </div>
+              <!-- Core principle -->
+              <div style="padding: 16px; background: var(--color-bg-sunken); border-radius: var(--radius-md); border-left: 3px solid var(--color-brand);">
+                <p style="font-family: var(--font-mono); font-size: 12px; color: var(--color-brand-light); margin: 0 0 4px 0; letter-spacing: 0.04em;">OPTICAL PRINCIPLE</p>
+                <p style="font-family: var(--font-body); font-size: 13px; color: var(--color-text-secondary); margin: 0; line-height: 1.7;">
+                  S &prop; f/d，当焦距和距离同时反向变化时主体大小不变。推轨变焦产生背景压缩与压迫感；拉轨变 zoom产生背景拉伸与疏离感。
+                </p>
+              </div>
+              <!-- Knowledge panel -->
+              <button onclick="openCards('panel-xiquke')" style="margin-top: 20px; padding: 10px 20px; background: transparent; border: 1px solid var(--color-border-brand); border-radius: var(--radius-full); color: var(--color-brand); font-family: var(--font-body); font-size: 13px; cursor: pointer; display: flex; align-items: center; gap: 8px; letter-spacing: 0.04em; transition: all 0.3s;"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>深入了解 · 希区柯克变焦</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== TECHNIQUE 02: 子弹时间 — Text Left / Image Right ===== -->
+    <section class="fade-in-section" style="background: var(--color-bg-primary);">
+      <div class="max-w-7xl mx-auto">
+        <div class="grid grid-cols-1 lg:grid-cols-5 gap-0">
+          <!-- Text side: 40% = 2 cols -->
+          <div class="lg:col-span-2 flex items-center" style="padding: 48px 40px;">
+            <div style="max-width: 420px;">
+              <div class="flex items-center gap-3 mb-4">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--color-brand)" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="3"/><path d="M12 2v4M12 18v4"/></svg>
+                <span style="font-family: var(--font-body); font-size: 11px; letter-spacing: 0.12em; color: var(--color-brand); text-transform: uppercase;">Technique 02</span>
+              </div>
+              <h2 style="font-family: var(--font-display); font-size: clamp(22px, 3vw, 32px); font-weight: 600; color: var(--color-text-primary); line-height: 1.3; margin: 0 0 4px 0;">
+                子弹时间
+              </h2>
+              <p style="font-family: var(--font-display); font-size: 15px; color: var(--color-text-tertiary); font-style: italic; margin: 0 0 20px 0;">Bullet Time</p>
+              <p style="font-family: var(--font-body); font-size: 14px; color: var(--color-text-secondary); line-height: 1.8; margin: 0 0 20px 0;">
+                通过多机位阵列抓拍或高速拍摄+后期合成，让主体动作近乎定格，同时镜头视角围绕主体做360&deg;环形环绕，实现"时间静止、空间环绕"的超现实视觉效果。
+              </p>
+              <!-- Key features pills -->
+              <div class="flex flex-wrap gap-2 mb-5">
+                <span class="feature-pill">时间凝滞</span>
+                <span class="feature-pill">空间环绕</span>
+                <span class="feature-pill">超现实感</span>
+              </div>
+              <!-- Films -->
+              <div class="mb-5">
+                <p style="font-family: var(--font-body); font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--color-text-tertiary); margin: 0 0 8px 0; font-weight: 600;">经典影片</p>
+                <p style="font-family: var(--font-body); font-size: 13px; color: var(--color-text-secondary); margin: 0; line-height: 1.8;">
+                  《黑客帝国》(1999) 尼奥后仰躲子弹 &mdash; 电影史上最具标志性的视觉革命
+                </p>
+              </div>
+              <!-- Implementation methods -->
+              <div style="padding: 16px; background: var(--color-bg-sunken); border-radius: var(--radius-md); border-left: 3px solid var(--color-brand);">
+                <p style="font-family: var(--font-mono); font-size: 12px; color: var(--color-brand-light); margin: 0 0 8px 0; letter-spacing: 0.04em;">IMPLEMENTATION</p>
+                <ul style="list-style: none; padding: 0; margin: 0;">
+                  <li style="font-family: var(--font-body); font-size: 13px; color: var(--color-text-secondary); margin-bottom: 4px; padding-left: 16px; position: relative;">
+                    <span style="position: absolute; left: 0; color: var(--color-brand);">&bull;</span>
+                    多机位阵列 &mdash; 环形排列120+台相机同步触发
+                  </li>
+                  <li style="font-family: var(--font-body); font-size: 13px; color: var(--color-text-secondary); margin-bottom: 4px; padding-left: 16px; position: relative;">
+                    <span style="position: absolute; left: 0; color: var(--color-brand);">&bull;</span>
+                    高速摄影 + 后期合成 &mdash; Phantom摄像机1000fps+
+                  </li>
+                  <li style="font-family: var(--font-body); font-size: 13px; color: var(--color-text-secondary); padding-left: 16px; position: relative;">
+                    <span style="position: absolute; left: 0; color: var(--color-brand);">&bull;</span>
+                    CGI渲染 &mdash; 全数字虚拟机位环绕
+                  </li>
+                </ul>
+              </div>
+              <!-- Knowledge panel -->
+              <button onclick="openCards('panel-zidan')" style="margin-top: 20px; padding: 10px 20px; background: transparent; border: 1px solid var(--color-border-brand); border-radius: var(--radius-full); color: var(--color-brand); font-family: var(--font-body); font-size: 13px; cursor: pointer; display: flex; align-items: center; gap: 8px; letter-spacing: 0.04em; transition: all 0.3s;"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>深入了解 · 子弹时间</button>
+            </div>
+          </div>
+          <!-- Image side: 60% = 3 cols -->
+          <div class="lg:col-span-3 img-placeholder-02" style="min-height: 480px; display: flex; align-items: center; justify-content: center; position: relative; overflow: hidden;">
+            <div style="text-align: center; opacity: 0.12;">
+              <svg width="100" height="100" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="0.5"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="3"/><path d="M12 2v4M12 18v4M2 12h4M18 12h4"/><circle cx="4.5" cy="4.5" r="1.5"/><circle cx="19.5" cy="4.5" r="1.5"/><circle cx="4.5" cy="19.5" r="1.5"/><circle cx="19.5" cy="19.5" r="1.5"/></svg>
+            </div>
+            <span class="editorial-num">02</span>
+            <!-- Video overlay -->
+            <div style="position: absolute; inset: 0; z-index: 5; overflow: hidden;">
+              <iframe src="https://player.bilibili.com/player.html?isOutside=true&aid=0&bvid=BV1DK4y1u7G4&cid=0&p=1&high_quality=1&autoplay=0"
+                style="width: 100%; height: 100%; border: none; display: block;"
+                allowfullscreen="true"
+                scrolling="no"
+                sandbox="allow-top-navigation allow-same-origin allow-forms allow-scripts">
+              </iframe>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== TECHNIQUE 03: FPV视角 — Image Left / Text Right ===== -->
+    <section class="fade-in-section" style="background: var(--color-bg-secondary);">
+      <div class="max-w-7xl mx-auto">
+        <div class="grid grid-cols-1 lg:grid-cols-5 gap-0">
+          <!-- Image side: 60% = 3 cols -->
+          <div class="lg:col-span-3 img-placeholder-03" style="min-height: 480px; display: flex; align-items: center; justify-content: center; position: relative; overflow: hidden;">
+            <div style="text-align: center; opacity: 0.12;">
+              <svg width="100" height="100" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="0.5"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
+            </div>
+            <span class="editorial-num">03</span>
+            <!-- Video overlay -->
+            <div style="position: absolute; inset: 0; z-index: 5; overflow: hidden;">
+              <iframe src="https://player.bilibili.com/player.html?isOutside=true&aid=0&bvid=BV1ja4118717&cid=0&p=1&high_quality=1&autoplay=0"
+                style="width: 100%; height: 100%; border: none; display: block;"
+                allowfullscreen="true"
+                scrolling="no"
+                sandbox="allow-top-navigation allow-same-origin allow-forms allow-scripts">
+              </iframe>
+            </div>
+          </div>
+          <!-- Text side: 40% = 2 cols -->
+          <div class="lg:col-span-2 flex items-center" style="padding: 48px 40px;">
+            <div style="max-width: 420px;">
+              <div class="flex items-center gap-3 mb-4">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--color-brand)" stroke-width="1.5"><path d="M22 2L11 13"/><path d="M22 2l-7 20-4-9-9-4 20-7z"/></svg>
+                <span style="font-family: var(--font-body); font-size: 11px; letter-spacing: 0.12em; color: var(--color-brand); text-transform: uppercase;">Technique 03</span>
+              </div>
+              <h2 style="font-family: var(--font-display); font-size: clamp(22px, 3vw, 32px); font-weight: 600; color: var(--color-text-primary); line-height: 1.3; margin: 0 0 4px 0;">
+                FPV视角
+              </h2>
+              <p style="font-family: var(--font-display); font-size: 15px; color: var(--color-text-tertiary); font-style: italic; margin: 0 0 20px 0;">First Person View</p>
+              <p style="font-family: var(--font-body); font-size: 14px; color: var(--color-text-secondary); line-height: 1.8; margin: 0 0 20px 0;">
+                以飞行器第一视觉模拟人沉浸式临场观感，镜头等同于驾驶者眼睛，高速运动、转向、俯冲、穿梭，强调极速动感与沉浸式飞行穿越。
+              </p>
+              <!-- Key features pills -->
+              <div class="flex flex-wrap gap-2 mb-5">
+                <span class="feature-pill">第一人称沉浸</span>
+                <span class="feature-pill">极速动感</span>
+                <span class="feature-pill">灵活机动</span>
+                <span class="feature-pill">低视角冲击</span>
+              </div>
+              <!-- Films -->
+              <div class="mb-5">
+                <p style="font-family: var(--font-body); font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--color-text-tertiary); margin: 0 0 8px 0; font-weight: 600;">经典影片</p>
+                <p style="font-family: var(--font-body); font-size: 13px; color: var(--color-text-secondary); margin: 0; line-height: 1.8;">
+                  《碟中谍7》摩托车悬崖飞跃 / 《惊天营救2》一镜到底
+                </p>
+              </div>
+              <!-- Equipment -->
+              <div style="padding: 16px; background: var(--color-bg-sunken); border-radius: var(--radius-md); border-left: 3px solid var(--color-brand);">
+                <p style="font-family: var(--font-mono); font-size: 12px; color: var(--color-brand-light); margin: 0 0 8px 0; letter-spacing: 0.04em;">EQUIPMENT</p>
+                <ul style="list-style: none; padding: 0; margin: 0;">
+                  <li style="font-family: var(--font-body); font-size: 13px; color: var(--color-text-secondary); margin-bottom: 4px; padding-left: 16px; position: relative;">
+                    <span style="position: absolute; left: 0; color: var(--color-brand);">&bull;</span>
+                    穿越机 (Racing Drone) &mdash; 高速机动飞行平台
+                  </li>
+                  <li style="font-family: var(--font-body); font-size: 13px; color: var(--color-text-secondary); margin-bottom: 4px; padding-left: 16px; position: relative;">
+                    <span style="position: absolute; left: 0; color: var(--color-brand);">&bull;</span>
+                    FPV Goggles &mdash; 低延迟实时图传
+                  </li>
+                  <li style="font-family: var(--font-body); font-size: 13px; color: var(--color-text-secondary); padding-left: 16px; position: relative;">
+                    <span style="position: absolute; left: 0; color: var(--color-brand);">&bull;</span>
+                    GoPro / Insta360 &mdash; 超广角运动相机
+                  </li>
+                </ul>
+              </div>
+              <!-- Knowledge panel -->
+              <button onclick="openCards('panel-fpv')" style="margin-top: 20px; padding: 10px 20px; background: transparent; border: 1px solid var(--color-border-brand); border-radius: var(--radius-full); color: var(--color-brand); font-family: var(--font-body); font-size: 13px; cursor: pointer; display: flex; align-items: center; gap: 8px; letter-spacing: 0.04em; transition: all 0.3s;"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>深入了解 · FPV视角</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== TECHNIQUE 04: POV视角 — Text Left / Image Right ===== -->
+    <section class="fade-in-section" style="background: var(--color-bg-primary);">
+      <div class="max-w-7xl mx-auto">
+        <div class="grid grid-cols-1 lg:grid-cols-5 gap-0">
+          <!-- Text side: 40% = 2 cols -->
+          <div class="lg:col-span-2 flex items-center" style="padding: 48px 40px;">
+            <div style="max-width: 420px;">
+              <div class="flex items-center gap-3 mb-4">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--color-brand)" stroke-width="1.5"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+                <span style="font-family: var(--font-body); font-size: 11px; letter-spacing: 0.12em; color: var(--color-brand); text-transform: uppercase;">Technique 04</span>
+              </div>
+              <h2 style="font-family: var(--font-display); font-size: clamp(22px, 3vw, 32px); font-weight: 600; color: var(--color-text-primary); line-height: 1.3; margin: 0 0 4px 0;">
+                POV视角
+              </h2>
+              <p style="font-family: var(--font-display); font-size: 15px; color: var(--color-text-tertiary); font-style: italic; margin: 0 0 20px 0;">Point of View</p>
+              <p style="font-family: var(--font-body); font-size: 14px; color: var(--color-text-secondary); line-height: 1.8; margin: 0 0 20px 0;">
+                模拟角色主观视线的第一人称视角，镜头完全替代剧中人物的眼睛，让观众直接代入角色的感官与情绪，建立强烈的沉浸式体验。
+              </p>
+              <!-- Key features pills -->
+              <div class="flex flex-wrap gap-2 mb-5">
+                <span class="feature-pill">主观沉浸</span>
+                <span class="feature-pill">感官代入</span>
+                <span class="feature-pill">情绪同步</span>
+              </div>
+              <!-- Themes -->
+              <div class="mb-5">
+                <p style="font-family: var(--font-body); font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--color-text-tertiary); margin: 0 0 8px 0; font-weight: 600;">适用主题</p>
+                <div class="flex flex-wrap gap-2">
+                  <span style="display: inline-block; padding: 6px 14px; border: 1px solid var(--color-border-strong); border-radius: var(--radius-full); font-family: var(--font-body); font-size: 12px; color: var(--color-text-secondary);">恐惧</span>
+                  <span style="display: inline-block; padding: 6px 14px; border: 1px solid var(--color-border-strong); border-radius: var(--radius-full); font-family: var(--font-body); font-size: 12px; color: var(--color-text-secondary);">窥视</span>
+                  <span style="display: inline-block; padding: 6px 14px; border: 1px solid var(--color-border-strong); border-radius: var(--radius-full); font-family: var(--font-body); font-size: 12px; color: var(--color-text-secondary);">主观体验</span>
+                  <span style="display: inline-block; padding: 6px 14px; border: 1px solid var(--color-border-strong); border-radius: var(--radius-full); font-family: var(--font-body); font-size: 12px; color: var(--color-text-secondary);">沉浸</span>
+                </div>
+              </div>
+              <!-- Note -->
+              <div style="padding: 16px; background: var(--color-bg-sunken); border-radius: var(--radius-md); border-left: 3px solid var(--color-brand);">
+                <p style="font-family: var(--font-mono); font-size: 12px; color: var(--color-brand-light); margin: 0 0 4px 0; letter-spacing: 0.04em;">DISTINCTION</p>
+                <p style="font-family: var(--font-body); font-size: 13px; color: var(--color-text-secondary); margin: 0; line-height: 1.7;">
+                  POV视角不同于FPV视角：POV强调角色的心理与情绪代入，镜头是"角色之眼"；FPV强调物理层面的极速运动体验，镜头是"驾驶者之眼"。
+                </p>
+              </div>
+              <!-- Knowledge panel -->
+              <button onclick="openCards('panel-pov')" style="margin-top: 20px; padding: 10px 20px; background: transparent; border: 1px solid var(--color-border-brand); border-radius: var(--radius-full); color: var(--color-brand); font-family: var(--font-body); font-size: 13px; cursor: pointer; display: flex; align-items: center; gap: 8px; letter-spacing: 0.04em; transition: all 0.3s;"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>深入了解 · POV视角</button>
+            </div>
+          </div>
+          <!-- Image side: 60% = 3 cols -->
+          <div class="lg:col-span-3 img-placeholder-04" style="min-height: 480px; display: flex; align-items: center; justify-content: center; position: relative; overflow: hidden;">
+            <div style="text-align: center; opacity: 0.12;">
+              <svg width="100" height="100" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="0.5"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+            </div>
+            <span class="editorial-num">04</span>
+            <!-- Video overlay -->
+            <div style="position: absolute; inset: 0; z-index: 5; overflow: hidden;">
+              <iframe src="https://player.bilibili.com/player.html?isOutside=true&aid=0&bvid=BV1UYXpBCEcf&cid=0&p=1&high_quality=1&autoplay=0"
+                style="width: 100%; height: 100%; border: none; display: block;"
+                allowfullscreen="true"
+                scrolling="no"
+                sandbox="allow-top-navigation allow-same-origin allow-forms allow-scripts">
+              </iframe>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== SECTION DIVIDER: Core Concepts Strip ===== -->
+    <section class="fade-in-section" style="background: var(--color-bg-secondary); border-top: 1px solid var(--color-border-default); border-bottom: 1px solid var(--color-border-default);">
+      <div class="max-w-7xl mx-auto px-6 lg:px-8 py-16 lg:py-20">
+        <div class="flex flex-col sm:flex-row items-center gap-6 flex-wrap justify-center">
+          <span style="font-family: var(--font-body); font-size: 11px; text-transform: uppercase; letter-spacing: 0.12em; color: var(--color-text-tertiary); font-weight: 600; white-space: nowrap;">核心概念</span>
+          <div class="flex flex-wrap items-center justify-center gap-3">
+            <span class="concept-pill">空间扭曲</span>
+            <span class="concept-pill">时间操控</span>
+            <span class="concept-pill">沉浸视角</span>
+            <span class="concept-pill">运动轨迹</span>
+            <span class="concept-pill">无痕转场</span>
+            <span class="concept-pill">英雄定格</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================================================= -->
+    <!--  TECHNIQUES 5-8: EDITORIAL SECTIONS                     -->
+    <!-- ======================================================= -->
+
+    <!-- ===== Advanced Techniques Section Header ===== -->
+    <section class="fade-in-section" style="background: var(--color-bg-secondary);">
+      <div class="max-w-7xl mx-auto px-6 lg:px-8 py-16 sm:py-20 lg:py-24">
+        <div class="mb-12 lg:mb-16">
+          <div class="flex items-center gap-3 mb-4">
+            <div class="section-divider"></div>
+            <span style="font-family: var(--font-body); font-size: 11px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--color-brand); font-weight: 500;">Advanced Techniques</span>
+          </div>
+          <h2 style="font-family: var(--font-display); font-size: clamp(28px, 4vw, 42px); font-weight: 600; color: var(--color-text-primary); line-height: 1.2; margin-bottom: 12px;">
+            进阶技法
+          </h2>
+          <p style="font-family: var(--font-body); font-size: 15px; color: var(--color-text-secondary); line-height: 1.7; max-width: 560px;">
+            从时间操控到运动叙事，掌握大师级的镜头技法，构建属于你的视觉叙事工具箱。
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== TECHNIQUE 05: 延时摄影 — Image Left / Text Right ===== -->
+    <section class="fade-in-section" style="background: var(--color-bg-secondary);">
+      <div class="max-w-7xl mx-auto">
+        <div class="grid grid-cols-1 lg:grid-cols-5 gap-0">
+          <!-- Image side: 60% = 3 cols -->
+          <div class="lg:col-span-3" style="min-height: 480px; display: flex; align-items: center; justify-content: center; position: relative; overflow: hidden;">
+            <div style="text-align: center; opacity: 0.12;">
+              <svg width="100" height="100" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="0.5"><circle cx="12" cy="12" r="3"/><circle cx="12" cy="12" r="8" stroke-dasharray="4 3"/><path d="M12 2v4M12 18v4M2 12h4M18 12h4"/></svg>
+            </div>
+            <!-- Large number watermark -->
+            <span class="editorial-num">05</span>
+            <!-- Video overlay -->
+            <div style="position: absolute; inset: 0; z-index: 5; overflow: hidden;">
+              <iframe src="https://player.bilibili.com/player.html?isOutside=true&aid=0&bvid=BV13s411E7ay&cid=0&p=1&high_quality=1&autoplay=0"
+                style="width: 100%; height: 100%; border: none; display: block;"
+                allowfullscreen="true"
+                scrolling="no"
+                sandbox="allow-top-navigation allow-same-origin allow-forms allow-scripts">
+              </iframe>
+            </div>
+          </div>
+          <!-- Text side: 40% = 2 cols -->
+          <div class="lg:col-span-2 flex items-center" style="padding: 48px 40px;">
+            <div style="max-width: 420px;">
+              <!-- Technique label -->
+              <div class="flex items-center gap-3 mb-4">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--color-brand)" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                <span style="font-family: var(--font-body); font-size: 11px; letter-spacing: 0.12em; color: var(--color-brand); text-transform: uppercase;">Technique 05</span>
+              </div>
+              <h2 style="font-family: var(--font-display); font-size: clamp(22px, 3vw, 32px); font-weight: 600; color: var(--color-text-primary); line-height: 1.3; margin: 0 0 4px 0;">
+                延时摄影
+              </h2>
+              <p style="font-family: var(--font-display); font-size: 15px; color: var(--color-text-tertiary); font-style: italic; margin: 0 0 20px 0;">Time-lapse Photography</p>
+              <p style="font-family: var(--font-body); font-size: 14px; color: var(--color-text-secondary); line-height: 1.8; margin: 0 0 20px 0;">
+                以固定时间间隔连续拍摄静态照片，再按正常帧率快速合成视频，将长时间缓慢变化压缩在短时间内快速播放，实现时间加速。
+              </p>
+              <!-- Key features pills -->
+              <div class="flex flex-wrap gap-2 mb-5">
+                <span class="feature-pill">时间压缩</span>
+                <span class="feature-pill">光阴浓缩</span>
+                <span class="feature-pill">宏观叙事</span>
+              </div>
+              <!-- Formula box -->
+              <div style="padding: 16px; background: var(--color-bg-sunken); border-radius: var(--radius-md); border-left: 3px solid var(--color-brand); margin-bottom: 14px;">
+                <p style="font-family: var(--font-mono); font-size: 12px; color: var(--color-brand-light); margin: 0 0 8px 0; letter-spacing: 0.04em;">FORMULA</p>
+                <p style="font-family: var(--font-mono); font-size: 12px; color: var(--color-text-secondary); margin: 0 0 4px 0; line-height: 1.6;">
+                  总张数 = 总时长 &divide; 拍摄间隔
+                </p>
+                <p style="font-family: var(--font-mono); font-size: 12px; color: var(--color-text-secondary); margin: 0 0 4px 0; line-height: 1.6;">
+                  成片时长 = 总张数 &divide; 播放帧率
+                </p>
+                <p style="font-family: var(--font-mono); font-size: 12px; color: var(--color-text-secondary); margin: 0; line-height: 1.6;">
+                  压缩比 = 拍摄总时长 &divide; 成片时长
+                </p>
+              </div>
+              <!-- Example -->
+              <div style="padding: 10px 14px; background: var(--color-bg-elevated); border-radius: var(--radius-md); border: 1px solid var(--color-border-default); margin-bottom: 14px;">
+                <p style="font-family: var(--font-body); font-size: 12px; color: var(--color-text-tertiary); margin: 0; line-height: 1.6;">
+                  <span style="color: var(--color-brand);">Example:</span> 间隔5秒 &middot; 2小时 &middot; 25fps &rarr; 57.6秒成片 &middot; 125&times;压缩
+                </p>
+              </div>
+              <!-- Knowledge panel button -->
+              <button onclick="openCards('panel-yanshi')" style="margin-top: 20px; padding: 10px 20px; background: transparent; border: 1px solid var(--color-border-brand); border-radius: var(--radius-full); color: var(--color-brand); font-family: var(--font-body); font-size: 13px; cursor: pointer; display: flex; align-items: center; gap: 8px; letter-spacing: 0.04em; transition: all 0.3s;"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>深入了解 · 延时摄影</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== TECHNIQUE 06: 斯皮尔伯格闯入镜头 — Text Left / Image Right ===== -->
+    <section class="fade-in-section" style="background: var(--color-bg-primary);">
+      <div class="max-w-7xl mx-auto">
+        <div class="grid grid-cols-1 lg:grid-cols-5 gap-0">
+          <!-- Text side: 40% = 2 cols -->
+          <div class="lg:col-span-2 flex items-center" style="padding: 48px 40px;">
+            <div style="max-width: 420px;">
+              <!-- Technique label -->
+              <div class="flex items-center gap-3 mb-4">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--color-brand)" stroke-width="1.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+                <span style="font-family: var(--font-body); font-size: 11px; letter-spacing: 0.12em; color: var(--color-brand); text-transform: uppercase;">Technique 06</span>
+              </div>
+              <h2 style="font-family: var(--font-display); font-size: clamp(22px, 3vw, 32px); font-weight: 600; color: var(--color-text-primary); line-height: 1.3; margin: 0 0 4px 0;">
+                斯皮尔伯格闯入镜头
+              </h2>
+              <p style="font-family: var(--font-display); font-size: 15px; color: var(--color-text-tertiary); font-style: italic; margin: 0 0 20px 0;">Spielberg Oner</p>
+              <p style="font-family: var(--font-body); font-size: 14px; color: var(--color-text-secondary); line-height: 1.8; margin: 0 0 20px 0;">
+                不靠生硬切镜头的转场手法，依靠动作、视线、声音、物体遮挡自然衔接下一场景，转场丝滑、润物无声，服务剧情情绪。
+              </p>
+              <!-- Key features pills -->
+              <div class="flex flex-wrap gap-2 mb-5">
+                <span class="feature-pill">无痕转场</span>
+                <span class="feature-pill">情绪驱动</span>
+                <span class="feature-pill">注意力管理</span>
+                <span class="feature-pill">叙事服务</span>
+              </div>
+              <!-- Application Scenes -->
+              <div style="padding: 16px; background: var(--color-bg-sunken); border-radius: var(--radius-md); border-left: 3px solid var(--color-brand);">
+                <p style="font-family: var(--font-mono); font-size: 12px; color: var(--color-brand-light); margin: 0 0 8px 0; letter-spacing: 0.04em;">APPLICATION SCENES</p>
+                <ul style="list-style: none; padding: 0; margin: 0;">
+                  <li style="font-family: var(--font-body); font-size: 13px; color: var(--color-text-secondary); margin-bottom: 4px; padding-left: 16px; position: relative;">
+                    <span style="position: absolute; left: 0; color: var(--color-brand);">&bull;</span>
+                    主角登场 &mdash; 跟随人物进入新空间
+                  </li>
+                  <li style="font-family: var(--font-body); font-size: 13px; color: var(--color-text-secondary); margin-bottom: 4px; padding-left: 16px; position: relative;">
+                    <span style="position: absolute; left: 0; color: var(--color-brand);">&bull;</span>
+                    信息揭示 &mdash; 视线引导观众发现关键信息
+                  </li>
+                  <li style="font-family: var(--font-body); font-size: 13px; color: var(--color-text-secondary); padding-left: 16px; position: relative;">
+                    <span style="position: absolute; left: 0; color: var(--color-brand);">&bull;</span>
+                    空间关系变化 &mdash; 一镜揭示人物关系的转变
+                  </li>
+                </ul>
+              </div>
+              <!-- Knowledge panel button -->
+              <button onclick="openCards('panel-sipierberg')" style="margin-top: 20px; padding: 10px 20px; background: transparent; border: 1px solid var(--color-border-brand); border-radius: var(--radius-full); color: var(--color-brand); font-family: var(--font-body); font-size: 13px; cursor: pointer; display: flex; align-items: center; gap: 8px; letter-spacing: 0.04em; transition: all 0.3s;"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>深入了解 · 斯皮尔伯格闯入镜头</button>
+            </div>
+          </div>
+          <!-- Image side: 60% = 3 cols -->
+          <div class="lg:col-span-3" style="min-height: 480px; display: flex; align-items: center; justify-content: center; position: relative; overflow: hidden;">
+            <div style="text-align: center; opacity: 0.12;">
+              <svg width="100" height="100" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="0.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+            </div>
+            <!-- Large number watermark -->
+            <span class="editorial-num">06</span>
+            <!-- Video overlay -->
+            <div style="position: absolute; inset: 0; z-index: 5; overflow: hidden;">
+              <iframe src="https://player.bilibili.com/player.html?isOutside=true&aid=0&bvid=BV1t1576iEtx&cid=0&p=1&high_quality=1&autoplay=0"
+                style="width: 100%; height: 100%; border: none; display: block;"
+                allowfullscreen="true"
+                scrolling="no"
+                sandbox="allow-top-navigation allow-same-origin allow-forms allow-scripts">
+              </iframe>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== TECHNIQUE 07: 昆汀式后备箱视角 — Image Left / Text Right ===== -->
+    <section class="fade-in-section" style="background: var(--color-bg-secondary);">
+      <div class="max-w-7xl mx-auto">
+        <div class="grid grid-cols-1 lg:grid-cols-5 gap-0">
+          <!-- Image side: 60% = 3 cols -->
+          <div class="lg:col-span-3" style="min-height: 480px; display: flex; align-items: center; justify-content: center; position: relative; overflow: hidden;">
+            <div style="text-align: center; opacity: 0.12;">
+              <svg width="100" height="100" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="0.5"><path d="M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 003 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg>
+            </div>
+            <!-- Large number watermark -->
+            <span class="editorial-num">07</span>
+            <!-- Video overlay -->
+            <div style="position: absolute; inset: 0; z-index: 5; overflow: hidden;">
+              <iframe src="https://player.bilibili.com/player.html?isOutside=true&aid=0&bvid=BV1MSXaY5EhK&cid=0&p=1&high_quality=1&autoplay=0"
+                style="width: 100%; height: 100%; border: none; display: block;"
+                allowfullscreen="true"
+                scrolling="no"
+                sandbox="allow-top-navigation allow-same-origin allow-forms allow-scripts">
+              </iframe>
+            </div>
+          </div>
+          <!-- Text side: 40% = 2 cols -->
+          <div class="lg:col-span-2 flex items-center" style="padding: 48px 40px;">
+            <div style="max-width: 420px;">
+              <!-- Technique label -->
+              <div class="flex items-center gap-3 mb-4">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--color-brand)" stroke-width="1.5"><path d="M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 003 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg>
+                <span style="font-family: var(--font-body); font-size: 11px; letter-spacing: 0.12em; color: var(--color-brand); text-transform: uppercase;">Technique 07</span>
+              </div>
+              <h2 style="font-family: var(--font-display); font-size: clamp(22px, 3vw, 32px); font-weight: 600; color: var(--color-text-primary); line-height: 1.3; margin: 0 0 4px 0;">
+                昆汀式后备箱视角
+              </h2>
+              <p style="font-family: var(--font-display); font-size: 15px; color: var(--color-text-tertiary); font-style: italic; margin: 0 0 20px 0;">Tarantino Trunk Shot</p>
+              <p style="font-family: var(--font-body); font-size: 14px; color: var(--color-text-secondary); line-height: 1.8; margin: 0 0 20px 0;">
+                摄影机仿佛被放在汽车后备箱、箱子等封闭空间内，向上仰拍打开它的人物，容器边框天然形成画框构图，极低角度仰拍制造压迫感与戏剧张力。
+              </p>
+              <!-- Key features pills -->
+              <div class="flex flex-wrap gap-2 mb-5">
+                <span class="feature-pill">极低角度</span>
+                <span class="feature-pill">画框构图</span>
+                <span class="feature-pill">压迫感</span>
+                <span class="feature-pill">戏剧张力</span>
+              </div>
+              <!-- Signature note -->
+              <div style="padding: 16px; background: var(--color-bg-sunken); border-radius: var(--radius-md); border-left: 3px solid var(--color-brand);">
+                <p style="font-family: var(--font-mono); font-size: 12px; color: var(--color-brand-light); margin: 0 0 4px 0; letter-spacing: 0.04em;">SIGNATURE</p>
+                <p style="font-family: var(--font-body); font-size: 13px; color: var(--color-text-secondary); margin: 0; line-height: 1.7;">
+                  昆汀&middot;塔伦蒂诺标志性的低角度仰拍手法。从《低俗小说》《杀死比尔》到《八恶人》，后备箱视角成为其作者签名的视觉符号。
+                </p>
+              </div>
+              <!-- Knowledge panel button -->
+              <button onclick="openCards('panel-kunding')" style="margin-top: 20px; padding: 10px 20px; background: transparent; border: 1px solid var(--color-border-brand); border-radius: var(--radius-full); color: var(--color-brand); font-family: var(--font-body); font-size: 13px; cursor: pointer; display: flex; align-items: center; gap: 8px; letter-spacing: 0.04em; transition: all 0.3s;"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>深入了解 · 昆汀式后备箱视角</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== TECHNIQUE 08: 迈克尔·贝环绕镜头 — Text Left / Image Right ===== -->
+    <section class="fade-in-section" style="background: var(--color-bg-primary);">
+      <div class="max-w-7xl mx-auto">
+        <div class="grid grid-cols-1 lg:grid-cols-5 gap-0">
+          <!-- Text side: 40% = 2 cols -->
+          <div class="lg:col-span-2 flex items-center" style="padding: 48px 40px;">
+            <div style="max-width: 420px;">
+              <!-- Technique label -->
+              <div class="flex items-center gap-3 mb-4">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--color-brand)" stroke-width="1.5"><path d="M21 12a9 9 0 11-6.219-8.56"/><path d="M16 3l4 0l0 4"/></svg>
+                <span style="font-family: var(--font-body); font-size: 11px; letter-spacing: 0.12em; color: var(--color-brand); text-transform: uppercase;">Technique 08</span>
+              </div>
+              <h2 style="font-family: var(--font-display); font-size: clamp(22px, 3vw, 32px); font-weight: 600; color: var(--color-text-primary); line-height: 1.3; margin: 0 0 4px 0;">
+                迈克尔&middot;贝环绕镜头
+              </h2>
+              <p style="font-family: var(--font-display); font-size: 15px; color: var(--color-text-tertiary); font-style: italic; margin: 0 0 20px 0;">Michael Bay Orbit</p>
+              <p style="font-family: var(--font-body); font-size: 14px; color: var(--color-text-secondary); line-height: 1.8; margin: 0 0 20px 0;">
+                摄影机以低角度围绕人物、车辆做弧形或360度运动，配合慢动作、逆光、烟尘、爆炸和强音乐，将人物拍成极具压迫感和英雄感。
+              </p>
+              <!-- Key features pills -->
+              <div class="flex flex-wrap gap-2 mb-5">
+                <span class="feature-pill">低角度仰拍</span>
+                <span class="feature-pill">360&deg;环绕</span>
+                <span class="feature-pill">慢动作加持</span>
+                <span class="feature-pill">英雄感</span>
+              </div>
+              <!-- Bayhem note -->
+              <div style="padding: 16px; background: var(--color-bg-sunken); border-radius: var(--radius-md); border-left: 3px solid var(--color-brand);">
+                <p style="font-family: var(--font-mono); font-size: 12px; color: var(--color-brand-light); margin: 0 0 4px 0; letter-spacing: 0.04em;">"BAYHEM"</p>
+                <p style="font-family: var(--font-body); font-size: 13px; color: var(--color-text-secondary); margin: 0; line-height: 1.7;">
+                  代表作：《绝地战警》《变形金刚》系列。环绕镜头与爆炸场面的结合，形成了被业界戏称为"Bayhem"的标志性视觉风格。
+                </p>
+              </div>
+              <!-- Knowledge panel button -->
+              <button onclick="openCards('panel-maikeerbei')" style="margin-top: 20px; padding: 10px 20px; background: transparent; border: 1px solid var(--color-border-brand); border-radius: var(--radius-full); color: var(--color-brand); font-family: var(--font-body); font-size: 13px; cursor: pointer; display: flex; align-items: center; gap: 8px; letter-spacing: 0.04em; transition: all 0.3s;"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>深入了解 · 迈克尔·贝环绕镜头</button>
+            </div>
+          </div>
+          <!-- Image side: 60% = 3 cols -->
+          <div class="lg:col-span-3" style="min-height: 480px; display: flex; align-items: center; justify-content: center; position: relative; overflow: hidden;">
+            <div style="text-align: center; opacity: 0.12;">
+              <svg width="100" height="100" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="0.5"><path d="M21 12a9 9 0 11-6.219-8.56"/><path d="M16 3l4 0l0 4"/></svg>
+            </div>
+            <!-- Large number watermark -->
+            <span class="editorial-num">08</span>
+            <!-- Video overlay -->
+            <div style="position: absolute; inset: 0; z-index: 5; overflow: hidden;">
+              <iframe src="https://player.bilibili.com/player.html?isOutside=true&aid=0&bvid=BV1Ac411b772&cid=0&p=1&high_quality=1&autoplay=0"
+                style="width: 100%; height: 100%; border: none; display: block;"
+                allowfullscreen="true"
+                scrolling="no"
+                sandbox="allow-top-navigation allow-same-origin allow-forms allow-scripts">
+              </iframe>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================================================= -->
+    <!--  COMPARISON TABLE                                       -->
+    <!-- ======================================================= -->
+    <section class="fade-in-section" style="background: var(--color-bg-secondary);">
+      <div class="max-w-7xl mx-auto px-6 lg:px-8 py-16 sm:py-20 lg:py-24">
+        <!-- Section header -->
+        <div class="mb-12 lg:mb-16">
+          <div class="flex items-center gap-3 mb-4">
+            <div class="section-divider"></div>
+            <span style="font-family: var(--font-body); font-size: 11px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--color-brand); font-weight: 500;">Comparison</span>
+          </div>
+          <h2 style="font-family: var(--font-display); font-size: clamp(28px, 4vw, 42px); font-weight: 600; color: var(--color-text-primary); line-height: 1.2; margin-bottom: 12px;">
+            技法对比总览
+          </h2>
+          <p style="font-family: var(--font-body); font-size: 15px; color: var(--color-text-secondary); line-height: 1.7; max-width: 560px;">
+            八大经典镜头技法一览 &mdash; 核心效果、情绪传达与实现难度。
+          </p>
+        </div>
+
+        <!-- Table -->
+        <div class="overflow-x-auto no-scrollbar">
+          <table style="width: 100%; border-collapse: separate; border-spacing: 0; background: var(--color-bg-surface); border-radius: var(--radius-lg); border: 1px solid var(--color-border-default); overflow: hidden;">
+            <thead>
+              <tr style="border-bottom: 1px solid var(--color-border-brand);">
+                <th style="padding: 16px 20px; text-align: left; font-family: var(--font-body); font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--color-brand); font-weight: 600; white-space: nowrap; width: 20%;">技法名称</th>
+                <th style="padding: 16px 20px; text-align: left; font-family: var(--font-body); font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--color-brand); font-weight: 600; white-space: nowrap; width: 35%;">核心效果</th>
+                <th style="padding: 16px 20px; text-align: left; font-family: var(--font-body); font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--color-brand); font-weight: 600; white-space: nowrap; width: 25%;">主要情绪</th>
+                <th style="padding: 16px 20px; text-align: center; font-family: var(--font-body); font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--color-brand); font-weight: 600; white-space: nowrap; width: 20%;">难度</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr style="border-bottom: 1px solid var(--color-border-default);">
+                <td style="padding: 14px 20px; font-family: var(--font-display); font-size: 15px; color: var(--color-text-primary); font-weight: 500; vertical-align: top;">希区柯克变焦</td>
+                <td style="padding: 14px 20px; font-family: var(--font-body); font-size: 13px; color: var(--color-text-secondary); line-height: 1.6; vertical-align: top;">焦距与机位反向联动，主体不变背景畸变</td>
+                <td style="padding: 14px 20px; font-family: var(--font-body); font-size: 13px; color: var(--color-text-secondary); line-height: 1.6; vertical-align: top;">眩晕、恐惧、心理压迫</td>
+                <td style="padding: 14px 20px; text-align: center; vertical-align: top;">
+                  <span class="difficulty-badge difficulty-hard">高</span>
+                </td>
+              </tr>
+              <tr style="border-bottom: 1px solid var(--color-border-default);">
+                <td style="padding: 14px 20px; font-family: var(--font-display); font-size: 15px; color: var(--color-text-primary); font-weight: 500; vertical-align: top;">子弹时间</td>
+                <td style="padding: 14px 20px; font-family: var(--font-body); font-size: 13px; color: var(--color-text-secondary); line-height: 1.6; vertical-align: top;">时间近乎定格，视角360度环绕主体</td>
+                <td style="padding: 14px 20px; font-family: var(--font-body); font-size: 13px; color: var(--color-text-secondary); line-height: 1.6; vertical-align: top;">超现实、酷炫、时间操控</td>
+                <td style="padding: 14px 20px; text-align: center; vertical-align: top;">
+                  <span class="difficulty-badge difficulty-very-hard">极高</span>
+                </td>
+              </tr>
+              <tr style="border-bottom: 1px solid var(--color-border-default);">
+                <td style="padding: 14px 20px; font-family: var(--font-display); font-size: 15px; color: var(--color-text-primary); font-weight: 500; vertical-align: top;">FPV视角</td>
+                <td style="padding: 14px 20px; font-family: var(--font-body); font-size: 13px; color: var(--color-text-secondary); line-height: 1.6; vertical-align: top;">穿越机第一人称，极速运动与俯冲穿越</td>
+                <td style="padding: 14px 20px; font-family: var(--font-body); font-size: 13px; color: var(--color-text-secondary); line-height: 1.6; vertical-align: top;">速度、自由、肾上腺素</td>
+                <td style="padding: 14px 20px; text-align: center; vertical-align: top;">
+                  <span class="difficulty-badge difficulty-hard">高</span>
+                </td>
+              </tr>
+              <tr style="border-bottom: 1px solid var(--color-border-default);">
+                <td style="padding: 14px 20px; font-family: var(--font-display); font-size: 15px; color: var(--color-text-primary); font-weight: 500; vertical-align: top;">POV视角</td>
+                <td style="padding: 14px 20px; font-family: var(--font-body); font-size: 13px; color: var(--color-text-secondary); line-height: 1.6; vertical-align: top;">角色主观视线，镜头替代人物眼睛</td>
+                <td style="padding: 14px 20px; font-family: var(--font-body); font-size: 13px; color: var(--color-text-secondary); line-height: 1.6; vertical-align: top;">代入、恐惧、窥视</td>
+                <td style="padding: 14px 20px; text-align: center; vertical-align: top;">
+                  <span class="difficulty-badge difficulty-mid">中</span>
+                </td>
+              </tr>
+              <tr style="border-bottom: 1px solid var(--color-border-default);">
+                <td style="padding: 14px 20px; font-family: var(--font-display); font-size: 15px; color: var(--color-text-primary); font-weight: 500; vertical-align: top;">延时摄影</td>
+                <td style="padding: 14px 20px; font-family: var(--font-body); font-size: 13px; color: var(--color-text-secondary); line-height: 1.6; vertical-align: top;">固定间隔拍摄，快速合成实现时间加速</td>
+                <td style="padding: 14px 20px; font-family: var(--font-body); font-size: 13px; color: var(--color-text-secondary); line-height: 1.6; vertical-align: top;">时间流逝、宏大、诗意</td>
+                <td style="padding: 14px 20px; text-align: center; vertical-align: top;">
+                  <span class="difficulty-badge difficulty-mid">中</span>
+                </td>
+              </tr>
+              <tr style="border-bottom: 1px solid var(--color-border-default);">
+                <td style="padding: 14px 20px; font-family: var(--font-display); font-size: 15px; color: var(--color-text-primary); font-weight: 500; vertical-align: top;">斯皮尔伯格闯入镜头</td>
+                <td style="padding: 14px 20px; font-family: var(--font-body); font-size: 13px; color: var(--color-text-secondary); line-height: 1.6; vertical-align: top;">一镜到底，靠动作视线自然转场</td>
+                <td style="padding: 14px 20px; font-family: var(--font-body); font-size: 13px; color: var(--color-text-secondary); line-height: 1.6; vertical-align: top;">流畅、沉浸、情绪连贯</td>
+                <td style="padding: 14px 20px; text-align: center; vertical-align: top;">
+                  <span class="difficulty-badge difficulty-hard">高</span>
+                </td>
+              </tr>
+              <tr style="border-bottom: 1px solid var(--color-border-default);">
+                <td style="padding: 14px 20px; font-family: var(--font-display); font-size: 15px; color: var(--color-text-primary); font-weight: 500; vertical-align: top;">昆汀式后备箱视角</td>
+                <td style="padding: 14px 20px; font-family: var(--font-body); font-size: 13px; color: var(--color-text-secondary); line-height: 1.6; vertical-align: top;">封闭空间极低仰拍，容器形成画框</td>
+                <td style="padding: 14px 20px; font-family: var(--font-body); font-size: 13px; color: var(--color-text-secondary); line-height: 1.6; vertical-align: top;">压迫、戏剧张力、暴力美学</td>
+                <td style="padding: 14px 20px; text-align: center; vertical-align: top;">
+                  <span class="difficulty-badge difficulty-low">低</span>
+                </td>
+              </tr>
+              <tr>
+                <td style="padding: 14px 20px; font-family: var(--font-display); font-size: 15px; color: var(--color-text-primary); font-weight: 500; vertical-align: top;">迈克尔&middot;贝环绕镜头</td>
+                <td style="padding: 14px 20px; font-family: var(--font-body); font-size: 13px; color: var(--color-text-secondary); line-height: 1.6; vertical-align: top;">低角度360度环绕，慢动作+逆光+爆炸</td>
+                <td style="padding: 14px 20px; font-family: var(--font-body); font-size: 13px; color: var(--color-text-secondary); line-height: 1.6; vertical-align: top;">英雄感、力量、视觉奇观</td>
+                <td style="padding: 14px 20px; text-align: center; vertical-align: top;">
+                  <span class="difficulty-badge difficulty-hard">高</span>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================================================= -->
+    <!--  TECHNIQUE QUICK REFERENCE GRID                         -->
+    <!-- ======================================================= -->
+    <section class="fade-in-section" style="background: var(--color-bg-primary);">
+      <div class="max-w-7xl mx-auto px-6 lg:px-8 py-16 sm:py-20 lg:py-24">
+        <!-- Section header -->
+        <div class="mb-12 lg:mb-16">
+          <div class="flex items-center gap-3 mb-4">
+            <div class="section-divider"></div>
+            <span style="font-family: var(--font-body); font-size: 11px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--color-brand); font-weight: 500;">Quick Reference</span>
+          </div>
+          <h2 style="font-family: var(--font-display); font-size: clamp(28px, 4vw, 42px); font-weight: 600; color: var(--color-text-primary); line-height: 1.2; margin-bottom: 12px;">
+            技法速查
+          </h2>
+          <p style="font-family: var(--font-body); font-size: 15px; color: var(--color-text-secondary); line-height: 1.7; max-width: 560px;">
+            一句话掌握每个技法的核心精髓。
+          </p>
+        </div>
+
+        <!-- Quick Reference Mini Cards Grid -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+
+          <!-- QR 01 -->
+          <div class="qr-card">
+            <span style="font-family: var(--font-display); font-size: 32px; font-weight: 700; color: var(--color-brand); opacity: 0.15; line-height: 1;">01</span>
+            <h4 style="font-family: var(--font-display); font-size: 16px; font-weight: 600; color: var(--color-text-primary); margin: 8px 0 6px 0;">希区柯克变焦</h4>
+            <p style="font-family: var(--font-body); font-size: 13px; color: var(--color-text-secondary); line-height: 1.6; margin: 0;">焦距增、距离减 &mdash; 背景压缩，空间坍塌于身后。</p>
+          </div>
+
+          <!-- QR 02 -->
+          <div class="qr-card">
+            <span style="font-family: var(--font-display); font-size: 32px; font-weight: 700; color: var(--color-brand); opacity: 0.15; line-height: 1;">02</span>
+            <h4 style="font-family: var(--font-display); font-size: 16px; font-weight: 600; color: var(--color-text-primary); margin: 8px 0 6px 0;">子弹时间</h4>
+            <p style="font-family: var(--font-body); font-size: 13px; color: var(--color-text-secondary); line-height: 1.6; margin: 0;">时间冻结，空间环绕 &mdash; 让瞬间拥有360度视角。</p>
+          </div>
+
+          <!-- QR 03 -->
+          <div class="qr-card">
+            <span style="font-family: var(--font-display); font-size: 32px; font-weight: 700; color: var(--color-brand); opacity: 0.15; line-height: 1;">03</span>
+            <h4 style="font-family: var(--font-display); font-size: 16px; font-weight: 600; color: var(--color-text-primary); margin: 8px 0 6px 0;">FPV视角</h4>
+            <p style="font-family: var(--font-body); font-size: 13px; color: var(--color-text-secondary); line-height: 1.6; margin: 0;">穿越机之眼 &mdash; 极速飞行中体验空间的真实穿越。</p>
+          </div>
+
+          <!-- QR 04 -->
+          <div class="qr-card">
+            <span style="font-family: var(--font-display); font-size: 32px; font-weight: 700; color: var(--color-brand); opacity: 0.15; line-height: 1;">04</span>
+            <h4 style="font-family: var(--font-display); font-size: 16px; font-weight: 600; color: var(--color-text-primary); margin: 8px 0 6px 0;">POV视角</h4>
+            <p style="font-family: var(--font-body); font-size: 13px; color: var(--color-text-secondary); line-height: 1.6; margin: 0;">角色之眼 &mdash; 镜头即瞳孔，让观众成为剧中人。</p>
+          </div>
+
+          <!-- QR 05 -->
+          <div class="qr-card">
+            <span style="font-family: var(--font-display); font-size: 32px; font-weight: 700; color: var(--color-brand); opacity: 0.15; line-height: 1;">05</span>
+            <h4 style="font-family: var(--font-display); font-size: 16px; font-weight: 600; color: var(--color-text-primary); margin: 8px 0 6px 0;">延时摄影</h4>
+            <p style="font-family: var(--font-body); font-size: 13px; color: var(--color-text-secondary); line-height: 1.6; margin: 0;">时间压缩器 &mdash; 数小时的光阴在数秒内绽放。</p>
+          </div>
+
+          <!-- QR 06 -->
+          <div class="qr-card">
+            <span style="font-family: var(--font-display); font-size: 32px; font-weight: 700; color: var(--color-brand); opacity: 0.15; line-height: 1;">06</span>
+            <h4 style="font-family: var(--font-display); font-size: 16px; font-weight: 600; color: var(--color-text-primary); margin: 8px 0 6px 0;">斯皮尔伯格闯入镜头</h4>
+            <p style="font-family: var(--font-body); font-size: 13px; color: var(--color-text-secondary); line-height: 1.6; margin: 0;">一镜闯关 &mdash; 不剪切、不跳转，让镜头自己走过去。</p>
+          </div>
+
+          <!-- QR 07 -->
+          <div class="qr-card">
+            <span style="font-family: var(--font-display); font-size: 32px; font-weight: 700; color: var(--color-brand); opacity: 0.15; line-height: 1;">07</span>
+            <h4 style="font-family: var(--font-display); font-size: 16px; font-weight: 600; color: var(--color-text-primary); margin: 8px 0 6px 0;">昆汀式后备箱视角</h4>
+            <p style="font-family: var(--font-body); font-size: 13px; color: var(--color-text-secondary); line-height: 1.6; margin: 0;">箱子之底仰视世界 &mdash; 天然画框+极端仰拍=暴力美学。</p>
+          </div>
+
+          <!-- QR 08 -->
+          <div class="qr-card">
+            <span style="font-family: var(--font-display); font-size: 32px; font-weight: 700; color: var(--color-brand); opacity: 0.15; line-height: 1;">08</span>
+            <h4 style="font-family: var(--font-display); font-size: 16px; font-weight: 600; color: var(--color-text-primary); margin: 8px 0 6px 0;">迈克尔&middot;贝环绕镜头</h4>
+            <p style="font-family: var(--font-body); font-size: 13px; color: var(--color-text-secondary); line-height: 1.6; margin: 0;">低角度英雄旋转 &mdash; 慢动作+逆光+环绕=超级英雄感。</p>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== NEXT STEPS CTA SECTION ===== -->
+    <section class="fade-in-section" style="background: var(--color-bg-primary);">
+      <div class="max-w-7xl mx-auto px-6 lg:px-8">
+        <div class="flex flex-col items-center text-center" style="padding: 64px 0 96px 0;">
+          <!-- Divider -->
+          <div style="width: 1px; height: 48px; background: linear-gradient(to bottom, transparent, var(--color-brand), transparent); margin-bottom: 32px;"></div>
+
+          <span style="font-family: var(--font-body); font-size: 11px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--color-brand); font-weight: 500; margin-bottom: 16px;">Continue Learning</span>
+
+          <h2 style="font-family: var(--font-display); font-size: clamp(24px, 3.5vw, 36px); font-weight: 600; color: var(--color-text-primary); line-height: 1.2; margin-bottom: 12px;">
+            继续学习
+          </h2>
+          <p style="font-family: var(--font-body); font-size: 15px; color: var(--color-text-secondary); line-height: 1.7; margin-bottom: 32px; max-width: 400px;">
+            在镜头语言的基础上，探索多模态光影的进阶技法，将视觉叙事推向新维度。
+          </p>
+
+          <!-- CTA Button -->
+          <a href="multimodal-light.html" class="cta-glow inline-flex items-center gap-3 px-8 py-4" style="background: var(--color-brand); color: var(--color-text-inverse); font-family: var(--font-body); font-size: 14px; font-weight: 500; letter-spacing: 0.05em; text-decoration: none; border-radius: var(--radius-full); transition: box-shadow 0.3s ease;">
+            <span>多模态光影</span>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </a>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ===== FOOTER ===== -->
+  <footer style="background: var(--color-bg-secondary); border-top: 1px solid var(--color-border-default);">
+    <div class="max-w-7xl mx-auto px-6 lg:px-8 py-16">
+      <div class="grid grid-cols-1 md:grid-cols-4 gap-12">
+        <div class="md:col-span-2">
+          <h3 style="font-family: var(--font-display); color: var(--color-brand); font-size: 22px; font-weight: 600; margin-bottom: 12px;">Visual Aesthetics</h3>
+          <p style="color: var(--color-text-secondary); font-family: var(--font-body); font-size: 14px; line-height: 1.7; max-width: 360px;">探索视觉美学的深层原理，从光影到镜头，从理论到实践，构建系统的视觉表达能力。</p>
+        </div>
+        <div>
+          <h4 style="font-family: var(--font-body); color: var(--color-text-primary); font-size: 12px; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 16px; font-weight: 600;">学习模块</h4>
+          <ul style="list-style: none; padding: 0; margin: 0;">
+            <li style="margin-bottom: 10px;"><a href="multimodal-light.html" style="color: var(--color-text-secondary); text-decoration: none; font-size: 14px; font-family: var(--font-body);">多模态光影</a></li>
+            <li style="margin-bottom: 10px;"><a href="lens-language.html" style="color: var(--color-text-secondary); text-decoration: none; font-size: 14px; font-family: var(--font-body);">镜头语言</a></li>
+            <li style="margin-bottom: 10px;"><a href="#" style="color: var(--color-text-secondary); text-decoration: none; font-size: 14px; font-family: var(--font-body);">色彩理论</a></li>
+            <li><a href="#" style="color: var(--color-text-secondary); text-decoration: none; font-size: 14px; font-family: var(--font-body);">构图法则</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4 style="font-family: var(--font-body); color: var(--color-text-primary); font-size: 12px; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 16px; font-weight: 600;">关于</h4>
+          <ul style="list-style: none; padding: 0; margin: 0;">
+            <li style="margin-bottom: 10px;"><a href="#" style="color: var(--color-text-secondary); text-decoration: none; font-size: 14px; font-family: var(--font-body);">设计理念</a></li>
+            <li style="margin-bottom: 10px;"><a href="#" style="color: var(--color-text-secondary); text-decoration: none; font-size: 14px; font-family: var(--font-body);">学习路径</a></li>
+            <li><a href="#" style="color: var(--color-text-secondary); text-decoration: none; font-size: 14px; font-family: var(--font-body);">联系我们</a></li>
+          </ul>
+        </div>
+      </div>
+      <div style="margin-top: 48px; padding-top: 24px; border-top: 1px solid var(--color-border-default); text-align: center;">
+        <p style="color: var(--color-text-tertiary); font-size: 12px; font-family: var(--font-body); letter-spacing: 0.05em;">Visual Aesthetics Learning Platform. Designed for creators.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scroll animation observer -->
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const observer = new IntersectionObserver(function(entries) {
+        entries.forEach(function(entry) {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+          }
+        });
+      }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+
+      document.querySelectorAll('.fade-in-section').forEach(function(el) {
+        observer.observe(el);
+      });
+    });
+  </script>
+
+  <style>
+    /* -- Nav & Link styles -- */
+    .nav-link:hover { color: var(--color-brand) !important; }
+    .nav-active:hover { color: var(--color-brand-light) !important; }
+    a { transition: color 0.2s ease; }
+
+    /* -- Active nav state -- */
+    .nav-active {
+      color: var(--color-brand) !important;
+    }
+
+    /* -- Smooth scrolling -- */
+    html { scroll-behavior: smooth; }
+
+    /* -- Hero overlay gradient -- */
+    .hero-overlay {
+      background: linear-gradient(
+        to bottom,
+        rgba(10, 10, 10, 0.4) 0%,
+        rgba(10, 10, 10, 0.6) 40%,
+        rgba(10, 10, 10, 0.92) 100%
+      );
+    }
+
+    /* -- Section divider gold line -- */
+    .section-divider {
+      width: 48px;
+      height: 1px;
+      background: var(--color-brand);
+      opacity: 0.5;
+    }
+
+    /* -- Image placeholders with warm golden gradients -- */
+    .img-placeholder-01 {
+      background: linear-gradient(135deg, #3D2E14 0%, #C9A96E 40%, #8B7040 70%, #1A1208 100%);
+    }
+    .img-placeholder-02 {
+      background: linear-gradient(135deg, #1A1208 0%, #A68B5B 35%, #DBC99E 65%, #2A1F0E 100%);
+    }
+    .img-placeholder-03 {
+      background: linear-gradient(135deg, #2A1F0E 0%, #C9A96E 50%, #5A4A2E 80%, #0A0A0A 100%);
+    }
+    .img-placeholder-04 {
+      background: linear-gradient(135deg, #0A0A0A 0%, #8B7040 30%, #DBC99E 55%, #3D2E14 100%);
+    }
+
+    /* -- Editorial number watermark -- */
+    .editorial-num {
+      font-family: var(--font-display);
+      font-size: 120px;
+      font-weight: 700;
+      line-height: 1;
+      color: var(--color-brand);
+      opacity: 0.08;
+      position: absolute;
+      bottom: 20px;
+      right: 30px;
+      z-index: 1;
+      pointer-events: none;
+    }
+
+    /* -- Feature pills -- */
+    .feature-pill {
+      display: inline-block;
+      padding: 6px 16px;
+      border: 1px solid var(--color-border-brand);
+      border-radius: var(--radius-full);
+      font-family: var(--font-body);
+      font-size: 12px;
+      color: var(--color-brand);
+      cursor: default;
+      letter-spacing: 0.04em;
+      transition: all 0.3s ease;
+    }
+    .feature-pill:hover {
+      background: var(--color-brand);
+      color: var(--color-text-inverse);
+      border-color: var(--color-brand);
+    }
+
+    .feature-pill-sm {
+      display: inline-block;
+      padding: 4px 12px;
+      border: 1px solid var(--color-border-brand);
+      border-radius: var(--radius-full);
+      font-family: var(--font-body);
+      font-size: 11px;
+      color: var(--color-brand);
+      cursor: default;
+      letter-spacing: 0.04em;
+      transition: all 0.3s ease;
+    }
+    .feature-pill-sm:hover {
+      background: var(--color-brand);
+      color: var(--color-text-inverse);
+      border-color: var(--color-brand);
+    }
+
+    /* -- Concept pill -- */
+    .concept-pill {
+      display: inline-block;
+      padding: 8px 20px;
+      border: 1px solid var(--color-brand);
+      border-radius: var(--radius-full);
+      font-family: var(--font-body);
+      font-size: 13px;
+      color: var(--color-brand);
+      cursor: default;
+      letter-spacing: 0.04em;
+      transition: all 0.3s ease;
+    }
+    .concept-pill:hover {
+      background: var(--color-brand);
+      color: var(--color-text-inverse);
+      border-color: var(--color-brand);
+    }
+
+    /* -- Film negative card styles -- */
+    .film-card {
+      position: relative;
+      background: var(--color-bg-surface);
+      border-radius: var(--radius-md);
+      overflow: visible;
+    }
+
+    .film-card::before,
+    .film-card::after {
+      content: '';
+      position: absolute;
+      left: 0;
+      right: 0;
+      height: 18px;
+      background: repeating-linear-gradient(
+        90deg,
+        transparent,
+        transparent 12px,
+        var(--color-bg-sunken) 12px,
+        var(--color-bg-sunken) 14px
+      );
+      z-index: 2;
+      border-left: 2px solid var(--color-brand);
+      border-right: 2px solid var(--color-brand);
+    }
+
+    .film-card::before {
+      top: 0;
+      border-top: 2px solid var(--color-brand);
+      border-radius: var(--radius-md) var(--radius-md) 0 0;
+    }
+
+    .film-card::after {
+      bottom: 0;
+      border-bottom: 2px solid var(--color-brand);
+      border-radius: 0 0 var(--radius-md) var(--radius-md);
+    }
+
+    .film-card-inner {
+      border-left: 2px solid var(--color-brand);
+      border-right: 2px solid var(--color-brand);
+      margin-top: 18px;
+      margin-bottom: 18px;
+    }
+
+    /* -- Sprocket hole dots overlay -- */
+    .sprocket-top,
+    .sprocket-bottom {
+      position: absolute;
+      left: 6px;
+      right: 6px;
+      height: 18px;
+      display: flex;
+      align-items: center;
+      justify-content: space-around;
+      z-index: 3;
+      pointer-events: none;
+    }
+
+    .sprocket-top { top: 0; }
+    .sprocket-bottom { bottom: 0; }
+
+    .sprocket-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--color-bg-sunken);
+      border: 1px solid var(--color-border-strong);
+      flex-shrink: 0;
+    }
+
+    /* -- Film card hover glow effect -- */
+    .film-card {
+      transition: box-shadow 0.4s ease, border-color 0.4s ease;
+      box-shadow: var(--shadow-md);
+    }
+
+    .film-card:hover {
+      box-shadow: var(--shadow-float), 0 0 20px rgba(201, 169, 110, 0.08);
+    }
+
+    /* -- Technique card number watermark -- */
+    .technique-num {
+      font-family: var(--font-display);
+      font-size: 64px;
+      font-weight: 700;
+      line-height: 1;
+      color: var(--color-brand);
+      opacity: 0.1;
+      position: absolute;
+      top: 28px;
+      right: 20px;
+    }
+
+    /* -- Quick Reference cards -- */
+    .qr-card {
+      padding: 24px;
+      background: var(--color-bg-surface);
+      border-radius: var(--radius-lg);
+      border: 1px solid var(--color-border-default);
+      transition: box-shadow 0.3s ease, border-color 0.3s ease;
+    }
+    .qr-card:hover {
+      box-shadow: var(--shadow-lg);
+      border-color: var(--color-border-brand);
+    }
+
+    /* -- Difficulty badges -- */
+    .difficulty-badge {
+      display: inline-block;
+      padding: 4px 12px;
+      border-radius: var(--radius-full);
+      font-family: var(--font-body);
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+    .difficulty-low {
+      background: rgba(74, 222, 128, 0.12);
+      color: #4ADE80;
+      border: 1px solid rgba(74, 222, 128, 0.25);
+    }
+    .difficulty-mid {
+      background: rgba(251, 191, 36, 0.12);
+      color: #FBBF24;
+      border: 1px solid rgba(251, 191, 36, 0.25);
+    }
+    .difficulty-hard {
+      background: rgba(201, 169, 110, 0.12);
+      color: var(--color-brand);
+      border: 1px solid rgba(201, 169, 110, 0.25);
+    }
+    .difficulty-very-hard {
+      background: rgba(248, 113, 113, 0.12);
+      color: #F87171;
+      border: 1px solid rgba(248, 113, 113, 0.25);
+    }
+
+    /* -- CTA glow effect -- */
+    .cta-glow {
+      position: relative;
+    }
+    .cta-glow::after {
+      content: '';
+      position: absolute;
+      inset: -2px;
+      border-radius: var(--radius-full);
+      background: linear-gradient(135deg, var(--color-brand), var(--color-brand-dark));
+      z-index: -1;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+      filter: blur(8px);
+    }
+    .cta-glow:hover::after {
+      opacity: 0.4;
+    }
+    .cta-glow:hover {
+      box-shadow: 0 8px 24px rgba(201, 169, 110, 0.3);
+    }
+
+    /* -- Scroll-triggered fade-in animation -- */
+    .fade-in-section {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.8s ease, transform 0.8s ease;
+    }
+    .fade-in-section.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* -- Knowledge panel collapsible -- */
+    .knowledge-panel.expanded .knowledge-content { max-height: 2000px; padding: 16px; }
+    .knowledge-panel.expanded .toggle-arrow { transform: rotate(180deg); }
+    .knowledge-panel .knowledge-content p { margin-bottom: 10px; }
+    .knowledge-panel .knowledge-content p:last-child { margin-bottom: 0; }
+    .knowledge-panel .knowledge-content .kp-label {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      color: var(--color-brand-light);
+      letter-spacing: 0.06em;
+      margin: 0 0 4px 0;
+      text-transform: uppercase;
+      font-weight: 600;
+    }
+    .knowledge-panel .knowledge-content .kp-text {
+      font-family: var(--font-body);
+      font-size: 13px;
+      color: var(--color-text-secondary);
+      line-height: 1.75;
+      margin: 0 0 14px 0;
+    }
+    .knowledge-panel .knowledge-content .kp-text:last-child { margin-bottom: 0; }
+    .knowledge-panel .knowledge-content ul {
+      list-style: none;
+      padding: 0;
+      margin: 0 0 14px 0;
+    }
+    .knowledge-panel .knowledge-content ul:last-child { margin-bottom: 0; }
+    .knowledge-panel .knowledge-content ul li {
+      font-family: var(--font-body);
+      font-size: 13px;
+      color: var(--color-text-secondary);
+      line-height: 1.7;
+      padding-left: 16px;
+      position: relative;
+      margin-bottom: 3px;
+    }
+    .knowledge-panel .knowledge-content ul li span {
+      position: absolute;
+      left: 0;
+      color: var(--color-brand);
+    }
+  
+    /* === Cards Panel Styles === */
+    .cards-backdrop {
+      position: fixed; top: 0; left: 0; right: 0; bottom: 0;
+      background: var(--color-bg-primary);
+      z-index: 1000; opacity: 0; pointer-events: none;
+      transition: opacity 0.4s ease;
+    }
+    .cards-backdrop.active { opacity: 1; pointer-events: auto; }
+    .cards-topbar {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 1010;
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 16px 24px;
+      background: linear-gradient(to bottom, var(--color-bg-primary), transparent);
+      pointer-events: none;
+    }
+    .cards-backdrop.active .cards-topbar > * { pointer-events: auto; }
+    .cards-topbar-left h2 {
+      font-family: var(--font-display); font-size: 20px; font-weight: 500;
+      color: var(--color-text-primary); margin: 0 0 2px 0;
+    }
+    .cards-topbar-left p {
+      font-family: var(--font-body); font-size: 11px; color: var(--color-text-tertiary);
+      letter-spacing: 0.08em; text-transform: uppercase; margin: 0;
+    }
+    .cards-close {
+      width: 40px; height: 40px; border-radius: var(--radius-full);
+      border: 1px solid var(--color-border-strong);
+      background: var(--color-bg-elevated);
+      color: var(--color-text-secondary); cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 20px; transition: all 0.2s;
+    }
+    .cards-close:hover { border-color: var(--color-brand); color: var(--color-text-primary); }
+    .cards-track {
+      display: flex; gap: 20px; padding: 80px 40px 40px; height: 100vh;
+      overflow-x: auto; overflow-y: hidden; scroll-behavior: smooth;
+      scroll-snap-type: x mandatory; scrollbar-width: none;
+    }
+    .cards-track::-webkit-scrollbar { display: none; }
+    .hcard {
+      flex-shrink: 0; width: 360px; height: calc(100vh - 120px);
+      background: var(--color-bg-surface); border: 1px solid var(--color-border-default);
+      border-radius: var(--radius-lg); overflow-y: auto; scrollbar-width: thin;
+      scrollbar-color: rgba(201,169,110,0.3) transparent; scroll-snap-align: center;
+      transition: border-color 0.3s, box-shadow 0.3s; cursor: pointer;
+    }
+    .hcard::-webkit-scrollbar { width: 4px; }
+    .hcard::-webkit-scrollbar-track { background: transparent; }
+    .hcard::-webkit-scrollbar-thumb { background: rgba(201,169,110,0.3); border-radius: 2px; }
+    .hcard:hover { border-color: var(--color-border-strong); }
+    .hcard.active {
+      border-color: var(--color-brand);
+      box-shadow: 0 0 40px rgba(201, 169, 110, 0.08), inset 0 1px 0 rgba(201,169,110,0.1);
+    }
+    .hcard-header {
+      position: sticky; top: 0; background: var(--color-bg-surface);
+      padding: 20px 22px 14px; border-bottom: 1px solid var(--color-border-default); z-index: 1;
+    }
+    .hcard-header-num {
+      display: inline-flex; align-items: center; justify-content: center;
+      width: 28px; height: 28px; border-radius: var(--radius-full);
+      border: 1px solid var(--color-border-brand);
+      font-family: var(--font-display); font-size: 12px; color: var(--color-brand); margin-bottom: 8px;
+    }
+    .hcard.active .hcard-header-num {
+      background: var(--color-brand); color: var(--color-bg-primary); border-color: var(--color-brand);
+    }
+    .hcard-header-title {
+      font-family: var(--font-body); font-size: 11px; text-transform: uppercase;
+      letter-spacing: 0.12em; color: var(--color-brand); font-weight: 600;
+    }
+    .hcard:not(.active) .hcard-header-title { color: var(--color-text-tertiary); }
+    .hcard-body { padding: 18px 22px 30px; }
+    .hcard-body strong { color: var(--color-brand); font-weight: 600; }
+
+  </style>
+  <script>
+    var currentCard = {};
+    function openCards(id) {
+      if (!id) id = 'cards-backdrop';
+      currentCard[id] = 0;
+      var backdrop = document.getElementById(id);
+      backdrop.classList.add('active');
+      document.body.style.overflow = 'hidden';
+      setTimeout(function() { centerCard(0, id); }, 100);
+    }
+    function closeCards(id) {
+      if (!id) {
+        document.querySelectorAll('.cards-backdrop.active').forEach(function(b) { b.classList.remove('active'); });
+      } else {
+        document.getElementById(id).classList.remove('active');
+      }
+      if (!document.querySelector('.cards-backdrop.active')) { document.body.style.overflow = ''; }
+    }
+    function centerCard(index, id) {
+      if (!id) id = 'cards-backdrop';
+      currentCard[id] = index;
+      var backdrop = document.getElementById(id);
+      var track = backdrop.querySelector('.cards-track');
+      if (!track) return;
+      var cards = track.querySelectorAll('.hcard');
+      cards.forEach(function(c, i) { c.classList.toggle('active', i === index); });
+      var card = cards[index];
+      if (card) { var sl = card.offsetLeft - track.offsetWidth / 2 + card.offsetWidth / 2; track.scrollTo({ left: sl, behavior: 'smooth' }); }
+    }
+    document.querySelectorAll('.cards-backdrop').forEach(function(backdrop) {
+      var id = backdrop.id;
+      var track = backdrop.querySelector('.cards-track');
+      if (!track) return;
+      backdrop.addEventListener('click', function(e) { if (e.target === backdrop) closeCards(id); });
+      track.querySelectorAll('.hcard').forEach(function(card, i) {
+        card.addEventListener('click', function(e) {
+          e.stopPropagation();
+          if (i === (currentCard[id] || 0)) closeCards(id); else centerCard(i, id);
+        });
+      });
+      track.addEventListener('wheel', function(e) {
+        if (Math.abs(e.deltaY) > Math.abs(e.deltaX)) {
+          e.preventDefault();
+          track.scrollLeft += e.deltaY;
+          var cards = track.querySelectorAll('.hcard');
+          var cx = track.scrollLeft + track.offsetWidth / 2;
+          var cl = 0, cd = Infinity;
+          cards.forEach(function(card, ci) { var cc = card.offsetLeft + card.offsetWidth / 2; var d = Math.abs(cc - cx); if (d < cd) { cd = d; cl = ci; } });
+          if (cl !== (currentCard[id] || 0)) { currentCard[id] = cl; cards.forEach(function(c, ci) { c.classList.toggle('active', ci === cl); }); }
+        }
+      }, { passive: false });
+    });
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape') closeCards();
+      var ab = document.querySelector('.cards-backdrop.active');
+      if (!ab) return;
+      var id = ab.id;
+      var cards = ab.querySelectorAll('.hcard');
+      if (e.key === 'ArrowRight' && (currentCard[id]||0) < cards.length - 1) centerCard((currentCard[id]||0) + 1, id);
+      if (e.key === 'ArrowLeft' && (currentCard[id]||0) > 0) centerCard((currentCard[id]||0) - 1, id);
+    });
+  </script>
+
+
+  
+<!-- Knowledge Panel: 希区柯克变焦 -->
+<div id="panel-xiquke" class="cards-backdrop">
+  <div class="cards-topbar">
+    <div class="cards-topbar-left">
+      <h2>希区柯克变焦</h2>
+      <p>Dolly Zoom / Vertigo Effect · 滚轮左右切换，点击卡片居中</p>
+    </div>
+    <button class="cards-close" onclick="closeCards('panel-xiquke')" title="关闭">&times;</button>
+  </div>
+  <div class="cards-track">
+      <div class="hcard active" data-card="0"><div class="hcard-header"><div class="hcard-header-num">1</div><div class="hcard-header-title">概念定义 & 名称由来</div></div><div class="hcard-body"><p style="margin:8px 0;line-height:1.7;"><strong>希区柯克变焦（Dolly Zoom）</strong>，又称<strong style="color:var(--color-brand);">眩晕效果（Vertigo Effect）</strong>，在保持主体大小不变的前提下，让背景被急剧拉伸或压缩，产生空间扭曲、透视畸变、心理压迫的视觉特效。</p><blockquote style="border-left:2px solid var(--color-brand);padding-left:12px;margin:12px 0;color:var(--color-text-tertiary);font-style:italic;">人好像没动，但背后的世界突然被拉远、压扁或坍缩。</blockquote><p style="margin:8px 0;line-height:1.7;">因<strong>希区柯克</strong>在1958年电影<strong>《迷魂记》（Vertigo）</strong>中著名使用而得名。钟楼楼梯上望向深渊的镜头，成为影史最具心理冲击力的镜头之一。</p></div></div>
+      <div class="hcard" data-card="1"><div class="hcard-header"><div class="hcard-header-num">2</div><div class="hcard-header-title">核心原理 & 光学本质</div></div><div class="hcard-body"><p style="margin:8px 0;line-height:1.7;">核心是<strong>焦距与摄影机位置的反向联动</strong>。主体大小 = 焦距 / 拍摄距离，两者同时反向变化时主体不变，但透视剧变。</p><blockquote style="border-left:2px solid var(--color-brand);padding-left:12px;margin:12px 0;color:var(--color-text-tertiary);font-style:italic;">S / f/d，当f增大时同步增大d，比值不变，透视关系剧变。</blockquote><table style="width:100%;border-collapse:collapse;margin:12px 0;font-family:var(--font-body);font-size:12px;color:var(--color-text-secondary);"><tr><th style="border:1px solid var(--color-border-default);padding:6px 10px;text-align:left;color:var(--color-brand);font-weight:600;">类型</th><th style="border:1px solid var(--color-border-default);padding:6px 10px;text-align:left;color:var(--color-brand);font-weight:600;">操作</th><th style="border:1px solid var(--color-border-default);padding:6px 10px;text-align:left;color:var(--color-brand);font-weight:600;">效果</th></tr><tr><td style="border:1px solid var(--color-border-default);padding:6px 10px;">推轨变焦</td><td style="border:1px solid var(--color-border-default);padding:6px 10px;">推进+拉远</td><td style="border:1px solid var(--color-border-default);padding:6px 10px;">背景压缩</td></tr><tr><td style="border:1px solid var(--color-border-default);padding:6px 10px;">拉轨变焦</td><td style="border:1px solid var(--color-border-default);padding:6px 10px;">后退+推近</td><td style="border:1px solid var(--color-border-default);padding:6px 10px;">背景拉伸</td></tr></table></div></div>
+      <div class="hcard" data-card="2"><div class="hcard-header"><div class="hcard-header-num">3</div><div class="hcard-header-title">技术实现方式</div></div><div class="hcard-body"><ul style="margin:8px 0;padding-left:18px;"><li style="margin:4px 0;line-height:1.6;"><strong>传统物理</strong>：轨道/稳定器+变焦镜头同步操作</li><li style="margin:4px 0;line-height:1.6;"><strong>后期合成</strong>：AE/DaVinci Resolve数字变焦</li><li style="margin:4px 0;line-height:1.6;"><strong>云台相机</strong>：DJI Inspire+电动变焦</li><li style="margin:4px 0;line-height:1.6;"><strong>手机技巧</strong>：4K拍摄+后期反向缩放</li></ul></div></div>
+      <div class="hcard" data-card="3"><div class="hcard-header"><div class="hcard-header-num">4</div><div class="hcard-header-title">适合表现的情绪 & 场景</div></div><div class="hcard-body"><ul style="margin:8px 0;padding-left:18px;"><li style="margin:4px 0;line-height:1.6;"><strong>眩晕与失衡</strong></li><li style="margin:4px 0;line-height:1.6;"><strong>恐惧与威胁</strong></li><li style="margin:4px 0;line-height:1.6;"><strong>顿悟与觉醒</strong></li><li style="margin:4px 0;line-height:1.6;"><strong>心理崩溃</strong></li><li style="margin:4px 0;line-height:1.6;"><strong>超自然力量</strong></li><li style="margin:4px 0;line-height:1.6;"><strong>情感冲击</strong></li></ul></div></div>
+      <div class="hcard" data-card="4"><div class="hcard-header"><div class="hcard-header-num">5</div><div class="hcard-header-title">代表作品 & 经典场景</div></div><div class="hcard-body"><table style="width:100%;border-collapse:collapse;margin:12px 0;font-family:var(--font-body);font-size:12px;color:var(--color-text-secondary);"><tr><th style="border:1px solid var(--color-border-default);padding:6px 10px;text-align:left;color:var(--color-brand);font-weight:600;">电影</th><th style="border:1px solid var(--color-border-default);padding:6px 10px;text-align:left;color:var(--color-brand);font-weight:600;">年份</th><th style="border:1px solid var(--color-border-default);padding:6px 10px;text-align:left;color:var(--color-brand);font-weight:600;">场景</th></tr><tr><td style="border:1px solid var(--color-border-default);padding:6px 10px;">《迷魂记》</td><td style="border:1px solid var(--color-border-default);padding:6px 10px;">1958</td><td style="border:1px solid var(--color-border-default);padding:6px 10px;">钟楼楼梯望向深渊</td></tr><tr><td style="border:1px solid var(--color-border-default);padding:6px 10px;">《大白鲨》</td><td style="border:1px solid var(--color-border-default);padding:6px 10px;">1975</td><td style="border:1px solid var(--color-border-default);padding:6px 10px;">海滩发现鲨鱼袭击</td></tr><tr><td style="border:1px solid var(--color-border-default);padding:6px 10px;">《好家伙》</td><td style="border:1px solid var(--color-border-default);padding:6px 10px;">1990</td><td style="border:1px solid var(--color-border-default);padding:6px 10px;">进入夜总会空间扭曲</td></tr><tr><td style="border:1px solid var(--color-border-default);padding:6px 10px;">《指环王》</td><td style="border:1px solid var(--color-border-default);padding:6px 10px;">2001</td><td style="border:1px solid var(--color-border-default);padding:6px 10px;">魔戒后世界变形</td></tr><tr><td style="border:1px solid var(--color-border-default);padding:6px 10px;">《1917》</td><td style="border:1px solid var(--color-border-default);padding:6px 10px;">2019</td><td style="border:1px solid var(--color-border-default);padding:6px 10px;">战场心理冲击</td></tr></table></div></div>
+      <div class="hcard" data-card="5"><div class="hcard-header"><div class="hcard-header-num">6</div><div class="hcard-header-title">拍摄技巧 & 注意事项</div></div><div class="hcard-body"><h3 style="font-family:var(--font-display);font-size:14px;color:var(--color-text-primary);margin:16px 0 8px;">前期准备</h3><ul style="margin:8px 0;padding-left:18px;"><li style="margin:4px 0;line-height:1.6;">广角到中长焦变焦镜头（24-70mm）</li><li style="margin:4px 0;line-height:1.6;">运动空间至少2-5米</li><li style="margin:4px 0;line-height:1.6;">轨道/滑轨必须绝对平稳</li></ul><h3 style="font-family:var(--font-display);font-size:14px;color:var(--color-text-primary);margin:16px 0 8px;">拍摄操作</h3><ul style="margin:8px 0;padding-left:18px;"><li style="margin:4px 0;line-height:1.6;">变焦速度和移动速度必须精确匹配</li><li style="margin:4px 0;line-height:1.6;">保持主体在画面中心</li><li style="margin:4px 0;line-height:1.6;">通常需要3-5次尝试</li></ul></div></div>
+  </div>
+</div>
+<!-- Knowledge Panel: 子弹时间 -->
+<div id="panel-zidan" class="cards-backdrop">
+  <div class="cards-topbar">
+    <div class="cards-topbar-left">
+      <h2>子弹时间</h2>
+      <p>Bullet Time · 滚轮左右切换，点击卡片居中</p>
+    </div>
+    <button class="cards-close" onclick="closeCards('panel-zidan')" title="关闭">&times;</button>
+  </div>
+  <div class="cards-track">
+      <div class="hcard active" data-card="0"><div class="hcard-header"><div class="hcard-header-num">1</div><div class="hcard-header-title">概念定义 & 名称由来</div></div><div class="hcard-body"><p style="margin:8px 0;line-height:1.7;"><strong>子弹时间（Bullet Time）</strong>通过多机位阵列抓拍或高速拍摄+后期合成，让主体动作近乎定格，同时镜头视角360度环绕主体，实现"时间静止、空间环绕"。</p><blockquote style="border-left:2px solid var(--color-brand);padding-left:12px;margin:12px 0;color:var(--color-text-tertiary);font-style:italic;">世界被按下暂停键，镜头还能绕着人走。</blockquote><p style="margin:8px 0;line-height:1.7;">因电影<strong>《黑客帝国》（The Matrix, 1999）</strong>中尼奥后仰躲子弹的经典场面而得名。</p></div></div>
+      <div class="hcard" data-card="1"><div class="hcard-header"><div class="hcard-header-num">2</div><div class="hcard-header-title">核心原理 & 光学本质</div></div><div class="hcard-body"><table style="width:100%;border-collapse:collapse;margin:12px 0;font-family:var(--font-body);font-size:12px;color:var(--color-text-secondary);"><tr><th style="border:1px solid var(--color-border-default);padding:6px 10px;text-align:left;color:var(--color-brand);font-weight:600;">特点</th><th style="border:1px solid var(--color-border-default);padding:6px 10px;text-align:left;color:var(--color-brand);font-weight:600;">说明</th></tr><tr><td style="border:1px solid var(--color-border-default);padding:6px 10px;">时间凝滞</td><td style="border:1px solid var(--color-border-default);padding:6px 10px;">主体近乎定格</td></tr><tr><td style="border:1px solid var(--color-border-default);padding:6px 10px;">空间环绕</td><td style="border:1px solid var(--color-border-default);padding:6px 10px;">镜头360度环形运动</td></tr><tr><td style="border:1px solid var(--color-border-default);padding:6px 10px;">超现实感</td><td style="border:1px solid var(--color-border-default);padding:6px 10px;">打破物理规律</td></tr><tr><td style="border:1px solid var(--color-border-default);padding:6px 10px;">强调瞬间</td><td style="border:1px solid var(--color-border-default);padding:6px 10px;">关键动作无限拉长</td></tr></table></div></div>
+      <div class="hcard" data-card="2"><div class="hcard-header"><div class="hcard-header-num">3</div><div class="hcard-header-title">技术实现方式</div></div><div class="hcard-body"><ul style="margin:8px 0;padding-left:18px;"><li style="margin:4px 0;line-height:1.6;"><strong>多机位阵列</strong>：120+台相机环形排列同步触发</li><li style="margin:4px 0;line-height:1.6;"><strong>高速摄影</strong>：Phantom Flex数千帧/秒+Nuke/AE合成</li><li style="margin:4px 0;line-height:1.6;"><strong>CGI全合成</strong>：纯CG虚拟摄影机运动</li><li style="margin:4px 0;line-height:1.6;"><strong>AI插帧</strong>：降低拍摄成本</li></ul></div></div>
+      <div class="hcard" data-card="3"><div class="hcard-header"><div class="hcard-header-num">4</div><div class="hcard-header-title">适合表现的情绪 & 场景</div></div><div class="hcard-body"><ul style="margin:8px 0;padding-left:18px;"><li style="margin:4px 0;line-height:1.6;"><strong>超能力展示</strong></li><li style="margin:4px 0;line-height:1.6;"><strong>极限反应</strong></li><li style="margin:4px 0;line-height:1.6;"><strong>关键动作瞬间</strong></li><li style="margin:4px 0;line-height:1.6;"><strong>心理时间</strong></li><li style="margin:4px 0;line-height:1.6;"><strong>产品展示</strong>：360度环绕</li></ul></div></div>
+      <div class="hcard" data-card="4"><div class="hcard-header"><div class="hcard-header-num">5</div><div class="hcard-header-title">代表作品 & 经典场景</div></div><div class="hcard-body"><table style="width:100%;border-collapse:collapse;margin:12px 0;font-family:var(--font-body);font-size:12px;color:var(--color-text-secondary);"><tr><th style="border:1px solid var(--color-border-default);padding:6px 10px;text-align:left;color:var(--color-brand);font-weight:600;">电影</th><th style="border:1px solid var(--color-border-default);padding:6px 10px;text-align:left;color:var(--color-brand);font-weight:600;">年份</th><th style="border:1px solid var(--color-border-default);padding:6px 10px;text-align:left;color:var(--color-brand);font-weight:600;">场景</th></tr><tr><td style="border:1px solid var(--color-border-default);padding:6px 10px;">《黑客帝国》</td><td style="border:1px solid var(--color-border-default);padding:6px 10px;">1999</td><td style="border:1px solid var(--color-border-default);padding:6px 10px;">尼奥后仰躲子弹</td></tr><tr><td style="border:1px solid var(--color-border-default);padding:6px 10px;">《X战警》</td><td style="border:1px solid var(--color-border-default);padding:6px 10px;">2000+</td><td style="border:1px solid var(--color-border-default);padding:6px 10px;">快银时间暂停</td></tr><tr><td style="border:1px solid var(--color-border-default);padding:6px 10px;">《头号玩家》</td><td style="border:1px solid var(--color-border-default);padding:6px 10px;">2018</td><td style="border:1px solid var(--color-border-default);padding:6px 10px;">虚拟世界致敬</td></tr></table></div></div>
+      <div class="hcard" data-card="5"><div class="hcard-header"><div class="hcard-header-num">6</div><div class="hcard-header-title">拍摄技巧 & 注意事项</div></div><div class="hcard-body"><ul style="margin:8px 0;padding-left:18px;"><li style="margin:4px 0;line-height:1.6;">精确规划机位布置图和运动轨迹</li><li style="margin:4px 0;line-height:1.6;">演员动作精确到帧</li><li style="margin:4px 0;line-height:1.6;">阵列拍摄各机位光线一致</li><li style="margin:4px 0;line-height:1.6;">后期帧间对齐+AI插帧平滑</li><li style="margin:4px 0;line-height:1.6;">确保所有机位色彩曝光一致</li></ul></div></div>
+  </div>
+</div>
+<!-- Knowledge Panel: FPV视角 -->
+<div id="panel-fpv" class="cards-backdrop">
+  <div class="cards-topbar">
+    <div class="cards-topbar-left">
+      <h2>FPV视角</h2>
+      <p>First Person View · 滚轮左右切换，点击卡片居中</p>
+    </div>
+    <button class="cards-close" onclick="closeCards('panel-fpv')" title="关闭">&times;</button>
+  </div>
+  <div class="cards-track">
+      <div class="hcard active" data-card="0"><div class="hcard-header"><div class="hcard-header-num">1</div><div class="hcard-header-title">概念定义 & 名称由来</div></div><div class="hcard-body"><p style="margin:8px 0;line-height:1.7;"><strong>FPV（First Person View）</strong>以飞行器第一视觉模拟沉浸式临场观感。镜头等同于驾驶者眼睛，画面跟随载体高速运动、转向、俯冲、穿梭。</p><blockquote style="border-left:2px solid var(--color-brand);padding-left:12px;margin:12px 0;color:var(--color-text-tertiary);font-style:italic;">不是"你在看无人机飞"，而是"你像变成无人机自己在飞"。</blockquote><p style="margin:8px 0;line-height:1.7;">从航模圈的小众玩法到电影工业标配运镜工具，仅用了不到20年。</p></div></div>
+      <div class="hcard" data-card="1"><div class="hcard-header"><div class="hcard-header-num">2</div><div class="hcard-header-title">核心原理 & 光学本质</div></div><div class="hcard-body"><table style="width:100%;border-collapse:collapse;margin:12px 0;font-family:var(--font-body);font-size:12px;color:var(--color-text-secondary);"><tr><th style="border:1px solid var(--color-border-default);padding:6px 10px;text-align:left;color:var(--color-brand);font-weight:600;">特点</th><th style="border:1px solid var(--color-border-default);padding:6px 10px;text-align:left;color:var(--color-brand);font-weight:600;">说明</th></tr><tr><td style="border:1px solid var(--color-border-default);padding:6px 10px;">第一人称沉浸</td><td style="border:1px solid var(--color-border-default);padding:6px 10px;">观众即飞行员</td></tr><tr><td style="border:1px solid var(--color-border-default);padding:6px 10px;">极速动感</td><td style="border:1px solid var(--color-border-default);padding:6px 10px;">时速100-200km/h</td></tr><tr><td style="border:1px solid var(--color-border-default);padding:6px 10px;">灵活机动</td><td style="border:1px solid var(--color-border-default);padding:6px 10px;">俯冲、翻滚、穿洞</td></tr><tr><td style="border:1px solid var(--color-border-default);padding:6px 10px;">低视角冲击</td><td style="border:1px solid var(--color-border-default);padding:6px 10px;">贴地飞行、穿窗</td></tr><tr><td style="border:1px solid var(--color-border-default);padding:6px 10px;">一镜到底</td><td style="border:1px solid var(--color-border-default);padding:6px 10px;">长距离连续运动</td></tr></table></div></div>
+      <div class="hcard" data-card="2"><div class="hcard-header"><div class="hcard-header-num">3</div><div class="hcard-header-title">技术实现方式</div></div><div class="hcard-body"><ul style="margin:8px 0;padding-left:18px;"><li style="margin:4px 0;line-height:1.6;"><strong>穿越机</strong>：碳纤维机架、高KV无刷电机</li><li style="margin:4px 0;line-height:1.6;"><strong>FPV Goggles</strong>：低延迟实时图传眼镜</li><li style="margin:4px 0;line-height:1.6;"><strong>GoPro/Insta360</strong>：挂载式高清拍摄</li></ul><p style="margin:8px 0;line-height:1.7;">FPV强调物理极速运动体验（驾驶者之眼），POV强调角色心理情绪代入（角色之眼）。</p></div></div>
+      <div class="hcard" data-card="3"><div class="hcard-header"><div class="hcard-header-num">4</div><div class="hcard-header-title">适合表现的情绪 & 场景</div></div><div class="hcard-body"><ul style="margin:8px 0;padding-left:18px;"><li style="margin:4px 0;line-height:1.6;"><strong>高速穿越</strong>：穿林过洞、飞越建筑</li><li style="margin:4px 0;line-height:1.6;"><strong>追逐戏份</strong>：高强度动作场面</li><li style="margin:4px 0;line-height:1.6;"><strong>极限运动</strong>：滑雪、翼装飞行</li><li style="margin:4px 0;line-height:1.6;"><strong>战争突入</strong>：战场第一视角</li><li style="margin:4px 0;line-height:1.6;"><strong>空间探索</strong>：洞穴、废墟探险</li></ul></div></div>
+      <div class="hcard" data-card="4"><div class="hcard-header"><div class="hcard-header-num">5</div><div class="hcard-header-title">代表作品 & 经典场景</div></div><div class="hcard-body"><table style="width:100%;border-collapse:collapse;margin:12px 0;font-family:var(--font-body);font-size:12px;color:var(--color-text-secondary);"><tr><th style="border:1px solid var(--color-border-default);padding:6px 10px;text-align:left;color:var(--color-brand);font-weight:600;">电影</th><th style="border:1px solid var(--color-border-default);padding:6px 10px;text-align:left;color:var(--color-brand);font-weight:600;">年份</th><th style="border:1px solid var(--color-border-default);padding:6px 10px;text-align:left;color:var(--color-brand);font-weight:600;">场景</th></tr><tr><td style="border:1px solid var(--color-border-default);padding:6px 10px;">《碟中谍7》</td><td style="border:1px solid var(--color-border-default);padding:6px 10px;">2023</td><td style="border:1px solid var(--color-border-default);padding:6px 10px;">摩托车悬崖飞跃</td></tr><tr><td style="border:1px solid var(--color-border-default);padding:6px 10px;">《惊天营救2》</td><td style="border:1px solid var(--color-border-default);padding:6px 10px;">2023</td><td style="border:1px solid var(--color-border-default);padding:6px 10px;">21分钟一镜到底</td></tr><tr><td style="border:1px solid var(--color-border-default);padding:6px 10px;">《007》</td><td style="border:1px solid var(--color-border-default);padding:6px 10px;">2021</td><td style="border:1px solid var(--color-border-default);padding:6px 10px;">追车戏FPV视角</td></tr></table></div></div>
+      <div class="hcard" data-card="5"><div class="hcard-header"><div class="hcard-header-num">6</div><div class="hcard-header-title">拍摄技巧 & 注意事项</div></div><div class="hcard-body"><ul style="margin:8px 0;padding-left:18px;"><li style="margin:4px 0;line-height:1.6;">提前勘察环境，标记障碍物</li><li style="margin:4px 0;line-height:1.6;">准备至少2套备份设备</li><li style="margin:4px 0;line-height:1.6;">拍摄区域必须清场</li><li style="margin:4px 0;line-height:1.6;">ReelSteady/Gyroflow陀螺仪增稳</li><li style="margin:4px 0;line-height:1.6;">FPV镜头通常3-10秒为佳</li></ul></div></div>
+  </div>
+</div>
+<!-- Knowledge Panel: POV视角 -->
+<div id="panel-pov" class="cards-backdrop">
+  <div class="cards-topbar">
+    <div class="cards-topbar-left">
+      <h2>POV视角</h2>
+      <p>Point of View · 滚轮左右切换，点击卡片居中</p>
+    </div>
+    <button class="cards-close" onclick="closeCards('panel-pov')" title="关闭">&times;</button>
+  </div>
+  <div class="cards-track">
+      <div class="hcard active" data-card="0"><div class="hcard-header"><div class="hcard-header-num">1</div><div class="hcard-header-title">概念定义 & 名称由来</div></div><div class="hcard-body"><p style="margin:8px 0;line-height:1.7;"><strong>POV（Point of View）</strong>模拟角色主观视线的第一人称视角。镜头完全替代剧中人物的眼睛，画面呈现角色当下亲眼看到的视野，让观众直接代入角色的感官与情绪。</p><blockquote style="border-left:2px solid var(--color-brand);padding-left:12px;margin:12px 0;color:var(--color-text-tertiary);font-style:italic;">观众暂时借用了角色的眼睛。</blockquote></div></div>
+      <div class="hcard" data-card="1"><div class="hcard-header"><div class="hcard-header-num">2</div><div class="hcard-header-title">核心原理 & 光学本质</div></div><div class="hcard-body"><p style="margin:8px 0;line-height:1.7;">关键在于<strong>视线匹配</strong>和<strong>心理代入</strong>。镜头高度与角色眼部齐平，运动模拟人眼自然的扫视和转头。</p><table style="width:100%;border-collapse:collapse;margin:12px 0;font-family:var(--font-body);font-size:12px;color:var(--color-text-secondary);"><tr><th style="border:1px solid var(--color-border-default);padding:6px 10px;text-align:left;color:var(--color-brand);font-weight:600;">类型</th><th style="border:1px solid var(--color-border-default);padding:6px 10px;text-align:left;color:var(--color-brand);font-weight:600;">特点</th></tr><tr><td style="border:1px solid var(--color-border-default);padding:6px 10px;">主观POV</td><td style="border:1px solid var(--color-border-default);padding:6px 10px;">严格等同角色眼睛</td></tr><tr><td style="border:1px solid var(--color-border-default);padding:6px 10px;">过肩POV</td><td style="border:1px solid var(--color-border-default);padding:6px 10px;">对话场景最常用</td></tr><tr><td style="border:1px solid var(--color-border-default);padding:6px 10px;">反射POV</td><td style="border:1px solid var(--color-border-default);padding:6px 10px;">镜子/水面反射</td></tr><tr><td style="border:1px solid var(--color-border-default);padding:6px 10px;">幻觉POV</td><td style="border:1px solid var(--color-border-default);padding:6px 10px;">扭曲主观视角</td></tr></table></div></div>
+      <div class="hcard" data-card="2"><div class="hcard-header"><div class="hcard-header-num">3</div><div class="hcard-header-title">技术实现方式</div></div><div class="hcard-body"><ul style="margin:8px 0;padding-left:18px;"><li style="margin:4px 0;line-height:1.6;">头戴式相机：GoPro头带</li><li style="margin:4px 0;line-height:1.6;">胸带/肩带：模拟稍低视线</li><li style="margin:4px 0;line-height:1.6;">手持稳定器：模拟角色手持设备</li><li style="margin:4px 0;line-height:1.6;">视线引导+呼吸起伏增强真实感</li></ul></div></div>
+      <div class="hcard" data-card="3"><div class="hcard-header"><div class="hcard-header-num">4</div><div class="hcard-header-title">适合表现的情绪 & 场景</div></div><div class="hcard-body"><ul style="margin:8px 0;padding-left:18px;"><li style="margin:4px 0;line-height:1.6;"><strong>恐惧</strong>：危险时的主观恐慌</li><li style="margin:4px 0;line-height:1.6;"><strong>窥视</strong>：偷窥视角的道德冲击</li><li style="margin:4px 0;line-height:1.6;"><strong>沉浸</strong>：全身心进入故事世界</li><li style="margin:4px 0;line-height:1.6;"><strong>角色心理</strong>：视线暗示内心活动</li></ul></div></div>
+      <div class="hcard" data-card="4"><div class="hcard-header"><div class="hcard-header-num">5</div><div class="hcard-header-title">代表作品 & 经典场景</div></div><div class="hcard-body"><table style="width:100%;border-collapse:collapse;margin:12px 0;font-family:var(--font-body);font-size:12px;color:var(--color-text-secondary);"><tr><th style="border:1px solid var(--color-border-default);padding:6px 10px;text-align:left;color:var(--color-brand);font-weight:600;">电影</th><th style="border:1px solid var(--color-border-default);padding:6px 10px;text-align:left;color:var(--color-brand);font-weight:600;">年份</th><th style="border:1px solid var(--color-border-default);padding:6px 10px;text-align:left;color:var(--color-brand);font-weight:600;">场景</th></tr><tr><td style="border:1px solid var(--color-border-default);padding:6px 10px;">《惊魂记》</td><td style="border:1px solid var(--color-border-default);padding:6px 10px;">1960</td><td style="border:1px solid var(--color-border-default);padding:6px 10px;">浴室杀人主观窥视</td></tr><tr><td style="border:1px solid var(--color-border-default);padding:6px 10px;">《硬核亨利》</td><td style="border:1px solid var(--color-border-default);padding:6px 10px;">2015</td><td style="border:1px solid var(--color-border-default);padding:6px 10px;">全片第一人称</td></tr><tr><td style="border:1px solid var(--color-border-default);padding:6px 10px;">《遁入虚无》</td><td style="border:1px solid var(--color-border-default);padding:6px 10px;">2009</td><td style="border:1px solid var(--color-border-default);padding:6px 10px;">灵魂出窍极致主观</td></tr></table></div></div>
+      <div class="hcard" data-card="5"><div class="hcard-header"><div class="hcard-header-num">6</div><div class="hcard-header-title">拍摄技巧 & 注意事项</div></div><div class="hcard-body"><ul style="margin:8px 0;padding-left:18px;"><li style="margin:4px 0;line-height:1.6;">通常3-8秒为佳，过长导致视觉疲劳</li><li style="margin:4px 0;line-height:1.6;">先用客观镜头展示角色，再切到POV</li><li style="margin:4px 0;line-height:1.6;">视线匹配：POV注视的物体下一镜头应对应</li><li style="margin:4px 0;line-height:1.6;">避免过度使用，全片大量使用让观众疲惫</li></ul></div></div>
+  </div>
+</div>
+<!-- Knowledge Panel: 延时摄影 -->
+<div id="panel-yanshi" class="cards-backdrop">
+  <div class="cards-topbar">
+    <div class="cards-topbar-left">
+      <h2>延时摄影</h2>
+      <p>Time-lapse Photography · 滚轮左右切换，点击卡片居中</p>
+    </div>
+    <button class="cards-close" onclick="closeCards('panel-yanshi')" title="关闭">&times;</button>
+  </div>
+  <div class="cards-track">
+      <div class="hcard active" data-card="0"><div class="hcard-header"><div class="hcard-header-num">1</div><div class="hcard-header-title">概念定义 & 名称由来</div></div><div class="hcard-body"><p style="margin:8px 0;line-height:1.7;"><strong>延时摄影（Time-lapse Photography）</strong>以固定时间间隔连续拍摄静态照片，按正常帧率快速合成视频，实现时间加速、光阴浓缩流逝的视觉效果。</p><blockquote style="border-left:2px solid var(--color-brand);padding-left:12px;margin:12px 0;color:var(--color-text-tertiary);font-style:italic;">把几个小时甚至几天的变化，在几秒钟内看完。</blockquote></div></div>
+      <div class="hcard" data-card="1"><div class="hcard-header"><div class="hcard-header-num">2</div><div class="hcard-header-title">核心原理 & 光学本质</div></div><div class="hcard-body"><table style="width:100%;border-collapse:collapse;margin:12px 0;font-family:var(--font-body);font-size:12px;color:var(--color-text-secondary);"><tr><th style="border:1px solid var(--color-border-default);padding:6px 10px;text-align:left;color:var(--color-brand);font-weight:600;">要素</th><th style="border:1px solid var(--color-border-default);padding:6px 10px;text-align:left;color:var(--color-brand);font-weight:600;">说明</th></tr><tr><td style="border:1px solid var(--color-border-default);padding:6px 10px;">拍摄间隔</td><td style="border:1px solid var(--color-border-default);padding:6px 10px;">1秒~30分钟</td></tr><tr><td style="border:1px solid var(--color-border-default);padding:6px 10px;">播放帧率</td><td style="border:1px solid var(--color-border-default);padding:6px 10px;">24/25/30/60fps</td></tr><tr><td style="border:1px solid var(--color-border-default);padding:6px 10px;">压缩比</td><td style="border:1px solid var(--color-border-default);padding:6px 10px;">拍摄总时长 / 成片时长</td></tr></table><blockquote style="border-left:2px solid var(--color-brand);padding-left:12px;margin:12px 0;color:var(--color-text-tertiary);font-style:italic;">示例：间隔5秒、2小时、25fps = 1440张 = 57.6秒 = 125倍压缩</blockquote></div></div>
+      <div class="hcard" data-card="2"><div class="hcard-header"><div class="hcard-header-num">3</div><div class="hcard-header-title">技术实现方式</div></div><div class="hcard-body"><table style="width:100%;border-collapse:collapse;margin:12px 0;font-family:var(--font-body);font-size:12px;color:var(--color-text-secondary);"><tr><th style="border:1px solid var(--color-border-default);padding:6px 10px;text-align:left;color:var(--color-brand);font-weight:600;">类型</th><th style="border:1px solid var(--color-border-default);padding:6px 10px;text-align:left;color:var(--color-brand);font-weight:600;">场景</th></tr><tr><td style="border:1px solid var(--color-border-default);padding:6px 10px;">固定机位</td><td style="border:1px solid var(--color-border-default);padding:6px 10px;">日出日落、云层</td></tr><tr><td style="border:1px solid var(--color-border-default);padding:6px 10px;">移动Hyperlapse</td><td style="border:1px solid var(--color-border-default);padding:6px 10px;">城市漫步</td></tr><tr><td style="border:1px solid var(--color-border-default);padding:6px 10px;">日转夜</td><td style="border:1px solid var(--color-border-default);padding:6px 10px;">城市天际线</td></tr><tr><td style="border:1px solid var(--color-border-default);padding:6px 10px;">星空Star Trail</td><td style="border:1px solid var(--color-border-default);padding:6px 10px;">银河星轨</td></tr></table></div></div>
+      <div class="hcard" data-card="3"><div class="hcard-header"><div class="hcard-header-num">4</div><div class="hcard-header-title">适合表现的情绪 & 场景</div></div><div class="hcard-body"><ul style="margin:8px 0;padding-left:18px;"><li style="margin:4px 0;line-height:1.6;"><strong>日出日落</strong>：天空色彩渐变</li><li style="margin:4px 0;line-height:1.6;"><strong>城市车流</strong>：光轨与光河</li><li style="margin:4px 0;line-height:1.6;"><strong>云层变化</strong>：翻涌蒸腾</li><li style="margin:4px 0;line-height:1.6;"><strong>植物生长</strong>：种子发芽、花朵绽放</li><li style="margin:4px 0;line-height:1.6;"><strong>四季更替</strong>：潮汐涨落</li></ul></div></div>
+      <div class="hcard" data-card="4"><div class="hcard-header"><div class="hcard-header-num">5</div><div class="hcard-header-title">代表作品 & 经典场景</div></div><div class="hcard-body"><table style="width:100%;border-collapse:collapse;margin:12px 0;font-family:var(--font-body);font-size:12px;color:var(--color-text-secondary);"><tr><th style="border:1px solid var(--color-border-default);padding:6px 10px;text-align:left;color:var(--color-brand);font-weight:600;">作品</th><th style="border:1px solid var(--color-border-default);padding:6px 10px;text-align:left;color:var(--color-brand);font-weight:600;">年份</th><th style="border:1px solid var(--color-border-default);padding:6px 10px;text-align:left;color:var(--color-brand);font-weight:600;">亮点</th></tr><tr><td style="border:1px solid var(--color-border-default);padding:6px 10px;">《失衡生活》</td><td style="border:1px solid var(--color-border-default);padding:6px 10px;">1982</td><td style="border:1px solid var(--color-border-default);padding:6px 10px;">延时鼻祖纪录片</td></tr><tr><td style="border:1px solid var(--color-border-default);padding:6px 10px;">《天地玄黄》</td><td style="border:1px solid var(--color-border-default);padding:6px 10px;">1992</td><td style="border:1px solid var(--color-border-default);padding:6px 10px;">无对白史诗</td></tr><tr><td style="border:1px solid var(--color-border-default);padding:6px 10px;">《时间的风景》</td><td style="border:1px solid var(--color-border-default);padding:6px 10px;">2012</td><td style="border:1px solid var(--color-border-default);padding:6px 10px;">专为延时而生的电影</td></tr></table></div></div>
+      <div class="hcard" data-card="5"><div class="hcard-header"><div class="hcard-header-num">6</div><div class="hcard-header-title">拍摄技巧 & 注意事项</div></div><div class="hcard-body"><ul style="margin:8px 0;padding-left:18px;"><li style="margin:4px 0;line-height:1.6;">稳定三脚架（必须）</li><li style="margin:4px 0;line-height:1.6;">手动曝光（M档）避免闪烁</li><li style="margin:4px 0;line-height:1.6;">固定白平衡防色温跳变</li><li style="margin:4px 0;line-height:1.6;">关闭防抖和自动对焦</li><li style="margin:4px 0;line-height:1.6;">RAW格式保留最大后期空间</li></ul></div></div>
+  </div>
+</div>
+<!-- Knowledge Panel: 斯皮尔伯格闯入镜头 -->
+<div id="panel-sipierberg" class="cards-backdrop">
+  <div class="cards-topbar">
+    <div class="cards-topbar-left">
+      <h2>斯皮尔伯格闯入镜头</h2>
+      <p>Spielberg Oner · 滚轮左右切换，点击卡片居中</p>
+    </div>
+    <button class="cards-close" onclick="closeCards('panel-sipierberg')" title="关闭">&times;</button>
+  </div>
+  <div class="cards-track">
+      <div class="hcard active" data-card="0"><div class="hcard-header"><div class="hcard-header-num">1</div><div class="hcard-header-title">概念定义 & 名称由来</div></div><div class="hcard-body"><p style="margin:8px 0;line-height:1.7;"><strong>斯皮尔伯格闯入镜头</strong>，又叫<strong>情绪动机式无痕转场</strong>，不靠生硬切镜头，依靠动作、视线、声音、物体遮挡自然衔接下一场景，转场丝滑、润物无声。</p><blockquote style="border-left:2px solid var(--color-brand);padding-left:12px;margin:12px 0;color:var(--color-text-tertiary);font-style:italic;">先让你以为重点是A，下一秒主角B突然入画，注意力被"接管"。</blockquote></div></div>
+      <div class="hcard" data-card="1"><div class="hcard-header"><div class="hcard-header-num">2</div><div class="hcard-header-title">核心原理 & 光学本质</div></div><div class="hcard-body"><p style="margin:8px 0;line-height:1.7;">核心在于<strong>情绪驱动的转场动机</strong>。让观众忘记在看电影，完全沉浸在故事中。</p><table style="width:100%;border-collapse:collapse;margin:12px 0;font-family:var(--font-body);font-size:12px;color:var(--color-text-secondary);"><tr><th style="border:1px solid var(--color-border-default);padding:6px 10px;text-align:left;color:var(--color-brand);font-weight:600;">手法</th><th style="border:1px solid var(--color-border-default);padding:6px 10px;text-align:left;color:var(--color-brand);font-weight:600;">说明</th></tr><tr><td style="border:1px solid var(--color-border-default);padding:6px 10px;">动作匹配</td><td style="border:1px solid var(--color-border-default);padding:6px 10px;">角色A做动作，镜头跟随，B自然入画</td></tr><tr><td style="border:1px solid var(--color-border-default);padding:6px 10px;">视线引导</td><td style="border:1px solid var(--color-border-default);padding:6px 10px;">镜头顺着角色视线切到所看之物</td></tr><tr><td style="border:1px solid var(--color-border-default);padding:6px 10px;">声音先入</td><td style="border:1px solid var(--color-border-default);padding:6px 10px;">下一场景声音先进入当前画面</td></tr><tr><td style="border:1px solid var(--color-border-default);padding:6px 10px;">物体遮挡</td><td style="border:1px solid var(--color-border-default);padding:6px 10px;">物体经过遮挡后场景已转换</td></tr></table></div></div>
+      <div class="hcard" data-card="2"><div class="hcard-header"><div class="hcard-header-num">3</div><div class="hcard-header-title">技术实现方式</div></div><div class="hcard-body"><p style="margin:8px 0;line-height:1.7;">常与<strong>长镜头（Oner）</strong>结合使用。要求精确走位调度、复杂分镜设计、斯坦尼康/稳定器配合精密走位。</p><ul style="margin:8px 0;padding-left:18px;"><li style="margin:4px 0;line-height:1.6;">匹配剪辑（Match Cut）形成视觉关联</li><li style="margin:4px 0;line-height:1.6;">声音桥接：下一场景环境音提前进入</li><li style="margin:4px 0;line-height:1.6;">情绪紧张段落转场更快</li></ul></div></div>
+      <div class="hcard" data-card="3"><div class="hcard-header"><div class="hcard-header-num">4</div><div class="hcard-header-title">适合表现的情绪 & 场景</div></div><div class="hcard-body"><ul style="margin:8px 0;padding-left:18px;"><li style="margin:4px 0;line-height:1.6;"><strong>主角登场</strong></li><li style="margin:4px 0;line-height:1.6;"><strong>信息揭示</strong></li><li style="margin:4px 0;line-height:1.6;"><strong>空间关系变化</strong></li><li style="margin:4px 0;line-height:1.6;"><strong>惊喜转场</strong></li><li style="margin:4px 0;line-height:1.6;"><strong>惊悚惊吓</strong></li></ul></div></div>
+      <div class="hcard" data-card="4"><div class="hcard-header"><div class="hcard-header-num">5</div><div class="hcard-header-title">代表作品 & 经典场景</div></div><div class="hcard-body"><table style="width:100%;border-collapse:collapse;margin:12px 0;font-family:var(--font-body);font-size:12px;color:var(--color-text-secondary);"><tr><th style="border:1px solid var(--color-border-default);padding:6px 10px;text-align:left;color:var(--color-brand);font-weight:600;">电影</th><th style="border:1px solid var(--color-border-default);padding:6px 10px;text-align:left;color:var(--color-brand);font-weight:600;">年份</th><th style="border:1px solid var(--color-border-default);padding:6px 10px;text-align:left;color:var(--color-brand);font-weight:600;">场景</th></tr><tr><td style="border:1px solid var(--color-border-default);padding:6px 10px;">《侏罗纪公园》</td><td style="border:1px solid var(--color-border-default);padding:6px 10px;">1993</td><td style="border:1px solid var(--color-border-default);padding:6px 10px;">公园大门到霸王龙登场</td></tr><tr><td style="border:1px solid var(--color-border-default);padding:6px 10px;">《好家伙》</td><td style="border:1px solid var(--color-border-default);padding:6px 10px;">1990</td><td style="border:1px solid var(--color-border-default);padding:6px 10px;">Copacabana长镜头</td></tr><tr><td style="border:1px solid var(--color-border-default);padding:6px 10px;">《俄罗斯方舟》</td><td style="border:1px solid var(--color-border-default);padding:6px 10px;">2002</td><td style="border:1px solid var(--color-border-default);padding:6px 10px;">全片一镜到底</td></tr></table></div></div>
+      <div class="hcard" data-card="5"><div class="hcard-header"><div class="hcard-header-num">6</div><div class="hcard-header-title">拍摄技巧 & 注意事项</div></div><div class="hcard-body"><ul style="margin:8px 0;padding-left:18px;"><li style="margin:4px 0;line-height:1.6;">转场必须有情绪动机</li><li style="margin:4px 0;line-height:1.6;">画面始终有元素在运动</li><li style="margin:4px 0;line-height:1.6;">利用景深、光线引导注意力</li><li style="margin:4px 0;line-height:1.6;">多元素协同：动作+视线+声音+遮挡</li></ul></div></div>
+  </div>
+</div>
+<!-- Knowledge Panel: 昆汀式后备箱视角 -->
+<div id="panel-kunding" class="cards-backdrop">
+  <div class="cards-topbar">
+    <div class="cards-topbar-left">
+      <h2>昆汀式后备箱视角</h2>
+      <p>Tarantino Trunk Shot · 滚轮左右切换，点击卡片居中</p>
+    </div>
+    <button class="cards-close" onclick="closeCards('panel-kunding')" title="关闭">&times;</button>
+  </div>
+  <div class="cards-track">
+      <div class="hcard active" data-card="0"><div class="hcard-header"><div class="hcard-header-num">1</div><div class="hcard-header-title">概念定义 & 名称由来</div></div><div class="hcard-body"><p style="margin:8px 0;line-height:1.7;"><strong>昆汀式后备箱视角</strong>：摄影机仿佛被放在汽车后备箱等封闭空间内，向上仰拍打开它的人物。固定机位不移动，边框天然形成画框构图，极低角度仰拍制造压迫感与戏剧张力。</p><blockquote style="border-left:2px solid var(--color-brand);padding-left:12px;margin:12px 0;color:var(--color-text-tertiary);font-style:italic;">观众变成被关在后备箱里的人，抬头看到外面的人正俯视着你。</blockquote><p style="margin:8px 0;line-height:1.7;">因<strong>昆汀·塔伦蒂诺</strong>在《落水狗》《低俗小说》《杀死比尔》等多部电影中反复使用而成为个人标志。</p></div></div>
+      <div class="hcard" data-card="1"><div class="hcard-header"><div class="hcard-header-num">2</div><div class="hcard-header-title">核心原理 & 光学本质</div></div><div class="hcard-body"><table style="width:100%;border-collapse:collapse;margin:12px 0;font-family:var(--font-body);font-size:12px;color:var(--color-text-secondary);"><tr><th style="border:1px solid var(--color-border-default);padding:6px 10px;text-align:left;color:var(--color-brand);font-weight:600;">维度</th><th style="border:1px solid var(--color-border-default);padding:6px 10px;text-align:left;color:var(--color-brand);font-weight:600;">特征</th></tr><tr><td style="border:1px solid var(--color-border-default);padding:6px 10px;">机位</td><td style="border:1px solid var(--color-border-default);padding:6px 10px;">固定，不移动</td></tr><tr><td style="border:1px solid var(--color-border-default);padding:6px 10px;">角度</td><td style="border:1px solid var(--color-border-default);padding:6px 10px;">极低仰拍</td></tr><tr><td style="border:1px solid var(--color-border-default);padding:6px 10px;">构图</td><td style="border:1px solid var(--color-border-default);padding:6px 10px;">容器边框天然画框</td></tr><tr><td style="border:1px solid var(--color-border-default);padding:6px 10px;">影调</td><td style="border:1px solid var(--color-border-default);padding:6px 10px;">低亮度冷调，明暗对比强</td></tr></table></div></div>
+      <div class="hcard" data-card="2"><div class="hcard-header"><div class="hcard-header-num">3</div><div class="hcard-header-title">技术实现方式</div></div><div class="hcard-body"><ul style="margin:8px 0;padding-left:18px;"><li style="margin:4px 0;line-height:1.6;">三脚架固定在后备箱底部</li><li style="margin:4px 0;line-height:1.6;">广角镜头16-24mm最大化空间</li><li style="margin:4px 0;line-height:1.6;">自然逆光+高对比度</li><li style="margin:4px 0;line-height:1.6;">变体：后备箱/棺材/地面/洞口</li></ul></div></div>
+      <div class="hcard" data-card="3"><div class="hcard-header"><div class="hcard-header-num">4</div><div class="hcard-header-title">适合表现的情绪 & 场景</div></div><div class="hcard-body"><ul style="margin:8px 0;padding-left:18px;"><li style="margin:4px 0;line-height:1.6;"><strong>犯罪感</strong>：承载非法与阴暗</li><li style="margin:4px 0;line-height:1.6;"><strong>秘密揭露</strong>：打开=揭晓秘密</li><li style="margin:4px 0;line-height:1.6;"><strong>暴力前奏</strong>：铺垫与悬念</li><li style="margin:4px 0;line-height:1.6;"><strong>黑色幽默</strong>：荒诞与暴力美学</li><li style="margin:4px 0;line-height:1.6;"><strong>绑架/威胁</strong>：最典型场景</li></ul></div></div>
+      <div class="hcard" data-card="4"><div class="hcard-header"><div class="hcard-header-num">5</div><div class="hcard-header-title">代表作品 & 经典场景</div></div><div class="hcard-body"><table style="width:100%;border-collapse:collapse;margin:12px 0;font-family:var(--font-body);font-size:12px;color:var(--color-text-secondary);"><tr><th style="border:1px solid var(--color-border-default);padding:6px 10px;text-align:left;color:var(--color-brand);font-weight:600;">电影</th><th style="border:1px solid var(--color-border-default);padding:6px 10px;text-align:left;color:var(--color-brand);font-weight:600;">年份</th><th style="border:1px solid var(--color-border-default);padding:6px 10px;text-align:left;color:var(--color-brand);font-weight:600;">场景</th></tr><tr><td style="border:1px solid var(--color-border-default);padding:6px 10px;">《落水狗》</td><td style="border:1px solid var(--color-border-default);padding:6px 10px;">1992</td><td style="border:1px solid var(--color-border-default);padding:6px 10px;">首次经典使用</td></tr><tr><td style="border:1px solid var(--color-border-default);padding:6px 10px;">《低俗小说》</td><td style="border:1px solid var(--color-border-default);padding:6px 10px;">1994</td><td style="border:1px solid var(--color-border-default);padding:6px 10px;">标志性镜头</td></tr><tr><td style="border:1px solid var(--color-border-default);padding:6px 10px;">《杀死比尔》</td><td style="border:1px solid var(--color-border-default);padding:6px 10px;">2003</td><td style="border:1px solid var(--color-border-default);padding:6px 10px;">棺材视角变体</td></tr></table></div></div>
+      <div class="hcard" data-card="5"><div class="hcard-header"><div class="hcard-header-num">6</div><div class="hcard-header-title">拍摄技巧 & 注意事项</div></div><div class="hcard-body"><ul style="margin:8px 0;padding-left:18px;"><li style="margin:4px 0;line-height:1.6;">天然画框：利用箱体边缘</li><li style="margin:4px 0;line-height:1.6;">俯视人物位于画面上半部分</li><li style="margin:4px 0;line-height:1.6;">深色服装+逆光形成剪影</li><li style="margin:4px 0;line-height:1.6;">两人站两侧对称构图更震撼</li></ul></div></div>
+  </div>
+</div>
+<!-- Knowledge Panel: 迈克尔·贝环绕镜头 -->
+<div id="panel-maikeerbei" class="cards-backdrop">
+  <div class="cards-topbar">
+    <div class="cards-topbar-left">
+      <h2>迈克尔·贝环绕镜头</h2>
+      <p>Michael Bay Orbit / Bayhem · 滚轮左右切换，点击卡片居中</p>
+    </div>
+    <button class="cards-close" onclick="closeCards('panel-maikeerbei')" title="关闭">&times;</button>
+  </div>
+  <div class="cards-track">
+      <div class="hcard active" data-card="0"><div class="hcard-header"><div class="hcard-header-num">1</div><div class="hcard-header-title">概念定义 & 名称由来</div></div><div class="hcard-body"><p style="margin:8px 0;line-height:1.7;"><strong>迈克尔·贝环绕镜头（Michael Bay Orbit）</strong>，摄影机以低角度围绕人物、车辆做弧形或360度运动，配合慢动作、逆光、烟尘、爆炸和强音乐，将人物拍成极具压迫感和英雄感的出场。</p><blockquote style="border-left:2px solid var(--color-brand);padding-left:12px;margin:12px 0;color:var(--color-text-tertiary);font-style:italic;">主角登场时，镜头像卫星一样绕着他转，世界都在为他让路。</blockquote><p style="margin:8px 0;line-height:1.7;">"Bayhem"一词被专门创造来形容迈克尔·贝独特的视觉轰炸风格。</p></div></div>
+      <div class="hcard" data-card="1"><div class="hcard-header"><div class="hcard-header-num">2</div><div class="hcard-header-title">核心原理 & 光学本质</div></div><div class="hcard-body"><table style="width:100%;border-collapse:collapse;margin:12px 0;font-family:var(--font-body);font-size:12px;color:var(--color-text-secondary);"><tr><th style="border:1px solid var(--color-border-default);padding:6px 10px;text-align:left;color:var(--color-brand);font-weight:600;">特点</th><th style="border:1px solid var(--color-border-default);padding:6px 10px;text-align:left;color:var(--color-brand);font-weight:600;">说明</th></tr><tr><td style="border:1px solid var(--color-border-default);padding:6px 10px;">低角度仰拍</td><td style="border:1px solid var(--color-border-default);padding:6px 10px;">强化崇高感和威慑力</td></tr><tr><td style="border:1px solid var(--color-border-default);padding:6px 10px;">360度环绕</td><td style="border:1px solid var(--color-border-default);padding:6px 10px;">弧形或整圆，空间包围感</td></tr><tr><td style="border:1px solid var(--color-border-default);padding:6px 10px;">慢动作</td><td style="border:1px solid var(--color-border-default);padding:6px 10px;">每一帧充满戏剧张力</td></tr><tr><td style="border:1px solid var(--color-border-default);padding:6px 10px;">逆光剪影</td><td style="border:1px solid var(--color-border-default);padding:6px 10px;">强烈背光勾勒轮廓</td></tr><tr><td style="border:1px solid var(--color-border-default);padding:6px 10px;">强音乐</td><td style="border:1px solid var(--color-border-default);padding:6px 10px;">史诗配乐同步推情绪</td></tr></table></div></div>
+      <div class="hcard" data-card="2"><div class="hcard-header"><div class="hcard-header-num">3</div><div class="hcard-header-title">技术实现方式</div></div><div class="hcard-body"><table style="width:100%;border-collapse:collapse;margin:12px 0;font-family:var(--font-body);font-size:12px;color:var(--color-text-secondary);"><tr><th style="border:1px solid var(--color-border-default);padding:6px 10px;text-align:left;color:var(--color-brand);font-weight:600;">方式</th><th style="border:1px solid var(--color-border-default);padding:6px 10px;text-align:left;color:var(--color-brand);font-weight:600;">特点</th></tr><tr><td style="border:1px solid var(--color-border-default);padding:6px 10px;">轨道环绕</td><td style="border:1px solid var(--color-border-default);padding:6px 10px;">最平稳</td></tr><tr><td style="border:1px solid var(--color-border-default);padding:6px 10px;">斯坦尼康</td><td style="border:1px solid var(--color-border-default);padding:6px 10px;">灵活，复杂地形</td></tr><tr><td style="border:1px solid var(--color-border-default);padding:6px 10px;">无人机环绕</td><td style="border:1px solid var(--color-border-default);padding:6px 10px;">大范围、高角度</td></tr><tr><td style="border:1px solid var(--color-border-default);padding:6px 10px;">摇臂Crane</td><td style="border:1px solid var(--color-border-default);padding:6px 10px;">升降+环绕复合运动</td></tr></table></div></div>
+      <div class="hcard" data-card="3"><div class="hcard-header"><div class="hcard-header-num">4</div><div class="hcard-header-title">适合表现的情绪 & 场景</div></div><div class="hcard-body"><ul style="margin:8px 0;padding-left:18px;"><li style="margin:4px 0;line-height:1.6;"><strong>英雄登场</strong></li><li style="margin:4px 0;line-height:1.6;"><strong>团队集结</strong></li><li style="margin:4px 0;line-height:1.6;"><strong>战斗前气势</strong></li><li style="margin:4px 0;line-height:1.6;"><strong>人物觉醒</strong></li><li style="margin:4px 0;line-height:1.6;"><strong>车辆展示</strong></li><li style="margin:4px 0;line-height:1.6;"><strong>反派威慑</strong></li></ul></div></div>
+      <div class="hcard" data-card="4"><div class="hcard-header"><div class="hcard-header-num">5</div><div class="hcard-header-title">代表作品 & 经典场景</div></div><div class="hcard-body"><table style="width:100%;border-collapse:collapse;margin:12px 0;font-family:var(--font-body);font-size:12px;color:var(--color-text-secondary);"><tr><th style="border:1px solid var(--color-border-default);padding:6px 10px;text-align:left;color:var(--color-brand);font-weight:600;">电影</th><th style="border:1px solid var(--color-border-default);padding:6px 10px;text-align:left;color:var(--color-brand);font-weight:600;">年份</th><th style="border:1px solid var(--color-border-default);padding:6px 10px;text-align:left;color:var(--color-brand);font-weight:600;">场景</th></tr><tr><td style="border:1px solid var(--color-border-default);padding:6px 10px;">《绝地战警》</td><td style="border:1px solid var(--color-border-default);padding:6px 10px;">1995</td><td style="border:1px solid var(--color-border-default);padding:6px 10px;">搭档亮相</td></tr><tr><td style="border:1px solid var(--color-border-default);padding:6px 10px;">《变形金刚》</td><td style="border:1px solid var(--color-border-default);padding:6px 10px;">2007</td><td style="border:1px solid var(--color-border-default);padding:6px 10px;">擎天柱360度登场</td></tr><tr><td style="border:1px solid var(--color-border-default);padding:6px 10px;">《复仇者联盟》</td><td style="border:1px solid var(--color-border-default);padding:6px 10px;">2012</td><td style="border:1px solid var(--color-border-default);padding:6px 10px;">英雄集结环绕</td></tr></table></div></div>
+      <div class="hcard" data-card="5"><div class="hcard-header"><div class="hcard-header-num">6</div><div class="hcard-header-title">拍摄技巧 & 注意事项</div></div><div class="hcard-body"><ul style="margin:8px 0;padding-left:18px;"><li style="margin:4px 0;line-height:1.6;">摄影机低于人物腰部</li><li style="margin:4px 0;line-height:1.6;">主体位于画面正中央</li><li style="margin:4px 0;line-height:1.6;">逆光为主光源+侧面rim light</li><li style="margin:4px 0;line-height:1.6;">烟尘/风效增加动态感</li><li style="margin:4px 0;line-height:1.6;">60-120fps拍摄，环绕与配乐同步</li></ul></div></div>
+  </div>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,148 @@
+{
+  "project": {
+    "name": "视觉美学学习网站",
+    "operation": "create",
+    "operatingMode": "free-explore",
+    "deviceType": "desktop",
+    "styleDefinitionBrief": "Art gallery meets editorial magazine. Dark sophisticated palette with gold accent (#C9A96E). Playfair Display serif for editorial elegance, Inter for body readability. High-contrast imagery, asymmetric layouts, generous whitespace.",
+    "designRead": "Educational website / visual art learners / editorial gallery sophistication / low density / avoid generic blue-purple tech look",
+    "designDials": {
+      "layoutVariance": 4,
+      "motionIntensity": 2,
+      "visualDensity": 2
+    },
+    "styleContinuityAnchors": {
+      "typographySystem": {
+        "display": "'Playfair Display', 'Noto Serif SC', serif",
+        "body": "'Inter', 'Noto Sans SC', sans-serif"
+      },
+      "colorTemperature": "warm-dark with gold accent",
+      "layoutSignature": "asymmetric editorial grid with full-bleed imagery"
+    },
+    "generationTree": {
+      "root": {
+        "nodeId": "gen-project-shell",
+        "kind": "project-shell",
+        "output": "partials/project-shell.html",
+        "sharedRegions": ["header nav", "footer", "brand CSS", "typography", "radius"],
+        "privateRegions": [],
+        "status": "planned",
+        "children": [
+          {
+            "nodeId": "gen-page-index",
+            "kind": "page-leaf",
+            "output": "pages/index.html",
+            "sharedRegions": [],
+            "privateRegions": ["hero section", "featured modules", "call to action"],
+            "status": "planned",
+            "children": []
+          },
+          {
+            "nodeId": "gen-page-courses",
+            "kind": "page-leaf",
+            "output": "pages/courses.html",
+            "sharedRegions": [],
+            "privateRegions": ["course grid", "filter bar", "sidebar"],
+            "status": "planned",
+            "children": []
+          },
+          {
+            "nodeId": "gen-page-multimodal-light",
+            "kind": "page-leaf",
+            "output": "pages/multimodal-light.html",
+            "sharedRegions": [],
+            "privateRegions": ["module hero", "lesson grid", "gallery"],
+            "status": "planned",
+            "children": []
+          },
+          {
+            "nodeId": "gen-page-lens-language",
+            "kind": "page-leaf",
+            "output": "pages/lens-language.html",
+            "sharedRegions": [],
+            "privateRegions": ["module hero", "technique cards", "case studies"],
+            "status": "planned",
+            "children": []
+          }
+        ]
+      }
+    }
+  },
+  "designSource": {
+    "operatingMode": "free-explore",
+    "styleConstraints": {
+      "radiusMax": 12,
+      "staticShadowAlphaMax": 0.05
+    },
+    "libraryIdentity": null
+  },
+  "pages": [
+    {
+      "nodeId": "page-index",
+      "title": "首页",
+      "htmlSrc": "pages/index.html",
+      "pageIndex": 1,
+      "pageType": "showcase",
+      "visualNorthStar": "Immersive full-bleed hero with dramatic light/shadow imagery, editorial magazine feel",
+      "compositionPattern": "full-bleed-hero + asymmetric 2-column feature cards + vertical rhythm sections",
+      "imagePlan": ["hero-main.jpg"],
+      "chartsRequired": false,
+      "soulElement": "Hero uses cinematic light beam splitting the dark background — feels like entering a gallery"
+    },
+    {
+      "nodeId": "page-courses",
+      "title": "课程中心",
+      "htmlSrc": "pages/courses.html",
+      "pageIndex": 2,
+      "pageType": "showcase",
+      "visualNorthStar": "Masonry-like course grid with hover reveals, curated editorial feel",
+      "compositionPattern": "filter bar + masonry-style grid cards + category sidebar",
+      "imagePlan": ["course-light.jpg", "course-lens.jpg"],
+      "chartsRequired": false,
+      "soulElement": "Course cards reveal a subtle gold border glow on hover, like gallery frames illuminating"
+    },
+    {
+      "nodeId": "page-multimodal-light",
+      "title": "多模态光影",
+      "htmlSrc": "pages/multimodal-light.html",
+      "pageIndex": 3,
+      "pageType": "showcase",
+      "visualNorthStar": "Visual learning page with dramatic light imagery and lesson flow",
+      "compositionPattern": "editorial header + lesson modules in asymmetric layout + image gallery strip",
+      "imagePlan": ["light-shadow.jpg"],
+      "chartsRequired": false,
+      "soulElement": "Lesson modules alternate between light-on-dark and dark-on-light panels, mimicking actual light concepts"
+    },
+    {
+      "nodeId": "page-lens-language",
+      "title": "镜头语言",
+      "htmlSrc": "pages/lens-language.html",
+      "pageIndex": 4,
+      "pageType": "showcase",
+      "visualNorthStar": "Cinematic lens technique showcase with film-frame inspired layouts",
+      "compositionPattern": "cinematic hero + technique cards with film-strip accents + case study features",
+      "imagePlan": ["cinematic-lens.jpg"],
+      "chartsRequired": false,
+      "soulElement": "Technique cards styled like film negatives with sprocket holes — playful cinematic reference"
+    }
+  ],
+  "assets": [],
+  "wiringPlan": [
+    { "from": "page-index", "to": "page-courses", "domId": "nav-courses", "label": "课程中心" },
+    { "from": "page-index", "to": "page-multimodal-light", "domId": "nav-multimodal", "label": "多模态光影" },
+    { "from": "page-index", "to": "page-lens-language", "domId": "nav-lens", "label": "镜头语言" },
+    { "from": "page-courses", "to": "page-multimodal-light", "domId": "cta-multimodal", "label": "进入课程" },
+    { "from": "page-courses", "to": "page-lens-language", "domId": "cta-lens", "label": "进入课程" },
+    { "from": "page-multimodal-light", "to": "page-courses", "domId": "nav-courses", "label": "课程中心" },
+    { "from": "page-lens-language", "to": "page-courses", "domId": "nav-courses", "label": "课程中心" }
+  ],
+  "hiddenInteractionPlan": [
+    { "from": "page-index", "to": "page-index", "domId": "nav-home", "label": "首页", "hideEdge": true },
+    { "from": "page-courses", "to": "page-index", "domId": "nav-home", "label": "首页", "hideEdge": true },
+    { "from": "page-courses", "to": "page-courses", "domId": "nav-courses", "label": "课程中心", "hideEdge": true },
+    { "from": "page-multimodal-light", "to": "page-index", "domId": "nav-home", "label": "首页", "hideEdge": true },
+    { "from": "page-multimodal-light", "to": "page-multimodal-light", "domId": "nav-multimodal", "label": "多模态光影", "hideEdge": true },
+    { "from": "page-lens-language", "to": "page-index", "domId": "nav-home", "label": "首页", "hideEdge": true },
+    { "from": "page-lens-language", "to": "page-lens-language", "domId": "nav-lens", "label": "镜头语言", "hideEdge": true }
+  ]
+}

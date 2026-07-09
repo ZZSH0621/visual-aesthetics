@@ -1,0 +1,61 @@
+<!-- Project Shell: Shared Header + Footer -->
+<!-- SLOT: pageContent -->
+
+<header class="fixed top-0 left-0 right-0 z-50" style="background: rgba(10,10,10,0.85); backdrop-filter: blur(20px); border-bottom: 1px solid var(--color-border-default);">
+  <nav class="max-w-7xl mx-auto px-6 lg:px-8 h-16 flex items-center justify-between">
+    <a href="#" data-dom-id="nav-home" class="flex items-center gap-2" style="font-family: var(--font-display); color: var(--color-brand); font-size: 20px; font-weight: 600; text-decoration: none; letter-spacing: 0.02em;">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><path d="M12 2v20M2 12h20" opacity="0.3"/><circle cx="12" cy="12" r="4" fill="currentColor" opacity="0.4"/></svg>
+      Visual Aesthetics
+    </a>
+    <div class="hidden md:flex items-center gap-8">
+      <!-- SLOT: navLinks -->
+      <a href="#" data-dom-id="nav-home" class="nav-link" style="color: var(--color-text-secondary); font-family: var(--font-body); font-size: 13px; text-decoration: none; letter-spacing: 0.08em; text-transform: uppercase; transition: color 0.2s;">首页</a>
+      <a href="#" data-dom-id="nav-courses" class="nav-link" style="color: var(--color-text-secondary); font-family: var(--font-body); font-size: 13px; text-decoration: none; letter-spacing: 0.08em; text-transform: uppercase; transition: color 0.2s;">课程中心</a>
+      <a href="#" data-dom-id="nav-multimodal" class="nav-link" style="color: var(--color-text-secondary); font-family: var(--font-body); font-size: 13px; text-decoration: none; letter-spacing: 0.08em; text-transform: uppercase; transition: color 0.2s;">多模态光影</a>
+      <a href="#" data-dom-id="nav-lens" class="nav-link" style="color: var(--color-text-secondary); font-family: var(--font-body); font-size: 13px; text-decoration: none; letter-spacing: 0.08em; text-transform: uppercase; transition: color 0.2s;">镜头语言</a>
+    </div>
+    <button class="md:hidden" style="color: var(--color-text-primary); background: none; border: none; cursor: pointer;">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
+    </button>
+  </nav>
+</header>
+
+<main class="pt-16 min-h-screen" style="background: var(--color-bg-primary);">
+  <!-- PAGE CONTENT INJECTED HERE -->
+</main>
+
+<footer style="background: var(--color-bg-secondary); border-top: 1px solid var(--color-border-default);">
+  <div class="max-w-7xl mx-auto px-6 lg:px-8 py-16">
+    <div class="grid grid-cols-1 md:grid-cols-4 gap-12">
+      <div class="md:col-span-2">
+        <h3 style="font-family: var(--font-display); color: var(--color-brand); font-size: 22px; font-weight: 600; margin-bottom: 12px;">Visual Aesthetics</h3>
+        <p style="color: var(--color-text-secondary); font-family: var(--font-body); font-size: 14px; line-height: 1.7; max-width: 360px;">探索视觉美学的深层原理，从光影到镜头，从理论到实践，构建系统的视觉表达能力。</p>
+      </div>
+      <div>
+        <h4 style="font-family: var(--font-body); color: var(--color-text-primary); font-size: 12px; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 16px; font-weight: 600;">学习模块</h4>
+        <ul style="list-style: none; padding: 0; margin: 0;">
+          <li style="margin-bottom: 10px;"><a href="#" style="color: var(--color-text-secondary); text-decoration: none; font-size: 14px; font-family: var(--font-body);">多模态光影</a></li>
+          <li style="margin-bottom: 10px;"><a href="#" style="color: var(--color-text-secondary); text-decoration: none; font-size: 14px; font-family: var(--font-body);">镜头语言</a></li>
+          <li style="margin-bottom: 10px;"><a href="#" style="color: var(--color-text-secondary); text-decoration: none; font-size: 14px; font-family: var(--font-body);">色彩理论</a></li>
+          <li><a href="#" style="color: var(--color-text-secondary); text-decoration: none; font-size: 14px; font-family: var(--font-body);">构图法则</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4 style="font-family: var(--font-body); color: var(--color-text-primary); font-size: 12px; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 16px; font-weight: 600;">关于</h4>
+        <ul style="list-style: none; padding: 0; margin: 0;">
+          <li style="margin-bottom: 10px;"><a href="#" style="color: var(--color-text-secondary); text-decoration: none; font-size: 14px; font-family: var(--font-body);">设计理念</a></li>
+          <li style="margin-bottom: 10px;"><a href="#" style="color: var(--color-text-secondary); text-decoration: none; font-size: 14px; font-family: var(--font-body);">学习路径</a></li>
+          <li><a href="#" style="color: var(--color-text-secondary); text-decoration: none; font-size: 14px; font-family: var(--font-body);">联系我们</a></li>
+        </ul>
+      </div>
+    </div>
+    <div style="margin-top: 48px; padding-top: 24px; border-top: 1px solid var(--color-border-default); text-align: center;">
+      <p style="color: var(--color-text-tertiary); font-size: 12px; font-family: var(--font-body); letter-spacing: 0.05em;">Visual Aesthetics Learning Platform. Designed for creators.</p>
+    </div>
+  </div>
+</footer>
+
+<style>
+  .nav-link:hover { color: var(--color-brand) !important; }
+  a { transition: color 0.2s ease; }
+</style>
