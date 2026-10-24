@@ -143,11 +143,14 @@ html.light {
         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><path d="M12 2v20M2 12h20" opacity="0.3"/><circle cx="12" cy="12" r="4" fill="currentColor" opacity="0.4"/></svg>
         Visual Aesthetics
       </a>
-      <div class="hidden md:flex items-center gap-8">
-        <a href="#index" onclick="switchPage('index'); return false;" data-dom-id="nav-home" class="nav-link" style="color: var(--color-brand); font-family: var(--font-body); font-size: 13px; text-decoration: none; letter-spacing: 0.08em; text-transform: uppercase; transition: color 0.2s;">首页</a>
-        <a href="#courses" onclick="switchPage('courses'); return false;" data-dom-id="nav-courses" class="nav-link" style="color: var(--color-text-secondary); font-family: var(--font-body); font-size: 13px; text-decoration: none; letter-spacing: 0.08em; text-transform: uppercase; transition: color 0.2s;">课程中心</a>
-        <a href="#multimodal-light" onclick="switchPage('multimodal-light'); return false;" data-dom-id="nav-multimodal" class="nav-link" style="color: var(--color-text-secondary); font-family: var(--font-body); font-size: 13px; text-decoration: none; letter-spacing: 0.08em; text-transform: uppercase; transition: color 0.2s;">多模态光影</a>
-        <a href="#lens-language" onclick="switchPage('lens-language'); return false;" data-dom-id="nav-lens" class="nav-link" style="color: var(--color-text-secondary); font-family: var(--font-body); font-size: 13px; text-decoration: none; letter-spacing: 0.08em; text-transform: uppercase; transition: color 0.2s;">镜头语言</a>
+      <div class="hidden md:flex items-center gap-5">
+        <a href="#index" onclick="switchPage('index'); return false;" data-dom-id="nav-home" class="nav-link" style="color: var(--color-brand); font-family: var(--font-body); font-size: 12px; text-decoration: none; letter-spacing: 0.04em; text-transform: uppercase; transition: color 0.2s;">首页</a>
+        <a href="#courses" onclick="switchPage('courses'); return false;" data-dom-id="nav-courses" class="nav-link" style="color: var(--color-text-secondary); font-family: var(--font-body); font-size: 12px; text-decoration: none; letter-spacing: 0.04em; text-transform: uppercase; transition: color 0.2s;">课程中心</a>
+        <a href="#multimodal-light" onclick="switchPage('multimodal-light'); return false;" data-dom-id="nav-multimodal" class="nav-link" style="color: var(--color-text-secondary); font-family: var(--font-body); font-size: 12px; text-decoration: none; letter-spacing: 0.04em; text-transform: uppercase; transition: color 0.2s;">多模态光影</a>
+        <a href="#lens-language" onclick="switchPage('lens-language'); return false;" data-dom-id="nav-lens" class="nav-link" style="color: var(--color-text-secondary); font-family: var(--font-body); font-size: 12px; text-decoration: none; letter-spacing: 0.04em; text-transform: uppercase; transition: color 0.2s;">镜头语言</a>
+        <a href="#composition" onclick="switchPage('composition'); return false;" class="nav-link" style="color: var(--color-text-secondary); font-family: var(--font-body); font-size: 12px; text-decoration: none; letter-spacing: 0.04em; text-transform: uppercase; transition: color 0.2s;">构图组织</a>
+        <a href="photography-attrs.html" class="nav-link" style="color: var(--color-text-secondary); font-family: var(--font-body); font-size: 12px; text-decoration: none; letter-spacing: 0.04em; text-transform: uppercase; transition: color 0.2s;">摄影属性</a>
+        <a href="camera-movement.html" class="nav-link" style="color: var(--color-text-secondary); font-family: var(--font-body); font-size: 12px; text-decoration: none; letter-spacing: 0.04em; text-transform: uppercase; transition: color 0.2s;">镜头调度</a>
       </div>
       <button class="md:hidden" style="color: var(--color-text-primary); background: none; border: none; cursor: pointer;" aria-label="Menu">
         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
@@ -161,7 +164,7 @@ html.light {
     <section class="relative w-full overflow-hidden" style="min-height: 100vh; display: flex; align-items: center;">
       <!-- Background image -->
       <div class="absolute inset-0">
-        <img loading="lazy" decoding="async"
+        <img
           src="../assets/hero-main.jpg"
           alt="Hero background"
           class="w-full h-full object-cover"
@@ -229,7 +232,7 @@ html.light {
           <!-- Left card: 多模态光影 (taller) -->
           <a href="#multimodal-light" onclick="switchPage('multimodal-light'); return false;" data-dom-id="nav-multimodal" class="feature-card block relative overflow-hidden rounded-sm lg:rounded-md" style="border: 1px solid var(--color-border-default); text-decoration: none; min-height: 480px;">
             <div class="absolute inset-0">
-              <img loading="lazy" decoding="async"
+              <img
                 src="../assets/light-shadow.jpg"
                 alt="多模态光影"
                 class="w-full h-full object-cover"
@@ -256,10 +259,68 @@ html.light {
             </div>
           </a>
 
+          <!-- Card: 摄影属性 -->
+          <a href="photography-attrs.html" class="feature-card block relative overflow-hidden rounded-sm lg:rounded-md" style="border: 1px solid var(--color-border-default); text-decoration: none; min-height: 420px;">
+            <div class="absolute inset-0">
+              <img
+                src="../assets/lens_anamorphic.png"
+                alt="摄影属性"
+                class="w-full h-full object-cover"
+                style="filter: brightness(0.4) saturate(0.85);"
+              >
+            </div>
+            <div class="feature-card-overlay absolute inset-0" style="background: linear-gradient(to top, rgba(10,10,10,0.95) 0%, rgba(10,10,10,0.5) 50%, rgba(10,10,10,0.2) 100%); transition: opacity 0.4s ease;"></div>
+            <div class="absolute top-0 left-0 w-full h-px" style="background: linear-gradient(to right, transparent, var(--color-brand), transparent); opacity: 0.5;"></div>
+            <div class="relative z-10 flex flex-col justify-end h-full p-8 lg:p-10" style="min-height: 420px;">
+              <p style="font-family: var(--font-body); font-size: 11px; text-transform: uppercase; letter-spacing: 0.2em; color: var(--color-brand); font-weight: 500; margin-bottom: 12px;">
+                Module 03
+              </p>
+              <h3 class="feature-card-title" style="font-family: var(--font-display); font-size: clamp(24px, 3vw, 36px); font-weight: 500; color: var(--color-text-primary); margin: 0 0 12px 0; line-height: 1.2; transition: color 0.3s ease;">
+                摄影属性
+              </h3>
+              <p style="font-family: var(--font-body); font-size: 14px; line-height: 1.7; color: var(--color-text-secondary); max-width: 400px; margin-bottom: 20px;">
+                景别、机位、角度、镜头与成像——构成影像观看方式的底层条件，配套 AI 视频生成 Prompt 速查。
+              </p>
+              <span class="feature-card-arrow inline-flex items-center gap-2" style="font-family: var(--font-body); font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--color-brand); opacity: 0.7; transition: all 0.3s ease;">
+                探索模块
+                <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 7h10M8 3l4 4-4 4"/></svg>
+              </span>
+            </div>
+          </a>
+
+          <!-- Card: 镜头调度 -->
+          <a href="camera-movement.html" class="feature-card block relative overflow-hidden rounded-sm lg:rounded-md" style="border: 1px solid var(--color-border-default); text-decoration: none; min-height: 420px;">
+            <div class="absolute inset-0">
+              <img
+                src="../assets/posters/kling_bullettime.jpg"
+                alt="镜头调度"
+                class="w-full h-full object-cover"
+                style="filter: brightness(0.4) saturate(0.85);"
+              >
+            </div>
+            <div class="feature-card-overlay absolute inset-0" style="background: linear-gradient(to top, rgba(10,10,10,0.95) 0%, rgba(10,10,10,0.5) 50%, rgba(10,10,10,0.2) 100%); transition: opacity 0.4s ease;"></div>
+            <div class="absolute top-0 left-0 w-full h-px" style="background: linear-gradient(to right, transparent, var(--color-brand), transparent); opacity: 0.5;"></div>
+            <div class="relative z-10 flex flex-col justify-end h-full p-8 lg:p-10" style="min-height: 420px;">
+              <p style="font-family: var(--font-body); font-size: 11px; text-transform: uppercase; letter-spacing: 0.2em; color: var(--color-brand); font-weight: 500; margin-bottom: 12px;">
+                Module 04
+              </p>
+              <h3 class="feature-card-title" style="font-family: var(--font-display); font-size: clamp(24px, 3vw, 36px); font-weight: 500; color: var(--color-text-primary); margin: 0 0 12px 0; line-height: 1.2; transition: color 0.3s ease;">
+                镜头调度
+              </h3>
+              <p style="font-family: var(--font-body); font-size: 14px; line-height: 1.7; color: var(--color-text-secondary); max-width: 400px; margin-bottom: 20px;">
+                推拉摇移跟升降、组合运镜与一镜到底，再到希区柯克变焦、子弹时间等高表现力镜头——镜头如何制造节奏与冲击。
+              </p>
+              <span class="feature-card-arrow inline-flex items-center gap-2" style="font-family: var(--font-body); font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--color-brand); opacity: 0.7; transition: all 0.3s ease;">
+                探索模块
+                <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 7h10M8 3l4 4-4 4"/></svg>
+              </span>
+            </div>
+          </a>
+
           <!-- Right card: 镜头语言 (slightly shorter) -->
           <a href="#lens-language" onclick="switchPage('lens-language'); return false;" data-dom-id="nav-lens" class="feature-card block relative overflow-hidden rounded-sm lg:rounded-md" style="border: 1px solid var(--color-border-default); text-decoration: none; min-height: 420px;">
             <div class="absolute inset-0">
-              <img loading="lazy" decoding="async"
+              <img
                 src="../assets/cinematic-lens.jpg"
                 alt="镜头语言"
                 class="w-full h-full object-cover"
@@ -281,6 +342,64 @@ html.light {
               </p>
               <span class="feature-card-arrow inline-flex items-center gap-2" style="font-family: var(--font-body); font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--color-brand); opacity: 0.7; transition: all 0.3s ease;">
                 探索模块
+                <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 7h10M8 3l4 4-4 4"/></svg>
+              </span>
+            </div>
+          </a>
+
+          <!-- Card: 构图组织 -->
+          <a href="#composition" onclick="switchPage('composition'); return false;" class="feature-card block relative overflow-hidden rounded-sm lg:rounded-md" style="border: 1px solid var(--color-border-default); text-decoration: none; min-height: 420px;">
+            <div class="absolute inset-0">
+              <img
+                src="../assets/comp_symmetry.jpg"
+                alt="构图组织"
+                class="w-full h-full object-cover"
+                style="filter: brightness(0.4) saturate(0.85);"
+              >
+            </div>
+            <div class="feature-card-overlay absolute inset-0" style="background: linear-gradient(to top, rgba(10,10,10,0.95) 0%, rgba(10,10,10,0.5) 50%, rgba(10,10,10,0.2) 100%); transition: opacity 0.4s ease;"></div>
+            <div class="absolute top-0 left-0 w-full h-px" style="background: linear-gradient(to right, transparent, var(--color-brand), transparent); opacity: 0.5;"></div>
+            <div class="relative z-10 flex flex-col justify-end h-full p-8 lg:p-10" style="min-height: 420px;">
+              <p style="font-family: var(--font-body); font-size: 11px; text-transform: uppercase; letter-spacing: 0.2em; color: var(--color-brand); font-weight: 500; margin-bottom: 12px;">
+                Module 05
+              </p>
+              <h3 class="feature-card-title" style="font-family: var(--font-display); font-size: clamp(24px, 3vw, 36px); font-weight: 500; color: var(--color-text-primary); margin: 0 0 12px 0; line-height: 1.2; transition: color 0.3s ease;">
+                构图组织
+              </h3>
+              <p style="font-family: var(--font-body); font-size: 14px; line-height: 1.7; color: var(--color-text-secondary); max-width: 400px; margin-bottom: 20px;">
+                三分法、对称、框架、留白——41 种构图法则全覆盖，从基础到经典大师风格，掌握画面组织的核心逻辑。
+              </p>
+              <span class="feature-card-arrow inline-flex items-center gap-2" style="font-family: var(--font-body); font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--color-brand); opacity: 0.7; transition: all 0.3s ease;">
+                探索模块
+                <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 7h10M8 3l4 4-4 4"/></svg>
+              </span>
+            </div>
+          </a>
+
+          <!-- Card: 课程中心 -->
+          <a href="#courses" onclick="switchPage('courses'); return false;" class="feature-card block relative overflow-hidden rounded-sm lg:rounded-md" style="border: 1px solid var(--color-border-default); text-decoration: none; min-height: 420px;">
+            <div class="absolute inset-0">
+              <img
+                src="../assets/course-light.jpg"
+                alt="课程中心"
+                class="w-full h-full object-cover"
+                style="filter: brightness(0.4) saturate(0.85);"
+              >
+            </div>
+            <div class="feature-card-overlay absolute inset-0" style="background: linear-gradient(to top, rgba(10,10,10,0.95) 0%, rgba(10,10,10,0.5) 50%, rgba(10,10,10,0.2) 100%); transition: opacity 0.4s ease;"></div>
+            <div class="absolute top-0 left-0 w-full h-px" style="background: linear-gradient(to right, transparent, var(--color-brand), transparent); opacity: 0.5;"></div>
+            <div class="relative z-10 flex flex-col justify-end h-full p-8 lg:p-10" style="min-height: 420px;">
+              <p style="font-family: var(--font-body); font-size: 11px; text-transform: uppercase; letter-spacing: 0.2em; color: var(--color-brand); font-weight: 500; margin-bottom: 12px;">
+                Module 06
+              </p>
+              <h3 class="feature-card-title" style="font-family: var(--font-display); font-size: clamp(24px, 3vw, 36px); font-weight: 500; color: var(--color-text-primary); margin: 0 0 12px 0; line-height: 1.2; transition: color 0.3s ease;">
+                课程中心
+              </h3>
+              <p style="font-family: var(--font-body); font-size: 14px; line-height: 1.7; color: var(--color-text-secondary); max-width: 400px; margin-bottom: 20px;">
+                所有学习模块的汇总入口，按体系化路径学习视觉美学，从光影到构图，从镜头到调度。
+              </p>
+              <span class="feature-card-arrow inline-flex items-center gap-2" style="font-family: var(--font-body); font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--color-brand); opacity: 0.7; transition: all 0.3s ease;">
+                进入课程
                 <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 7h10M8 3l4 4-4 4"/></svg>
               </span>
             </div>
@@ -546,16 +665,20 @@ html.light {
 <nav class="max-w-7xl mx-auto px-6 lg:px-8 h-16 flex items-center justify-between">      
 <a href="#index" onclick="switchPage('index'); return false;" class="flex items-center gap-2" style="font-family: var(--font-display); color: var(--color-brand); font-size: 20px; font-weight: 600; text-decoration: none; letter-spacing: 0.02em;">        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><path d="M12 2v20M2 12h20" opacity="0.3"/><circle cx="12" cy="12" r="4" fill="currentColor" opacity="0.4"/></svg>        Visual Aesthetics      
 </a>      
-<div class="hidden md:flex items-center gap-8">        
-<a href="#index" onclick="switchPage('index'); return false;" class="nav-link" style="color: var(--color-text-secondary); font-family: var(--font-body); font-size: 13px; text-decoration: none; letter-spacing: 0.08em; text-transform: uppercase; transition: color 0.2s;">首页
+<div class="hidden md:flex items-center gap-5">        
+<a href="#index" onclick="switchPage('index'); return false;" class="nav-link" style="color: var(--color-text-secondary); font-family: var(--font-body); font-size: 12px; text-decoration: none; letter-spacing: 0.04em; text-transform: uppercase; transition: color 0.2s;">首页
 </a>        
-<a href="#courses" onclick="switchPage('courses'); return false;" class="nav-link" style="color: var(--color-text-secondary); font-family: var(--font-body); font-size: 13px; text-decoration: none; letter-spacing: 0.08em; text-transform: uppercase; transition: color 0.2s;">课程中心
+<a href="#courses" onclick="switchPage('courses'); return false;" class="nav-link" style="color: var(--color-text-secondary); font-family: var(--font-body); font-size: 12px; text-decoration: none; letter-spacing: 0.04em; text-transform: uppercase; transition: color 0.2s;">课程中心
 </a>        
-<a href="#multimodal-light" onclick="switchPage('multimodal-light'); return false;" class="nav-link nav-link--active" style="font-family: var(--font-body); font-size: 13px; text-decoration: none; letter-spacing: 0.08em; text-transform: uppercase; transition: color 0.2s;">多模态光影
+<a href="#multimodal-light" onclick="switchPage('multimodal-light'); return false;" class="nav-link nav-link--active" style="font-family: var(--font-body); font-size: 12px; text-decoration: none; letter-spacing: 0.04em; text-transform: uppercase; transition: color 0.2s;">多模态光影
 </a>        
-<a href="#lens-language" onclick="switchPage('lens-language'); return false;" class="nav-link" style="color: var(--color-text-secondary); font-family: var(--font-body); font-size: 13px; text-decoration: none; letter-spacing: 0.08em; text-transform: uppercase; transition: color 0.2s;">镜头语言
-</a>      
-</div>      
+<a href="#lens-language" onclick="switchPage('lens-language'); return false;" class="nav-link" style="color: var(--color-text-secondary); font-family: var(--font-body); font-size: 12px; text-decoration: none; letter-spacing: 0.04em; text-transform: uppercase; transition: color 0.2s;">镜头语言
+</a>
+        <a href="#composition" onclick="switchPage('composition'); return false;" class="nav-link" style="color: var(--color-text-secondary); font-family: var(--font-body); font-size: 12px; text-decoration: none; letter-spacing: 0.04em; text-transform: uppercase; transition: color 0.2s;">构图组织</a>
+        <a href="photography-attrs.html" class="nav-link" style="color: var(--color-text-secondary); font-family: var(--font-body); font-size: 12px; text-decoration: none; letter-spacing: 0.04em; text-transform: uppercase; transition: color 0.2s;">摄影属性
+</a>
+        <a href="camera-movement.html" class="nav-link" style="color: var(--color-text-secondary); font-family: var(--font-body); font-size: 12px; text-decoration: none; letter-spacing: 0.04em; text-transform: uppercase; transition: color 0.2s;">镜头调度</a>
+      </div>      
 <button class="md:hidden" style="color: var(--color-text-primary); background: none; border: none; cursor: pointer;" aria-label="Menu">        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 6h16M4 12h16M4 18h16"/></svg>      
 </button>    
 </nav>  
@@ -634,18 +757,18 @@ html.light {
 <div class="grid grid-cols-1 lg:grid-cols-5 gap-0">          
 <!-- Image side: 3 cols 
 -->          
-<div class="lg:col-span-3 relative overflow-hidden gallery-section" style="min-height: 480px;">            <img loading="lazy" decoding="async" src="../assets/黄金时刻_01_泰坦尼克式船头拥抱.jpg" alt="黄金时刻" class="main-img w-full h-full object-cover" style="filter: brightness(0.8) saturate(1.05); cursor: pointer;">            
+<div class="lg:col-span-3 relative overflow-hidden gallery-section" style="min-height: 480px;">            <img src="../assets/golden_hour_01.jpg" alt="黄金时刻" class="main-img w-full h-full object-cover" style="filter: brightness(0.8) saturate(1.05); cursor: pointer;">            
 <!-- Gallery strip 
 -->            
 <div class="absolute bottom-0 left-0 right-0 p-4" style="background: linear-gradient(to top, rgba(0,0,0,0.7), transparent);">              
 <div class="flex gap-2">                
-<div class="gallery-thumb w-20 h-14 flex-shrink-0 overflow-hidden rounded-sm" style="border: 1px solid var(--color-border-strong); cursor: pointer; opacity: 0.7; transition: opacity 0.3s ease;" data-full="../assets/黄金时刻_02_非洲草原象群日落.jpg">                  <img loading="lazy" decoding="async" src="../assets/黄金时刻_02_非洲草原象群日落.jpg" alt="非洲草原象群日落" class="w-full h-full object-cover">                
+<div class="gallery-thumb w-20 h-14 flex-shrink-0 overflow-hidden rounded-sm" style="border: 1px solid var(--color-border-strong); cursor: pointer; opacity: 0.7; transition: opacity 0.3s ease;" data-full="../assets/golden_hour_02.jpg">                  <img src="../assets/golden_hour_02.jpg" alt="非洲草原象群日落" class="w-full h-full object-cover">                
 </div>                
-<div class="gallery-thumb w-20 h-14 flex-shrink-0 overflow-hidden rounded-sm" style="border: 1px solid var(--color-border-strong); cursor: pointer; opacity: 0.7; transition: opacity 0.3s ease;" data-full="../assets/黄金时刻_03_摩洛哥蓝色之城.jpg">                  <img loading="lazy" decoding="async" src="../assets/黄金时刻_03_摩洛哥蓝色之城.jpg" alt="摩洛哥蓝色之城" class="w-full h-full object-cover">                
+<div class="gallery-thumb w-20 h-14 flex-shrink-0 overflow-hidden rounded-sm" style="border: 1px solid var(--color-border-strong); cursor: pointer; opacity: 0.7; transition: opacity 0.3s ease;" data-full="../assets/golden_hour_03.jpg">                  <img src="../assets/golden_hour_03.jpg" alt="摩洛哥蓝色之城" class="w-full h-full object-cover">                
 </div>                
-<div class="gallery-thumb w-20 h-14 flex-shrink-0 overflow-hidden rounded-sm" style="border: 1px solid var(--color-border-strong); cursor: pointer; opacity: 0.7; transition: opacity 0.3s ease;" data-full="../assets/黄金时刻_04_稻田劳作剪影.jpg">                  <img loading="lazy" decoding="async" src="../assets/黄金时刻_04_稻田劳作剪影.jpg" alt="稻田劳作剪影" class="w-full h-full object-cover">                
+<div class="gallery-thumb w-20 h-14 flex-shrink-0 overflow-hidden rounded-sm" style="border: 1px solid var(--color-border-strong); cursor: pointer; opacity: 0.7; transition: opacity 0.3s ease;" data-full="../assets/golden_hour_04.jpg">                  <img src="../assets/golden_hour_04.jpg" alt="稻田劳作剪影" class="w-full h-full object-cover">                
 </div>                
-<div class="gallery-thumb w-20 h-14 flex-shrink-0 overflow-hidden rounded-sm" style="border: 1px solid var(--color-border-strong); cursor: pointer; opacity: 0.7; transition: opacity 0.3s ease;" data-full="../assets/黄金时刻_05_废弃教堂彩色玻璃.jpg">                  <img loading="lazy" decoding="async" src="../assets/黄金时刻_05_废弃教堂彩色玻璃.jpg" alt="废弃教堂彩色玻璃" class="w-full h-full object-cover">                
+<div class="gallery-thumb w-20 h-14 flex-shrink-0 overflow-hidden rounded-sm" style="border: 1px solid var(--color-border-strong); cursor: pointer; opacity: 0.7; transition: opacity 0.3s ease;" data-full="../assets/golden_hour_05.jpg">                  <img src="../assets/golden_hour_05.jpg" alt="废弃教堂彩色玻璃" class="w-full h-full object-cover">                
 </div>              
 </div>            
 </div>          
@@ -758,17 +881,17 @@ html.light {
 </div>          
 <!-- Image side: 3 cols 
 -->          
-<div class="lg:col-span-3 relative overflow-hidden gallery-section" style="min-height: 480px;">            <img loading="lazy" decoding="async" src="../assets/蓝调时刻_01_浅蓝调爱乐之城式山顶.jpg" alt="蓝调时刻" class="main-img w-full h-full object-cover" style="filter: brightness(0.75) saturate(1.1); cursor: pointer;">            
+<div class="lg:col-span-3 relative overflow-hidden gallery-section" style="min-height: 480px;">            <img src="../assets/blue_hour_01.jpg" alt="蓝调时刻" class="main-img w-full h-full object-cover" style="filter: brightness(0.75) saturate(1.1); cursor: pointer;">            
 <div class="absolute bottom-0 left-0 right-0 p-4" style="background: linear-gradient(to top, rgba(0,0,0,0.7), transparent);">              
 <div class="flex gap-2">                
-<div class="gallery-thumb w-20 h-14 flex-shrink-0 overflow-hidden rounded-sm" style="border: 1px solid var(--color-border-strong); cursor: pointer; opacity: 0.7; transition: opacity 0.3s ease;" data-full="../assets/蓝调时刻_02_中蓝调威尼斯水面镜面.jpg">                  <img loading="lazy" decoding="async" src="../assets/蓝调时刻_02_中蓝调威尼斯水面镜面.jpg" alt="威尼斯水面镜面" class="w-full h-full object-cover">                
+<div class="gallery-thumb w-20 h-14 flex-shrink-0 overflow-hidden rounded-sm" style="border: 1px solid var(--color-border-strong); cursor: pointer; opacity: 0.7; transition: opacity 0.3s ease;" data-full="../assets/blue_hour_02.jpg">                  <img src="../assets/blue_hour_02.jpg" alt="威尼斯水面镜面" class="w-full h-full object-cover">                
 </div>
                 
-<div class="gallery-thumb w-20 h-14 flex-shrink-0 overflow-hidden rounded-sm" style="border: 1px solid var(--color-border-strong); cursor: pointer; opacity: 0.7; transition: opacity 0.3s ease;" data-full="../assets/蓝调时刻_03_深蓝调雪山湖泊极致纯净.jpg">                  <img loading="lazy" decoding="async" src="../assets/蓝调时刻_03_深蓝调雪山湖泊极致纯净.jpg" alt="雪山湖泊极致纯净" class="w-full h-full object-cover">                
+<div class="gallery-thumb w-20 h-14 flex-shrink-0 overflow-hidden rounded-sm" style="border: 1px solid var(--color-border-strong); cursor: pointer; opacity: 0.7; transition: opacity 0.3s ease;" data-full="../assets/blue_hour_03.jpg">                  <img src="../assets/blue_hour_03.jpg" alt="雪山湖泊极致纯净" class="w-full h-full object-cover">                
 </div>                
-<div class="gallery-thumb w-20 h-14 flex-shrink-0 overflow-hidden rounded-sm" style="border: 1px solid var(--color-border-strong); cursor: pointer; opacity: 0.7; transition: opacity 0.3s ease;" data-full="../assets/蓝调时刻_04_浅蓝调海边栈道情侣.jpg">                  <img loading="lazy" decoding="async" src="../assets/蓝调时刻_04_浅蓝调海边栈道情侣.jpg" alt="海边栈道情侣" class="w-full h-full object-cover">                
+<div class="gallery-thumb w-20 h-14 flex-shrink-0 overflow-hidden rounded-sm" style="border: 1px solid var(--color-border-strong); cursor: pointer; opacity: 0.7; transition: opacity 0.3s ease;" data-full="../assets/blue_hour_04.jpg">                  <img src="../assets/blue_hour_04.jpg" alt="海边栈道情侣" class="w-full h-full object-cover">                
 </div>                
-<div class="gallery-thumb w-20 h-14 flex-shrink-0 overflow-hidden rounded-sm" style="border: 1px solid var(--color-border-strong); cursor: pointer; opacity: 0.7; transition: opacity 0.3s ease;" data-full="../assets/蓝调时刻_05_中蓝调京都古寺灯笼.jpg">                  <img loading="lazy" decoding="async" src="../assets/蓝调时刻_05_中蓝调京都古寺灯笼.jpg" alt="京都古寺灯笼" class="w-full h-full object-cover">                
+<div class="gallery-thumb w-20 h-14 flex-shrink-0 overflow-hidden rounded-sm" style="border: 1px solid var(--color-border-strong); cursor: pointer; opacity: 0.7; transition: opacity 0.3s ease;" data-full="../assets/blue_hour_05.jpg">                  <img src="../assets/blue_hour_05.jpg" alt="京都古寺灯笼" class="w-full h-full object-cover">                
 </div>              
 </div>            
 </div>          
@@ -781,16 +904,16 @@ html.light {
 <section class="fade-in-section" style="background: var(--color-bg-secondary);">      
 <div class="max-w-7xl mx-auto">        
 <div class="grid grid-cols-1 lg:grid-cols-5 gap-0">          
-<div class="lg:col-span-3 relative overflow-hidden gallery-section" style="min-height: 480px;">            <img loading="lazy" decoding="async" src="../assets/丁达尔光_01_森林晨雾光柱.jpg" alt="丁达尔光" class="main-img w-full h-full object-cover" style="filter: brightness(0.8) saturate(1.1); cursor: pointer;">            
+<div class="lg:col-span-3 relative overflow-hidden gallery-section" style="min-height: 480px;">            <img src="../assets/tyndall_01.jpg" alt="丁达尔光" class="main-img w-full h-full object-cover" style="filter: brightness(0.8) saturate(1.1); cursor: pointer;">            
 <div class="absolute bottom-0 left-0 right-0 p-4" style="background: linear-gradient(to top, rgba(0,0,0,0.7), transparent);">              
 <div class="flex gap-2">                
-<div class="gallery-thumb w-20 h-14 flex-shrink-0 overflow-hidden rounded-sm" style="border: 1px solid var(--color-border-strong); cursor: pointer; opacity: 0.7; transition: opacity 0.3s ease;" data-full="../assets/丁达尔光_02_教堂圣光天窗.jpg">                  <img loading="lazy" decoding="async" src="../assets/丁达尔光_02_教堂圣光天窗.jpg" alt="教堂圣光天窗" class="w-full h-full object-cover">                
+<div class="gallery-thumb w-20 h-14 flex-shrink-0 overflow-hidden rounded-sm" style="border: 1px solid var(--color-border-strong); cursor: pointer; opacity: 0.7; transition: opacity 0.3s ease;" data-full="../assets/tyndall_02.jpg">                  <img src="../assets/tyndall_02.jpg" alt="教堂圣光天窗" class="w-full h-full object-cover">                
 </div>                
-<div class="gallery-thumb w-20 h-14 flex-shrink-0 overflow-hidden rounded-sm" style="border: 1px solid var(--color-border-strong); cursor: pointer; opacity: 0.7; transition: opacity 0.3s ease;" data-full="../assets/丁达尔光_03_云海日出万道金光.jpg">                  <img loading="lazy" decoding="async" src="../assets/丁达尔光_03_云海日出万道金光.jpg" alt="云海日出万道金光" class="w-full h-full object-cover">                
+<div class="gallery-thumb w-20 h-14 flex-shrink-0 overflow-hidden rounded-sm" style="border: 1px solid var(--color-border-strong); cursor: pointer; opacity: 0.7; transition: opacity 0.3s ease;" data-full="../assets/tyndall_03.jpg">                  <img src="../assets/tyndall_03.jpg" alt="云海日出万道金光" class="w-full h-full object-cover">                
 </div>                
-<div class="gallery-thumb w-20 h-14 flex-shrink-0 overflow-hidden rounded-sm" style="border: 1px solid var(--color-border-strong); cursor: pointer; opacity: 0.7; transition: opacity 0.3s ease;" data-full="../assets/丁达尔光_04_演唱会烟雾光束.jpg">                  <img loading="lazy" decoding="async" src="../assets/丁达尔光_04_演唱会烟雾光束.jpg" alt="演唱会烟雾光束" class="w-full h-full object-cover">                
+<div class="gallery-thumb w-20 h-14 flex-shrink-0 overflow-hidden rounded-sm" style="border: 1px solid var(--color-border-strong); cursor: pointer; opacity: 0.7; transition: opacity 0.3s ease;" data-full="../assets/tyndall_04.jpg">                  <img src="../assets/tyndall_04.jpg" alt="演唱会烟雾光束" class="w-full h-full object-cover">                
 </div>                
-<div class="gallery-thumb w-20 h-14 flex-shrink-0 overflow-hidden rounded-sm" style="border: 1px solid var(--color-border-strong); cursor: pointer; opacity: 0.7; transition: opacity 0.3s ease;" data-full="../assets/丁达尔光_05_废墟裂缝希望之光.jpg">                  <img loading="lazy" decoding="async" src="../assets/丁达尔光_05_废墟裂缝希望之光.jpg" alt="废墟裂缝希望之光" class="w-full h-full object-cover">                
+<div class="gallery-thumb w-20 h-14 flex-shrink-0 overflow-hidden rounded-sm" style="border: 1px solid var(--color-border-strong); cursor: pointer; opacity: 0.7; transition: opacity 0.3s ease;" data-full="../assets/tyndall_05.jpg">                  <img src="../assets/tyndall_05.jpg" alt="废墟裂缝希望之光" class="w-full h-full object-cover">                
 </div>              
 </div>            
 </div>          
@@ -894,17 +1017,17 @@ html.light {
             </button>
 </div>          
 </div>          
-<div class="lg:col-span-3 relative overflow-hidden gallery-section" style="min-height: 480px;">            <img loading="lazy" decoding="async" src="../assets/霓虹光_01_赛博朋克雨夜街道.jpg" alt="霓虹光" class="main-img w-full h-full object-cover" style="filter: brightness(0.8) saturate(1.15); cursor: pointer;">            
+<div class="lg:col-span-3 relative overflow-hidden gallery-section" style="min-height: 480px;">            <img src="../assets/neon_01.jpg" alt="霓虹光" class="main-img w-full h-full object-cover" style="filter: brightness(0.8) saturate(1.15); cursor: pointer;">            
 <div class="absolute bottom-0 left-0 right-0 p-4" style="background: linear-gradient(to top, rgba(0,0,0,0.7), transparent);">              
 <div class="flex gap-2">                
-<div class="gallery-thumb w-20 h-14 flex-shrink-0 overflow-hidden rounded-sm" style="border: 1px solid var(--color-border-strong); cursor: pointer; opacity: 0.7; transition: opacity 0.3s ease;" data-full="../assets/霓虹光_02_港风窄巷情侣人像.jpg">                  <img loading="lazy" decoding="async" src="../assets/霓虹光_02_港风窄巷情侣人像.jpg" alt="港风窄巷情侣人像" class="w-full h-full object-cover">                
+<div class="gallery-thumb w-20 h-14 flex-shrink-0 overflow-hidden rounded-sm" style="border: 1px solid var(--color-border-strong); cursor: pointer; opacity: 0.7; transition: opacity 0.3s ease;" data-full="../assets/neon_02.jpg">                  <img src="../assets/neon_02.jpg" alt="港风窄巷情侣人像" class="w-full h-full object-cover">                
 </div>
                 
-<div class="gallery-thumb w-20 h-14 flex-shrink-0 overflow-hidden rounded-sm" style="border: 1px solid var(--color-border-strong); cursor: pointer; opacity: 0.7; transition: opacity 0.3s ease;" data-full="../assets/霓虹光_03_东京夜色街景.jpg">                  <img loading="lazy" decoding="async" src="../assets/霓虹光_03_东京夜色街景.jpg" alt="东京夜色街景" class="w-full h-full object-cover">                
+<div class="gallery-thumb w-20 h-14 flex-shrink-0 overflow-hidden rounded-sm" style="border: 1px solid var(--color-border-strong); cursor: pointer; opacity: 0.7; transition: opacity 0.3s ease;" data-full="../assets/neon_03.jpg">                  <img src="../assets/neon_03.jpg" alt="东京夜色街景" class="w-full h-full object-cover">                
 </div>                
-<div class="gallery-thumb w-20 h-14 flex-shrink-0 overflow-hidden rounded-sm" style="border: 1px solid var(--color-border-strong); cursor: pointer; opacity: 0.7; transition: opacity 0.3s ease;" data-full="../assets/霓虹光_04_酒吧驻唱歌手特写.jpg">                  <img loading="lazy" decoding="async" src="../assets/霓虹光_04_酒吧驻唱歌手特写.jpg" alt="酒吧驻唱歌手特写" class="w-full h-full object-cover">                
+<div class="gallery-thumb w-20 h-14 flex-shrink-0 overflow-hidden rounded-sm" style="border: 1px solid var(--color-border-strong); cursor: pointer; opacity: 0.7; transition: opacity 0.3s ease;" data-full="../assets/neon_04.jpg">                  <img src="../assets/neon_04.jpg" alt="酒吧驻唱歌手特写" class="w-full h-full object-cover">                
 </div>                
-<div class="gallery-thumb w-20 h-14 flex-shrink-0 overflow-hidden rounded-sm" style="border: 1px solid var(--color-border-strong); cursor: pointer; opacity: 0.7; transition: opacity 0.3s ease;" data-full="../assets/霓虹光_05_中式古镇灯笼夜市.jpg">                  <img loading="lazy" decoding="async" src="../assets/霓虹光_05_中式古镇灯笼夜市.jpg" alt="中式古镇灯笼夜市" class="w-full h-full object-cover">                
+<div class="gallery-thumb w-20 h-14 flex-shrink-0 overflow-hidden rounded-sm" style="border: 1px solid var(--color-border-strong); cursor: pointer; opacity: 0.7; transition: opacity 0.3s ease;" data-full="../assets/neon_05.jpg">                  <img src="../assets/neon_05.jpg" alt="中式古镇灯笼夜市" class="w-full h-full object-cover">                
 </div>              
 </div>            
 </div>          
@@ -917,16 +1040,16 @@ html.light {
 <section class="fade-in-section" style="background: var(--color-bg-secondary);">      
 <div class="max-w-7xl mx-auto">        
 <div class="grid grid-cols-1 lg:grid-cols-5 gap-0">          
-<div class="lg:col-span-3 relative overflow-hidden gallery-section" style="min-height: 480px;">            <img loading="lazy" decoding="async" src="../assets/伦勃朗光_01_伦勃朗自画像1659.jpg" alt="伦勃朗光" class="main-img w-full h-full object-cover" style="filter: brightness(0.8) saturate(1.0); cursor: pointer;">            
+<div class="lg:col-span-3 relative overflow-hidden gallery-section" style="min-height: 480px;">            <img src="../assets/rembrandt_01.jpg" alt="伦勃朗光" class="main-img w-full h-full object-cover" style="filter: brightness(0.8) saturate(1.0); cursor: pointer;">            
 <div class="absolute bottom-0 left-0 right-0 p-4" style="background: linear-gradient(to top, rgba(0,0,0,0.7), transparent);">              
 <div class="flex gap-2">                
-<div class="gallery-thumb w-20 h-14 flex-shrink-0 overflow-hidden rounded-sm" style="border: 1px solid var(--color-border-strong); cursor: pointer; opacity: 0.7; transition: opacity 0.3s ease;" data-full="../assets/伦勃朗光_02_夜巡式群像光影.jpg">                  <img loading="lazy" decoding="async" src="../assets/伦勃朗光_02_夜巡式群像光影.jpg" alt="夜巡式群像光影" class="w-full h-full object-cover">                
+<div class="gallery-thumb w-20 h-14 flex-shrink-0 overflow-hidden rounded-sm" style="border: 1px solid var(--color-border-strong); cursor: pointer; opacity: 0.7; transition: opacity 0.3s ease;" data-full="../assets/rembrandt_02.jpg">                  <img src="../assets/rembrandt_02.jpg" alt="夜巡式群像光影" class="w-full h-full object-cover">                
 </div>                
-<div class="gallery-thumb w-20 h-14 flex-shrink-0 overflow-hidden rounded-sm" style="border: 1px solid var(--color-border-strong); cursor: pointer; opacity: 0.7; transition: opacity 0.3s ease;" data-full="../assets/伦勃朗光_03_商务高管肖像.jpg">                  <img loading="lazy" decoding="async" src="../assets/伦勃朗光_03_商务高管肖像.jpg" alt="商务高管肖像" class="w-full h-full object-cover">                
+<div class="gallery-thumb w-20 h-14 flex-shrink-0 overflow-hidden rounded-sm" style="border: 1px solid var(--color-border-strong); cursor: pointer; opacity: 0.7; transition: opacity 0.3s ease;" data-full="../assets/rembrandt_03.jpg">                  <img src="../assets/rembrandt_03.jpg" alt="商务高管肖像" class="w-full h-full object-cover">                
 </div>                
-<div class="gallery-thumb w-20 h-14 flex-shrink-0 overflow-hidden rounded-sm" style="border: 1px solid var(--color-border-strong); cursor: pointer; opacity: 0.7; transition: opacity 0.3s ease;" data-full="../assets/伦勃朗光_04_摇滚音乐人肖像.jpg">                  <img loading="lazy" decoding="async" src="../assets/伦勃朗光_04_摇滚音乐人肖像.jpg" alt="摇滚音乐人肖像" class="w-full h-full object-cover">                
+<div class="gallery-thumb w-20 h-14 flex-shrink-0 overflow-hidden rounded-sm" style="border: 1px solid var(--color-border-strong); cursor: pointer; opacity: 0.7; transition: opacity 0.3s ease;" data-full="../assets/rembrandt_04.jpg">                  <img src="../assets/rembrandt_04.jpg" alt="摇滚音乐人肖像" class="w-full h-full object-cover">                
 </div>                
-<div class="gallery-thumb w-20 h-14 flex-shrink-0 overflow-hidden rounded-sm" style="border: 1px solid var(--color-border-strong); cursor: pointer; opacity: 0.7; transition: opacity 0.3s ease;" data-full="../assets/伦勃朗光_05_老年匠人纪实肖像.jpg">                  <img loading="lazy" decoding="async" src="../assets/伦勃朗光_05_老年匠人纪实肖像.jpg" alt="老年匠人纪实肖像" class="w-full h-full object-cover">                
+<div class="gallery-thumb w-20 h-14 flex-shrink-0 overflow-hidden rounded-sm" style="border: 1px solid var(--color-border-strong); cursor: pointer; opacity: 0.7; transition: opacity 0.3s ease;" data-full="../assets/rembrandt_05.jpg">                  <img src="../assets/rembrandt_05.jpg" alt="老年匠人纪实肖像" class="w-full h-full object-cover">                
 </div>              
 </div>            
 </div>          
@@ -1030,17 +1153,17 @@ html.light {
             </button>
 </div>          
 </div>          
-<div class="lg:col-span-3 relative overflow-hidden gallery-section" style="min-height: 480px;">            <img loading="lazy" decoding="async" src="../assets/蝴蝶光_01_赫本式经典黑白肖像.jpg" alt="蝴蝶光" class="main-img w-full h-full object-cover" style="filter: brightness(0.8) saturate(0.95); cursor: pointer;">            
+<div class="lg:col-span-3 relative overflow-hidden gallery-section" style="min-height: 480px;">            <img src="../assets/butterfly_light_01.jpg" alt="蝴蝶光" class="main-img w-full h-full object-cover" style="filter: brightness(0.8) saturate(0.95); cursor: pointer;">            
 <div class="absolute bottom-0 left-0 right-0 p-4" style="background: linear-gradient(to top, rgba(0,0,0,0.7), transparent);">              
 <div class="flex gap-2">                
-<div class="gallery-thumb w-20 h-14 flex-shrink-0 overflow-hidden rounded-sm" style="border: 1px solid var(--color-border-strong); cursor: pointer; opacity: 0.7; transition: opacity 0.3s ease;" data-full="../assets/蝴蝶光_02_梦露式派拉蒙宣传照.jpg">                  <img loading="lazy" decoding="async" src="../assets/蝴蝶光_02_梦露式派拉蒙宣传照.jpg" alt="梦露式派拉蒙宣传照" class="w-full h-full object-cover">                
+<div class="gallery-thumb w-20 h-14 flex-shrink-0 overflow-hidden rounded-sm" style="border: 1px solid var(--color-border-strong); cursor: pointer; opacity: 0.7; transition: opacity 0.3s ease;" data-full="../assets/butterfly_light_02.jpg">                  <img src="../assets/butterfly_light_02.jpg" alt="梦露式派拉蒙宣传照" class="w-full h-full object-cover">                
 </div>
                 
-<div class="gallery-thumb w-20 h-14 flex-shrink-0 overflow-hidden rounded-sm" style="border: 1px solid var(--color-border-strong); cursor: pointer; opacity: 0.7; transition: opacity 0.3s ease;" data-full="../assets/蝴蝶光_03_复古油画质感人像.jpg">                  <img loading="lazy" decoding="async" src="../assets/蝴蝶光_03_复古油画质感人像.jpg" alt="复古油画质感人像" class="w-full h-full object-cover">                
+<div class="gallery-thumb w-20 h-14 flex-shrink-0 overflow-hidden rounded-sm" style="border: 1px solid var(--color-border-strong); cursor: pointer; opacity: 0.7; transition: opacity 0.3s ease;" data-full="../assets/butterfly_light_03.jpg">                  <img src="../assets/butterfly_light_03.jpg" alt="复古油画质感人像" class="w-full h-full object-cover">                
 </div>                
-<div class="gallery-thumb w-20 h-14 flex-shrink-0 overflow-hidden rounded-sm" style="border: 1px solid var(--color-border-strong); cursor: pointer; opacity: 0.7; transition: opacity 0.3s ease;" data-full="../assets/蝴蝶光_04_时尚美妆杂志封面.jpg">                  <img loading="lazy" decoding="async" src="../assets/蝴蝶光_04_时尚美妆杂志封面.jpg" alt="时尚美妆杂志封面" class="w-full h-full object-cover">                
+<div class="gallery-thumb w-20 h-14 flex-shrink-0 overflow-hidden rounded-sm" style="border: 1px solid var(--color-border-strong); cursor: pointer; opacity: 0.7; transition: opacity 0.3s ease;" data-full="../assets/butterfly_light_04.jpg">                  <img src="../assets/butterfly_light_04.jpg" alt="时尚美妆杂志封面" class="w-full h-full object-cover">                
 </div>                
-<div class="gallery-thumb w-20 h-14 flex-shrink-0 overflow-hidden rounded-sm" style="border: 1px solid var(--color-border-strong); cursor: pointer; opacity: 0.7; transition: opacity 0.3s ease;" data-full="../assets/蝴蝶光_05_婚纱新娘肖像.jpg">                  <img loading="lazy" decoding="async" src="../assets/蝴蝶光_05_婚纱新娘肖像.jpg" alt="婚纱新娘肖像" class="w-full h-full object-cover">                
+<div class="gallery-thumb w-20 h-14 flex-shrink-0 overflow-hidden rounded-sm" style="border: 1px solid var(--color-border-strong); cursor: pointer; opacity: 0.7; transition: opacity 0.3s ease;" data-full="../assets/butterfly_light_05.jpg">                  <img src="../assets/butterfly_light_05.jpg" alt="婚纱新娘肖像" class="w-full h-full object-cover">                
 </div>              
 </div>            
 </div>          
@@ -1053,16 +1176,16 @@ html.light {
 <section class="fade-in-section" style="background: var(--color-bg-secondary);">      
 <div class="max-w-7xl mx-auto">        
 <div class="grid grid-cols-1 lg:grid-cols-5 gap-0">          
-<div class="lg:col-span-3 relative overflow-hidden gallery-section" style="min-height: 480px;">            <img loading="lazy" decoding="async" src="../assets/剪影光_01_ET式飞月剪影.jpg" alt="剪影光" class="main-img w-full h-full object-cover" style="filter: brightness(0.85) saturate(1.0); cursor: pointer;">            
+<div class="lg:col-span-3 relative overflow-hidden gallery-section" style="min-height: 480px;">            <img src="../assets/silhouette_light_01.jpg" alt="剪影光" class="main-img w-full h-full object-cover" style="filter: brightness(0.85) saturate(1.0); cursor: pointer;">            
 <div class="absolute bottom-0 left-0 right-0 p-4" style="background: linear-gradient(to top, rgba(0,0,0,0.7), transparent);">              
 <div class="flex gap-2">                
-<div class="gallery-thumb w-20 h-14 flex-shrink-0 overflow-hidden rounded-sm" style="border: 1px solid var(--color-border-strong); cursor: pointer; opacity: 0.7; transition: opacity 0.3s ease;" data-full="../assets/剪影光_02_日落海边情侣剪影.jpg">                  <img loading="lazy" decoding="async" src="../assets/剪影光_02_日落海边情侣剪影.jpg" alt="日落海边情侣剪影" class="w-full h-full object-cover">                
+<div class="gallery-thumb w-20 h-14 flex-shrink-0 overflow-hidden rounded-sm" style="border: 1px solid var(--color-border-strong); cursor: pointer; opacity: 0.7; transition: opacity 0.3s ease;" data-full="../assets/silhouette_light_02.jpg">                  <img src="../assets/silhouette_light_02.jpg" alt="日落海边情侣剪影" class="w-full h-full object-cover">                
 </div>                
-<div class="gallery-thumb w-20 h-14 flex-shrink-0 overflow-hidden rounded-sm" style="border: 1px solid var(--color-border-strong); cursor: pointer; opacity: 0.7; transition: opacity 0.3s ease;" data-full="../assets/剪影光_03_边境杀手式隧道剪影.jpg">                  <img loading="lazy" decoding="async" src="../assets/剪影光_03_边境杀手式隧道剪影.jpg" alt="边境杀手式隧道剪影" class="w-full h-full object-cover">                
+<div class="gallery-thumb w-20 h-14 flex-shrink-0 overflow-hidden rounded-sm" style="border: 1px solid var(--color-border-strong); cursor: pointer; opacity: 0.7; transition: opacity 0.3s ease;" data-full="../assets/silhouette_light_03.jpg">                  <img src="../assets/silhouette_light_03.jpg" alt="边境杀手式隧道剪影" class="w-full h-full object-cover">                
 </div>                
-<div class="gallery-thumb w-20 h-14 flex-shrink-0 overflow-hidden rounded-sm" style="border: 1px solid var(--color-border-strong); cursor: pointer; opacity: 0.7; transition: opacity 0.3s ease;" data-full="../assets/剪影光_04_阿拉伯劳伦斯式沙漠剪影.jpg">                  <img loading="lazy" decoding="async" src="../assets/剪影光_04_阿拉伯劳伦斯式沙漠剪影.jpg" alt="阿拉伯劳伦斯式沙漠剪影" class="w-full h-full object-cover">                
+<div class="gallery-thumb w-20 h-14 flex-shrink-0 overflow-hidden rounded-sm" style="border: 1px solid var(--color-border-strong); cursor: pointer; opacity: 0.7; transition: opacity 0.3s ease;" data-full="../assets/silhouette_light_04.jpg">                  <img src="../assets/silhouette_light_04.jpg" alt="阿拉伯劳伦斯式沙漠剪影" class="w-full h-full object-cover">                
 </div>                
-<div class="gallery-thumb w-20 h-14 flex-shrink-0 overflow-hidden rounded-sm" style="border: 1px solid var(--color-border-strong); cursor: pointer; opacity: 0.7; transition: opacity 0.3s ease;" data-full="../assets/剪影光_05_城市天际线剪影.jpg">                  <img loading="lazy" decoding="async" src="../assets/剪影光_05_城市天际线剪影.jpg" alt="城市天际线剪影" class="w-full h-full object-cover">                
+<div class="gallery-thumb w-20 h-14 flex-shrink-0 overflow-hidden rounded-sm" style="border: 1px solid var(--color-border-strong); cursor: pointer; opacity: 0.7; transition: opacity 0.3s ease;" data-full="../assets/silhouette_light_05.jpg">                  <img src="../assets/silhouette_light_05.jpg" alt="城市天际线剪影" class="w-full h-full object-cover">                
 </div>              
 </div>            
 </div>          
@@ -1121,19 +1244,19 @@ html.light {
 <p style="font-family: var(--font-body); font-size: 11px; text-transform: uppercase; letter-spacing: 0.12em; color: var(--color-text-tertiary); font-weight: 600; margin: 0 0 16px 0;">对比图集 — 剪影光与逆光
 </p>          
 <div class="grid grid-cols-1 md:grid-cols-3 gap-4">            
-<div class="overflow-hidden rounded-sm" style="border: 1px solid var(--color-border-default);">              <img loading="lazy" decoding="async" src="../assets/对比01_剪影光_纯黑轮廓.jpg" alt="剪影光纯黑轮廓" class="w-full object-cover" style="height: 200px; filter: brightness(0.85);">              
+<div class="overflow-hidden rounded-sm" style="border: 1px solid var(--color-border-default);">              <img src="../assets/misc_02.jpg" alt="剪影光纯黑轮廓" class="w-full object-cover" style="height: 200px; filter: brightness(0.85);">              
 <div style="padding: 10px 12px; background: var(--color-bg-sunken);">                
 <p style="font-family: var(--font-body); font-size: 12px; color: var(--color-text-secondary); margin: 0;">纯黑轮廓 — 经典剪影
 </p>              
 </div>            
 </div>            
-<div class="overflow-hidden rounded-sm" style="border: 1px solid var(--color-border-default);">              <img loading="lazy" decoding="async" src="../assets/对比02_逆光_有细节轮廓光.jpg" alt="逆光有细节轮廓光" class="w-full object-cover" style="height: 200px; filter: brightness(0.85);">              
+<div class="overflow-hidden rounded-sm" style="border: 1px solid var(--color-border-default);">              <img src="../assets/misc_03.jpg" alt="逆光有细节轮廓光" class="w-full object-cover" style="height: 200px; filter: brightness(0.85);">              
 <div style="padding: 10px 12px; background: var(--color-bg-sunken);">                
 <p style="font-family: var(--font-body); font-size: 12px; color: var(--color-text-secondary); margin: 0;">有细节轮廓光 — 半剪影
 </p>              
 </div>            
 </div>            
-<div class="overflow-hidden rounded-sm" style="border: 1px solid var(--color-border-default);">              <img loading="lazy" decoding="async" src="../assets/对比03_剪影光vs逆光_并排对比.jpg" alt="剪影光vs逆光并排对比" class="w-full object-cover" style="height: 200px; filter: brightness(0.85);">              
+<div class="overflow-hidden rounded-sm" style="border: 1px solid var(--color-border-default);">              <img src="../assets/misc_04.jpg" alt="剪影光vs逆光并排对比" class="w-full object-cover" style="height: 200px; filter: brightness(0.85);">              
 <div style="padding: 10px 12px; background: var(--color-bg-sunken);">                
 <p style="font-family: var(--font-body); font-size: 12px; color: var(--color-text-secondary); margin: 0;">并排对比 — 剪影光 vs 逆光
 </p>              
@@ -1194,17 +1317,17 @@ html.light {
             </button>
 </div>          
 </div>          
-<div class="lg:col-span-3 relative overflow-hidden gallery-section" style="min-height: 480px;">            <img loading="lazy" decoding="async" src="../assets/底光_01_恐怖人像特写.jpg" alt="底光" class="main-img w-full h-full object-cover" style="filter: brightness(0.75) saturate(1.0); cursor: pointer;">            
+<div class="lg:col-span-3 relative overflow-hidden gallery-section" style="min-height: 480px;">            <img src="../assets/uplight_01.jpg" alt="底光" class="main-img w-full h-full object-cover" style="filter: brightness(0.75) saturate(1.0); cursor: pointer;">            
 <div class="absolute bottom-0 left-0 right-0 p-4" style="background: linear-gradient(to top, rgba(0,0,0,0.7), transparent);">              
 <div class="flex gap-2">                
-<div class="gallery-thumb w-20 h-14 flex-shrink-0 overflow-hidden rounded-sm" style="border: 1px solid var(--color-border-strong); cursor: pointer; opacity: 0.7; transition: opacity 0.3s ease;" data-full="../assets/底光_02_酒吧幻觉场景.jpg">                  <img loading="lazy" decoding="async" src="../assets/底光_02_酒吧幻觉场景.jpg" alt="酒吧幻觉场景" class="w-full h-full object-cover">                
+<div class="gallery-thumb w-20 h-14 flex-shrink-0 overflow-hidden rounded-sm" style="border: 1px solid var(--color-border-strong); cursor: pointer; opacity: 0.7; transition: opacity 0.3s ease;" data-full="../assets/uplight_02.jpg">                  <img src="../assets/uplight_02.jpg" alt="酒吧幻觉场景" class="w-full h-full object-cover">                
 </div>
                 
-<div class="gallery-thumb w-20 h-14 flex-shrink-0 overflow-hidden rounded-sm" style="border: 1px solid var(--color-border-strong); cursor: pointer; opacity: 0.7; transition: opacity 0.3s ease;" data-full="../assets/底光_03_驱魔人式恐怖特写.jpg">                  <img loading="lazy" decoding="async" src="../assets/底光_03_驱魔人式恐怖特写.jpg" alt="驱魔人式恐怖特写" class="w-full h-full object-cover">                
+<div class="gallery-thumb w-20 h-14 flex-shrink-0 overflow-hidden rounded-sm" style="border: 1px solid var(--color-border-strong); cursor: pointer; opacity: 0.7; transition: opacity 0.3s ease;" data-full="../assets/uplight_03.jpg">                  <img src="../assets/uplight_03.jpg" alt="驱魔人式恐怖特写" class="w-full h-full object-cover">                
 </div>                
-<div class="gallery-thumb w-20 h-14 flex-shrink-0 overflow-hidden rounded-sm" style="border: 1px solid var(--color-border-strong); cursor: pointer; opacity: 0.7; transition: opacity 0.3s ease;" data-full="../assets/底光_04_黑色电影反派.jpg">                  <img loading="lazy" decoding="async" src="../assets/底光_04_黑色电影反派.jpg" alt="黑色电影反派" class="w-full h-full object-cover">                
+<div class="gallery-thumb w-20 h-14 flex-shrink-0 overflow-hidden rounded-sm" style="border: 1px solid var(--color-border-strong); cursor: pointer; opacity: 0.7; transition: opacity 0.3s ease;" data-full="../assets/uplight_04.jpg">                  <img src="../assets/uplight_04.jpg" alt="黑色电影反派" class="w-full h-full object-cover">                
 </div>                
-<div class="gallery-thumb w-20 h-14 flex-shrink-0 overflow-hidden rounded-sm" style="border: 1px solid var(--color-border-strong); cursor: pointer; opacity: 0.7; transition: opacity 0.3s ease;" data-full="../assets/底光_05_哥特奇幻创意人像.jpg">                  <img loading="lazy" decoding="async" src="../assets/底光_05_哥特奇幻创意人像.jpg" alt="哥特奇幻创意人像" class="w-full h-full object-cover">                
+<div class="gallery-thumb w-20 h-14 flex-shrink-0 overflow-hidden rounded-sm" style="border: 1px solid var(--color-border-strong); cursor: pointer; opacity: 0.7; transition: opacity 0.3s ease;" data-full="../assets/uplight_05.jpg">                  <img src="../assets/uplight_05.jpg" alt="哥特奇幻创意人像" class="w-full h-full object-cover">                
 </div>              
 </div>            
 </div>          
@@ -1217,16 +1340,16 @@ html.light {
 <section class="fade-in-section" style="background: var(--color-bg-secondary);">      
 <div class="max-w-7xl mx-auto">        
 <div class="grid grid-cols-1 lg:grid-cols-5 gap-0">          
-<div class="lg:col-span-3 relative overflow-hidden gallery-section" style="min-height: 480px;">            <img loading="lazy" decoding="async" src="../assets/百叶窗光_01_教父式办公室权力牢笼.jpg" alt="百叶窗光" class="main-img w-full h-full object-cover" style="filter: brightness(0.8) saturate(0.95); cursor: pointer;">            
+<div class="lg:col-span-3 relative overflow-hidden gallery-section" style="min-height: 480px;">            <img src="../assets/blinds_light_01.jpg" alt="百叶窗光" class="main-img w-full h-full object-cover" style="filter: brightness(0.8) saturate(0.95); cursor: pointer;">            
 <div class="absolute bottom-0 left-0 right-0 p-4" style="background: linear-gradient(to top, rgba(0,0,0,0.7), transparent);">              
 <div class="flex gap-2">                
-<div class="gallery-thumb w-20 h-14 flex-shrink-0 overflow-hidden rounded-sm" style="border: 1px solid var(--color-border-strong); cursor: pointer; opacity: 0.7; transition: opacity 0.3s ease;" data-full="../assets/百叶窗光_02_法式公寓慵懒清晨.jpg">                  <img loading="lazy" decoding="async" src="../assets/百叶窗光_02_法式公寓慵懒清晨.jpg" alt="法式公寓慵懒清晨" class="w-full h-full object-cover">                
+<div class="gallery-thumb w-20 h-14 flex-shrink-0 overflow-hidden rounded-sm" style="border: 1px solid var(--color-border-strong); cursor: pointer; opacity: 0.7; transition: opacity 0.3s ease;" data-full="../assets/blinds_light_02.jpg">                  <img src="../assets/blinds_light_02.jpg" alt="法式公寓慵懒清晨" class="w-full h-full object-cover">                
 </div>                
-<div class="gallery-thumb w-20 h-14 flex-shrink-0 overflow-hidden rounded-sm" style="border: 1px solid var(--color-border-strong); cursor: pointer; opacity: 0.7; transition: opacity 0.3s ease;" data-full="../assets/百叶窗光_03_医院病房晨光治愈.jpg">                  <img loading="lazy" decoding="async" src="../assets/百叶窗光_03_医院病房晨光治愈.jpg" alt="医院病房晨光治愈" class="w-full h-full object-cover">                
+<div class="gallery-thumb w-20 h-14 flex-shrink-0 overflow-hidden rounded-sm" style="border: 1px solid var(--color-border-strong); cursor: pointer; opacity: 0.7; transition: opacity 0.3s ease;" data-full="../assets/blinds_light_03.jpg">                  <img src="../assets/blinds_light_03.jpg" alt="医院病房晨光治愈" class="w-full h-full object-cover">                
 </div>                
-<div class="gallery-thumb w-20 h-14 flex-shrink-0 overflow-hidden rounded-sm" style="border: 1px solid var(--color-border-strong); cursor: pointer; opacity: 0.7; transition: opacity 0.3s ease;" data-full="../assets/百叶窗光_04_停车场天桥铁栅光影.jpg">                  <img loading="lazy" decoding="async" src="../assets/百叶窗光_04_停车场天桥铁栅光影.jpg" alt="停车场天桥铁栅光影" class="w-full h-full object-cover">                
+<div class="gallery-thumb w-20 h-14 flex-shrink-0 overflow-hidden rounded-sm" style="border: 1px solid var(--color-border-strong); cursor: pointer; opacity: 0.7; transition: opacity 0.3s ease;" data-full="../assets/blinds_light_04.jpg">                  <img src="../assets/blinds_light_04.jpg" alt="停车场天桥铁栅光影" class="w-full h-full object-cover">                
 </div>                
-<div class="gallery-thumb w-20 h-14 flex-shrink-0 overflow-hidden rounded-sm" style="border: 1px solid var(--color-border-strong); cursor: pointer; opacity: 0.7; transition: opacity 0.3s ease;" data-full="../assets/百叶窗光_05_烟雾中彩色百叶窗光柱.jpg">                  <img loading="lazy" decoding="async" src="../assets/百叶窗光_05_烟雾中彩色百叶窗光柱.jpg" alt="烟雾中彩色百叶窗光柱" class="w-full h-full object-cover">                
+<div class="gallery-thumb w-20 h-14 flex-shrink-0 overflow-hidden rounded-sm" style="border: 1px solid var(--color-border-strong); cursor: pointer; opacity: 0.7; transition: opacity 0.3s ease;" data-full="../assets/blinds_light_05.jpg">                  <img src="../assets/blinds_light_05.jpg" alt="烟雾中彩色百叶窗光柱" class="w-full h-full object-cover">                
 </div>              
 </div>            
 </div>          
@@ -1330,17 +1453,17 @@ html.light {
             </button>
 </div>          
 </div>          
-<div class="lg:col-span-3 relative overflow-hidden gallery-section" style="min-height: 480px;">            <img loading="lazy" decoding="async" src="../assets/胶片晕光_01_情书式雪景白色晕光.jpg" alt="胶片晕光" class="main-img w-full h-full object-cover" style="filter: brightness(0.8) saturate(1.05); cursor: pointer;">            
+<div class="lg:col-span-3 relative overflow-hidden gallery-section" style="min-height: 480px;">            <img src="../assets/film_halation_01.jpg" alt="胶片晕光" class="main-img w-full h-full object-cover" style="filter: brightness(0.8) saturate(1.05); cursor: pointer;">            
 <div class="absolute bottom-0 left-0 right-0 p-4" style="background: linear-gradient(to top, rgba(0,0,0,0.7), transparent);">              
 <div class="flex gap-2">                
-<div class="gallery-thumb w-20 h-14 flex-shrink-0 overflow-hidden rounded-sm" style="border: 1px solid var(--color-border-strong); cursor: pointer; opacity: 0.7; transition: opacity 0.3s ease;" data-full="../assets/胶片晕光_02_花样年华式金色路灯晕光.jpg">                  <img loading="lazy" decoding="async" src="../assets/胶片晕光_02_花样年华式金色路灯晕光.jpg" alt="花样年华式金色路灯晕光" class="w-full h-full object-cover">                
+<div class="gallery-thumb w-20 h-14 flex-shrink-0 overflow-hidden rounded-sm" style="border: 1px solid var(--color-border-strong); cursor: pointer; opacity: 0.7; transition: opacity 0.3s ease;" data-full="../assets/film_halation_02.jpg">                  <img src="../assets/film_halation_02.jpg" alt="花样年华式金色路灯晕光" class="w-full h-full object-cover">                
 </div>
                 
-<div class="gallery-thumb w-20 h-14 flex-shrink-0 overflow-hidden rounded-sm" style="border: 1px solid var(--color-border-strong); cursor: pointer; opacity: 0.7; transition: opacity 0.3s ease;" data-full="../assets/胶片晕光_03_水形物语式蓝绿晕光.jpg">                  <img loading="lazy" decoding="async" src="../assets/胶片晕光_03_水形物语式蓝绿晕光.jpg" alt="水形物语式蓝绿晕光" class="w-full h-full object-cover">                
+<div class="gallery-thumb w-20 h-14 flex-shrink-0 overflow-hidden rounded-sm" style="border: 1px solid var(--color-border-strong); cursor: pointer; opacity: 0.7; transition: opacity 0.3s ease;" data-full="../assets/film_halation_03.jpg">                  <img src="../assets/film_halation_03.jpg" alt="水形物语式蓝绿晕光" class="w-full h-full object-cover">                
 </div>                
-<div class="gallery-thumb w-20 h-14 flex-shrink-0 overflow-hidden rounded-sm" style="border: 1px solid var(--color-border-strong); cursor: pointer; opacity: 0.7; transition: opacity 0.3s ease;" data-full="../assets/胶片晕光_04_日系清新绿调晕光.jpg">                  <img loading="lazy" decoding="async" src="../assets/胶片晕光_04_日系清新绿调晕光.jpg" alt="日系清新绿调晕光" class="w-full h-full object-cover">                
+<div class="gallery-thumb w-20 h-14 flex-shrink-0 overflow-hidden rounded-sm" style="border: 1px solid var(--color-border-strong); cursor: pointer; opacity: 0.7; transition: opacity 0.3s ease;" data-full="../assets/film_halation_04.jpg">                  <img src="../assets/film_halation_04.jpg" alt="日系清新绿调晕光" class="w-full h-full object-cover">                
 </div>                
-<div class="gallery-thumb w-20 h-14 flex-shrink-0 overflow-hidden rounded-sm" style="border: 1px solid var(--color-border-strong); cursor: pointer; opacity: 0.7; transition: opacity 0.3s ease;" data-full="../assets/胶片晕光_05_紫粉迷幻霓虹晕光.jpg">                  <img loading="lazy" decoding="async" src="../assets/胶片晕光_05_紫粉迷幻霓虹晕光.jpg" alt="紫粉迷幻霓虹晕光" class="w-full h-full object-cover">                
+<div class="gallery-thumb w-20 h-14 flex-shrink-0 overflow-hidden rounded-sm" style="border: 1px solid var(--color-border-strong); cursor: pointer; opacity: 0.7; transition: opacity 0.3s ease;" data-full="../assets/film_halation_05.jpg">                  <img src="../assets/film_halation_05.jpg" alt="紫粉迷幻霓虹晕光" class="w-full h-full object-cover">                
 </div>              
 </div>            
 </div>          
@@ -1378,7 +1501,7 @@ html.light {
 <!-- Card 1: 新海诚风格 
 -->          
 <div class="style-card overflow-hidden" style="background: var(--color-bg-surface); border: 1px solid var(--color-border-default); border-radius: var(--radius-md); transition: box-shadow 0.4s ease;">            
-<div class="relative overflow-hidden" style="height: 280px;">              <img loading="lazy" decoding="async" src="../assets/新海诚风格_01_彗星划过星空.jpg" alt="新海诚风格" class="w-full h-full object-cover" style="filter: brightness(0.85) saturate(1.1);">              
+<div class="relative overflow-hidden" style="height: 280px;">              <img src="../assets/misc_06.jpg" alt="新海诚风格" class="w-full h-full object-cover" style="filter: brightness(0.85) saturate(1.1);">              
 <!-- Gold accent line at top 
 -->              
 <div class="absolute top-0 left-0 w-full h-px" style="background: linear-gradient(to right, transparent, var(--color-brand), transparent); opacity: 0.5;">
@@ -1408,7 +1531,7 @@ html.light {
 <!-- Card 2: 宫崎骏风格 
 -->          
 <div class="style-card overflow-hidden" style="background: var(--color-bg-surface); border: 1px solid var(--color-border-default); border-radius: var(--radius-md); transition: box-shadow 0.4s ease;">            
-<div class="relative overflow-hidden" style="height: 280px;">              <img loading="lazy" decoding="async" src="../assets/宫崎骏风格_02_油屋灯火夜景.jpg" alt="宫崎骏风格" class="w-full h-full object-cover" style="filter: brightness(0.85) saturate(1.05);">              
+<div class="relative overflow-hidden" style="height: 280px;">              <img src="../assets/misc_01.jpg" alt="宫崎骏风格" class="w-full h-full object-cover" style="filter: brightness(0.85) saturate(1.05);">              
 <div class="absolute top-0 left-0 w-full h-px" style="background: linear-gradient(to right, transparent, var(--color-brand), transparent); opacity: 0.5;">
 </div>            
 </div>            
@@ -1436,7 +1559,7 @@ html.light {
 <!-- Card 3: 皮克斯风格 
 -->          
 <div class="style-card overflow-hidden" style="background: var(--color-bg-surface); border: 1px solid var(--color-border-default); border-radius: var(--radius-md); transition: box-shadow 0.4s ease;">            
-<div class="relative overflow-hidden" style="height: 280px;">              <img loading="lazy" decoding="async" src="../assets/皮克斯风格_01_万寿菊桥寻梦环游记.jpg" alt="皮克斯风格" class="w-full h-full object-cover" style="filter: brightness(0.85) saturate(1.1);">              
+<div class="relative overflow-hidden" style="height: 280px;">              <img src="../assets/misc_08.jpg" alt="皮克斯风格" class="w-full h-full object-cover" style="filter: brightness(0.85) saturate(1.1);">              
 <div class="absolute top-0 left-0 w-full h-px" style="background: linear-gradient(to right, transparent, var(--color-brand), transparent); opacity: 0.5;">
 </div>            
 </div>            
@@ -1464,7 +1587,7 @@ html.light {
 <!-- Card 4: 赛博朋克风格 
 -->          
 <div class="style-card overflow-hidden" style="background: var(--color-bg-surface); border: 1px solid var(--color-border-default); border-radius: var(--radius-md); transition: box-shadow 0.4s ease;">            
-<div class="relative overflow-hidden" style="height: 280px;">              <img loading="lazy" decoding="async" src="../assets/赛博朋克风格_01_雨夜霓虹街道.jpg" alt="赛博朋克风格" class="w-full h-full object-cover" style="filter: brightness(0.8) saturate(1.2);">              
+<div class="relative overflow-hidden" style="height: 280px;">              <img src="../assets/misc_10.jpg" alt="赛博朋克风格" class="w-full h-full object-cover" style="filter: brightness(0.8) saturate(1.2);">              
 <div class="absolute top-0 left-0 w-full h-px" style="background: linear-gradient(to right, transparent, var(--color-brand), transparent); opacity: 0.5;">
 </div>            
 </div>            
@@ -1492,7 +1615,7 @@ html.light {
 <!-- Card 5: 港风复古风格 
 -->          
 <div class="style-card overflow-hidden" style="background: var(--color-bg-surface); border: 1px solid var(--color-border-default); border-radius: var(--radius-md); transition: box-shadow 0.4s ease;">            
-<div class="relative overflow-hidden" style="height: 280px;">              <img loading="lazy" decoding="async" src="../assets/港风复古_01_霓虹招牌雨夜街道.jpg" alt="港风复古风格" class="w-full h-full object-cover" style="filter: brightness(0.8) saturate(1.05);">              
+<div class="relative overflow-hidden" style="height: 280px;">              <img src="../assets/misc_07.jpg" alt="港风复古风格" class="w-full h-full object-cover" style="filter: brightness(0.8) saturate(1.05);">              
 <div class="absolute top-0 left-0 w-full h-px" style="background: linear-gradient(to right, transparent, var(--color-brand), transparent); opacity: 0.5;">
 </div>            
 </div>            
@@ -1520,7 +1643,7 @@ html.light {
 <!-- Card 6: 废土风格 
 -->          
 <div class="style-card overflow-hidden" style="background: var(--color-bg-surface); border: 1px solid var(--color-border-default); border-radius: var(--radius-md); transition: box-shadow 0.4s ease;">            
-<div class="relative overflow-hidden" style="height: 280px;">              <img loading="lazy" decoding="async" src="../assets/废土风格_01_荒漠废墟城市全景.jpg" alt="废土风格" class="w-full h-full object-cover" style="filter: brightness(0.8) saturate(0.9);">              
+<div class="relative overflow-hidden" style="height: 280px;">              <img src="../assets/misc_05.jpg" alt="废土风格" class="w-full h-full object-cover" style="filter: brightness(0.8) saturate(0.9);">              
 <div class="absolute top-0 left-0 w-full h-px" style="background: linear-gradient(to right, transparent, var(--color-brand), transparent); opacity: 0.5;">
 </div>            
 </div>            
@@ -1548,7 +1671,7 @@ html.light {
 <!-- Card 7: 蒸汽朋克风格 
 -->          
 <div class="style-card overflow-hidden" style="background: var(--color-bg-surface); border: 1px solid var(--color-border-default); border-radius: var(--radius-md); transition: box-shadow 0.4s ease;">            
-<div class="relative overflow-hidden" style="height: 280px;">              <img loading="lazy" decoding="async" src="../assets/蒸汽朋克风格_01_巨型飞艇掠过机械城市.jpg" alt="蒸汽朋克风格" class="w-full h-full object-cover" style="filter: brightness(0.85) saturate(1.05);">              
+<div class="relative overflow-hidden" style="height: 280px;">              <img src="../assets/misc_09.jpg" alt="蒸汽朋克风格" class="w-full h-full object-cover" style="filter: brightness(0.85) saturate(1.05);">              
 <div class="absolute top-0 left-0 w-full h-px" style="background: linear-gradient(to right, transparent, var(--color-brand), transparent); opacity: 0.5;">
 </div>            
 </div>            
@@ -1576,7 +1699,7 @@ html.light {
 <!-- Card 8: CG风格 
 -->          
 <div class="style-card overflow-hidden" style="background: var(--color-bg-surface); border: 1px solid var(--color-border-default); border-radius: var(--radius-md); transition: box-shadow 0.4s ease;">            
-<div class="relative overflow-hidden" style="height: 280px;">              <img loading="lazy" decoding="async" src="../assets/CG风格_01_机甲战士能量护盾.jpg" alt="CG风格" class="w-full h-full object-cover" style="filter: brightness(0.85) saturate(1.1);">              
+<div class="relative overflow-hidden" style="height: 280px;">              <img src="../assets/cg_style_01.jpg" alt="CG风格" class="w-full h-full object-cover" style="filter: brightness(0.85) saturate(1.1);">              
 <div class="absolute top-0 left-0 w-full h-px" style="background: linear-gradient(to right, transparent, var(--color-brand), transparent); opacity: 0.5;">
 </div>            
 </div>            
@@ -1663,7 +1786,115 @@ html.light {
 </a>        
 </div>      
 </div>    
-</section>  
+</section>
+
+<!-- ==================== 曝光类型 ==================== -->
+<section class="fade-in-section visible" style="background: var(--color-bg-secondary); padding: 80px 0;">
+  <div class="max-w-7xl mx-auto px-6 lg:px-8">
+    <div class="sub-label" style="font-size: 12px; color: var(--color-brand); text-transform: uppercase; letter-spacing: .08em; margin-bottom: 10px; font-weight: 600;">曝光类型 · 明暗即情绪</div>
+    <h2 style="font-family: var(--font-display); font-size: clamp(26px, 3.5vw, 40px); font-weight: 500; margin: 0 0 40px 0;">明暗不是结果，是叙事选择</h2>
+    <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 16px;">
+      <div class="img-card" style="background: var(--color-bg-primary); border: 1px solid var(--color-border-default); border-radius: 8px; overflow: hidden; cursor: pointer;" onclick="openLB('../assets/exp_normal.jpg','正常曝光 Normal Exposure')"><img style="width:100%;aspect-ratio:16/9;object-fit:cover;display:block;" src="../assets/exp_normal.jpg" alt="正常曝光" loading="lazy"><div style="padding: 14px 16px;"><div style="font-family: var(--font-body); font-weight: 600; font-size: 14px; margin-bottom: 4px;">正常曝光</div><div style="font-size: 12px; color: var(--color-text-secondary); line-height: 1.5;">亮度自然可读——写实、平衡、日常。</div></div></div>
+      <div class="img-card" style="background: var(--color-bg-primary); border: 1px solid var(--color-border-default); border-radius: 8px; overflow: hidden; cursor: pointer;" onclick="openLB('../assets/exp_under.jpg','欠曝 Underexposure')"><img style="width:100%;aspect-ratio:16/9;object-fit:cover;display:block;" src="../assets/exp_under.jpg" alt="欠曝" loading="lazy"><div style="padding: 14px 16px;"><div style="font-family: var(--font-body); font-weight: 600; font-size: 14px; margin-bottom: 4px;">欠曝</div><div style="font-size: 12px; color: var(--color-text-secondary); line-height: 1.5;">画面偏暗——压抑、悬疑、夜景。</div></div></div>
+      <div class="img-card" style="background: var(--color-bg-primary); border: 1px solid var(--color-border-default); border-radius: 8px; overflow: hidden; cursor: pointer;" onclick="openLB('../assets/exp_over.jpg','过曝 Overexposure')"><img style="width:100%;aspect-ratio:16/9;object-fit:cover;display:block;" src="../assets/exp_over.jpg" alt="过曝" loading="lazy"><div style="padding: 14px 16px;"><div style="font-family: var(--font-body); font-weight: 600; font-size: 14px; margin-bottom: 4px;">过曝</div><div style="font-size: 12px; color: var(--color-text-secondary); line-height: 1.5;">画面偏亮——梦境、回忆、神圣。</div></div></div>
+      <div class="img-card" style="background: var(--color-bg-primary); border: 1px solid var(--color-border-default); border-radius: 8px; overflow: hidden; cursor: pointer;" onclick="openLB('../assets/exp_highcontrast.jpg','高反差 High Contrast')"><img style="width:100%;aspect-ratio:16/9;object-fit:cover;display:block;" src="../assets/exp_highcontrast.jpg" alt="高反差" loading="lazy"><div style="padding: 14px 16px;"><div style="font-family: var(--font-body); font-weight: 600; font-size: 14px; margin-bottom: 4px;">高反差</div><div style="font-size: 12px; color: var(--color-text-secondary); line-height: 1.5;">明暗差异强——黑色电影、硬朗、紧张。</div></div></div>
+      <div class="img-card" style="background: var(--color-bg-primary); border: 1px solid var(--color-border-default); border-radius: 8px; overflow: hidden; cursor: pointer;" onclick="openLB('../assets/exp_lowcontrast.jpg','低反差 Low Contrast')"><img style="width:100%;aspect-ratio:16/9;object-fit:cover;display:block;" src="../assets/exp_lowcontrast.jpg" alt="低反差" loading="lazy"><div style="padding: 14px 16px;"><div style="font-family: var(--font-body); font-weight: 600; font-size: 14px; margin-bottom: 4px;">低反差</div><div style="font-size: 12px; color: var(--color-text-secondary); line-height: 1.5;">灰阶丰富——自然、温柔、低饱和。</div></div></div>
+      <div class="img-card" style="background: var(--color-bg-primary); border: 1px solid var(--color-border-default); border-radius: 8px; overflow: hidden; cursor: pointer;" onclick="openLB('../assets/exp_silhouette.jpg','剪影曝光 Silhouette')"><img style="width:100%;aspect-ratio:16/9;object-fit:cover;display:block;" src="../assets/exp_silhouette.jpg" alt="剪影曝光" loading="lazy"><div style="padding: 14px 16px;"><div style="font-family: var(--font-body); font-weight: 600; font-size: 14px; margin-bottom: 4px;">剪影曝光</div><div style="font-size: 12px; color: var(--color-text-secondary); line-height: 1.5;">前景成黑色轮廓——神秘、史诗、孤独。</div></div></div>
+      <div class="img-card" style="background: var(--color-bg-primary); border: 1px solid var(--color-border-default); border-radius: 8px; overflow: hidden; cursor: pointer;" onclick="openLB('../assets/exp_bloom.jpg','高光溢出 Bloom')"><img style="width:100%;aspect-ratio:16/9;object-fit:cover;display:block;" src="../assets/exp_bloom.jpg" alt="高光溢出" loading="lazy"><div style="padding: 14px 16px;"><div style="font-family: var(--font-body); font-weight: 600; font-size: 14px; margin-bottom: 4px;">高光溢出 Bloom</div><div style="font-size: 12px; color: var(--color-text-secondary); line-height: 1.5;">高光向外扩散——发光、梦幻、数码感。</div></div></div>
+      <div class="img-card" style="background: var(--color-bg-primary); border: 1px solid var(--color-border-default); border-radius: 8px; overflow: hidden; cursor: pointer;" onclick="openLB('../assets/exp_long.jpg','长曝光感 Long-exposure Look')"><img style="width:100%;aspect-ratio:16/9;object-fit:cover;display:block;" src="../assets/exp_long.jpg" alt="长曝光感" loading="lazy"><div style="padding: 14px 16px;"><div style="font-family: var(--font-body); font-weight: 600; font-size: 14px; margin-bottom: 4px;">长曝光感</div><div style="font-size: 12px; color: var(--color-text-secondary); line-height: 1.5;">光轨拖影——都市速度、时间流逝。</div></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== 畸变 ==================== -->
+<section class="fade-in-section visible" style="background: var(--color-bg-primary); padding: 80px 0;">
+  <div class="max-w-7xl mx-auto px-6 lg:px-8">
+    <div class="sub-label" style="font-size: 12px; color: var(--color-brand); text-transform: uppercase; letter-spacing: .08em; margin-bottom: 10px; font-weight: 600;">畸变 Distortion · 现实的弯曲</div>
+    <h2 style="font-family: var(--font-display); font-size: clamp(26px, 3.5vw, 40px); font-weight: 500; margin: 0 0 40px 0;">光学偏差成为语言</h2>
+    <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 16px;">
+      <div class="img-card" style="background: var(--color-bg-secondary); border: 1px solid var(--color-border-default); border-radius: 8px; overflow: hidden; cursor: pointer;" onclick="openLB('../assets/dist_wide.jpg','广角透视变形')"><img style="width:100%;aspect-ratio:16/9;object-fit:cover;display:block;" src="../assets/dist_wide.jpg" alt="广角透视变形" loading="lazy"><div style="padding: 14px 16px;"><div style="font-family: var(--font-body); font-weight: 600; font-size: 14px; margin-bottom: 4px;">广角透视变形</div><div style="font-size: 12px; color: var(--color-text-secondary); line-height: 1.5;">近物放大远处拉远——夸张空间、冲击感。</div></div></div>
+      <div class="img-card" style="background: var(--color-bg-secondary); border: 1px solid var(--color-border-default); border-radius: 8px; overflow: hidden; cursor: pointer;" onclick="openLB('../assets/dist_tele.jpg','长焦空间压缩')"><img style="width:100%;aspect-ratio:16/9;object-fit:cover;display:block;" src="../assets/dist_tele.jpg" alt="长焦空间压缩" loading="lazy"><div style="padding: 14px 16px;"><div style="font-family: var(--font-body); font-weight: 600; font-size: 14px; margin-bottom: 4px;">长焦空间压缩</div><div style="font-size: 12px; color: var(--color-text-secondary); line-height: 1.5;">前后景被压缩——拥挤、压迫、窥视。</div></div></div>
+      <div class="img-card" style="background: var(--color-bg-secondary); border: 1px solid var(--color-border-default); border-radius: 8px; overflow: hidden; cursor: pointer;" onclick="openLB('../assets/dist_barrel.jpg','桶形畸变')"><img style="width:100%;aspect-ratio:16/9;object-fit:cover;display:block;" src="../assets/dist_barrel.jpg" alt="桶形畸变" loading="lazy"><div style="padding: 14px 16px;"><div style="font-family: var(--font-body); font-weight: 600; font-size: 14px; margin-bottom: 4px;">桶形畸变</div><div style="font-size: 12px; color: var(--color-text-secondary); line-height: 1.5;">直线向外鼓起——广角/鱼眼/运动相机。</div></div></div>
+      <div class="img-card" style="background: var(--color-bg-secondary); border: 1px solid var(--color-border-default); border-radius: 8px; overflow: hidden; cursor: pointer;" onclick="openLB('../assets/dist_pincushion.jpg','枕形畸变')"><img style="width:100%;aspect-ratio:16/9;object-fit:cover;display:block;" src="../assets/dist_pincushion.jpg" alt="枕形畸变" loading="lazy"><div style="padding: 14px 16px;"><div style="font-family: var(--font-body); font-weight: 600; font-size: 14px; margin-bottom: 4px;">枕形畸变</div><div style="font-size: 12px; color: var(--color-text-secondary); line-height: 1.5;">直线向中心收缩——部分长焦边缘。</div></div></div>
+      <div class="img-card" style="background: var(--color-bg-secondary); border: 1px solid var(--color-border-default); border-radius: 8px; overflow: hidden; cursor: pointer;" onclick="openLB('../assets/dist_glitch.jpg','故障畸变')"><img style="width:100%;aspect-ratio:16/9;object-fit:cover;display:block;" src="../assets/dist_glitch.jpg" alt="故障畸变" loading="lazy"><div style="padding: 14px 16px;"><div style="font-family: var(--font-body); font-weight: 600; font-size: 14px; margin-bottom: 4px;">故障畸变</div><div style="font-size: 12px; color: var(--color-text-secondary); line-height: 1.5;">数字撕裂错位——赛博、惊悚、记忆崩坏。</div></div></div>
+      <div class="img-card" style="background: var(--color-bg-secondary); border: 1px solid var(--color-border-default); border-radius: 8px; overflow: hidden; cursor: pointer;" onclick="openLB('../assets/dist_heat.jpg','热浪畸变')"><img style="width:100%;aspect-ratio:16/9;object-fit:cover;display:block;" src="../assets/dist_heat.jpg" alt="热浪畸变" loading="lazy"><div style="padding: 14px 16px;"><div style="font-family: var(--font-body); font-weight: 600; font-size: 14px; margin-bottom: 4px;">热浪畸变</div><div style="font-size: 12px; color: var(--color-text-secondary); line-height: 1.5;">高温空气波动——沙漠、火场、公路。</div></div></div>
+      <div class="img-card" style="background: var(--color-bg-secondary); border: 1px solid var(--color-border-default); border-radius: 8px; overflow: hidden; cursor: pointer;" onclick="openLB('../assets/dist_underwater.jpg','水下折射畸变')"><img style="width:100%;aspect-ratio:16/9;object-fit:cover;display:block;" src="../assets/dist_underwater.jpg" alt="水下折射畸变" loading="lazy"><div style="padding: 14px 16px;"><div style="font-family: var(--font-body); font-weight: 600; font-size: 14px; margin-bottom: 4px;">水下折射畸变</div><div style="font-size: 12px; color: var(--color-text-secondary); line-height: 1.5;">水体折射——水下、梦境、窒息。</div></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== 光圈 ==================== -->
+<section class="fade-in-section visible" style="background: var(--color-bg-secondary); padding: 80px 0;">
+  <div class="max-w-7xl mx-auto px-6 lg:px-8">
+    <div class="sub-label" style="font-size: 12px; color: var(--color-brand); text-transform: uppercase; letter-spacing: .08em; margin-bottom: 10px; font-weight: 600;">光圈档位 · f 值越小光圈越大</div>
+    <h2 style="font-family: var(--font-display); font-size: clamp(26px, 3.5vw, 40px); font-weight: 500; margin: 0 0 40px 0;">光圈决定清晰范围</h2>
+    <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 16px;">
+      <div class="img-card" style="background: var(--color-bg-primary); border: 1px solid var(--color-border-default); border-radius: 8px; overflow: hidden; cursor: pointer;" onclick="openLB('../assets/aperture_extreme_wide.jpg','超大光圈 f/0.95-f/1.4')"><img style="width:100%;aspect-ratio:16/9;object-fit:cover;display:block;" src="../assets/aperture_extreme_wide.jpg" alt="超大光圈" loading="lazy"><div style="padding: 14px 16px;"><div style="font-family: var(--font-body); font-weight: 600; font-size: 14px; margin-bottom: 4px;">超大光圈</div><div style="font-size: 12px; color: var(--color-text-secondary); line-height: 1.5;">f/0.95–1.4 · 极浅景深，梦幻人像。</div></div></div>
+      <div class="img-card" style="background: var(--color-bg-primary); border: 1px solid var(--color-border-default); border-radius: 8px; overflow: hidden; cursor: pointer;" onclick="openLB('../assets/aperture_wide.jpg','大光圈 f/1.8-f/2.8')"><img style="width:100%;aspect-ratio:16/9;object-fit:cover;display:block;" src="../assets/aperture_wide.jpg" alt="大光圈" loading="lazy"><div style="padding: 14px 16px;"><div style="font-family: var(--font-body); font-weight: 600; font-size: 14px; margin-bottom: 4px;">大光圈</div><div style="font-size: 12px; color: var(--color-text-secondary); line-height: 1.5;">f/1.8–2.8 · 浅景深，人像夜景。</div></div></div>
+      <div class="img-card" style="background: var(--color-bg-primary); border: 1px solid var(--color-border-default); border-radius: 8px; overflow: hidden; cursor: pointer;" onclick="openLB('../assets/aperture_moderate.jpg','中等光圈 f/4-f/5.6')"><img style="width:100%;aspect-ratio:16/9;object-fit:cover;display:block;" src="../assets/aperture_moderate.jpg" alt="中等光圈" loading="lazy"><div style="padding: 14px 16px;"><div style="font-family: var(--font-body); font-weight: 600; font-size: 14px; margin-bottom: 4px;">中等光圈</div><div style="font-size: 12px; color: var(--color-text-secondary); line-height: 1.5;">f/4–5.6 · 平衡，日常叙事。</div></div></div>
+      <div class="img-card" style="background: var(--color-bg-primary); border: 1px solid var(--color-border-default); border-radius: 8px; overflow: hidden; cursor: pointer;" onclick="openLB('../assets/aperture_small.jpg','小光圈 f/8-f/11')"><img style="width:100%;aspect-ratio:16/9;object-fit:cover;display:block;" src="../assets/aperture_small.jpg" alt="小光圈" loading="lazy"><div style="padding: 14px 16px;"><div style="font-family: var(--font-body); font-weight: 600; font-size: 14px; margin-bottom: 4px;">小光圈</div><div style="font-size: 12px; color: var(--color-text-secondary); line-height: 1.5;">f/8–11 · 深景深，群像建筑。</div></div></div>
+      <div class="img-card" style="background: var(--color-bg-primary); border: 1px solid var(--color-border-default); border-radius: 8px; overflow: hidden; cursor: pointer;" onclick="openLB('../assets/aperture_extreme_small.jpg','极小光圈 f/16-f/22')"><img style="width:100%;aspect-ratio:16/9;object-fit:cover;display:block;" src="../assets/aperture_extreme_small.jpg" alt="极小光圈" loading="lazy"><div style="padding: 14px 16px;"><div style="font-family: var(--font-body); font-weight: 600; font-size: 14px; margin-bottom: 4px;">极小光圈</div><div style="font-size: 12px; color: var(--color-text-secondary); line-height: 1.5;">f/16–22 · 极深景深，星芒效果。</div></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== ISO + 快门 ==================== -->
+<section class="fade-in-section visible" style="background: var(--color-bg-primary); padding: 80px 0;">
+  <div class="max-w-7xl mx-auto px-6 lg:px-8">
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 60px;">
+      <div>
+        <div class="sub-label" style="font-size: 12px; color: var(--color-brand); text-transform: uppercase; letter-spacing: .08em; margin-bottom: 10px; font-weight: 600;">ISO 感光度 · 越高噪点越多</div>
+        <h3 style="font-family: var(--font-display); font-size: clamp(20px, 2.5vw, 28px); font-weight: 500; margin: 0 0 24px 0;">感光度决定画质纯净</h3>
+        <div style="display: grid; grid-template-columns: 1fr; gap: 12px;">
+          <div onclick="openLB('../assets/iso_low.jpg','低感光度 ISO ≤ 200')" style="display: flex; gap: 14px; align-items: center; cursor: pointer; padding: 14px; border: 1px solid var(--color-border-default); border-radius: 8px; background: var(--color-bg-secondary);"><img style="width:100px;height:60px;object-fit:cover;border-radius:4px;flex-shrink:0;" src="../assets/iso_low.jpg" alt="低感光度" loading="lazy"><div><div style="font-weight: 600; font-size: 13px; margin-bottom: 2px;">低感光度 ≤ ISO 200</div><div style="font-size: 12px; color: var(--color-text-secondary);">最纯净——影棚、风光、商业级。</div></div></div>
+          <div onclick="openLB('../assets/iso_mid.jpg','中感光度 ISO 200-800')" style="display: flex; gap: 14px; align-items: center; cursor: pointer; padding: 14px; border: 1px solid var(--color-border-default); border-radius: 8px; background: var(--color-bg-secondary);"><img style="width:100px;height:60px;object-fit:cover;border-radius:4px;flex-shrink:0;" src="../assets/iso_mid.jpg" alt="中感光度" loading="lazy"><div><div style="font-weight: 600; font-size: 13px; margin-bottom: 2px;">中感光度 ISO 200–800</div><div style="font-size: 12px; color: var(--color-text-secondary);">均衡——日常拍摄、电影叙事。</div></div></div>
+          <div onclick="openLB('../assets/iso_high.jpg','高感光度 ISO 1600+')" style="display: flex; gap: 14px; align-items: center; cursor: pointer; padding: 14px; border: 1px solid var(--color-border-default); border-radius: 8px; background: var(--color-bg-secondary);"><img style="width:100px;height:60px;object-fit:cover;border-radius:4px;flex-shrink:0;" src="../assets/iso_high.jpg" alt="高感光度" loading="lazy"><div><div style="font-weight: 600; font-size: 13px; margin-bottom: 2px;">高感光度 ISO 1600+</div><div style="font-size: 12px; color: var(--color-text-secondary);">可见噪点——弱光、情绪、氛围。</div></div></div>
+        </div>
+      </div>
+      <div>
+        <div class="sub-label" style="font-size: 12px; color: var(--color-brand); text-transform: uppercase; letter-spacing: .08em; margin-bottom: 10px; font-weight: 600;">快门速度 · 决定运动表现</div>
+        <h3 style="font-family: var(--font-display); font-size: clamp(20px, 2.5vw, 28px); font-weight: 500; margin: 0 0 24px 0;">快门决定时间的形态</h3>
+        <div style="display: grid; grid-template-columns: 1fr; gap: 12px;">
+          <div onclick="openLB('../assets/shutter_slow.jpg','低速快门 ≤ 1/30s')" style="display: flex; gap: 14px; align-items: center; cursor: pointer; padding: 14px; border: 1px solid var(--color-border-default); border-radius: 8px; background: var(--color-bg-secondary);"><img style="width:100px;height:60px;object-fit:cover;border-radius:4px;flex-shrink:0;" src="../assets/shutter_slow.jpg" alt="低速快门" loading="lazy"><div><div style="font-weight: 600; font-size: 13px; margin-bottom: 2px;">低速快门 ≤ 1/30s</div><div style="font-size: 12px; color: var(--color-text-secondary);">运动成轨迹——光轨、水流丝绸化。</div></div></div>
+          <div onclick="openLB('../assets/shutter_mid.jpg','中速快门 1/30-1/250s')" style="display: flex; gap: 14px; align-items: center; cursor: pointer; padding: 14px; border: 1px solid var(--color-border-default); border-radius: 8px; background: var(--color-bg-secondary);"><img style="width:100px;height:60px;object-fit:cover;border-radius:4px;flex-shrink:0;" src="../assets/shutter_mid.jpg" alt="中速快门" loading="lazy"><div><div style="font-weight: 600; font-size: 13px; margin-bottom: 2px;">中速快门 1/30–1/250s</div><div style="font-size: 12px; color: var(--color-text-secondary);">自然动感——180° 规则，电影感。</div></div></div>
+          <div onclick="openLB('../assets/shutter_fast.jpg','高速快门 ≥ 1/500s')" style="display: flex; gap: 14px; align-items: center; cursor: pointer; padding: 14px; border: 1px solid var(--color-border-default); border-radius: 8px; background: var(--color-bg-secondary);"><img style="width:100px;height:60px;object-fit:cover;border-radius:4px;flex-shrink:0;" src="../assets/shutter_fast.jpg" alt="高速快门" loading="lazy"><div><div style="font-weight: 600; font-size: 13px; margin-bottom: 2px;">高速快门 ≥ 1/500s</div><div style="font-size: 12px; color: var(--color-text-secondary);">凝固瞬间——运动、水滴、爆炸。</div></div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== 其他成像特征 ==================== -->
+<section class="fade-in-section visible" style="background: var(--color-bg-secondary); padding: 80px 0;">
+  <div class="max-w-7xl mx-auto px-6 lg:px-8">
+    <div class="sub-label" style="font-size: 12px; color: var(--color-brand); text-transform: uppercase; letter-spacing: .08em; margin-bottom: 10px; font-weight: 600;">其他成像特征 · 缺陷即质感</div>
+    <h2 style="font-family: var(--font-display); font-size: clamp(26px, 3.5vw, 40px); font-weight: 500; margin: 0 0 12px 0;">曾经的"拍摄事故"成为风格语言</h2>
+    <p style="font-family: var(--font-body); font-size: 15px; color: var(--color-text-secondary); line-height: 1.7; margin: 0 0 40px 0; max-width: 640px;">胶片颗粒、眩光、色差、果冻效应……这些被数字时代追求消除的"瑕疵"，今天是 Instagram 滤镜、电影美学和 AI Prompt 里主动追求的质感词汇。</p>
+    <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 14px;">
+      <div onclick="openLB('../assets/img_bokeh2.png','散景 Bokeh')" style="background: var(--color-bg-primary); border: 1px solid var(--color-border-default); border-radius: 8px; overflow: hidden; cursor: pointer;"><img style="width:100%;aspect-ratio:16/9;object-fit:cover;display:block;" src="../assets/img_bokeh2.png" alt="散景" loading="lazy"><div style="padding: 12px 14px;"><div style="font-weight: 600; font-size: 13px; margin-bottom: 2px;">散景 Bokeh</div><div style="font-size: 11px; color: var(--color-text-secondary); line-height: 1.5;">焦外光斑形态——浅景深标志。</div></div></div>
+      <div onclick="openLB('../assets/img_flare.png','眩光 Lens Flare')" style="background: var(--color-bg-primary); border: 1px solid var(--color-border-default); border-radius: 8px; overflow: hidden; cursor: pointer;"><img style="width:100%;aspect-ratio:16/9;object-fit:cover;display:block;" src="../assets/img_flare.png" alt="眩光" loading="lazy"><div style="padding: 12px 14px;"><div style="font-weight: 600; font-size: 13px; margin-bottom: 2px;">眩光 Lens Flare</div><div style="font-size: 11px; color: var(--color-text-secondary); line-height: 1.5;">强光直入镜头——逆光、科幻。</div></div></div>
+      <div onclick="openLB('../assets/img_glitch.png','色差 Chromatic Aberration')" style="background: var(--color-bg-primary); border: 1px solid var(--color-border-default); border-radius: 8px; overflow: hidden; cursor: pointer;"><img style="width:100%;aspect-ratio:16/9;object-fit:cover;display:block;" src="../assets/img_glitch.png" alt="色差" loading="lazy"><div style="padding: 12px 14px;"><div style="font-weight: 600; font-size: 13px; margin-bottom: 2px;">色差</div><div style="font-size: 11px; color: var(--color-text-secondary); line-height: 1.5;">RGB 错位——复古、故障、迷幻。</div></div></div>
+      <div onclick="openLB('../assets/img_motionblur.png','运动模糊 Motion Blur')" style="background: var(--color-bg-primary); border: 1px solid var(--color-border-default); border-radius: 8px; overflow: hidden; cursor: pointer;"><img style="width:100%;aspect-ratio:16/9;object-fit:cover;display:block;" src="../assets/img_motionblur.png" alt="运动模糊" loading="lazy"><div style="padding: 12px 14px;"><div style="font-weight: 600; font-size: 13px; margin-bottom: 2px;">运动模糊</div><div style="font-size: 11px; color: var(--color-text-secondary); line-height: 1.5;">快门记录运动轨迹——完全没有反而生硬。</div></div></div>
+      <div onclick="openLB('../assets/img_barrel.png','暗角 Vignetting')" style="background: var(--color-bg-primary); border: 1px solid var(--color-border-default); border-radius: 8px; overflow: hidden; cursor: pointer;"><img style="width:100%;aspect-ratio:16/9;object-fit:cover;display:block;" src="../assets/img_barrel.png" alt="暗角" loading="lazy"><div style="padding: 12px 14px;"><div style="font-weight: 600; font-size: 13px; margin-bottom: 2px;">暗角</div><div style="font-size: 11px; color: var(--color-text-secondary); line-height: 1.5;">边缘比中心暗——视线引导、复古。</div></div></div>
+      <div onclick="openLB('../assets/img_filmgrain.png','胶片颗粒 Film Grain')" style="background: var(--color-bg-primary); border: 1px solid var(--color-border-default); border-radius: 8px; overflow: hidden; cursor: pointer;"><img style="width:100%;aspect-ratio:16/9;object-fit:cover;display:block;" src="../assets/img_filmgrain.png" alt="胶片颗粒" loading="lazy"><div style="padding: 12px 14px;"><div style="font-weight: 600; font-size: 13px; margin-bottom: 2px;">胶片颗粒</div><div style="font-size: 11px; color: var(--color-text-secondary); line-height: 1.5;">有机细密颗粒——复古、90 年代质感。</div></div></div>
+      <div onclick="openLB('../assets/fx_digital_noise.jpg','数字噪点 Digital Noise')" style="background: var(--color-bg-primary); border: 1px solid var(--color-border-default); border-radius: 8px; overflow: hidden; cursor: pointer;"><img style="width:100%;aspect-ratio:16/9;object-fit:cover;display:block;" src="../assets/fx_digital_noise.jpg" alt="数字噪点" loading="lazy"><div style="padding: 12px 14px;"><div style="font-weight: 600; font-size: 13px; margin-bottom: 2px;">数字噪点</div><div style="font-size: 11px; color: var(--color-text-secondary); line-height: 1.5;">电子杂点——监控、低质画面。</div></div></div>
+      <div onclick="openLB('../assets/fx_rolling_shutter.jpg','果冻效应 Rolling Shutter')" style="background: var(--color-bg-primary); border: 1px solid var(--color-border-default); border-radius: 8px; overflow: hidden; cursor: pointer;"><img style="width:100%;aspect-ratio:16/9;object-fit:cover;display:block;" src="../assets/fx_rolling_shutter.jpg" alt="果冻效应" loading="lazy"><div style="padding: 12px 14px;"><div style="font-weight: 600; font-size: 13px; margin-bottom: 2px;">果冻效应</div><div style="font-size: 11px; color: var(--color-text-secondary); line-height: 1.5;">卷帘快门变形——手机/无人机感。</div></div></div>
+      <div onclick="openLB('../assets/fx_scanlines.jpg','扫描线 Scan Lines')" style="background: var(--color-bg-primary); border: 1px solid var(--color-border-default); border-radius: 8px; overflow: hidden; cursor: pointer;"><img style="width:100%;aspect-ratio:16/9;object-fit:cover;display:block;" src="../assets/fx_scanlines.jpg" alt="扫描线" loading="lazy"><div style="padding: 12px 14px;"><div style="font-weight: 600; font-size: 13px; margin-bottom: 2px;">扫描线</div><div style="font-size: 11px; color: var(--color-text-secondary); line-height: 1.5;">CRT 横线——复古电视、赛博朋克。</div></div></div>
+      <div onclick="openLB('../assets/fx_lens_water.jpg','镜头污渍/雨滴')" style="background: var(--color-bg-primary); border: 1px solid var(--color-border-default); border-radius: 8px; overflow: hidden; cursor: pointer;"><img style="width:100%;aspect-ratio:16/9;object-fit:cover;display:block;" src="../assets/fx_lens_water.jpg" alt="镜头污渍" loading="lazy"><div style="padding: 12px 14px;"><div style="font-weight: 600; font-size: 13px; margin-bottom: 2px;">镜头污渍 / 雨滴</div><div style="font-size: 11px; color: var(--color-text-secondary); line-height: 1.5;">水珠折射——手持感、雨夜临场感。</div></div></div>
+      <div onclick="openLB('../assets/fx_halation.jpg','高光辉散 Halation')" style="background: var(--color-bg-primary); border: 1px solid var(--color-border-default); border-radius: 8px; overflow: hidden; cursor: pointer;"><img style="width:100%;aspect-ratio:16/9;object-fit:cover;display:block;" src="../assets/fx_halation.jpg" alt="高光辉散" loading="lazy"><div style="padding: 12px 14px;"><div style="font-weight: 600; font-size: 13px; margin-bottom: 2px;">高光辉散 Halation</div><div style="font-size: 11px; color: var(--color-text-secondary); line-height: 1.5;">亮部边缘自然发光——胶片独有。</div></div></div>
+      <div onclick="openLB('../assets/fx_flicker.jpg','画面闪烁 Flicker')" style="background: var(--color-bg-primary); border: 1px solid var(--color-border-default); border-radius: 8px; overflow: hidden; cursor: pointer;"><img style="width:100%;aspect-ratio:16/9;object-fit:cover;display:block;" src="../assets/fx_flicker.jpg" alt="画面闪烁" loading="lazy"><div style="padding: 12px 14px;"><div style="font-weight: 600; font-size: 13px; margin-bottom: 2px;">画面闪烁 Flicker</div><div style="font-size: 11px; color: var(--color-text-secondary); line-height: 1.5;">亮度闪动——不安、惊悚、年代感。</div></div></div>
+      <div onclick="openLB('../assets/fx_radial_blur.jpg','径向模糊 Radial Blur')" style="background: var(--color-bg-primary); border: 1px solid var(--color-border-default); border-radius: 8px; overflow: hidden; cursor: pointer;"><img style="width:100%;aspect-ratio:16/9;object-fit:cover;display:block;" src="../assets/fx_radial_blur.jpg" alt="径向模糊" loading="lazy"><div style="padding: 12px 14px;"><div style="font-weight: 600; font-size: 13px; margin-bottom: 2px;">径向模糊</div><div style="font-size: 11px; color: var(--color-text-secondary); line-height: 1.5;">放射状爆发——冲击、眩晕、能量。</div></div></div>
+      <div onclick="openLB('../assets/fx_shutter_smear.jpg','快门拖影 Shutter Smear')" style="background: var(--color-bg-primary); border: 1px solid var(--color-border-default); border-radius: 8px; overflow: hidden; cursor: pointer;"><img style="width:100%;aspect-ratio:16/9;object-fit:cover;display:block;" src="../assets/fx_shutter_smear.jpg" alt="快门拖影" loading="lazy"><div style="padding: 12px 14px;"><div style="font-weight: 600; font-size: 13px; margin-bottom: 2px;">快门拖影</div><div style="font-size: 11px; color: var(--color-text-secondary); line-height: 1.5;">连续渐变残影——迷幻、醉酒、舞蹈。</div></div></div>
+      <div onclick="openLB('../assets/fx_compression.jpg','数字压缩噪声')" style="background: var(--color-bg-primary); border: 1px solid var(--color-border-default); border-radius: 8px; overflow: hidden; cursor: pointer;"><img style="width:100%;aspect-ratio:16/9;object-fit:cover;display:block;" src="../assets/fx_compression.jpg" alt="数字压缩噪声" loading="lazy"><div style="padding: 12px 14px;"><div style="font-weight: 600; font-size: 13px; margin-bottom: 2px;">数字压缩噪声</div><div style="font-size: 11px; color: var(--color-text-secondary); line-height: 1.5;">块状破碎——监控、低码率、伪纪录。</div></div></div>
+      <div onclick="openLB('../assets/fx_ghosting.jpg','拖影 Ghosting')" style="background: var(--color-bg-primary); border: 1px solid var(--color-border-default); border-radius: 8px; overflow: hidden; cursor: pointer;"><img style="width:100%;aspect-ratio:16/9;object-fit:cover;display:block;" src="../assets/fx_ghosting.jpg" alt="拖影" loading="lazy"><div style="padding: 12px 14px;"><div style="font-weight: 600; font-size: 13px; margin-bottom: 2px;">拖影 Ghosting</div><div style="font-size: 11px; color: var(--color-text-secondary); line-height: 1.5;">半透明残影——灵异、记忆重叠。</div></div></div>
+      <div onclick="openLB('../assets/fx_focus_breathing.jpg','镜头呼吸 Focus Breathing')" style="background: var(--color-bg-primary); border: 1px solid var(--color-border-default); border-radius: 8px; overflow: hidden; cursor: pointer;"><img style="width:100%;aspect-ratio:16/9;object-fit:cover;display:block;" src="../assets/fx_focus_breathing.jpg" alt="镜头呼吸" loading="lazy"><div style="padding: 12px 14px;"><div style="font-weight: 600; font-size: 13px; margin-bottom: 2px;">镜头呼吸</div><div style="font-size: 11px; color: var(--color-text-secondary); line-height: 1.5;">焦点变化时画面微缩放——真实光学感。</div></div></div>
+      <div onclick="openLB('../assets/fx_edge_falloff.jpg','边缘衰减 Edge Falloff')" style="background: var(--color-bg-primary); border: 1px solid var(--color-border-default); border-radius: 8px; overflow: hidden; cursor: pointer;"><img style="width:100%;aspect-ratio:16/9;object-fit:cover;display:block;" src="../assets/fx_edge_falloff.jpg" alt="边缘衰减" loading="lazy"><div style="padding: 12px 14px;"><div style="font-weight: 600; font-size: 13px; margin-bottom: 2px;">边缘衰减</div><div style="font-size: 11px; color: var(--color-text-secondary); line-height: 1.5;">中心锐边缘软——老镜头、胶片复古。</div></div></div>
+      <div onclick="openLB('../assets/fx_low_sharpness.jpg','低清晰度 Low Sharpness')" style="background: var(--color-bg-primary); border: 1px solid var(--color-border-default); border-radius: 8px; overflow: hidden; cursor: pointer;"><img style="width:100%;aspect-ratio:16/9;object-fit:cover;display:block;" src="../assets/fx_low_sharpness.jpg" alt="低清晰度" loading="lazy"><div style="padding: 12px 14px;"><div style="font-weight: 600; font-size: 13px; margin-bottom: 2px;">低清晰度</div><div style="font-size: 11px; color: var(--color-text-secondary); line-height: 1.5;">整体钝化——90 年代 DV、低保真。</div></div></div>
+      <div onclick="openLB('../assets/fx_sharpening.jpg','边缘锐化 Sharpening Artifacts')" style="background: var(--color-bg-primary); border: 1px solid var(--color-border-default); border-radius: 8px; overflow: hidden; cursor: pointer;"><img style="width:100%;aspect-ratio:16/9;object-fit:cover;display:block;" src="../assets/fx_sharpening.jpg" alt="边缘锐化" loading="lazy"><div style="padding: 12px 14px;"><div style="font-weight: 600; font-size: 13px; margin-bottom: 2px;">边缘锐化</div><div style="font-size: 11px; color: var(--color-text-secondary); line-height: 1.5;">硬边白边——廉价数码、过度后期。</div></div></div>
+    </div>
+  </div>
+</section>
+
 </main>  
 <!-- ===== FOOTER ===== 
 -->  
@@ -4625,11 +4856,15 @@ document.querySelectorAll('.gallery-section').forEach(function(section) {
         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><path d="M12 2v20M2 12h20" opacity="0.3"/><circle cx="12" cy="12" r="4" fill="currentColor" opacity="0.4"/></svg>
         Visual Aesthetics
       </a>
-      <div class="hidden md:flex items-center gap-8">
-        <a href="#index" onclick="switchPage('index'); return false;" class="nav-link" style="color: var(--color-text-secondary); font-family: var(--font-body); font-size: 13px; text-decoration: none; letter-spacing: 0.08em; text-transform: uppercase; transition: color 0.2s;">首页</a>
-        <a href="#courses" onclick="switchPage('courses'); return false;" class="nav-link" style="color: var(--color-text-secondary); font-family: var(--font-body); font-size: 13px; text-decoration: none; letter-spacing: 0.08em; text-transform: uppercase; transition: color 0.2s;">课程中心</a>
-        <a href="#multimodal-light" onclick="switchPage('multimodal-light'); return false;" class="nav-link" style="color: var(--color-text-secondary); font-family: var(--font-body); font-size: 13px; text-decoration: none; letter-spacing: 0.08em; text-transform: uppercase; transition: color 0.2s;">多模态光影</a>
-        <a href="#lens-language" onclick="switchPage('lens-language'); return false;" class="nav-link nav-active" style="font-family: var(--font-body); font-size: 13px; text-decoration: none; letter-spacing: 0.08em; text-transform: uppercase; transition: color 0.2s;">镜头语言</a>
+      <div class="hidden md:flex items-center gap-5">
+        <a href="#index" onclick="switchPage('index'); return false;" class="nav-link" style="color: var(--color-text-secondary); font-family: var(--font-body); font-size: 12px; text-decoration: none; letter-spacing: 0.04em; text-transform: uppercase; transition: color 0.2s;">首页</a>
+        <a href="#courses" onclick="switchPage('courses'); return false;" class="nav-link" style="color: var(--color-text-secondary); font-family: var(--font-body); font-size: 12px; text-decoration: none; letter-spacing: 0.04em; text-transform: uppercase; transition: color 0.2s;">课程中心</a>
+        <a href="#multimodal-light" onclick="switchPage('multimodal-light'); return false;" class="nav-link" style="color: var(--color-text-secondary); font-family: var(--font-body); font-size: 12px; text-decoration: none; letter-spacing: 0.04em; text-transform: uppercase; transition: color 0.2s;">多模态光影</a>
+        <a href="#lens-language" onclick="switchPage('lens-language'); return false;" class="nav-link nav-active" style="font-family: var(--font-body); font-size: 12px; text-decoration: none; letter-spacing: 0.04em; text-transform: uppercase; transition: color 0.2s;">镜头语言</a>
+        <a href="#composition" onclick="switchPage('composition'); return false;" class="nav-link" style="color: var(--color-brand); font-family: var(--font-body); font-size: 12px; text-decoration: none; letter-spacing: 0.04em; text-transform: uppercase; transition: color 0.2s;">构图组织</a>
+        <a href="photography-attrs.html" class="nav-link" style="color: var(--color-text-secondary); font-family: var(--font-body); font-size: 12px; text-decoration: none; letter-spacing: 0.04em; text-transform: uppercase; transition: color 0.2s;">摄影属性
+</a>
+        <a href="camera-movement.html" class="nav-link" style="color: var(--color-text-secondary); font-family: var(--font-body); font-size: 12px; text-decoration: none; letter-spacing: 0.04em; text-transform: uppercase; transition: color 0.2s;">镜头调度</a>
       </div>
       <button class="md:hidden" style="color: var(--color-text-primary); background: none; border: none; cursor: pointer;">
         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
@@ -5457,8 +5692,8 @@ document.querySelectorAll('.gallery-section').forEach(function(section) {
           </p>
 
           <!-- CTA Button -->
-          <a href="#multimodal-light" onclick="switchPage('multimodal-light'); return false;" class="cta-glow inline-flex items-center gap-3 px-8 py-4" style="background: var(--color-brand); color: var(--color-text-inverse); font-family: var(--font-body); font-size: 14px; font-weight: 500; letter-spacing: 0.05em; text-decoration: none; border-radius: var(--radius-full); transition: box-shadow 0.3s ease;">
-            <span>多模态光影</span>
+          <a href="#composition" onclick="switchPage('composition'); return false;" class="cta-glow inline-flex items-center gap-3 px-8 py-4" style="background: var(--color-brand); color: var(--color-text-inverse); font-family: var(--font-body); font-size: 14px; font-weight: 500; letter-spacing: 0.05em; text-decoration: none; border-radius: var(--radius-full); transition: box-shadow 0.3s ease;">
+            <span>构图组织</span>
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
           </a>
         </div>
@@ -6136,6 +6371,444 @@ document.querySelectorAll('.gallery-section').forEach(function(section) {
 </div>
 
 
+</div><div class="spa-page" data-page="composition" style="display: none;">
+
+  <div class="grain-overlay"></div>
+
+  <header class="fixed top-0 left-0 right-0 z-50" style="background: rgba(10,10,10,0.85); backdrop-filter: blur(20px); border-bottom: 1px solid var(--color-border-default);">
+    <nav class="max-w-7xl mx-auto px-6 lg:px-8 h-16 flex items-center justify-between">
+      <a href="#index" onclick="switchPage('index'); return false;" class="flex items-center gap-2" style="font-family: var(--font-display); color: var(--color-brand); font-size: 20px; font-weight: 600; text-decoration: none; letter-spacing: 0.02em;">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><path d="M12 2v20M2 12h20" opacity="0.3"/><circle cx="12" cy="12" r="4" fill="currentColor" opacity="0.4"/></svg>
+        Visual Aesthetics
+      </a>
+      <div class="hidden md:flex items-center gap-5">
+        <a href="#index" onclick="switchPage('index'); return false;" class="nav-link" style="color: var(--color-text-secondary); font-family: var(--font-body); font-size: 12px; text-decoration: none; letter-spacing: 0.04em; text-transform: uppercase; transition: color 0.2s;">首页</a>
+        <a href="#courses" onclick="switchPage('courses'); return false;" class="nav-link" style="color: var(--color-text-secondary); font-family: var(--font-body); font-size: 12px; text-decoration: none; letter-spacing: 0.04em; text-transform: uppercase; transition: color 0.2s;">课程中心</a>
+        <a href="#multimodal-light" onclick="switchPage('multimodal-light'); return false;" class="nav-link" style="color: var(--color-text-secondary); font-family: var(--font-body); font-size: 12px; text-decoration: none; letter-spacing: 0.04em; text-transform: uppercase; transition: color 0.2s;">多模态光影</a>
+        <a href="#lens-language" onclick="switchPage('lens-language'); return false;" class="nav-link" style="color: var(--color-text-secondary); font-family: var(--font-body); font-size: 12px; text-decoration: none; letter-spacing: 0.04em; text-transform: uppercase; transition: color 0.2s;">镜头语言</a>
+        <a href="#composition" onclick="switchPage('composition'); return false;" class="nav-link" style="color: var(--color-brand); font-family: var(--font-body); font-size: 12px; text-decoration: none; letter-spacing: 0.04em; text-transform: uppercase; transition: color 0.2s;">构图组织</a>
+        <a href="photography-attrs.html" class="nav-link" style="color: var(--color-text-secondary); font-family: var(--font-body); font-size: 12px; text-decoration: none; letter-spacing: 0.04em; text-transform: uppercase; transition: color 0.2s;">摄影属性</a>
+        <a href="camera-movement.html" class="nav-link" style="color: var(--color-text-secondary); font-family: var(--font-body); font-size: 12px; text-decoration: none; letter-spacing: 0.04em; text-transform: uppercase; transition: color 0.2s;">镜头调度</a>
+      </div>
+      <button class="md:hidden" style="color: var(--color-text-primary); background: none; border: none; cursor: pointer;">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
+      </button>
+    </nav>
+  </header>
+
+  <main class="pt-16 min-h-screen">
+
+    <section style="position: relative; min-height: 70vh; display: flex; align-items: flex-end; padding-bottom: 80px; overflow: hidden;">
+      <div style="position: absolute; inset: 0; background-image: url('../assets/comp-hero.jpg'); background-size: cover; background-position: center;"></div>
+      <div style="position: absolute; inset: 0; background: linear-gradient(to top, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.3) 60%, transparent 100%);"></div>
+      <div class="max-w-7xl mx-auto px-6 lg:px-8 relative z-10">
+        <div style="display: inline-block; font-size: 11px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--color-brand); font-family: var(--font-body); font-weight: 500; border: 1px solid var(--color-border-brand); padding: 4px 12px; border-radius: 2px; margin-bottom: 20px;">Module 03</div>
+        <h1 style="font-family: var(--font-display); font-size: clamp(40px, 6vw, 80px); font-weight: 600; color: #fff; line-height: 1.05; margin: 0 0 16px 0; letter-spacing: -0.02em;">构图组织</h1>
+        <p style="font-family: var(--font-body); font-size: clamp(15px, 2vw, 18px); color: rgba(255,255,255,0.75); max-width: 520px; line-height: 1.65; margin: 0 0 28px 0;">画面秩序，视觉叙事的底层语法</p>
+        <div style="display: inline-block; font-size: 12px; color: var(--color-brand); border: 1px solid var(--color-border-brand); padding: 6px 16px; border-radius: 20px; font-family: var(--font-body); letter-spacing: 0.06em;">37 种构图法</div>
+      </div>
+    </section>
+
+    <section class="fade-in-section visible" style="background: var(--color-bg-primary); padding: 80px 0;">
+      <div class="max-w-7xl mx-auto px-6 lg:px-8">
+        <div style="font-size: 12px; color: var(--color-brand); text-transform: uppercase; letter-spacing: .08em; margin-bottom: 10px; font-weight: 600;">基础构图 · Foundation</div>
+        <h2 style="font-family: var(--font-display); font-size: clamp(26px, 3.5vw, 40px); font-weight: 500; margin: 0 0 12px 0;">画面的基本秩序</h2>
+        <p style="color: var(--color-text-secondary); font-family: var(--font-body); font-size: 15px; line-height: 1.7; margin: 0 0 40px 0; max-width: 640px;">14 种核心构图原则，从中心到三分、从引导线到景深层次，构建稳定而有叙事力的画面结构。</p>
+        <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 16px;">
+
+          <div class="img-card fade-in-section visible" style="background: var(--color-bg-primary); border: 1px solid var(--color-border-default); border-radius: 8px; overflow: hidden; cursor: pointer;" onclick="openLB('../assets/comp_center.jpg','中心构图 Center Composition')">
+            <img style="width:100%;aspect-ratio:16/9;object-fit:cover;display:block;" src="../assets/comp_center.jpg" alt="中心构图 Center Composition" loading="lazy">
+            <div style="padding: 14px 16px;">
+              <div style="font-family: var(--font-body); font-weight: 600; font-size: 14px; margin-bottom: 6px;">中心构图 Center Composition</div>
+              <div style="font-size: 12px; color: var(--color-text-secondary); line-height: 1.6;">主体居中，四周均衡，画面稳定、权威、不容忽视。</div>
+              <div style="font-size: 11px; color: var(--color-brand); margin-top: 6px; line-height: 1.5;">Prompt: 夜晚空旷街道，黑衣女人站在画面正中央，远处路灯延伸，中心构图，背景轻微虚化</div>
+            </div>
+          </div>
+          <div class="img-card fade-in-section visible" style="background: var(--color-bg-primary); border: 1px solid var(--color-border-default); border-radius: 8px; overflow: hidden; cursor: pointer;" onclick="openLB('../assets/comp_thirds.jpg','三分法构图 Rule of Thirds')">
+            <img style="width:100%;aspect-ratio:16/9;object-fit:cover;display:block;" src="../assets/comp_thirds.jpg" alt="三分法构图 Rule of Thirds" loading="lazy">
+            <div style="padding: 14px 16px;">
+              <div style="font-family: var(--font-body); font-weight: 600; font-size: 14px; margin-bottom: 6px;">三分法构图 Rule of Thirds</div>
+              <div style="font-size: 12px; color: var(--color-text-secondary); line-height: 1.6;">主体偏置但有支撑，留出空间，自然均衡，有呼吸感。</div>
+              <div style="font-size: 11px; color: var(--color-brand); margin-top: 6px; line-height: 1.5;">Prompt: 海边黄昏，女孩站在右侧三分线，天空云层橙粉色，旅行电影感</div>
+            </div>
+          </div>
+          <div class="img-card fade-in-section visible" style="background: var(--color-bg-primary); border: 1px solid var(--color-border-default); border-radius: 8px; overflow: hidden; cursor: pointer;" onclick="openLB('../assets/comp_symmetry.jpg','对称构图 Symmetrical Composition')">
+            <img style="width:100%;aspect-ratio:16/9;object-fit:cover;display:block;" src="../assets/comp_symmetry.jpg" alt="对称构图 Symmetrical Composition" loading="lazy">
+            <div style="padding: 14px 16px;">
+              <div style="font-family: var(--font-body); font-weight: 600; font-size: 14px; margin-bottom: 6px;">对称构图 Symmetrical Composition</div>
+              <div style="font-size: 12px; color: var(--color-text-secondary); line-height: 1.6;">左右高度对称，主体位于中轴线，秩序、庄重、仪式感。</div>
+              <div style="font-size: 11px; color: var(--color-brand); margin-top: 6px; line-height: 1.5;">Prompt: 美术馆走廊，穿红衣的人站在中轴线尽头，对称空间，庄重压迫</div>
+            </div>
+          </div>
+          <div class="img-card fade-in-section visible" style="background: var(--color-bg-primary); border: 1px solid var(--color-border-default); border-radius: 8px; overflow: hidden; cursor: pointer;" onclick="openLB('../assets/comp_balance.jpg','平衡构图 Balanced Composition')">
+            <img style="width:100%;aspect-ratio:16/9;object-fit:cover;display:block;" src="../assets/comp_balance.jpg" alt="平衡构图 Balanced Composition" loading="lazy">
+            <div style="padding: 14px 16px;">
+              <div style="font-family: var(--font-body); font-weight: 600; font-size: 14px; margin-bottom: 6px;">平衡构图 Balanced Composition</div>
+              <div style="font-size: 12px; color: var(--color-text-secondary); line-height: 1.6;">视觉重量分布均衡，各元素互相搭着，稳定真实。</div>
+              <div style="font-size: 11px; color: var(--color-brand); margin-top: 6px; line-height: 1.5;">Prompt: 温暖客厅，老人坐左侧，右侧落地灯和半开窗帘，家庭叙事感</div>
+            </div>
+          </div>
+          <div class="img-card fade-in-section visible" style="background: var(--color-bg-primary); border: 1px solid var(--color-border-default); border-radius: 8px; overflow: hidden; cursor: pointer;" onclick="openLB('../assets/comp_fmb.jpg','前中后景构图 FMB')">
+            <img style="width:100%;aspect-ratio:16/9;object-fit:cover;display:block;" src="../assets/comp_fmb.jpg" alt="前中后景构图 FMB" loading="lazy">
+            <div style="padding: 14px 16px;">
+              <div style="font-family: var(--font-body); font-weight: 600; font-size: 14px; margin-bottom: 6px;">前中后景构图 FMB</div>
+              <div style="font-size: 12px; color: var(--color-text-secondary); line-height: 1.6;">三层空间同时有信息，空间感强，单镜传达多重叙事。</div>
+              <div style="font-size: 11px; color: var(--color-brand); margin-top: 6px; line-height: 1.5;">Prompt: 前景虚化门框，中景侦探查文件，背景窗外模糊人影，悬疑纵深</div>
+            </div>
+          </div>
+          <div class="img-card fade-in-section visible" style="background: var(--color-bg-primary); border: 1px solid var(--color-border-default); border-radius: 8px; overflow: hidden; cursor: pointer;" onclick="openLB('../assets/comp_lines.jpg','引导线构图 Leading Lines')">
+            <img style="width:100%;aspect-ratio:16/9;object-fit:cover;display:block;" src="../assets/comp_lines.jpg" alt="引导线构图 Leading Lines" loading="lazy">
+            <div style="padding: 14px 16px;">
+              <div style="font-family: var(--font-body); font-weight: 600; font-size: 14px; margin-bottom: 6px;">引导线构图 Leading Lines</div>
+              <div style="font-size: 12px; color: var(--color-text-secondary); line-height: 1.6;">线条形成视觉路径，把观众视线引向主体或画面深处。</div>
+              <div style="font-size: 11px; color: var(--color-brand); margin-top: 6px; line-height: 1.5;">Prompt: 清晨火车站台，铁轨汇聚，孤独男子站在透视线终点，薄雾冷光</div>
+            </div>
+          </div>
+          <div class="img-card fade-in-section visible" style="background: var(--color-bg-primary); border: 1px solid var(--color-border-default); border-radius: 8px; overflow: hidden; cursor: pointer;" onclick="openLB('../assets/comp_triangle.jpg','三角形构图 Triangle Composition')">
+            <img style="width:100%;aspect-ratio:16/9;object-fit:cover;display:block;" src="../assets/comp_triangle.jpg" alt="三角形构图 Triangle Composition" loading="lazy">
+            <div style="padding: 14px 16px;">
+              <div style="font-family: var(--font-body); font-weight: 600; font-size: 14px; margin-bottom: 6px;">三角形构图 Triangle Composition</div>
+              <div style="font-size: 12px; color: var(--color-text-secondary); line-height: 1.6;">正三角稳定权威，倒三角危险，斜三角有运动感。</div>
+              <div style="font-size: 11px; color: var(--color-brand); margin-top: 6px; line-height: 1.5;">Prompt: 三人围坐圆桌，头部形成三角形，低光打亮桌面，家族晚宴</div>
+            </div>
+          </div>
+          <div class="img-card fade-in-section visible" style="background: var(--color-bg-primary); border: 1px solid var(--color-border-default); border-radius: 8px; overflow: hidden; cursor: pointer;" onclick="openLB('../assets/comp_horizontal.jpg','水平线构图 Horizontal Composition')">
+            <img style="width:100%;aspect-ratio:16/9;object-fit:cover;display:block;" src="../assets/comp_horizontal.jpg" alt="水平线构图 Horizontal Composition" loading="lazy">
+            <div style="padding: 14px 16px;">
+              <div style="font-family: var(--font-body); font-weight: 600; font-size: 14px; margin-bottom: 6px;">水平线构图 Horizontal Composition</div>
+              <div style="font-size: 12px; color: var(--color-text-secondary); line-height: 1.6;">以横向结构稳定画面，宁静、宽广，时间慢下来。</div>
+              <div style="font-size: 11px; color: var(--color-brand); margin-top: 6px; line-height: 1.5;">Prompt: 清晨海边，平直海平线横贯画面，老人坐在沙滩椅，天空辽阔</div>
+            </div>
+          </div>
+          <div class="img-card fade-in-section visible" style="background: var(--color-bg-primary); border: 1px solid var(--color-border-default); border-radius: 8px; overflow: hidden; cursor: pointer;" onclick="openLB('../assets/comp_vertical.jpg','垂直线构图 Vertical Composition')">
+            <img style="width:100%;aspect-ratio:16/9;object-fit:cover;display:block;" src="../assets/comp_vertical.jpg" alt="垂直线构图 Vertical Composition" loading="lazy">
+            <div style="padding: 14px 16px;">
+              <div style="font-family: var(--font-body); font-weight: 600; font-size: 14px; margin-bottom: 6px;">垂直线构图 Vertical Composition</div>
+              <div style="font-size: 12px; color: var(--color-text-secondary); line-height: 1.6;">垂直线条强调高度、秩序、压迫或庄严。</div>
+              <div style="font-size: 11px; color: var(--color-brand); margin-top: 6px; line-height: 1.5;">Prompt: 法院大厅高耸石柱，律师站在柱廊下方显得渺小，权力压迫感</div>
+            </div>
+          </div>
+          <div class="img-card fade-in-section visible" style="background: var(--color-bg-primary); border: 1px solid var(--color-border-default); border-radius: 8px; overflow: hidden; cursor: pointer;" onclick="openLB('../assets/comp_frame.jpg','框架式构图 Framing Composition')">
+            <img style="width:100%;aspect-ratio:16/9;object-fit:cover;display:block;" src="../assets/comp_frame.jpg" alt="框架式构图 Framing Composition" loading="lazy">
+            <div style="padding: 14px 16px;">
+              <div style="font-family: var(--font-body); font-weight: 600; font-size: 14px; margin-bottom: 6px;">框架式构图 Framing Composition</div>
+              <div style="font-size: 12px; color: var(--color-text-secondary); line-height: 1.6;">用门框、窗框等自然框架包住主体，强调或隔离。</div>
+              <div style="font-size: 11px; color: var(--color-brand); margin-top: 6px; line-height: 1.5;">Prompt: 老宅走廊，女孩站在半开门框中，门内暖光，门外昏暗，神秘感</div>
+            </div>
+          </div>
+          <div class="img-card fade-in-section visible" style="background: var(--color-bg-primary); border: 1px solid var(--color-border-default); border-radius: 8px; overflow: hidden; cursor: pointer;" onclick="openLB('../assets/comp_negative.jpg','留白构图 Negative Space')">
+            <img style="width:100%;aspect-ratio:16/9;object-fit:cover;display:block;" src="../assets/comp_negative.jpg" alt="留白构图 Negative Space" loading="lazy">
+            <div style="padding: 14px 16px;">
+              <div style="font-family: var(--font-body); font-weight: 600; font-size: 14px; margin-bottom: 6px;">留白构图 Negative Space</div>
+              <div style="font-size: 12px; color: var(--color-text-secondary); line-height: 1.6;">大面积空白让主体突出，克制、高级、情绪浓度高。</div>
+              <div style="font-size: 11px; color: var(--color-brand); margin-top: 6px; line-height: 1.5;">Prompt: 白色展厅，穿黑裙女人站在右下角，大面积白墙，孤独高级感</div>
+            </div>
+          </div>
+          <div class="img-card fade-in-section visible" style="background: var(--color-bg-primary); border: 1px solid var(--color-border-default); border-radius: 8px; overflow: hidden; cursor: pointer;" onclick="openLB('../assets/comp_subject.jpg','主体突出构图 Subject-focused')">
+            <img style="width:100%;aspect-ratio:16/9;object-fit:cover;display:block;" src="../assets/comp_subject.jpg" alt="主体突出构图 Subject-focused" loading="lazy">
+            <div style="padding: 14px 16px;">
+              <div style="font-family: var(--font-body); font-weight: 600; font-size: 14px; margin-bottom: 6px;">主体突出构图 Subject-focused</div>
+              <div style="font-size: 12px; color: var(--color-text-secondary); line-height: 1.6;">通过色彩、虚化、光线让主体成为第一视觉中心。</div>
+              <div style="font-size: 11px; color: var(--color-brand); margin-top: 6px; line-height: 1.5;">Prompt: 拥挤地铁车厢，灰色人群中穿红色毛衣的女孩，背景轻微虚化</div>
+            </div>
+          </div>
+          <div class="img-card fade-in-section visible" style="background: var(--color-bg-primary); border: 1px solid var(--color-border-default); border-radius: 8px; overflow: hidden; cursor: pointer;" onclick="openLB('../assets/comp_ensemble.jpg','群像构图 Ensemble Composition')">
+            <img style="width:100%;aspect-ratio:16/9;object-fit:cover;display:block;" src="../assets/comp_ensemble.jpg" alt="群像构图 Ensemble Composition" loading="lazy">
+            <div style="padding: 14px 16px;">
+              <div style="font-family: var(--font-body); font-weight: 600; font-size: 14px; margin-bottom: 6px;">群像构图 Ensemble Composition</div>
+              <div style="font-size: 12px; color: var(--color-text-secondary); line-height: 1.6;">关系即构图，谁站哪里就说明谁与谁的关系。</div>
+              <div style="font-size: 11px; color: var(--color-brand); margin-top: 6px; line-height: 1.5;">Prompt: 长餐桌晚宴，年长父亲位于中心主位，两儿分坐两端，家族戏剧</div>
+            </div>
+          </div>
+          <div class="img-card fade-in-section visible" style="background: var(--color-bg-primary); border: 1px solid var(--color-border-default); border-radius: 8px; overflow: hidden; cursor: pointer;" onclick="openLB('../assets/comp_depth.jpg','景深层次构图 Depth-layered')">
+            <img style="width:100%;aspect-ratio:16/9;object-fit:cover;display:block;" src="../assets/comp_depth.jpg" alt="景深层次构图 Depth-layered" loading="lazy">
+            <div style="padding: 14px 16px;">
+              <div style="font-family: var(--font-body); font-weight: 600; font-size: 14px; margin-bottom: 6px;">景深层次构图 Depth-layered</div>
+              <div style="font-size: 12px; color: var(--color-text-secondary); line-height: 1.6;">前虚后实的层次感，浪漫纵深，空间有层次。</div>
+              <div style="font-size: 11px; color: var(--color-brand); margin-top: 6px; line-height: 1.5;">Prompt: 夜晚天台，前景虚化红色花枝，中景女孩清晰，背景城市散景</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="fade-in-section visible" style="background: var(--color-bg-secondary); padding: 80px 0;">
+      <div class="max-w-7xl mx-auto px-6 lg:px-8">
+        <div style="font-size: 12px; color: var(--color-brand); text-transform: uppercase; letter-spacing: .08em; margin-bottom: 10px; font-weight: 600;">特殊构图 · Experimental</div>
+        <h2 style="font-family: var(--font-display); font-size: clamp(26px, 3.5vw, 40px); font-weight: 500; margin: 0 0 12px 0;">打破规则的视觉张力</h2>
+        <p style="color: var(--color-text-secondary); font-family: var(--font-body); font-size: 15px; line-height: 1.7; margin: 0 0 40px 0; max-width: 640px;">16 种打破常规的构图手法，从封闭压迫到极端留白，用视觉失衡制造心理张力和叙事悬念。</p>
+        <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 16px;">
+
+          <div class="img-card fade-in-section visible" style="background: var(--color-bg-primary); border: 1px solid var(--color-border-default); border-radius: 8px; overflow: hidden; cursor: pointer;" onclick="openLB('../assets/comp_extreme_neg.jpg','极端留白 Extreme Negative Space')">
+            <img style="width:100%;aspect-ratio:16/9;object-fit:cover;display:block;" src="../assets/comp_extreme_neg.jpg" alt="极端留白 Extreme Negative Space" loading="lazy">
+            <div style="padding: 14px 16px;">
+              <div style="font-family: var(--font-body); font-weight: 600; font-size: 14px; margin-bottom: 6px;">极端留白 Extreme Negative Space</div>
+              <div style="font-size: 12px; color: var(--color-text-secondary); line-height: 1.6;">主体极小，空白压倒主体，渺小、孤独、荒凉感强烈。</div>
+              <div style="font-size: 11px; color: var(--color-brand); margin-top: 6px; line-height: 1.5;">Prompt: 茫茫雪原，黑色大衣人影站在底部偏右，大面积白色雪地</div>
+            </div>
+          </div>
+          <div class="img-card fade-in-section visible" style="background: var(--color-bg-primary); border: 1px solid var(--color-border-default); border-radius: 8px; overflow: hidden; cursor: pointer;" onclick="openLB('../assets/comp_offcenter.jpg','偏置构图 Off-center')">
+            <img style="width:100%;aspect-ratio:16/9;object-fit:cover;display:block;" src="../assets/comp_offcenter.jpg" alt="偏置构图 Off-center" loading="lazy">
+            <div style="padding: 14px 16px;">
+              <div style="font-family: var(--font-body); font-weight: 600; font-size: 14px; margin-bottom: 6px;">偏置构图 Off-center</div>
+              <div style="font-size: 12px; color: var(--color-text-secondary); line-height: 1.6;">主体靠近边缘，空缺制造不安感和叙事悬念。</div>
+              <div style="font-size: 11px; color: var(--color-brand); margin-top: 6px; line-height: 1.5;">Prompt: 昏暗酒店走廊，女主角在最左侧，右侧大面积空荡走廊和半开门</div>
+            </div>
+          </div>
+          <div class="img-card fade-in-section visible" style="background: var(--color-bg-primary); border: 1px solid var(--color-border-default); border-radius: 8px; overflow: hidden; cursor: pointer;" onclick="openLB('../assets/comp_claustro.jpg','封闭压迫 Claustrophobic')">
+            <img style="width:100%;aspect-ratio:16/9;object-fit:cover;display:block;" src="../assets/comp_claustro.jpg" alt="封闭压迫 Claustrophobic" loading="lazy">
+            <div style="padding: 14px 16px;">
+              <div style="font-family: var(--font-body); font-weight: 600; font-size: 14px; margin-bottom: 6px;">封闭压迫 Claustrophobic</div>
+              <div style="font-size: 12px; color: var(--color-text-secondary); line-height: 1.6;">低顶空间、墙体逼近，窒息、囚禁、逃不掉。</div>
+              <div style="font-size: 11px; color: var(--color-brand); margin-top: 6px; line-height: 1.5;">Prompt: 狭小审讯室，天花板压低，左右墙面逼近，人物像被空间挤住</div>
+            </div>
+          </div>
+          <div class="img-card fade-in-section visible" style="background: var(--color-bg-primary); border: 1px solid var(--color-border-default); border-radius: 8px; overflow: hidden; cursor: pointer;" onclick="openLB('../assets/comp_obstructed.jpg','遮挡式构图 Obstructed')">
+            <img style="width:100%;aspect-ratio:16/9;object-fit:cover;display:block;" src="../assets/comp_obstructed.jpg" alt="遮挡式构图 Obstructed" loading="lazy">
+            <div style="padding: 14px 16px;">
+              <div style="font-family: var(--font-body); font-weight: 600; font-size: 14px; margin-bottom: 6px;">遮挡式构图 Obstructed</div>
+              <div style="font-size: 12px; color: var(--color-text-secondary); line-height: 1.6;">前景遮挡主体，看不全，张力来自不完整。</div>
+              <div style="font-size: 11px; color: var(--color-brand); margin-top: 6px; line-height: 1.5;">Prompt: 夜晚卧室，半透明窗帘遮住大半，后方女人只露出模糊侧脸</div>
+            </div>
+          </div>
+          <div class="img-card fade-in-section visible" style="background: var(--color-bg-primary); border: 1px solid var(--color-border-default); border-radius: 8px; overflow: hidden; cursor: pointer;" onclick="openLB('../assets/comp_voyeur.jpg','窥视构图 Voyeuristic')">
+            <img style="width:100%;aspect-ratio:16/9;object-fit:cover;display:block;" src="../assets/comp_voyeur.jpg" alt="窥视构图 Voyeuristic" loading="lazy">
+            <div style="padding: 14px 16px;">
+              <div style="font-family: var(--font-body); font-weight: 600; font-size: 14px; margin-bottom: 6px;">窥视构图 Voyeuristic</div>
+              <div style="font-size: 12px; color: var(--color-text-secondary); line-height: 1.6;">门缝、墙角，被限制的观看，偷看感和危险感。</div>
+              <div style="font-size: 11px; color: var(--color-brand); margin-top: 6px; line-height: 1.5;">Prompt: 黑暗走廊，从门缝观看，男人背对镜头，边缘被黑暗遮住</div>
+            </div>
+          </div>
+          <div class="img-card fade-in-section visible" style="background: var(--color-bg-primary); border: 1px solid var(--color-border-default); border-radius: 8px; overflow: hidden; cursor: pointer;" onclick="openLB('../assets/comp_mirror.jpg','镜像构图 Mirror')">
+            <img style="width:100%;aspect-ratio:16/9;object-fit:cover;display:block;" src="../assets/comp_mirror.jpg" alt="镜像构图 Mirror" loading="lazy">
+            <div style="padding: 14px 16px;">
+              <div style="font-family: var(--font-body); font-weight: 600; font-size: 14px; margin-bottom: 6px;">镜像构图 Mirror</div>
+              <div style="font-size: 12px; color: var(--color-text-secondary); line-height: 1.6;">真实与倒影形成分裂关系，双重人格、内心观察。</div>
+              <div style="font-size: 11px; color: var(--color-brand); margin-top: 6px; line-height: 1.5;">Prompt: 昏黄浴室，男人背对站在洗手池前，镜子映出疲惫正脸，分裂感</div>
+            </div>
+          </div>
+          <div class="img-card fade-in-section visible" style="background: var(--color-bg-primary); border: 1px solid var(--color-border-default); border-radius: 8px; overflow: hidden; cursor: pointer;" onclick="openLB('../assets/comp_frame2.jpg','框中框 Frame within Frame')">
+            <img style="width:100%;aspect-ratio:16/9;object-fit:cover;display:block;" src="../assets/comp_frame2.jpg" alt="框中框 Frame within Frame" loading="lazy">
+            <div style="padding: 14px 16px;">
+              <div style="font-family: var(--font-body); font-weight: 600; font-size: 14px; margin-bottom: 6px;">框中框 Frame within Frame</div>
+              <div style="font-size: 12px; color: var(--color-text-secondary); line-height: 1.6;">画面内再出现视觉框架，嵌套观看，隔离关系。</div>
+              <div style="font-size: 11px; color: var(--color-brand); margin-top: 6px; line-height: 1.5;">Prompt: 雨夜车内，车窗边缘形成黑色框架，窗外女人被车窗和店门双重框住</div>
+            </div>
+          </div>
+          <div class="img-card fade-in-section visible" style="background: var(--color-bg-primary); border: 1px solid var(--color-border-default); border-radius: 8px; overflow: hidden; cursor: pointer;" onclick="openLB('../assets/comp_pip.jpg','画中画 Picture-in-picture')">
+            <img style="width:100%;aspect-ratio:16/9;object-fit:cover;display:block;" src="../assets/comp_pip.jpg" alt="画中画 Picture-in-picture" loading="lazy">
+            <div style="padding: 14px 16px;">
+              <div style="font-family: var(--font-body); font-weight: 600; font-size: 14px; margin-bottom: 6px;">画中画 Picture-in-picture</div>
+              <div style="font-size: 12px; color: var(--color-text-secondary); line-height: 1.6;">电视/投影形成叙事嵌套，现实里播放另一个现实。</div>
+              <div style="font-size: 11px; color: var(--color-brand); margin-top: 6px; line-height: 1.5;">Prompt: 暗色客厅，男人背坐沙发，老电视播放失踪女孩新闻照片</div>
+            </div>
+          </div>
+          <div class="img-card fade-in-section visible" style="background: var(--color-bg-primary); border: 1px solid var(--color-border-default); border-radius: 8px; overflow: hidden; cursor: pointer;" onclick="openLB('../assets/comp_screen.jpg','屏幕嵌套 Screen-within-screen')">
+            <img style="width:100%;aspect-ratio:16/9;object-fit:cover;display:block;" src="../assets/comp_screen.jpg" alt="屏幕嵌套 Screen-within-screen" loading="lazy">
+            <div style="padding: 14px 16px;">
+              <div style="font-family: var(--font-body); font-weight: 600; font-size: 14px; margin-bottom: 6px;">屏幕嵌套 Screen-within-screen</div>
+              <div style="font-size: 12px; color: var(--color-text-secondary); line-height: 1.6;">多屏嵌套，强调现代媒介界面和数字观看层级。</div>
+              <div style="font-size: 11px; color: var(--color-brand); margin-top: 6px; line-height: 1.5;">Prompt: 深夜安保室，多个监控屏幕，蓝色电子光照亮值班员侧脸</div>
+            </div>
+          </div>
+          <div class="img-card fade-in-section visible" style="background: var(--color-bg-primary); border: 1px solid var(--color-border-default); border-radius: 8px; overflow: hidden; cursor: pointer;" onclick="openLB('../assets/comp_split.jpg','分割构图 Split Composition')">
+            <img style="width:100%;aspect-ratio:16/9;object-fit:cover;display:block;" src="../assets/comp_split.jpg" alt="分割构图 Split Composition" loading="lazy">
+            <div style="padding: 14px 16px;">
+              <div style="font-family: var(--font-body); font-weight: 600; font-size: 14px; margin-bottom: 6px;">分割构图 Split Composition</div>
+              <div style="font-size: 12px; color: var(--color-text-secondary); line-height: 1.6;">画面被分为两区，两个世界，无法沟通的对立关系。</div>
+              <div style="font-size: 11px; color: var(--color-brand); margin-top: 6px; line-height: 1.5;">Prompt: 玻璃墙把画面分左右，左侧暖光女人，右侧冷蓝走廊男人，疏离</div>
+            </div>
+          </div>
+          <div class="img-card fade-in-section visible" style="background: var(--color-bg-primary); border: 1px solid var(--color-border-default); border-radius: 8px; overflow: hidden; cursor: pointer;" onclick="openLB('../assets/comp_unbalanced.jpg','失衡构图 Unbalanced')">
+            <img style="width:100%;aspect-ratio:16/9;object-fit:cover;display:block;" src="../assets/comp_unbalanced.jpg" alt="失衡构图 Unbalanced" loading="lazy">
+            <div style="padding: 14px 16px;">
+              <div style="font-family: var(--font-body); font-weight: 600; font-size: 14px; margin-bottom: 6px;">失衡构图 Unbalanced</div>
+              <div style="font-size: 12px; color: var(--color-text-secondary); line-height: 1.6;">视觉重量偏向一侧，焦虑、压迫，有什么要倒塌了。</div>
+              <div style="font-size: 11px; color: var(--color-brand); margin-top: 6px; line-height: 1.5;">Prompt: 狭窄房间，左侧堆满书柜纸箱和男人，右侧空白发霉墙面</div>
+            </div>
+          </div>
+          <div class="img-card fade-in-section visible" style="background: var(--color-bg-primary); border: 1px solid var(--color-border-default); border-radius: 8px; overflow: hidden; cursor: pointer;" onclick="openLB('../assets/comp_dutch.jpg','倾斜构图 Dutch Angle')">
+            <img style="width:100%;aspect-ratio:16/9;object-fit:cover;display:block;" src="../assets/comp_dutch.jpg" alt="倾斜构图 Dutch Angle" loading="lazy">
+            <div style="padding: 14px 16px;">
+              <div style="font-family: var(--font-body); font-weight: 600; font-size: 14px; margin-bottom: 6px;">倾斜构图 Dutch Angle</div>
+              <div style="font-size: 12px; color: var(--color-text-secondary); line-height: 1.6;">画面轴线倾斜，混乱、危险、心理失衡、眩晕感。</div>
+              <div style="font-size: 11px; color: var(--color-brand); margin-top: 6px; line-height: 1.5;">Prompt: 地下停车场，惊慌男人回头，柱子地面全部倾斜，危险逼近</div>
+            </div>
+          </div>
+          <div class="img-card fade-in-section visible" style="background: var(--color-bg-primary); border: 1px solid var(--color-border-default); border-radius: 8px; overflow: hidden; cursor: pointer;" onclick="openLB('../assets/comp_minimal.jpg','极简构图 Minimalist')">
+            <img style="width:100%;aspect-ratio:16/9;object-fit:cover;display:block;" src="../assets/comp_minimal.jpg" alt="极简构图 Minimalist" loading="lazy">
+            <div style="padding: 14px 16px;">
+              <div style="font-family: var(--font-body); font-weight: 600; font-size: 14px; margin-bottom: 6px;">极简构图 Minimalist</div>
+              <div style="font-size: 12px; color: var(--color-text-secondary); line-height: 1.6;">元素极少，干净克制，少即是多，设计感强。</div>
+              <div style="font-size: 11px; color: var(--color-brand); margin-top: 6px; line-height: 1.5;">Prompt: 纯白展厅，只有一只红色椅子和一扇窄窗，光线柔和，极简艺术</div>
+            </div>
+          </div>
+          <div class="img-card fade-in-section visible" style="background: var(--color-bg-primary); border: 1px solid var(--color-border-default); border-radius: 8px; overflow: hidden; cursor: pointer;" onclick="openLB('../assets/comp_dense.jpg','密集构图 Dense')">
+            <img style="width:100%;aspect-ratio:16/9;object-fit:cover;display:block;" src="../assets/comp_dense.jpg" alt="密集构图 Dense" loading="lazy">
+            <div style="padding: 14px 16px;">
+              <div style="font-family: var(--font-body); font-weight: 600; font-size: 14px; margin-bottom: 6px;">密集构图 Dense</div>
+              <div style="font-size: 12px; color: var(--color-text-secondary); line-height: 1.6;">元素高度密集，繁华、混乱、信息过载、都市感。</div>
+              <div style="font-size: 11px; color: var(--color-brand); margin-top: 6px; line-height: 1.5;">Prompt: 赛博夜市，霓虹招牌、人群、摊位、蒸汽密集堆叠，色彩丰富</div>
+            </div>
+          </div>
+          <div class="img-card fade-in-section visible" style="background: var(--color-bg-primary); border: 1px solid var(--color-border-default); border-radius: 8px; overflow: hidden; cursor: pointer;" onclick="openLB('../assets/comp_scale.jpg','尺度对比 Scale Contrast')">
+            <img style="width:100%;aspect-ratio:16/9;object-fit:cover;display:block;" src="../assets/comp_scale.jpg" alt="尺度对比 Scale Contrast" loading="lazy">
+            <div style="padding: 14px 16px;">
+              <div style="font-family: var(--font-body); font-weight: 600; font-size: 14px; margin-bottom: 6px;">尺度对比 Scale Contrast</div>
+              <div style="font-size: 12px; color: var(--color-text-secondary); line-height: 1.6;">巨物与小人的比例差，渺小、震撼、史诗恐惧感。</div>
+              <div style="font-size: 11px; color: var(--color-brand); margin-top: 6px; line-height: 1.5;">Prompt: 荒原上渺小人影，头顶巨大黑色飞船遮住天空，阴影覆盖地面</div>
+            </div>
+          </div>
+          <div class="img-card fade-in-section visible" style="background: var(--color-bg-primary); border: 1px solid var(--color-border-default); border-radius: 8px; overflow: hidden; cursor: pointer;" onclick="openLB('../assets/comp_crop.jpg','局部裁切 Unconventional Cropping')">
+            <img style="width:100%;aspect-ratio:16/9;object-fit:cover;display:block;" src="../assets/comp_crop.jpg" alt="局部裁切 Unconventional Cropping" loading="lazy">
+            <div style="padding: 14px 16px;">
+              <div style="font-family: var(--font-body); font-weight: 600; font-size: 14px; margin-bottom: 6px;">局部裁切 Unconventional Cropping</div>
+              <div style="font-size: 12px; color: var(--color-text-secondary); line-height: 1.6;">人物被画框故意裁掉，临场感、压迫，身体大于语言。</div>
+              <div style="font-size: 11px; color: var(--color-brand); margin-top: 6px; line-height: 1.5;">Prompt: 极近距离特写，裁掉眼睛，只保留下半张脸、嘴唇和香烟</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="fade-in-section visible" style="background: var(--color-bg-primary); padding: 80px 0;">
+      <div class="max-w-7xl mx-auto px-6 lg:px-8">
+        <div style="font-size: 12px; color: var(--color-brand); text-transform: uppercase; letter-spacing: .08em; margin-bottom: 10px; font-weight: 600;">经典构图 · Masters</div>
+        <h2 style="font-family: var(--font-display); font-size: clamp(26px, 3.5vw, 40px); font-weight: 500; margin: 0 0 12px 0;">大师的构图语言</h2>
+        <p style="color: var(--color-text-secondary); font-family: var(--font-body); font-size: 15px; line-height: 1.7; margin: 0 0 40px 0; max-width: 640px;">11 位大师的标志性构图风格，从韦斯·安德森的对称美学到小津安二郎的低机位沉默，学习构图背后的世界观。</p>
+        <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 16px;">
+
+          <div class="img-card fade-in-section visible" style="background: var(--color-bg-primary); border: 1px solid var(--color-border-default); border-radius: 8px; overflow: hidden; cursor: pointer;" onclick="openLB('../assets/comp_wes.jpg','韦斯·安德森式对称 Wes Anderson')">
+            <img style="width:100%;aspect-ratio:16/9;object-fit:cover;display:block;" src="../assets/comp_wes.jpg" alt="韦斯·安德森式对称 Wes Anderson" loading="lazy">
+            <div style="padding: 14px 16px;">
+              <div style="font-family: var(--font-body); font-weight: 600; font-size: 14px; margin-bottom: 6px;">韦斯·安德森式对称 Wes Anderson</div>
+              <div style="font-size: 12px; color: var(--color-text-secondary); line-height: 1.6;">严格中心轴、色块秩序、正面站位，像精密玩具盒。</div>
+              <div style="font-size: 11px; color: var(--color-brand); margin-top: 6px; line-height: 1.5;">Prompt: 复古粉色酒店大厅，严格左右对称，前台服务员站在正中央</div>
+            </div>
+          </div>
+          <div class="img-card fade-in-section visible" style="background: var(--color-bg-primary); border: 1px solid var(--color-border-default); border-radius: 8px; overflow: hidden; cursor: pointer;" onclick="openLB('../assets/comp_welles.jpg','奥逊·威尔斯深焦 Welles Deep Focus')">
+            <img style="width:100%;aspect-ratio:16/9;object-fit:cover;display:block;" src="../assets/comp_welles.jpg" alt="奥逊·威尔斯深焦 Welles Deep Focus" loading="lazy">
+            <div style="padding: 14px 16px;">
+              <div style="font-family: var(--font-body); font-weight: 600; font-size: 14px; margin-bottom: 6px;">奥逊·威尔斯深焦 Welles Deep Focus</div>
+              <div style="font-size: 12px; color: var(--color-text-secondary); line-height: 1.6;">前中背景同时清晰，一镜多叙事，权力关系空间化。</div>
+              <div style="font-size: 11px; color: var(--color-brand); margin-top: 6px; line-height: 1.5;">Prompt: 黑白老宅，前景母亲签文件，中景律师等待，背景小男孩雪地</div>
+            </div>
+          </div>
+          <div class="img-card fade-in-section visible" style="background: var(--color-bg-primary); border: 1px solid var(--color-border-default); border-radius: 8px; overflow: hidden; cursor: pointer;" onclick="openLB('../assets/comp_noir.jpg','黑色电影阴影 Film Noir Shadow')">
+            <img style="width:100%;aspect-ratio:16/9;object-fit:cover;display:block;" src="../assets/comp_noir.jpg" alt="黑色电影阴影 Film Noir Shadow" loading="lazy">
+            <div style="padding: 14px 16px;">
+              <div style="font-family: var(--font-body); font-weight: 600; font-size: 14px; margin-bottom: 6px;">黑色电影阴影 Film Noir Shadow</div>
+              <div style="font-size: 12px; color: var(--color-text-secondary); line-height: 1.6;">百叶窗阴影、半脸明暗，道德暧昧与犯罪感。</div>
+              <div style="font-size: 11px; color: var(--color-brand); margin-top: 6px; line-height: 1.5;">Prompt: 侦探办公室，百叶窗条纹阴影，光线只照亮半张脸，高反差黑白</div>
+            </div>
+          </div>
+          <div class="img-card fade-in-section visible" style="background: var(--color-bg-primary); border: 1px solid var(--color-border-default); border-radius: 8px; overflow: hidden; cursor: pointer;" onclick="openLB('../assets/comp_western.jpg','西部片地平线 Western Horizon')">
+            <img style="width:100%;aspect-ratio:16/9;object-fit:cover;display:block;" src="../assets/comp_western.jpg" alt="西部片地平线 Western Horizon" loading="lazy">
+            <div style="padding: 14px 16px;">
+              <div style="font-family: var(--font-body); font-weight: 600; font-size: 14px; margin-bottom: 6px;">西部片地平线 Western Horizon</div>
+              <div style="font-size: 12px; color: var(--color-text-secondary); line-height: 1.6;">牛仔剪影、荒原地平线，辽阔、孤独、史诗命运。</div>
+              <div style="font-size: 11px; color: var(--color-brand); margin-top: 6px; line-height: 1.5;">Prompt: 黄昏荒原，牛仔骑马停在下方，天空大面积，夕阳把人变成剪影</div>
+            </div>
+          </div>
+          <div class="img-card fade-in-section visible" style="background: var(--color-bg-primary); border: 1px solid var(--color-border-default); border-radius: 8px; overflow: hidden; cursor: pointer;" onclick="openLB('../assets/comp_samurai.jpg','武士片横向对峙 Samurai Standoff（黑泽明）')">
+            <img style="width:100%;aspect-ratio:16/9;object-fit:cover;display:block;" src="../assets/comp_samurai.jpg" alt="武士片横向对峙 Samurai Standoff（黑泽明）" loading="lazy">
+            <div style="padding: 14px 16px;">
+              <div style="font-family: var(--font-body); font-weight: 600; font-size: 14px; margin-bottom: 6px;">武士片横向对峙 Samurai Standoff（黑泽明）</div>
+              <div style="font-size: 12px; color: var(--color-text-secondary); line-height: 1.6;">横向对峙，中间留白距离，克制而致命的等待感。</div>
+              <div style="font-size: 11px; color: var(--color-brand); margin-top: 6px; line-height: 1.5;">Prompt: 荒凉山道，两名武士分站左右，中间大片空地，尘土风起</div>
+            </div>
+          </div>
+          <div class="img-card fade-in-section visible" style="background: var(--color-bg-primary); border: 1px solid var(--color-border-default); border-radius: 8px; overflow: hidden; cursor: pointer;" onclick="openLB('../assets/comp_tarkovsky.jpg','塔可夫斯基纵深静观 Tarkovsky Depth')">
+            <img style="width:100%;aspect-ratio:16/9;object-fit:cover;display:block;" src="../assets/comp_tarkovsky.jpg" alt="塔可夫斯基纵深静观 Tarkovsky Depth" loading="lazy">
+            <div style="padding: 14px 16px;">
+              <div style="font-family: var(--font-body); font-weight: 600; font-size: 14px; margin-bottom: 6px;">塔可夫斯基纵深静观 Tarkovsky Depth</div>
+              <div style="font-size: 12px; color: var(--color-text-secondary); line-height: 1.6;">积水倒影、废弃空间、纵深凝视，时间沉淀、形而上。</div>
+              <div style="font-size: 11px; color: var(--color-brand); margin-top: 6px; line-height: 1.5;">Prompt: 废弃房屋，前景积水倒映破碎窗户，背景男人站在门口，尘埃光</div>
+            </div>
+          </div>
+          <div class="img-card fade-in-section visible" style="background: var(--color-bg-primary); border: 1px solid var(--color-border-default); border-radius: 8px; overflow: hidden; cursor: pointer;" onclick="openLB('../assets/comp_ozu.jpg','小津榻榻米低机位 Ozu Tatami Shot')">
+            <img style="width:100%;aspect-ratio:16/9;object-fit:cover;display:block;" src="../assets/comp_ozu.jpg" alt="小津榻榻米低机位 Ozu Tatami Shot" loading="lazy">
+            <div style="padding: 14px 16px;">
+              <div style="font-family: var(--font-body); font-weight: 600; font-size: 14px; margin-bottom: 6px;">小津榻榻米低机位 Ozu Tatami Shot</div>
+              <div style="font-size: 12px; color: var(--color-text-secondary); line-height: 1.6;">低视角、正面、静稳，日常仪式感，情绪克制。</div>
+              <div style="font-size: 11px; color: var(--color-brand); margin-top: 6px; line-height: 1.5;">Prompt: 日式客厅，榻榻米视角，家人围坐矮桌，拉门和木框，安静秩序</div>
+            </div>
+          </div>
+          <div class="img-card fade-in-section visible" style="background: var(--color-bg-primary); border: 1px solid var(--color-border-default); border-radius: 8px; overflow: hidden; cursor: pointer;" onclick="openLB('../assets/comp_comic.jpg','漫画式分格 Comic Panel')">
+            <img style="width:100%;aspect-ratio:16/9;object-fit:cover;display:block;" src="../assets/comp_comic.jpg" alt="漫画式分格 Comic Panel" loading="lazy">
+            <div style="padding: 14px 16px;">
+              <div style="font-family: var(--font-body); font-weight: 600; font-size: 14px; margin-bottom: 6px;">漫画式分格 Comic Panel</div>
+              <div style="font-size: 12px; color: var(--color-text-secondary); line-height: 1.6;">多格并置，局部拼接，节奏感强，风格化叙事。</div>
+              <div style="font-size: 11px; color: var(--color-brand); margin-top: 6px; line-height: 1.5;">Prompt: 高饱和动作片，漫画分格，眼睛特写、手枪上膛、霓虹街道奔跑</div>
+            </div>
+          </div>
+          <div class="img-card fade-in-section visible" style="background: var(--color-bg-primary); border: 1px solid var(--color-border-default); border-radius: 8px; overflow: hidden; cursor: pointer;" onclick="openLB('../assets/comp_renaissance.jpg','宗教绘画三角 Renaissance Triangle')">
+            <img style="width:100%;aspect-ratio:16/9;object-fit:cover;display:block;" src="../assets/comp_renaissance.jpg" alt="宗教绘画三角 Renaissance Triangle" loading="lazy">
+            <div style="padding: 14px 16px;">
+              <div style="font-family: var(--font-body); font-weight: 600; font-size: 14px; margin-bottom: 6px;">宗教绘画三角 Renaissance Triangle</div>
+              <div style="font-size: 12px; color: var(--color-text-secondary); line-height: 1.6;">三角稳定结构，神圣等级，烛光庄严，古典仪式感。</div>
+              <div style="font-size: 11px; color: var(--color-brand); margin-top: 6px; line-height: 1.5;">Prompt: 昏暗教堂，老人坐中央高背椅，两侧年轻人倾斜，三角形构图</div>
+            </div>
+          </div>
+          <div class="img-card fade-in-section visible" style="background: var(--color-bg-primary); border: 1px solid var(--color-border-default); border-radius: 8px; overflow: hidden; cursor: pointer;" onclick="openLB('../assets/comp_johnnieto.jpg','杜琪峰枪战阵列 Johnnie To Tableau')">
+            <img style="width:100%;aspect-ratio:16/9;object-fit:cover;display:block;" src="../assets/comp_johnnieto.jpg" alt="杜琪峰枪战阵列 Johnnie To Tableau" loading="lazy">
+            <div style="padding: 14px 16px;">
+              <div style="font-family: var(--font-body); font-weight: 600; font-size: 14px; margin-bottom: 6px;">杜琪峰枪战阵列 Johnnie To Tableau</div>
+              <div style="font-size: 12px; color: var(--color-text-secondary); line-height: 1.6;">舞台化静态阵列，站位清楚，枪口交叉，静止中的杀机。</div>
+              <div style="font-size: 11px; color: var(--color-brand); margin-top: 6px; line-height: 1.5;">Prompt: 老公寓走廊，枪手分站门口墙角，枪口在画面中央交叉，战争即发</div>
+            </div>
+          </div>
+          <div class="img-card fade-in-section visible" style="background: var(--color-bg-primary); border: 1px solid var(--color-border-default); border-radius: 8px; overflow: hidden; cursor: pointer;" onclick="openLB('../assets/comp_johnford.jpg','约翰·福特门框构图 John Ford Doorway')">
+            <img style="width:100%;aspect-ratio:16/9;object-fit:cover;display:block;" src="../assets/comp_johnford.jpg" alt="约翰·福特门框构图 John Ford Doorway" loading="lazy">
+            <div style="padding: 14px 16px;">
+              <div style="font-family: var(--font-body); font-weight: 600; font-size: 14px; margin-bottom: 6px;">约翰·福特门框构图 John Ford Doorway</div>
+              <div style="font-size: 12px; color: var(--color-text-secondary); line-height: 1.6;">门框划分内外，文明与荒野，归属与放逐。</div>
+              <div style="font-size: 11px; color: var(--color-brand); margin-top: 6px; line-height: 1.5;">Prompt: 西部木屋室内昏暗，门框外刺眼荒原阳光，孤独牛仔背对屋内</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="fade-in-section visible" style="background: var(--color-bg-secondary); padding: 80px 0;">
+      <div class="max-w-7xl mx-auto px-6 lg:px-8 text-center">
+        <span style="font-family: var(--font-body); font-size: 11px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--color-brand); font-weight: 500; margin-bottom: 16px; display: block;">Continue Learning</span>
+        <h2 style="font-family: var(--font-display); font-size: clamp(24px, 3.5vw, 36px); font-weight: 600; color: var(--color-text-primary); line-height: 1.2; margin-bottom: 12px;">继续学习</h2>
+        <p style="font-family: var(--font-body); font-size: 15px; color: var(--color-text-secondary); line-height: 1.7; margin-bottom: 32px; max-width: 400px; margin-left: auto; margin-right: auto;">已学完构图组织，继续探索摄影属性的光圈、快门与色彩语言。</p>
+        <a href="photography-attrs.html" class="cta-glow inline-flex items-center gap-3 px-8 py-4" style="background: var(--color-brand); color: var(--color-text-inverse); font-family: var(--font-body); font-size: 14px; font-weight: 500; letter-spacing: 0.05em; text-decoration: none; border-radius: var(--radius-full); transition: box-shadow 0.3s ease;">
+          <span>进入摄影属性</span>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
+      </div>
+    </section>
+
+  </main>
+
+  <footer style="background: var(--color-bg-secondary); border-top: 1px solid var(--color-border-default);">
+    <div class="max-w-7xl mx-auto px-6 lg:px-8 py-16">
+      <div class="grid grid-cols-1 md:grid-cols-4 gap-12">
+        <div class="md:col-span-2">
+          <h3 style="font-family: var(--font-display); color: var(--color-brand); font-size: 22px; font-weight: 600; margin-bottom: 12px;">Visual Aesthetics</h3>
+          <p style="color: var(--color-text-secondary); font-family: var(--font-body); font-size: 14px; line-height: 1.7; max-width: 360px;">探索视觉美学的深层原理，从光影到镜头，从构图到色彩，构建系统的视觉表达能力。</p>
+        </div>
+        <div>
+          <h4 style="font-family: var(--font-body); color: var(--color-text-primary); font-size: 12px; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 16px; font-weight: 600;">学习模块</h4>
+          <ul style="list-style: none; padding: 0; margin: 0;">
+            <li style="margin-bottom: 10px;"><a href="#multimodal-light" onclick="switchPage('multimodal-light'); return false;" style="color: var(--color-text-secondary); text-decoration: none; font-size: 14px; font-family: var(--font-body);">多模态光影</a></li>
+            <li style="margin-bottom: 10px;"><a href="#lens-language" onclick="switchPage('lens-language'); return false;" style="color: var(--color-text-secondary); text-decoration: none; font-size: 14px; font-family: var(--font-body);">镜头语言</a></li>
+            <li style="margin-bottom: 10px;"><a href="#composition" onclick="switchPage('composition'); return false;" style="color: var(--color-text-secondary); text-decoration: none; font-size: 14px; font-family: var(--font-body);">构图组织</a></li>
+            <li><a href="photography-attrs.html" style="color: var(--color-text-secondary); text-decoration: none; font-size: 14px; font-family: var(--font-body);">摄影属性</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <style>
+    .nav-link:hover { color: var(--color-brand) !important; }
+    .img-card:hover { transform: translateY(-2px); transition: transform 0.2s ease; }
+  </style>
+
 </div><div class="spa-page" data-page="courses" style="display: none;">
 
 
@@ -6149,11 +6822,14 @@ document.querySelectorAll('.gallery-section').forEach(function(section) {
         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><path d="M12 2v20M2 12h20" opacity="0.3"/><circle cx="12" cy="12" r="4" fill="currentColor" opacity="0.4"/></svg>
         Visual Aesthetics
       </a>
-      <div class="hidden md:flex items-center gap-8">
-        <a href="#" data-dom-id="nav-home" class="nav-link" style="color: var(--color-text-secondary); font-family: var(--font-body); font-size: 13px; text-decoration: none; letter-spacing: 0.08em; text-transform: uppercase;">首页</a>
-        <a href="#" data-dom-id="nav-courses" class="nav-link nav-link--active" style="font-family: var(--font-body); font-size: 13px; text-decoration: none; letter-spacing: 0.08em; text-transform: uppercase;">课程中心</a>
-        <a href="#" data-dom-id="nav-multimodal" class="nav-link" style="color: var(--color-text-secondary); font-family: var(--font-body); font-size: 13px; text-decoration: none; letter-spacing: 0.08em; text-transform: uppercase;">多模态光影</a>
-        <a href="#" data-dom-id="nav-lens" class="nav-link" style="color: var(--color-text-secondary); font-family: var(--font-body); font-size: 13px; text-decoration: none; letter-spacing: 0.08em; text-transform: uppercase;">镜头语言</a>
+      <div class="hidden md:flex items-center gap-5">
+        <a href="#index" onclick="switchPage('index'); return false;" class="nav-link" style="color: var(--color-text-secondary); font-family: var(--font-body); font-size: 12px; text-decoration: none; letter-spacing: 0.04em; text-transform: uppercase; transition: color 0.2s;">首页</a>
+        <a href="#courses" onclick="switchPage('courses'); return false;" class="nav-link nav-link--active" style="color: var(--color-brand); font-family: var(--font-body); font-size: 12px; text-decoration: none; letter-spacing: 0.04em; text-transform: uppercase; transition: color 0.2s;">课程中心</a>
+        <a href="#multimodal-light" onclick="switchPage('multimodal-light'); return false;" class="nav-link" style="color: var(--color-text-secondary); font-family: var(--font-body); font-size: 12px; text-decoration: none; letter-spacing: 0.04em; text-transform: uppercase; transition: color 0.2s;">多模态光影</a>
+        <a href="#lens-language" onclick="switchPage('lens-language'); return false;" class="nav-link" style="color: var(--color-text-secondary); font-family: var(--font-body); font-size: 12px; text-decoration: none; letter-spacing: 0.04em; text-transform: uppercase; transition: color 0.2s;">镜头语言</a>
+        <a href="#composition" onclick="switchPage('composition'); return false;" class="nav-link" style="color: var(--color-text-secondary); font-family: var(--font-body); font-size: 12px; text-decoration: none; letter-spacing: 0.04em; text-transform: uppercase; transition: color 0.2s;">构图组织</a>
+        <a href="photography-attrs.html" class="nav-link" style="color: var(--color-text-secondary); font-family: var(--font-body); font-size: 12px; text-decoration: none; letter-spacing: 0.04em; text-transform: uppercase; transition: color 0.2s;">摄影属性</a>
+        <a href="camera-movement.html" class="nav-link" style="color: var(--color-text-secondary); font-family: var(--font-body); font-size: 12px; text-decoration: none; letter-spacing: 0.04em; text-transform: uppercase; transition: color 0.2s;">镜头调度</a>
       </div>
       <!-- Mobile menu button -->
       <button class="md:hidden" style="color: var(--color-text-primary); background: none; border: none; cursor: pointer;" aria-label="Open menu">
@@ -6184,7 +6860,7 @@ document.querySelectorAll('.gallery-section').forEach(function(section) {
         <!-- Card 1: 光影基础入门 -->
         <article class="course-card" style="background: var(--color-bg-surface); border-radius: var(--radius-lg); overflow: hidden;">
           <div style="overflow: hidden;">
-            <img loading="lazy" decoding="async" src="../assets/course-light.jpg" alt="光影基础入门" class="card-image" style="width: 100%; height: auto; display: block; object-fit: cover;" />
+            <img src="../assets/course-light.jpg" alt="光影基础入门" class="card-image" style="width: 100%; height: auto; display: block; object-fit: cover;" />
           </div>
           <div style="padding: 20px 20px 24px 20px;">
             <span class="card-tag" style="display: inline-block; font-family: var(--font-body); font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--color-brand); background: rgba(201, 169, 110, 0.08); padding: 4px 10px; border-radius: var(--radius-full); margin-bottom: 14px;">光影基础</span>
@@ -6206,7 +6882,7 @@ document.querySelectorAll('.gallery-section').forEach(function(section) {
         <!-- Card 2: 镜头语言精讲 -->
         <article class="course-card" style="background: var(--color-bg-surface); border-radius: var(--radius-lg); overflow: hidden;">
           <div style="overflow: hidden;">
-            <img loading="lazy" decoding="async" src="../assets/course-lens.jpg" alt="镜头语言精讲" class="card-image" style="width: 100%; height: auto; display: block; object-fit: cover;" />
+            <img src="../assets/course-lens.jpg" alt="镜头语言精讲" class="card-image" style="width: 100%; height: auto; display: block; object-fit: cover;" />
           </div>
           <div style="padding: 20px 20px 24px 20px;">
             <span class="card-tag" style="display: inline-block; font-family: var(--font-body); font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--color-brand); background: rgba(201, 169, 110, 0.08); padding: 4px 10px; border-radius: var(--radius-full); margin-bottom: 14px;">镜头技法</span>
@@ -6859,11 +7535,6 @@ document.addEventListener('DOMContentLoaded', function() {
     .bili-lazy-shell.is-loaded .bili-lazy-overlay{opacity:0;visibility:hidden;pointer-events:none;}
     .bili-lazy-button{display:inline-flex;align-items:center;gap:10px;padding:12px 20px;border:1px solid var(--color-border-brand);border-radius:999px;background:rgba(0,0,0,.38);color:var(--color-brand);font-family:var(--font-body);font-size:13px;letter-spacing:.08em;backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);}
     .bili-lazy-button::before{content:'';width:0;height:0;border-top:6px solid transparent;border-bottom:6px solid transparent;border-left:10px solid currentColor;}
-    @media (max-width: 768px){
-      .spa-page section.fade-in-section{content-visibility:auto;contain-intrinsic-size:720px;}
-      .gallery-section{min-height:320px!important;}
-      img{content-visibility:auto;}
-    }
   </style>
   <script>
     (function(){
@@ -6909,7 +7580,13 @@ document.addEventListener('DOMContentLoaded', function() {
 function switchPage(pageId) {
   document.querySelectorAll('.spa-page').forEach(function(p) { p.style.display = 'none'; });
   var target = document.querySelector('.spa-page[data-page="' + pageId + '"]');
-  if (target) target.style.display = 'block';
+  if (target) {
+    target.style.display = 'block';
+    // 切换页面后立即让所有 fade-in-section 可见，避免 IntersectionObserver 未重新触发导致内容隐藏
+    target.querySelectorAll('.fade-in-section').forEach(function(el) {
+      el.classList.add('visible');
+    });
+  }
   if (window.initBiliLazyFrames && target) window.initBiliLazyFrames(target);
   if (window.unloadInactiveBiliFrames) window.unloadInactiveBiliFrames(pageId);
   document.querySelectorAll('nav a.nav-link').forEach(function(a) { a.classList.remove('active'); });
@@ -6929,5 +7606,7 @@ window.addEventListener('popstate', function() {
 })();
   </script>
 
+<link rel="stylesheet" href="../assets/glow-hover-v2.css?v=2">
+<script src="../assets/glow-hover-v2.js?v=2"></script>
 </body>
 </html>

@@ -1,0 +1,157 @@
+/* ============================================================
+   流光边框悬停效果 v2 (2026-09-15)
+   备份: assets/hover-backup-v1.css
+   适用于: .img-card (camera-movement / photography-attrs)
+            .feature-card (all-in-one)
+   ============================================================ */
+
+/* ── 流光边框动画 ── */
+@property --glow-angle {
+  syntax: '<angle>';
+  initial-value: 0deg;
+  inherits: false;
+}
+
+@keyframes glow-rotate {
+  to { --glow-angle: 360deg; }
+}
+
+/* ── img-card 流光 ── */
+.img-card {
+  position: relative;
+  transition: transform .25s, box-shadow .3s;
+}
+
+/* 流光边框层 */
+.img-card::before {
+  content: '';
+  position: absolute;
+  inset: -1px;
+  border-radius: calc(var(--radius-lg, 8px) + 1px);
+  padding: 1.5px;
+  background: conic-gradient(
+    from var(--glow-angle, 0deg),
+    transparent 0%,
+    transparent 70%,
+    var(--color-brand, #c9a84c) 85%,
+    #f0d48a 92%,
+    var(--color-brand, #c9a84c) 100%
+  );
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  mask-composite: exclude;
+  opacity: 0;
+  transition: opacity .35s;
+  pointer-events: none;
+  z-index: 2;
+}
+
+.img-card:hover::before {
+  opacity: 1;
+  animation: glow-rotate 2.5s linear infinite;
+}
+
+.img-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 32px rgba(201, 168, 76, 0.12),
+              0 2px 8px rgba(201, 168, 76, 0.08);
+}
+
+/* ── 播放图标 overlay ── */
+.img-card .play-overlay {
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 170px; /* 与 .ic-img 高度一致 */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.25);
+  opacity: 0;
+  transition: opacity .3s;
+  pointer-events: none;
+  z-index: 3;
+}
+
+.img-card:hover .play-overlay {
+  opacity: 1;
+}
+
+.play-overlay .play-icon {
+  width: 48px; height: 48px;
+  border-radius: 50%;
+  background: rgba(201, 168, 76, 0.9);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 20px rgba(201, 168, 76, 0.4);
+  transform: scale(0.8);
+  transition: transform .3s;
+}
+
+.img-card:hover .play-icon {
+  transform: scale(1);
+}
+
+.play-icon svg {
+  width: 20px; height: 20px;
+  fill: #0a0a0a;
+  margin-left: 2px;
+}
+
+/* ── 图片亮度提升（保留原有逻辑，微调数值） ── */
+.img-card:hover .ic-img {
+  filter: brightness(1.05) saturate(1.08);
+  cursor: pointer;
+}
+
+/* ── feature-card 流光（首页大卡片） ── */
+.feature-card {
+  position: relative;
+}
+
+.feature-card::before {
+  content: '';
+  position: absolute;
+  inset: -1px;
+  border-radius: inherit;
+  padding: 1.5px;
+  background: conic-gradient(
+    from var(--glow-angle, 0deg),
+    transparent 0%,
+    transparent 65%,
+    var(--color-brand, #c9a84c) 80%,
+    #f0d48a 90%,
+    var(--color-brand, #c9a84c) 100%
+  );
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  mask-composite: exclude;
+  opacity: 0;
+  transition: opacity .4s;
+  pointer-events: none;
+  z-index: 2;
+}
+
+.feature-card:hover::before {
+  opacity: 1;
+  animation: glow-rotate 3s linear infinite;
+}
+
+.feature-card:hover {
+  box-shadow: 0 8px 40px rgba(201, 168, 76, 0.15),
+              0 2px 12px rgba(201, 168, 76, 0.08);
+}
+
+/* ── 点击音效（通过 JS 注入，见下方） ── */
+/* 无 CSS，音效由 JS 处理 */
+
+/* ── 降级方案：不支持 @property 的浏览器 ── */
+@supports not (background: conic-gradient(from var(--glow-angle, 0deg), red, blue)) {
+  .img-card:hover,
+  .feature-card:hover {
+    border-color: var(--color-brand, #c9a84c);
+    box-shadow: 0 0 12px rgba(201, 168, 76, 0.2);
+  }
+}

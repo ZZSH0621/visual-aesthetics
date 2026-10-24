@@ -1,0 +1,819 @@
+<!DOCTYPE html>
+<html lang="zh-CN" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>摄影属性 — Visual Aesthetics</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4.3.1/dist/index.global.js"></script>
+    <style>
+:root {
+  --color-brand: #C9A96E; --color-brand-light: #DBC99E; --color-brand-dark: #A68B5B;
+  --color-bg-primary: #0A0A0A; --color-bg-secondary: #141414; --color-bg-surface: #1A1A1A;
+  --color-bg-elevated: #222222; --color-bg-sunken: #111111;
+  --color-text-primary: #F0EDE8; --color-text-secondary: #9B9590; --color-text-tertiary: #6B6662;
+  --color-text-inverse: #0A0A0A;
+  --color-border-default: rgba(255,255,255,0.08); --color-border-strong: rgba(255,255,255,0.15);
+  --color-border-brand: rgba(201,169,110,0.3);
+  --radius-sm: 2px; --radius-md: 8px; --radius-lg: 12px; --radius-full: 9999px;
+  --font-display: 'Playfair Display', 'Noto Serif SC', 'Georgia', serif;
+  --font-body: 'Inter', 'Noto Sans SC', 'Helvetica Neue', sans-serif;
+}
+html { scroll-behavior: smooth; }
+body { background: var(--color-bg-primary); color: var(--color-text-primary); font-family: var(--font-body); margin: 0; }
+.nav-link:hover { color: var(--color-brand) !important; }
+.type-card { background: var(--color-bg-surface); border: 1px solid var(--color-border-default); border-radius: var(--radius-lg); padding: 20px 22px; transition: border-color .25s, transform .25s; display: block; }
+.type-card:hover { border-color: var(--color-border-brand); transform: translateY(-2px); }
+.type-card .tc-name { font-family: var(--font-display); font-size: 18px; color: var(--color-text-primary); margin-bottom: 2px; }
+.type-card .tc-en { font-size: 11px; color: var(--color-brand); text-transform: uppercase; letter-spacing: .08em; margin-bottom: 10px; }
+.type-card .tc-def { font-size: 13.5px; color: var(--color-text-secondary); line-height: 1.75; }
+.type-card .tc-effect { margin-top: 10px; font-size: 12px; color: var(--color-text-tertiary); border-top: 1px solid var(--color-border-default); padding-top: 10px; }
+.type-card .tc-effect b { color: var(--color-brand); font-weight: 500; }
+.sunk { background: var(--color-bg-sunken); border-radius: var(--radius-md); }
+.kv { display: flex; justify-content: space-between; gap: 12px; padding: 9px 14px; }
+.kv span:first-child { color: var(--color-text-tertiary); font-size: 13px; flex-shrink: 0; }
+.kv span:last-child { color: var(--color-text-primary); font-size: 13px; text-align: right; }
+.prompt-box { background: var(--color-bg-sunken); border-left: 3px solid var(--color-brand); border-radius: 0 var(--radius-md) var(--radius-md) 0; padding: 14px 18px; }
+.prompt-box .p-label { font-size: 11px; color: var(--color-brand); text-transform: uppercase; letter-spacing: .1em; margin-bottom: 8px; font-weight: 600; }
+.prompt-box p { font-size: 13.5px; color: var(--color-text-secondary); line-height: 1.85; margin: 0; }
+.note-box { background: var(--color-bg-sunken); border-left: 3px solid var(--color-brand); padding: 14px 18px; border-radius: 0 var(--radius-sm) var(--radius-sm) 0; }
+.note-box p { font-size: 14px; color: var(--color-text-secondary); line-height: 1.8; margin: 0; font-style: italic; }
+table.dt { width: 100%; border-collapse: collapse; font-size: 13.5px; }
+table.dt th { text-align: left; color: var(--color-brand); font-weight: 600; font-size: 11px; text-transform: uppercase; letter-spacing: .1em; padding: 10px 14px; border-bottom: 1px solid var(--color-border-strong); }
+table.dt td { padding: 11px 14px; color: var(--color-text-secondary); border-bottom: 1px solid var(--color-border-default); line-height: 1.7; vertical-align: top; }
+table.dt tr:last-child td { border-bottom: none; }
+table.dt td b, table.dt td strong { color: var(--color-text-primary); font-weight: 500; }
+.emo-chip { background: linear-gradient(135deg, rgba(201,169,110,0.15), rgba(201,169,110,0.05)); border-radius: var(--radius-md); padding: 14px 16px; text-align: center; }
+.emo-chip .e1 { font-family: var(--font-display); font-size: 17px; color: var(--color-brand); margin-bottom: 4px; }
+.emo-chip .e2 { font-size: 12px; color: var(--color-text-tertiary); line-height: 1.5; }
+.sec-label { display: flex; align-items: center; gap: 12px; margin-bottom: 10px; }
+.sec-label .bar { width: 32px; height: 1.5px; background: var(--color-brand); }
+.sec-label p { font-size: 12px; text-transform: uppercase; letter-spacing: .2em; color: var(--color-brand); font-weight: 500; margin: 0; }
+.module-hero { position: relative; overflow: hidden; min-height: 420px; }
+.module-hero img.mh { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; filter: brightness(0.5) saturate(1.05); }
+.module-hero .mh-grad { position: absolute; inset: 0; background: linear-gradient(to right, rgba(10,10,10,0.92) 20%, rgba(10,10,10,0.4) 70%, transparent); }
+.sub-label { font-size: 12px; color: var(--color-brand); text-transform: uppercase; letter-spacing: .08em; margin-bottom: 10px; font-weight: 600; }
+ul.tick { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 9px; }
+ul.tick li { font-size: 14px; color: var(--color-text-secondary); line-height: 1.7; padding-left: 16px; position: relative; }
+ul.tick li::before { content: "•"; position: absolute; left: 0; color: var(--color-brand); }
+ul.tick li b, ul.tick li strong { color: var(--color-text-primary); font-weight: 500; }
+.quote-final { background: linear-gradient(135deg, rgba(201,169,110,0.12), transparent); padding: 20px 26px; border-radius: var(--radius-lg); border: 1px solid var(--color-border-brand); text-align: center; }
+.quote-final .q1 { font-family: var(--font-display); font-size: 18px; color: var(--color-brand); line-height: 1.6; margin: 0; }
+.quote-final .q2 { font-size: 12px; color: var(--color-text-tertiary); margin: 10px 0 0 0; }
+.err-list li::before { content: "✕"; font-size: 11px; }
+.module-anchor { scroll-margin-top: 90px; }
+.gal-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; }
+.gal-grid figure, .fig { margin: 0; }
+.gal-grid img, .fig img { width: 100%; height: 130px; object-fit: cover; border-radius: var(--radius-md); border: 1px solid var(--color-border-default); }
+.gal-grid figcaption, .fig figcaption { font-size: 11px; color: var(--color-text-tertiary); margin-top: 6px; text-align: center; }
+@media (max-width: 1023px) { .gal-grid { grid-template-columns: repeat(2, 1fr); } }
+/* === image card (上图下文) === */
+.img-card { background: var(--color-bg-surface); border: 1px solid var(--color-border-default); border-radius: var(--radius-lg); overflow: hidden; transition: border-color .25s, transform .25s; }
+.img-card:hover { transform: translateY(-3px); }
+.img-card .ic-img { width: 100%; height: 170px; object-fit: cover; display: block; cursor: zoom-in; filter: brightness(0.92) saturate(1.02); transition: filter .3s; }
+.img-card:hover .ic-img { filter: brightness(1) saturate(1.05); }
+.img-card .ic-body { padding: 16px 18px 18px; }
+.img-card .tc-en { font-size: 11px; color: var(--color-brand); text-transform: uppercase; letter-spacing: .08em; margin-bottom: 6px; }
+.img-card .tc-name { font-family: var(--font-display); font-size: 17px; color: var(--color-text-primary); margin-bottom: 8px; }
+.img-card .tc-def { font-size: 13px; color: var(--color-text-secondary); line-height: 1.75; }
+.img-card .tc-effect { margin-top: 10px; font-size: 12px; color: var(--color-text-tertiary); border-top: 1px solid var(--color-border-default); padding-top: 10px; }
+.img-card .tc-effect b { color: var(--color-brand); font-weight: 500; }
+/* === lightbox === */
+.lb-backdrop { position: fixed; inset: 0; z-index: 200; background: rgba(0,0,0,0.88); backdrop-filter: blur(8px); display: none; align-items: center; justify-content: center; padding: 40px; cursor: zoom-out; }
+.lb-backdrop.open { display: flex; }
+.lb-backdrop img { max-width: 92vw; max-height: 88vh; object-fit: contain; border-radius: var(--radius-md); box-shadow: 0 24px 80px rgba(0,0,0,0.6); }
+.lb-cap { position: fixed; bottom: 28px; left: 50%; transform: translateX(-50%); color: var(--color-text-secondary); font-size: 13px; letter-spacing: .04em; background: rgba(10,10,10,0.6); padding: 8px 20px; border-radius: var(--radius-full); border: 1px solid var(--color-border-default); }
+.lb-close { position: fixed; top: 22px; right: 28px; width: 40px; height: 40px; border-radius: 50%; border: 1px solid var(--color-border-strong); background: rgba(10,10,10,0.6); color: var(--color-text-primary); font-size: 22px; line-height: 1; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: border-color .2s, color .2s; }
+.lb-close:hover { border-color: var(--color-brand); color: var(--color-brand); }
+    </style>
+</head>
+<body>
+
+<!-- ===== HEADER ===== -->
+<header class="fixed top-0 left-0 right-0 z-50" style="background: rgba(10,10,10,0.85); backdrop-filter: blur(20px); border-bottom: 1px solid var(--color-border-default);">
+  <nav class="max-w-7xl mx-auto px-6 lg:px-8 h-16 flex items-center justify-between">
+    <a href="all-in-one.html#index" class="flex items-center gap-2" style="font-family: var(--font-display); color: var(--color-brand); font-size: 20px; font-weight: 600; text-decoration: none; letter-spacing: 0.02em;">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><path d="M12 2v20M2 12h20" opacity="0.3"/><circle cx="12" cy="12" r="4" fill="currentColor" opacity="0.4"/></svg>
+      Visual Aesthetics
+    </a>
+    <div class="hidden md:flex items-center gap-5">
+      <a href="all-in-one.html#index" class="nav-link" style="color: var(--color-text-secondary); font-size: 12px; text-decoration: none; letter-spacing: 0.04em; text-transform: uppercase; transition: color 0.2s;">首页</a>
+      <a href="all-in-one.html#courses" class="nav-link" style="color: var(--color-text-secondary); font-size: 12px; text-decoration: none; letter-spacing: 0.04em; text-transform: uppercase; transition: color 0.2s;">课程中心</a>
+      <a href="all-in-one.html#multimodal-light" class="nav-link" style="color: var(--color-text-secondary); font-size: 12px; text-decoration: none; letter-spacing: 0.04em; text-transform: uppercase; transition: color 0.2s;">多模态光影</a>
+      <a href="all-in-one.html#lens-language" class="nav-link" style="color: var(--color-text-secondary); font-size: 12px; text-decoration: none; letter-spacing: 0.04em; text-transform: uppercase; transition: color 0.2s;">镜头语言</a>
+      <a href="all-in-one.html#composition" class="nav-link" style="color: var(--color-text-secondary); font-size: 12px; text-decoration: none; letter-spacing: 0.04em; text-transform: uppercase; transition: color 0.2s;">构图组织</a>
+      <a href="photography-attrs.html" class="nav-link" style="color: var(--color-brand); font-size: 12px; text-decoration: none; letter-spacing: 0.04em; text-transform: uppercase;">摄影属性</a>
+      <a href="camera-movement.html" class="nav-link" style="color: var(--color-text-secondary); font-size: 12px; text-decoration: none; letter-spacing: 0.04em; text-transform: uppercase; transition: color 0.2s;">镜头调度</a>
+    </div>
+  </nav>
+</header>
+
+<main class="pt-16 min-h-screen">
+
+  <!-- ===== HERO ===== -->
+  <section class="module-hero" style="display: flex; align-items: center;">
+    <img class="mh" src="../assets/lens_anamorphic.png" alt="摄影属性">
+    <div class="mh-grad"></div>
+    <div class="relative z-10 max-w-7xl mx-auto px-6 lg:px-8 py-24 w-full">
+      <div class="max-w-2xl">
+        <div class="flex flex-wrap items-center gap-3 mb-8">
+          <span style="display: inline-flex; align-items: center; gap: 6px; padding: 6px 16px; border: 1px solid var(--color-border-brand); border-radius: var(--radius-full); font-size: 12px; color: var(--color-brand); letter-spacing: 0.06em; text-transform: uppercase;">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg>
+            5 大模块
+          </span>
+          <span style="display: inline-flex; align-items: center; gap: 6px; padding: 6px 16px; border: 1px solid var(--color-border-brand); border-radius: var(--radius-full); font-size: 12px; color: var(--color-brand); letter-spacing: 0.06em; text-transform: uppercase;">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            基础 → 进阶
+          </span>
+          <span style="display: inline-flex; align-items: center; gap: 6px; padding: 6px 16px; border: 1px solid var(--color-border-brand); border-radius: var(--radius-full); font-size: 12px; color: var(--color-brand); letter-spacing: 0.06em; text-transform: uppercase;">AI Prompt 蒸馏版</span>
+        </div>
+        <h1 style="font-family: var(--font-display); font-size: clamp(40px, 7vw, 76px); font-weight: 600; line-height: 1.1; margin: 0 0 20px 0; letter-spacing: -0.01em;">摄影属性</h1>
+        <p style="font-size: clamp(15px, 2vw, 19px); color: var(--color-text-secondary); line-height: 1.8; margin: 0 0 14px 0; max-width: 580px; font-weight: 300;">
+          摄影机在静态拍摄状态下形成画面的基础观看条件——决定画面<strong style="color: var(--color-brand); font-weight: 500;">从哪里看、以什么距离看、通过什么镜头看</strong>，以及画面的基础成像形态。
+        </p>
+        <p style="font-size: 13px; color: var(--color-text-tertiary); line-height: 1.7; margin: 0; max-width: 560px;">
+          不是摄影机运动，也不处理画面内部元素的运动，而是构成影像观看方式的底层条件。范畴包括：景别、机位、拍摄角度、镜头、焦点、景深、曝光、畸变等。
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== 知识地图 ===== -->
+  <section style="background: var(--color-bg-secondary); padding: 56px 0;">
+    <div class="max-w-7xl mx-auto px-6 lg:px-8">
+      <div class="sec-label"><div class="bar"></div><p>知识地图</p></div>
+      <div class="grid grid-cols-2 md:grid-cols-5 gap-4" style="margin-top: 24px;">
+        <a href="#mod-jingbie" class="type-card" style="text-decoration: none;">
+          <div class="tc-en">Module 01</div><div class="tc-name">景别</div>
+          <div class="tc-def">主体在画面中的占比——观众与故事的心理距离。</div>
+        </a>
+        <a href="#mod-jiwei" class="type-card" style="text-decoration: none;">
+          <div class="tc-en">Module 02</div><div class="tc-name">机位</div>
+          <div class="tc-def">摄影机在哪里——位置即立场，高度即权力。</div>
+        </a>
+        <a href="#mod-jiaodu" class="type-card" style="text-decoration: none;">
+          <div class="tc-en">Module 03</div><div class="tc-name">拍摄角度</div>
+          <div class="tc-def">摄影机朝哪看、歪不歪头——叙事的态度。</div>
+        </a>
+        <a href="#mod-jingtou" class="type-card" style="text-decoration: none;">
+          <div class="tc-en">Module 04</div><div class="tc-name">镜头</div>
+          <div class="tc-def">焦段与特殊镜头——光学世界观的开关。</div>
+        </a>
+        <a href="#mod-chengxiang" class="type-card" style="text-decoration: none;">
+          <div class="tc-en">Module 05</div><div class="tc-name">成像属性</div>
+          <div class="tc-def">焦点、景深、曝光、畸变——画面的皮肤与质感。</div>
+        </a>
+      </div>
+    </div>
+  </section>
+<!-- ===== MODULE 01: 景别 ===== -->
+  <section id="mod-jingbie" class="module-anchor" style="padding: 90px 0 70px 0; background: var(--color-bg-primary);">
+    <div class="max-w-7xl mx-auto px-6 lg:px-8">
+      <div class="sec-label"><div class="bar"></div><p>Module 01 · Shot Size</p></div>
+      <h2 style="font-family: var(--font-display); font-size: clamp(30px, 4.5vw, 52px); font-weight: 500; line-height: 1.15; margin: 0 0 14px 0;">景别</h2>
+      <p style="font-size: 15px; line-height: 1.85; color: var(--color-text-secondary); max-width: 760px; margin: 0 0 10px 0;">
+        摄影机与被摄主体之间形成的<strong style="color: var(--color-text-primary);">画面距离关系</strong>，体现为主体在画面中所占比例的大小。它决定观众与人物、事件、空间之间的观看距离，影响画面的信息量、情绪强度和叙事重点。
+      </p>
+      <p style="font-size: 13.5px; line-height: 1.8; color: var(--color-text-tertiary); max-width: 760px; margin: 0;">
+        景别不是绝对距离，而是<strong style="color: var(--color-brand);">比例关系</strong>——长焦可以在 50 米外拍出特写，广角可以在 1 米内拍出远景。景别衡量的永远是"主体在画框中的占比"。
+      </p>
+
+      <div style="margin-top: 44px;">
+        <div class="sub-label">景别光谱 · 从环境到细节</div>
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-3">
+          <div class="type-card"><div class="tc-en">Extreme Long Shot</div><div class="tc-name">大远景</div><div class="tc-def">主体极小（&lt;10%），环境占绝大部分。</div><div class="tc-effect"><b>功能</b> 交代背景、抒发情感、史诗感</div></div>
+          <div class="type-card"><div class="tc-en">Long Shot</div><div class="tc-name">远景</div><div class="tc-def">人物全身可见，保留较多环境信息。</div><div class="tc-effect"><b>功能</b> 突出人物与环境的关系</div></div>
+          <div class="type-card"><div class="tc-en">Full Shot</div><div class="tc-name">全景</div><div class="tc-def">人物从头到脚完整出现。</div><div class="tc-effect"><b>功能</b> 展示身体动作与姿态</div></div>
+          <div class="type-card"><div class="tc-en">Medium Shot</div><div class="tc-name">中景</div><div class="tc-def">腰部或膝盖以上。</div><div class="tc-effect"><b>功能</b> 对话叙事主力景别</div></div>
+          <div class="type-card"><div class="tc-en">Medium Close-up</div><div class="tc-name">中近景</div><div class="tc-def">胸部以上，介于中景与近景之间。</div><div class="tc-effect"><b>功能</b> 表情 + 肩手姿态兼得</div></div>
+          <div class="type-card"><div class="tc-en">Close Shot</div><div class="tc-name">近景</div><div class="tc-def">胸部以上偏面部。</div><div class="tc-effect"><b>功能</b> 强调表情与情绪</div></div>
+          <div class="type-card"><div class="tc-en">Close-up</div><div class="tc-name">特写</div><div class="tc-def">聚焦面部、手部或关键物件。</div><div class="tc-effect"><b>功能</b> 强化情绪与信息重点</div></div>
+          <div class="type-card"><div class="tc-en">Extreme Close-up</div><div class="tc-name">极特写</div><div class="tc-def">只呈现眼睛、嘴唇、指尖等局部。</div><div class="tc-effect"><b>功能</b> 强烈心理或感官冲击</div></div>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-5 gap-10" style="margin-top: 48px;">
+        <div class="lg:col-span-3">
+          <div class="sub-label">景别判定方法</div>
+          <table class="dt">
+            <thead><tr><th style="width: 34%;">场景</th><th>判定规则</th></tr></thead>
+            <tbody>
+              <tr><td><b>单人画面</b></td><td>按人物在画面中的截取部位直接划分</td></tr>
+              <tr><td><b>多人 · 相对景深法</b></td><td>以<b>最靠近镜头</b>的人物为衡量标准</td></tr>
+              <tr><td><b>多人 · 独立景框法</b></td><td>以<b>独立景框内</b>的人物为衡量标准（如窗外的孩子 → 远景）</td></tr>
+              <tr><td><b>长焦多景深</b></td><td><b>谁清晰认准谁</b>——以焦平面上的人物为准</td></tr>
+              <tr><td><b>镜中人物</b></td><td>不作参考——镜中空间与拍摄方向无准确对应关系</td></tr>
+              <tr><td><b>无人画面</b></td><td>以被摄目标所在焦平面放置一个"虚拟人物"再判定</td></tr>
+            </tbody>
+          </table>
+          <div class="note-box" style="margin-top: 20px;">
+            <p>A 类划分自由粗疏，适合日常沟通；B 类划分精准细致，适合分镜脚本与教学。"相对景深法"看最近的人，"独立景框法"看框里的人——同一画面用不同方法，结论可以完全不同。</p>
+          </div>
+        </div>
+        <div class="lg:col-span-2">
+          <div class="sub-label">景别示例</div>
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
+            <figure class="fig"><img src="../assets/shot_extreme_long.png"><figcaption>大远景 · 环境碾压</figcaption></figure>
+            <figure class="fig"><img src="../assets/shot_long.jpg"><figcaption>远景 · 人与环境</figcaption></figure>
+            <figure class="fig"><img src="../assets/shot_closeup.jpg"><figcaption>特写 · 情绪聚焦</figcaption></figure>
+            <figure class="fig"><img src="../assets/shot_extreme_closeup.png"><figcaption>极特写 · 感官冲击</figcaption></figure>
+          </div>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-10" style="margin-top: 48px;">
+        <div>
+          <div class="sub-label">情绪表达</div>
+          <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px;">
+            <div class="emo-chip"><div class="e1">渺小</div><div class="e2">大远景 · 天地尺度</div></div>
+            <div class="emo-chip"><div class="e1">疏离</div><div class="e2">远景 · 旁观</div></div>
+            <div class="emo-chip"><div class="e1">客观</div><div class="e2">全景 · 完整</div></div>
+            <div class="emo-chip"><div class="e1">日常</div><div class="e2">中景 · 交流</div></div>
+            <div class="emo-chip"><div class="e1">共情</div><div class="e2">近景 · 表情</div></div>
+            <div class="emo-chip"><div class="e1">冲击</div><div class="e2">特写 · 爆发</div></div>
+          </div>
+        </div>
+        <div>
+          <div class="sub-label">景别的心理学</div>
+          <ul class="tick">
+            <li><b>亲密度的物理化</b> — 霍尔的空间关系学：景别本质是在银幕上复刻"亲密/个人/社交/公共"四层人际距离</li>
+            <li><b>权力的尺度</b> — 人物占比越小越被环境支配，占比越大越支配画面</li>
+            <li><b>信息的配额</b> — 景别越紧环境信息越少、情绪越多；景别越松情绪越冷、越客观</li>
+          </ul>
+        </div>
+      </div>
+
+      <div style="margin-top: 48px;">
+        <div class="sub-label">AI 视频生成 Prompt 示例</div>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div class="prompt-box"><div class="p-label">大远景</div><p>电影感视频：大远景，荒漠黄昏，一个孤独旅人走在广阔沙地中央，人物只占画面很小比例，天空巨大，风沙轻微流动，画面强调环境尺度与人物渺小感，写实电影质感。</p></div>
+          <div class="prompt-box"><div class="p-label">中近景</div><p>夜晚车内，一名年轻女性坐在驾驶座上，画面从胸口到头部入画，她双手紧握方向盘，眼神紧张地看向前方，车窗外霓虹灯和雨滴虚化成光斑，低调光，真实悬疑电影质感。</p></div>
+          <div class="prompt-box"><div class="p-label">特写</div><p>一只微微颤抖的手按下老旧电梯按钮，按钮边缘有磨损和指纹，金属表面反射冷光，背景完全虚化，紧张悬疑氛围。</p></div>
+          <div class="prompt-box"><div class="p-label">极特写</div><p>人物的一只眼睛占满画面，瞳孔中倒映出远处燃烧的火光，睫毛和皮肤纹理清晰，眼神恐惧，暗部细节丰富，电影级写实质感。</p></div>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-10" style="margin-top: 48px;">
+        <div>
+          <div class="sub-label">常见错误</div>
+          <ul class="tick err-list">
+            <li><b>景别跳切混乱</b> — 同一场戏景别忽远忽近没有逻辑</li>
+            <li><b>特写滥用</b> — 什么都特写，稀释了特写的情绪力量</li>
+            <li><b>大远景没耐心</b> — 建立镜头切太快，观众还没看清环境</li>
+            <li><b>Prompt 比例含糊</b> — 只说"拍一个人"，不说明截取部位</li>
+            <li><b>忽略焦段关系</b> — 广角近拍特写会严重变形人脸</li>
+          </ul>
+        </div>
+        <div style="display: flex; align-items: center;">
+          <div class="quote-final" style="width: 100%;">
+            <p class="q1">"景别 = 观众与故事的心理距离"</p>
+            <p class="q2">导演握住观众视线的第一只手——决定"让观众站多远看"。</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+<!-- ===== MODULE 02: 机位 ===== -->
+  <section id="mod-jiwei" class="module-anchor" style="padding: 90px 0 70px 0; background: var(--color-bg-secondary);">
+    <div class="max-w-7xl mx-auto px-6 lg:px-8">
+      <div class="sec-label"><div class="bar"></div><p>Module 02 · Camera Position</p></div>
+      <h2 style="font-family: var(--font-display); font-size: clamp(30px, 4.5vw, 52px); font-weight: 500; line-height: 1.15; margin: 0 0 14px 0;">机位</h2>
+      <p style="font-size: 15px; line-height: 1.85; color: var(--color-text-secondary); max-width: 760px; margin: 0 0 10px 0;">
+        通俗讲就是<strong style="color: var(--color-text-primary);">"摄影机在哪里"</strong>——摄影机在空间中的放置位置，包括高度、距离、方位和拍摄平台。它影响画面的空间感、权力关系、临场感和视觉立场。
+      </p>
+      <p style="font-size: 13.5px; line-height: 1.8; color: var(--color-text-tertiary); max-width: 760px; margin: 0;">
+        机位 ≠ 拍摄角度：机位回答"摄影机<strong style="color: var(--color-brand);">在哪里</strong>"，角度回答"摄影机<strong style="color: var(--color-brand);">朝哪个方向拍</strong>"。
+      </p>
+
+      <div style="margin-top: 44px;">
+        <div class="sub-label">基础机位 · 高度即权力</div>
+        <div class="grid grid-cols-2 md:grid-cols-3 gap-4">
+          <div class="img-card"><img class="ic-img" src="../assets/pos_eyelevel.jpg" alt="平视机位" onclick="openLB('../assets/pos_eyelevel.jpg','平视机位 Eye-level')" loading="lazy"><div class="ic-body"><div class="tc-en">Eye-level</div><div class="tc-name">平视机位</div><div class="tc-def">高度接近人物眼睛，形成自然、客观、日常的观看关系。</div><div class="tc-effect"><b>场景</b> 对话、纪实采访</div></div></div>
+          <div class="img-card"><img class="ic-img" src="../assets/pos_high.webp" alt="高机位" onclick="openLB('../assets/pos_high.webp','高机位 High Position')" loading="lazy"><div class="ic-body"><div class="tc-en">High Position</div><div class="tc-name">高机位</div><div class="tc-def">位于主体上方向下观看。</div><div class="tc-effect"><b>情绪</b> 弱小、被观察、被压制</div></div></div>
+          <div class="img-card"><img class="ic-img" src="../assets/pos_low.png" alt="低机位" onclick="openLB('../assets/pos_low.png','低机位 Low Position')" loading="lazy"><div class="ic-body"><div class="tc-en">Low Position</div><div class="tc-name">低机位</div><div class="tc-def">低于主体向上观看。</div><div class="tc-effect"><b>情绪</b> 力量、压迫、英雄感</div></div></div>
+          <div class="img-card"><img class="ic-img" src="../assets/pos_ground.webp" alt="地面机位" onclick="openLB('../assets/pos_ground.webp','地面机位 Ground-level')" loading="lazy"><div class="ic-body"><div class="tc-en">Ground-level</div><div class="tc-name">地面机位</div><div class="tc-def">极低接近地面。</div><div class="tc-effect"><b>情绪</b> 地面质感、脚步、危险逼近</div></div></div>
+          <div class="img-card"><img class="ic-img" src="../assets/pos_eyelevel.jpg" alt="肩部机位" onclick="openLB('../assets/pos_eyelevel.jpg','肩部机位 Shoulder-level')" loading="lazy"><div class="ic-body"><div class="tc-en">Shoulder-level</div><div class="tc-name">肩部机位</div><div class="tc-def">高度接近人物肩部。</div><div class="tc-effect"><b>场景</b> 跟拍、手持、现实感</div></div></div>
+          <div class="img-card"><img class="ic-img" src="../assets/pos_topdown.webp" alt="顶视机位" onclick="openLB('../assets/pos_topdown.webp','顶视机位 Top-down')" loading="lazy"><div class="ic-body"><div class="tc-en">Top-down</div><div class="tc-name">顶视机位</div><div class="tc-def">主体正上方垂直向下。</div><div class="tc-effect"><b>情绪</b> 图案、布局、命运感</div></div></div>
+        </div>
+      </div>
+
+      <div style="margin-top: 40px;">
+        <div class="sub-label">特殊机位 · 立场即叙事</div>
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+          <div class="img-card"><img class="ic-img" src="../assets/pos_drone.jpg" alt="无人机机位" onclick="openLB('../assets/pos_drone.jpg','无人机机位 Drone')" loading="lazy"><div class="ic-body"><div class="tc-name">无人机机位</div><div class="tc-def">空中视角，高度、广域空间、漂浮观察感。</div></div></div>
+          <div class="img-card"><img class="ic-img" src="../assets/pos_cctv.jpg" alt="监控机位" onclick="openLB('../assets/pos_cctv.jpg','监控机位 Surveillance')" loading="lazy"><div class="ic-body"><div class="tc-name">监控机位</div><div class="tc-def">高处广角静止，冷漠观察与证据感。</div></div></div>
+          <div class="img-card"><img class="ic-img" src="../assets/pos_car.jpg" alt="车载机位 Car Mount" onclick="openLB('../assets/pos_car.jpg','车载机位 Car Mount')" loading="lazy"><div class="ic-body"><div class="tc-name">车载机位</div><div class="tc-def">固定于车内/车头/车尾，速度与主观路感。</div></div></div>
+          <div class="img-card"><img class="ic-img" src="../assets/pos_object.jpg" alt="物件机位 Object Mount" onclick="openLB('../assets/pos_object.jpg','物件机位 Object Mount')" loading="lazy"><div class="ic-body"><div class="tc-name">物件机位</div><div class="tc-def">固定于运动物体，非人称奇异视角。</div></div></div>
+          <div class="img-card"><img class="ic-img" src="../assets/pos_voyeur.png" alt="隐藏窥视机位" onclick="openLB('../assets/pos_voyeur.png','隐藏窥视机位 Voyeuristic')" loading="lazy"><div class="ic-body"><div class="tc-name">隐藏窥视机位</div><div class="tc-def">门缝、窗帘、柜后偷看，悬疑与不安全感。</div></div></div>
+          <div class="img-card"><img class="ic-img" src="../assets/pos_underwater.png" alt="水下机位" onclick="openLB('../assets/pos_underwater.png','水下机位 Underwater')" loading="lazy"><div class="ic-body"><div class="tc-name">水下机位</div><div class="tc-def">水体折射、漂浮物、光线散射、窒息感。</div></div></div>
+          <div class="img-card"><img class="ic-img" src="../assets/pos_mirror.jpg" alt="镜面机位" onclick="openLB('../assets/pos_mirror.jpg','镜面机位 Mirror')" loading="lazy"><div class="ic-body"><div class="tc-name">镜面机位</div><div class="tc-def">通过镜子/玻璃/反射面观看，身份与分裂。</div></div></div>
+          <div class="img-card"><img class="ic-img" src="../assets/angle_godseye.png" alt="神视角位" onclick="openLB('../assets/angle_godseye.png','神视角位 God\'s-eye')" loading="lazy"><div class="ic-body"><div class="tc-name">神视角位</div><div class="tc-def">极高处垂直俯瞰，全知、冷静、宿命。</div></div></div>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-5 gap-10" style="margin-top: 48px;">
+        <div class="lg:col-span-3">
+          <div class="sub-label">机位示例</div>
+          <div class="gal-grid">
+            <figure><img src="../assets/pos_eyelevel.jpg"><figcaption>平视 · 日常对话</figcaption></figure>
+            <figure><img src="../assets/pos_low.png"><figcaption>低机位 · 压迫感</figcaption></figure>
+            <figure><img src="../assets/pos_voyeur.png"><figcaption>窥视 · 门缝</figcaption></figure>
+            <figure><img src="../assets/pos_drone.jpg"><figcaption>无人机 · 广域</figcaption></figure>
+          </div>
+        </div>
+        <div class="lg:col-span-2">
+          <div class="sub-label">机位的四个维度</div>
+          <div style="display: flex; flex-direction: column; gap: 8px;">
+            <div class="sunk kv"><span>高度 Height</span><span>权力关系：高=压制，低=敬畏</span></div>
+            <div class="sunk kv"><span>距离 Distance</span><span>亲密感 vs 窥视感</span></div>
+            <div class="sunk kv"><span>方位 Direction</span><span>正/侧/背/斜的信息量</span></div>
+            <div class="sunk kv"><span>平台 Platform</span><span>三脚架稳定 vs 手持临场</span></div>
+          </div>
+          <div class="note-box" style="margin-top: 18px;">
+            <p>奥逊·威尔斯拍《公民凯恩》时砸开摄影棚地板，只为把摄影机放得更低——机位高度是最直观的"权力语法"。</p>
+          </div>
+        </div>
+      </div>
+
+      <div style="margin-top: 48px;">
+        <div class="sub-label">AI 视频生成 Prompt 示例</div>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div class="prompt-box"><div class="p-label">低机位</div><p>黑衣反派站在雨夜街头，摄影机贴近地面向上拍摄，他的身形显得高大压迫，背后霓虹灯闪烁，雨水反光，黑色电影质感。</p></div>
+          <div class="prompt-box"><div class="p-label">地面机位</div><p>摄影机贴近泥泞地面，一队士兵的靴子从镜头前快速跑过，泥水飞溅到画面边缘，背景烟尘弥漫，战争电影质感。</p></div>
+          <div class="prompt-box"><div class="p-label">监控机位</div><p>便利店深夜空无一人，画面来自天花板角落的固定监控摄像头，高处广角视野，画质略粗糙，时间码感，货架间突然有影子闪过。</p></div>
+          <div class="prompt-box"><div class="p-label">物件机位</div><p>视角仿佛固定在一个红色行李箱上，行李箱被人拖着穿过机场大厅，地面快速滑过，周围人群从两侧掠过，画面有轻微震动。</p></div>
+          <div class="prompt-box"><div class="p-label">隐藏窥视</div><p>视角从半掩的门缝中看向客厅，两个人正在低声争吵，画面边缘被门框遮挡，室内灯光昏黄，气氛紧张，悬疑片质感。</p></div>
+          <div class="prompt-box"><div class="p-label">水下机位</div><p>摄影机位于泳池水下，蓝绿色水体中气泡上升，一个人影从水面坠入，阳光在水面形成波纹折射，动作缓慢，声音沉闷。</p></div>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-10" style="margin-top: 48px;">
+        <div>
+          <div class="sub-label">常见错误</div>
+          <ul class="tick err-list">
+            <li><b>机位与情绪错位</b> — 拍受害者却用低机位，权力关系反了</li>
+            <li><b>忽略轴线</b> — 对话戏机位随意跨轴，观众失去方向感</li>
+            <li><b>特殊机位滥用</b> — 监控/窥视/无人机是调味料，不是主菜</li>
+            <li><b>高度描述含糊</b> — Prompt 只写"俯拍"，模型分不清机位还是角度</li>
+            <li><b>忘记物理逻辑</b> — 水下机位没有折射气泡，物件机位稳如三脚架</li>
+          </ul>
+        </div>
+        <div style="display: flex; align-items: center;">
+          <div class="quote-final" style="width: 100%;">
+            <p class="q1">"机位 = 观众的座位"</p>
+            <p class="q2">你把观众放在哪里，观众就站在谁的立场上看这个故事。</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+<!-- ===== MODULE 03: 拍摄角度 ===== -->
+  <section id="mod-jiaodu" class="module-anchor" style="padding: 90px 0 70px 0; background: var(--color-bg-primary);">
+    <div class="max-w-7xl mx-auto px-6 lg:px-8">
+      <div class="sec-label"><div class="bar"></div><p>Module 03 · Camera Angle</p></div>
+      <h2 style="font-family: var(--font-display); font-size: clamp(30px, 4.5vw, 52px); font-weight: 500; line-height: 1.15; margin: 0 0 14px 0;">拍摄角度</h2>
+      <p style="font-size: 15px; line-height: 1.85; color: var(--color-text-secondary); max-width: 760px; margin: 0 0 10px 0;">
+        <strong style="color: var(--color-text-primary);">"摄影机怎么拍"</strong>——摄影机相对于被摄主体的观看方向和倾斜关系。它决定主体以何种姿态、方位和视觉关系被呈现，用于塑造人物状态、空间压迫感、心理不稳定感或叙事立场。
+      </p>
+      <p style="font-size: 13.5px; line-height: 1.8; color: var(--color-text-tertiary); max-width: 760px; margin: 0;">
+        机位管<strong style="color: var(--color-brand);">位置</strong>（高度/距离/平台），角度管<strong style="color: var(--color-brand);">方向与倾斜</strong>（正/侧/背/俯/仰/斜）。
+      </p>
+
+      <div style="margin-top: 44px;">
+        <div class="sub-label">基础角度</div>
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+          <div class="img-card"><img class="ic-img" src="../assets/angle_front.jpg" alt="正面" onclick="openLB('../assets/angle_front.jpg','正面 Front Angle')" loading="lazy"><div class="ic-body"><div class="tc-en">Front Angle</div><div class="tc-name">正面</div><div class="tc-def">正对主体，信息清楚、关系直接。</div><div class="tc-effect"><b>场景</b> 肖像、对峙、陈述</div></div></div>
+          <div class="img-card"><img class="ic-img" src="../assets/angle_side.jpg" alt="侧面" onclick="openLB('../assets/angle_side.jpg','侧面 Side Angle')" loading="lazy"><div class="ic-body"><div class="tc-en">Side Angle</div><div class="tc-name">侧面</div><div class="tc-def">从主体侧面拍摄，强调轮廓与动作线。</div><div class="tc-effect"><b>场景</b> 行走、距离感</div></div></div>
+          <div class="img-card"><img class="ic-img" src="../assets/angle_back.jpg" alt="背面 Back Angle" onclick="openLB('../assets/angle_back.jpg','背面 Back Angle')" loading="lazy"><div class="ic-body"><div class="tc-en">Back Angle</div><div class="tc-name">背面</div><div class="tc-def">从主体背后拍摄，去身份化。</div><div class="tc-effect"><b>情绪</b> 目的地、孤独、悬念</div></div></div>
+          <div class="img-card"><img class="ic-img" src="../assets/angle_threequarter.jpg" alt="三分侧" onclick="openLB('../assets/angle_threequarter.jpg','三分侧 Three-quarter')" loading="lazy"><div class="ic-body"><div class="tc-en">Three-quarter</div><div class="tc-name">三分侧</div><div class="tc-def">斜前/斜后方，兼具面部信息与空间方向。</div><div class="tc-effect"><b>场景</b> 好莱坞对话默认角度</div></div></div>
+          <div class="img-card"><img class="ic-img" src="../assets/angle_high.jpg" alt="俯拍" onclick="openLB('../assets/angle_high.jpg','俯拍 High Angle')" loading="lazy"><div class="ic-body"><div class="tc-en">High Angle</div><div class="tc-name">俯拍</div><div class="tc-def">从上方向下看主体。</div><div class="tc-effect"><b>情绪</b> 弱小、受困、被审视</div></div></div>
+          <div class="img-card"><img class="ic-img" src="../assets/angle_low.jpg" alt="仰拍" onclick="openLB('../assets/angle_low.jpg','仰拍 Low Angle')" loading="lazy"><div class="ic-body"><div class="tc-en">Low Angle</div><div class="tc-name">仰拍</div><div class="tc-def">从下方向上看主体。</div><div class="tc-effect"><b>情绪</b> 强大、压迫、英雄感</div></div></div>
+          <div class="img-card"><img class="ic-img" src="../assets/angle_birdseye.jpg" alt="鸟瞰" onclick="openLB('../assets/angle_birdseye.jpg','鸟瞰 Bird\'s-eye')" loading="lazy"><div class="ic-body"><div class="tc-en">Bird's-eye</div><div class="tc-name">鸟瞰</div><div class="tc-def">高空向下（非完全垂直）。</div><div class="tc-effect"><b>场景</b> 空间格局、宏观关系</div></div></div>
+          <div class="img-card"><img class="ic-img" src="../assets/angle_selfie.jpg" alt="自拍 Selfie" onclick="openLB('../assets/angle_selfie.jpg','自拍 Selfie')" loading="lazy"><div class="ic-body"><div class="tc-en">Selfie</div><div class="tc-name">自拍</div><div class="tc-def">前置广角近距离，突出五官、强烈眼神交流。</div><div class="tc-effect"><b>特征</b> 边缘脸型拉宽</div></div></div>
+        </div>
+      </div>
+
+      <div style="margin-top: 40px;">
+        <div class="sub-label">特殊角度 · 深度解析</div>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div class="img-card"><img class="ic-img" src="../assets/angle_dutch.png" alt="荷兰角" onclick="openLB('../assets/angle_dutch.png','荷兰角 Dutch Angle')" loading="lazy"><div class="ic-body"><div class="tc-en">Dutch Angle</div><div class="tc-name">荷兰角</div><div class="tc-def">摄影机水平线倾斜，地平线/垂直线不再与画框平行。出处与德国表现主义电影传统有关，《第三人》是经典用例。机位不变，机身向左或右倾斜即可。</div><div class="tc-effect"><b>用途</b> 心理不安、空间扭曲、危险逼近、精神失控</div></div></div>
+          <div class="img-card"><img class="ic-img" src="../assets/angle_pov.jpg" alt="第一人称视角" onclick="openLB('../assets/angle_pov.jpg','第一人称视角 POV')" loading="lazy"><div class="ic-body"><div class="tc-en">First-person POV</div><div class="tc-name">第一人称视角</div><div class="tc-def">摄影机模拟角色眼睛看到的画面，强化沉浸和代入。又称主观视角。</div><div class="tc-effect"><b>场景</b> 恐怖、动作、沉浸叙事</div></div></div>
+          <div class="img-card"><img class="ic-img" src="../assets/angle_rear_threequarter.jpg" alt="斜后方追随 Rear Three-quarter" onclick="openLB('../assets/angle_rear_threequarter.jpg','斜后方追随 Rear Three-quarter')" loading="lazy"><div class="ic-body"><div class="tc-en">Rear Three-quarter</div><div class="tc-name">斜后方追随</div><div class="tc-def">位于主体后方偏左/右约 30–60°，跟随运动，同时保留背影、侧轮廓与前方空间方向。观众既能"跟着角色走"，又能看到角色即将进入的空间。</div><div class="tc-effect"><b>场景</b> 动作片、游戏视角、潜行</div></div></div>
+          <div class="img-card"><img class="ic-img" src="../assets/angle_godseye.png" alt="神视角" onclick="openLB('../assets/angle_godseye.png','神视角 God\'s-eye View')" loading="lazy"><div class="ic-body"><div class="tc-en">God's-eye View</div><div class="tc-name">神视角 / 上帝视角</div><div class="tc-def">极高处接近垂直俯视，人物与群体呈现图案化、棋盘化、命运化关系。鸟瞰偏空间观察，顶视偏垂直角度，神视角强调超越角色的全知俯察。经典用例：《杀死比尔》室内顶视——构图如一盘棋局。</div><div class="tc-effect"><b>场景</b> 韦斯·安德森式构图、犯罪现场、群体仪式</div></div></div>
+          <div class="img-card"><img class="ic-img" src="../assets/angle_wormseye.jpg" alt="蚁视 Worm's-eye View" onclick="openLB('../assets/angle_wormseye.jpg','蚁视 Worm's-eye View')" loading="lazy"><div class="ic-body"><div class="tc-en">Worm's-eye View</div><div class="tc-name">蚁视</div><div class="tc-def">从极低位置向上看，模拟蚂蚁视角，视角接近地面。</div><div class="tc-effect"><b>情绪</b> 庞大、压迫、奇观感</div></div></div>
+          <div class="img-card"><img class="ic-img" src="../assets/pos_cctv.jpg" alt="监控视角" onclick="openLB('../assets/pos_cctv.jpg','监控视角 CCTV Angle')" loading="lazy"><div class="ic-body"><div class="tc-en">CCTV Angle</div><div class="tc-name">监控视角</div><div class="tc-def">模拟监控摄像头的固定广角倾斜视角。</div><div class="tc-effect"><b>情绪</b> 冷漠、非叙事化、证据感</div></div></div>
+          <div class="img-card"><img class="ic-img" src="../assets/angle_reverse_1.png" alt="反打角度" onclick="openLB('../assets/angle_reverse_1.png','反打角度 Reverse Angle · 镜头1：男人看向对方')" loading="lazy"><div class="ic-body"><div class="tc-en">Reverse Angle</div><div class="tc-name">反打角度</div><div class="tc-def">一个镜头之后，从约 180° 相反方向拍摄关系中的另一方。不是固定角度，而是一种镜头关系角度：先建立一方视线/动作方向，再切到另一方对应角度，保持空间轴线清楚。</div><div class="tc-effect"><b>用途</b> 对话节奏、反应信息、空间连续性</div></div></div>
+          <div class="img-card"><img class="ic-img" src="../assets/angle_ots_light.png" alt="过肩角度" onclick="openLB('../assets/angle_ots_light.png','过肩角度 OTS · 轻过肩')" loading="lazy"><div class="ic-body"><div class="tc-en">Over-the-shoulder</div><div class="tc-name">过肩角度 OTS</div><div class="tc-def">从一名角色肩膀后方看向另一名角色。肩部是前景关系参照物而非主体——通常不要超过画面 1/3，超过就从"关系提示"变成"遮挡式构图"或"压迫式过肩"。</div><div class="tc-effect"><b>场景</b> 对话、对峙、关系建立</div></div></div>
+        </div>
+      </div>
+
+      <!-- 过肩细分表 -->
+      <div class="grid grid-cols-1 lg:grid-cols-5 gap-10" style="margin-top: 40px;">
+        <div class="lg:col-span-3">
+          <div class="sub-label">过肩镜头 · 肩部占比四分法</div>
+          <table class="dt">
+            <thead><tr><th>类型</th><th>肩部占比</th><th>效果</th></tr></thead>
+            <tbody>
+              <tr><td><b>轻过肩</b></td><td>5%–15%</td><td>前景肩部只是轻微提示人物关系，画面更干净 <a href="javascript:void(0)" onclick="openLB('../assets/angle_ots_light.png','轻过肩 · 5%–15%')" style="color: var(--color-brand); text-decoration: none; font-size: 12px;">[示例]</a></td></tr>
+              <tr><td><b>标准过肩</b></td><td>15%–30%</td><td>最常见，保留前景人物存在感，又不遮挡对方表情</td></tr>
+              <tr><td><b>重过肩</b></td><td>30%–45%</td><td>前景人物压迫感强，用于审讯、威胁、亲密压迫 <a href="javascript:void(0)" onclick="openLB('../assets/angle_ots_heavy.png','重过肩 · 30%–45% · 两人势均力敌')" style="color: var(--color-brand); text-decoration: none; font-size: 12px;">[示例]</a></td></tr>
+              <tr><td><b>极重过肩</b></td><td>45% 以上</td><td>前景肩背几乎吞掉画面，带窥视、阻隔、压迫、主观感</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="lg:col-span-2">
+          <div class="sub-label">角度示例</div>
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
+            <figure class="fig"><img src="../assets/angle_dutch.png"><figcaption>荷兰角 · 失衡</figcaption></figure>
+            <figure class="fig"><img src="../assets/angle_godseye.png"><figcaption>神视角 · 宿命</figcaption></figure>
+            <figure class="fig"><img src="../assets/angle_pov.jpg"><figcaption>POV · 沉浸</figcaption></figure>
+            <figure class="fig"><img src="../assets/angle_threequarter.jpg"><figcaption>三分侧 · 万能角度</figcaption></figure>
+          </div>
+        </div>
+      </div>
+
+      <div style="margin-top: 48px;">
+        <div class="sub-label">AI 视频生成 Prompt 示例</div>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div class="prompt-box"><div class="p-label">荷兰角</div><p>夜晚空荡地铁站，一名男子突然停下脚步，画面整体向右倾斜，灯光闪烁，远处隧道黑暗，营造心理失衡和危险逼近感。</p></div>
+          <div class="prompt-box"><div class="p-label">背面角度</div><p>一个穿长外套的人背对镜头，独自走向昏暗隧道深处，隧道灯光一盏盏延伸，人物身份不可见，悬疑氛围强烈。</p></div>
+          <div class="prompt-box"><div class="p-label">过肩角度</div><p>摄影机位于警探肩膀后方，前景是警探模糊的肩部轮廓，焦点落在桌对面的嫌疑人脸上，审讯室灯光冰冷，气氛紧张。</p></div>
+          <div class="prompt-box"><div class="p-label">反打角度</div><p>餐桌对话中，画面从女性的视线方向反打到男性正面，男性沉默地看向她，桌面蜡烛在前景虚化，气氛尴尬压抑。</p></div>
+          <div class="prompt-box"><div class="p-label">斜后方追随</div><p>摄影机从主角右后方跟随，他穿过拥挤夜市，人群从两侧擦过，主角背影清晰，前方霓虹灯延伸，带有潜行和目标感。</p></div>
+          <div class="prompt-box"><div class="p-label">神视角</div><p>极高空俯视一座白色广场，数百人缓慢移动形成圆形队列，画面几何秩序强烈，人物像微小符号，氛围冷静而庄严。</p></div>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-10" style="margin-top: 48px;">
+        <div>
+          <div class="sub-label">常见错误</div>
+          <ul class="tick err-list">
+            <li><b>荷兰角滥用</b> — 必须有心理依据：角色失控、世界失衡时才用</li>
+            <li><b>反打乱轴</b> — 跨越 180° 轴线，观众分不清谁在看谁</li>
+            <li><b>过肩遮挡过度</b> — 肩部超 1/3 却没意识到压迫感，与情绪错位</li>
+            <li><b>背面角度没耐心</b> — 悬念需要时长发酵，切太快就浪费了</li>
+            <li><b>神视角高度不够</b> — 只有普通俯拍高度，图案感出不来</li>
+          </ul>
+        </div>
+        <div style="display: flex; align-items: center;">
+          <div class="quote-final" style="width: 100%;">
+            <p class="q1">"拍摄角度 = 叙事的态度"</p>
+            <p class="q2">平视是尊重，俯视是审判，倾斜是失控。</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+<!-- ===== MODULE 04: 镜头 ===== -->
+  <section id="mod-jingtou" class="module-anchor" style="padding: 90px 0 70px 0; background: var(--color-bg-secondary);">
+    <div class="max-w-7xl mx-auto px-6 lg:px-8">
+      <div class="sec-label"><div class="bar"></div><p>Module 04 · Lens</p></div>
+      <h2 style="font-family: var(--font-display); font-size: clamp(30px, 4.5vw, 52px); font-weight: 500; line-height: 1.15; margin: 0 0 14px 0;">镜头</h2>
+      <p style="font-size: 15px; line-height: 1.85; color: var(--color-text-secondary); max-width: 760px; margin: 0 0 10px 0;">
+        运用不同焦段、不同类型的镜头拍摄带来的<strong style="color: var(--color-text-primary);">视觉效果</strong>——透视变形、空间压缩或拉伸、视野范围和主体突出方式。它决定画面的光学质感、空间关系和视觉风格基础。
+      </p>
+      <p style="font-size: 13.5px; line-height: 1.8; color: var(--color-text-tertiary); max-width: 760px; margin: 0;">
+        <strong style="color: var(--color-brand);">变焦改变焦距，推拉改变摄影机位置</strong>——两者完全不同。空间压缩不是"走近了"，是长焦的光学特性。
+      </p>
+
+      <div style="margin-top: 44px;">
+        <div class="sub-label">焦段光谱 · 两大物理效应</div>
+        <div class="grid grid-cols-2 md:grid-cols-3 gap-4">
+          <div class="img-card"><img class="ic-img" src="../assets/lens_ultrawide.png" alt="超广角" onclick="openLB('../assets/lens_ultrawide.png','超广角 14mm')" loading="lazy"><div class="ic-body"><div class="tc-en">14–20mm</div><div class="tc-name">超广角</div><div class="tc-def">视野极宽，透视明显拉伸，近大远小被夸张，边缘易变形。</div><div class="tc-effect"><b>场景</b> 宏大空间、狭窄室内、极限运动</div></div></div>
+          <div class="img-card"><img class="ic-img" src="../assets/lens_wide.png" alt="广角" onclick="openLB('../assets/lens_wide.png','广角 24mm')" loading="lazy"><div class="ic-body"><div class="tc-en">21–35mm</div><div class="tc-name">广角</div><div class="tc-def">视野宽于人眼，容纳更多环境，强化前后景距离。18/24/25mm 是电影典型广角。</div><div class="tc-effect"><b>场景</b> 街景、动作、环境叙事</div></div></div>
+          <div class="img-card"><img class="ic-img" src="../assets/lens_standard.png" alt="标准镜头" onclick="openLB('../assets/lens_standard.png','标准镜头 35mm')" loading="lazy"><div class="ic-body"><div class="tc-en">35/50mm</div><div class="tc-name">标准镜头</div><div class="tc-def">接近人眼自然观看比例，透视自然，不夸张也不压缩。</div><div class="tc-effect"><b>场景</b> 日常叙事、纪实</div></div></div>
+          <div class="img-card"><img class="ic-img" src="../assets/lens_medium_tele.png" alt="中长焦" onclick="openLB('../assets/lens_medium_tele.png','中长焦 85mm')" loading="lazy"><div class="ic-body"><div class="tc-en">70–100mm</div><div class="tc-name">中长焦</div><div class="tc-def">开始明显压缩空间，背景拉近，主体突出，易虚化。75/85/100mm 常见于电影定焦组。</div><div class="tc-effect"><b>场景</b> 肖像、情绪特写</div></div></div>
+          <div class="img-card"><img class="ic-img" src="../assets/lens_tele.png" alt="长焦" onclick="openLB('../assets/lens_tele.png','长焦 135mm')" loading="lazy"><div class="ic-body"><div class="tc-en">100mm+</div><div class="tc-name">长焦</div><div class="tc-def">空间压缩更强，远处背景贴近主体。</div><div class="tc-effect"><b>情绪</b> 窥视、隔离、监视感</div></div></div>
+          <div class="img-card"><img class="ic-img" src="../assets/angle_godseye.png" alt="超长焦" onclick="openLB('../assets/angle_godseye.png','超长焦 200mm+ · 俯瞰')" loading="lazy"><div class="ic-body"><div class="tc-en">200mm+</div><div class="tc-name">超长焦</div><div class="tc-def">压缩极强，画面晃动和空气扰动更明显。</div><div class="tc-effect"><b>场景</b> 野生动物、体育、战争观察</div></div></div>
+        </div>
+      </div>
+
+      <div style="margin-top: 40px;">
+        <div class="sub-label">特殊功能镜头</div>
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+          <div class="img-card"><img class="ic-img" src="../assets/lens_zoom.gif" alt="变焦镜头" onclick="openLB('../assets/lens_zoom.gif','希区柯克变焦 Dolly Zoom')" loading="lazy"><div class="ic-body"><div class="tc-name">变焦镜头</div><div class="tc-def">焦距连续变化（24–70、70–200），机位不动画面缩放。经典：希区柯克变焦（动图示例）。</div></div></div>
+          <div class="img-card"><img class="ic-img" src="../assets/lens_macro.png" alt="微距镜头" onclick="openLB('../assets/lens_macro.png','微距镜头 Macro')" loading="lazy"><div class="ic-body"><div class="tc-name">微距镜头</div><div class="tc-def">极近拍摄、高放大倍率，放大纹理、昆虫、液体、皮肤细节。</div></div></div>
+          <div class="img-card"><img class="ic-img" src="../assets/lens_fisheye_card.png" alt="鱼眼镜头" onclick="openLB('../assets/lens_fisheye_card.png','鱼眼镜头 Fisheye')" loading="lazy"><div class="ic-body"><div class="tc-name">鱼眼镜头</div><div class="tc-def">极端超广角（6–16mm），球面畸变，画面边缘弯曲，怪诞失控。</div></div></div>
+          <div class="img-card"><img class="ic-img" src="../assets/lens_anamorphic.png" alt="变形宽银幕" onclick="openLB('../assets/lens_anamorphic.png','变形宽银幕 Anamorphic')" loading="lazy"><div class="ic-body"><div class="tc-name">变形宽银幕</div><div class="tc-def">横向压缩再展开：宽银幕比例、水平眩光、椭圆散景。同源焦距下水平视野更广、物距更近、景深更浅。</div></div></div>
+          <div class="img-card"><img class="ic-img" src="../assets/lens_tiltshift.png" alt="移轴镜头" onclick="openLB('../assets/lens_tiltshift.png','移轴镜头 Tilt-shift')" loading="lazy"><div class="ic-body"><div class="tc-name">移轴镜头</div><div class="tc-def">Shift 校正建筑透视；Tilt 改变焦平面，制造微缩模型感。</div></div></div>
+          <div class="img-card"><img class="ic-img" src="../assets/lens_splitdiopter.png" alt="分裂焦点镜" onclick="openLB('../assets/lens_splitdiopter.png','分裂焦点镜 Split Diopter · 前后景同时清晰')" loading="lazy"><div class="ic-body"><div class="tc-name">分裂焦点镜</div><div class="tc-def">前后景同时清晰，中间略异常。Brian De Palma 标签化使用，《Carrie》经典用例。</div></div></div>
+          <div class="img-card"><img class="ic-img" src="../assets/lens_probe.jpg" alt="探针镜头 Probe Lens" onclick="openLB('../assets/lens_probe.jpg','探针镜头 Probe Lens')" loading="lazy"><div class="ic-body"><div class="tc-name">探针镜头</div><div class="tc-def">细长管状深入狭窄空间，"进入物体内部"的奇观视角，食品/产品广告常客。</div></div></div>
+          <div class="img-card"><img class="ic-img" src="../assets/lens_softfocus.png" alt="软焦镜头" onclick="openLB('../assets/lens_softfocus.png','软焦镜头 Soft Focus')" loading="lazy"><div class="ic-body"><div class="tc-name">软焦镜头</div><div class="tc-def">高光扩散、边缘变柔，复古肖像、梦境、浪漫、旧电影质感。</div></div></div>
+        </div>
+      </div>
+
+      <div style="margin-top: 40px;">
+        <div class="sub-label">模拟类镜头 · 媒介质感</div>
+        <div class="grid grid-cols-2 md:grid-cols-3 gap-3">
+          <div class="type-card"><div class="tc-name">监控广角镜头</div><div class="tc-def">高位固定、广角畸变、画质压缩、低动态范围、冷漠记录感。</div></div>
+          <div class="type-card"><div class="tc-name">运动相机镜头</div><div class="tc-def">GoPro 式超广角贴身视角，边缘畸变、强烈速度感与身体临场感。</div></div>
+          <div class="type-card"><div class="tc-name">长焦窥视镜头</div><div class="tc-def">远距离穿过窗户/树枝/人群观察，压缩 + 前景遮挡 + 偷拍感。</div></div>
+          <div class="type-card"><div class="tc-name">针孔镜头</div><div class="tc-def">画面暗、软、边缘衰减明显，原始、实验、幽闭、非现实感。</div></div>
+          <div class="type-card"><div class="tc-name">窥孔镜头</div><div class="tc-def">门镜/猫眼视角，圆形边界、强烈边缘畸变、中心放大。</div></div>
+          <div class="type-card"><div class="tc-name">长焦肖像镜头</div><div class="tc-def">85/100/135mm 压缩脸部透视，面部比例自然，背景易虚化。</div></div>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-5 gap-10" style="margin-top: 48px;">
+        <div class="lg:col-span-3">
+          <div class="sub-label">镜头示例</div>
+          <div class="gal-grid">
+            <figure><img src="../assets/lens_focal_compare.jpg"><figcaption>焦段透视对比</figcaption></figure>
+            <figure><img src="../assets/lens_fisheye.png"><figcaption>鱼眼 · 球面畸变</figcaption></figure>
+            <figure><img src="../assets/lens_anamorphic.png"><figcaption>变形宽银幕 · 水平眩光</figcaption></figure>
+            <figure><img src="../assets/lens_tiltshift.png"><figcaption>移轴 · 微缩模型</figcaption></figure>
+          </div>
+        </div>
+        <div class="lg:col-span-2">
+          <div class="sub-label">变形宽银幕小史</div>
+          <div class="note-box">
+            <p>早期可追溯到 Henri Chrétien 的 anamorphoscope，1950 年代 CinemaScope 让它成为重要的电影宽银幕技术。水平蓝色眩光和椭圆焦外，是"电影感"最廉价也最贵的签名。</p>
+          </div>
+          <div style="display: flex; flex-direction: column; gap: 8px; margin-top: 16px;">
+            <div class="sunk kv"><span>透视拉伸</span><span>广角端 · 近大远小被夸张</span></div>
+            <div class="sunk kv"><span>空间压缩</span><span>长焦端 · 背景贴到主体脸上</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div style="margin-top: 48px;">
+        <div class="sub-label">AI 视频生成 Prompt 示例</div>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div class="prompt-box"><div class="p-label">超广角</div><p>滑板运动员从城市广场台阶上跃起，身体靠近镜头时产生夸张透视变形，背景建筑被拉伸，动作充满冲击力，运动广告质感。</p></div>
+          <div class="prompt-box"><div class="p-label">长焦</div><p>城市长街尽头，一名男子站在人行道上，远处车辆和建筑被压缩到他身后，背景密集，人物显得被城市挤压，冷色写实风格。</p></div>
+          <div class="prompt-box"><div class="p-label">变焦</div><p>远处广场人群中，一个穿红衣的人突然回头，镜头从中远景快速变焦到他的上半身，摄影机位置不变，画面带有纪录片抓拍感和紧张感。</p></div>
+          <div class="prompt-box"><div class="p-label">鱼眼</div><p>狭小电梯内，一个人突然靠近镜头，鱼眼畸变让他的脸和电梯墙壁夸张弯曲，灯光闪烁，画面带有怪诞恐怖感。</p></div>
+          <div class="prompt-box"><div class="p-label">变形宽银幕</div><p>夜晚雨中街道，一辆汽车缓慢驶过，车灯形成明显水平蓝色眩光，背景霓虹椭圆散景，宽银幕电影质感，画面高级冷峻。</p></div>
+          <div class="prompt-box"><div class="p-label">移轴</div><p>从高处俯视繁忙城市街道，车辆和行人像微缩模型一样移动，画面上下区域柔和虚化，中间清晰，色彩明亮，玩具城市质感。</p></div>
+          <div class="prompt-box"><div class="p-label">微距</div><p>清晨叶片上的一颗水珠缓慢滑落，水珠内倒映出天空和树影，叶脉纹理清晰可见，背景完全虚化，细腻自然纪录片质感。</p></div>
+          <div class="prompt-box"><div class="p-label">探针</div><p>镜头穿过透明冰块、柠檬片和气泡水之间，极近距离展示水珠、气泡和果肉纹理，空间狭窄但清晰，清爽商业广告质感。</p></div>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-10" style="margin-top: 48px;">
+        <div>
+          <div class="sub-label">常见错误</div>
+          <ul class="tick err-list">
+            <li><b>变焦与推拉混淆</b> — 变焦透视不动，推拉透视变化，Prompt 写错运动逻辑就错</li>
+            <li><b>广角拍人脸特写</b> — 鼻子大耳朵小脸变形，人像特写请用 85mm+</li>
+            <li><b>压缩的误归因</b> — "背景好近"不是场景近，是长焦压缩</li>
+            <li><b>鱼眼没有畸变</b> — 必须明确写"画面边缘弯曲、球面畸变"</li>
+            <li><b>移轴只有虚化</b> — 微缩感的关键是高机位俯拍 + 局部清晰带</li>
+          </ul>
+        </div>
+        <div style="display: flex; align-items: center;">
+          <div class="quote-final" style="width: 100%;">
+            <p class="q1">"镜头 = 光学世界观的开关"</p>
+            <p class="q2">选镜头就是选择让观众相信哪一种物理法则。</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+<!-- ===== MODULE 05: 成像属性 ===== -->
+  <section id="mod-chengxiang" class="module-anchor" style="padding: 90px 0 70px 0; background: var(--color-bg-primary);">
+    <div class="max-w-7xl mx-auto px-6 lg:px-8">
+      <div class="sec-label"><div class="bar"></div><p>Module 05 · Image Formation</p></div>
+      <h2 style="font-family: var(--font-display); font-size: clamp(30px, 4.5vw, 52px); font-weight: 500; line-height: 1.15; margin: 0 0 14px 0;">成像属性</h2>
+      <p style="font-size: 15px; line-height: 1.85; color: var(--color-text-secondary); max-width: 760px; margin: 0 0 10px 0;">
+        画面最终形成的<strong style="color: var(--color-text-primary);">视觉成像特征</strong>——焦点、景深、曝光、散景、畸变、眩光和色差等。它决定画面的清晰关系、视觉层次、质感表现和影像真实感。
+      </p>
+      <p style="font-size: 13.5px; line-height: 1.8; color: var(--color-text-tertiary); max-width: 760px; margin: 0;">
+        景别、机位、角度、镜头决定"怎么拍"，成像属性决定<strong style="color: var(--color-brand);">"拍出来长什么样"</strong>。
+      </p>
+
+      <!-- 三个距离 -->
+      <div style="margin-top: 44px;">
+        <div class="sub-label">三个必须厘清的"距离"</div>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-3">
+          <div class="type-card"><div class="tc-en">Camera ↔ Subject</div><div class="tc-name">机位</div><div class="tc-def">主语是"摄影机"——摄影机从多远、多高、何方位去拍摄被摄物。</div></div>
+          <div class="type-card"><div class="tc-en">Focus Plane</div><div class="tc-name">焦点</div><div class="tc-def">"清晰层"离"镜头"的距离——是一个"切片"，画面中最清楚的距离层面。</div></div>
+          <div class="type-card"><div class="tc-en">Depth Range</div><div class="tc-name">景深</div><div class="tc-def">焦点前后还能保持清晰的范围——是有"厚度"的范围。</div></div>
+        </div>
+      </div>
+
+      <!-- 焦点 -->
+      <div style="margin-top: 44px;">
+        <div class="sub-label">焦点 Focus · 注意力落在哪里</div>
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+          <div class="img-card"><img class="ic-img" src="../assets/img_fixedfocus.gif" alt="固定焦点" onclick="openLB('../assets/img_fixedfocus.gif','固定焦点 Fixed Focus · 动图')" loading="lazy"><div class="ic-body"><div class="tc-name">固定焦点</div><div class="tc-def">焦点始终停留在同一主体/距离层，稳定强调主体。</div></div></div>
+          <div class="img-card"><img class="ic-img" src="../assets/focus_front.jpg" alt="前景焦点 Front Focus" onclick="openLB('../assets/focus_front.jpg','前景焦点 Front Focus')" loading="lazy"><div class="ic-body"><div class="tc-name">前景焦点</div><div class="tc-def">焦点在前景物体，背景主体模糊——强调物件、遮挡、悬念。</div></div></div>
+          <div class="img-card"><img class="ic-img" src="../assets/img_midfocus.png" alt="中景焦点" onclick="openLB('../assets/img_midfocus.png','中景焦点 · 前后草叶虚化，焦点在中景花朵')" loading="lazy"><div class="ic-body"><div class="tc-name">中景焦点</div><div class="tc-def">焦点落在中间距离层，人物主体或主要事件（最常用）。</div></div></div>
+          <div class="img-card"><img class="ic-img" src="../assets/focus_back.jpg" alt="背景焦点 Back Focus" onclick="openLB('../assets/focus_back.jpg','背景焦点 Back Focus')" loading="lazy"><div class="ic-body"><div class="tc-name">背景焦点</div><div class="tc-def">焦点在远处背景，前景虚化——窥视、揭示远处信息。</div></div></div>
+          <div class="img-card"><img class="ic-img" src="../assets/focus_shift.jpg" alt="焦点转移 Rack Focus" onclick="openLB('../assets/focus_shift.jpg','焦点转移 Rack Focus')" loading="lazy"><div class="ic-body"><div class="tc-name">焦点转移</div><div class="tc-def">Rack Focus / 拉焦：焦点从一个距离层转移到另一个，引导注意力。</div></div></div>
+          <div class="img-card"><img class="ic-img" src="../assets/focus_defocus.jpg" alt="失焦 Defocus" onclick="openLB('../assets/focus_defocus.jpg','失焦 Defocus')" loading="lazy"><div class="ic-body"><div class="tc-name">失焦</div><div class="tc-def">主体故意不清晰——眩晕、梦境、醉酒、记忆、心理混乱。</div></div></div>
+          <div class="img-card"><img class="ic-img" src="../assets/focus_breathing.jpg" alt="呼吸式对焦 Focus Breathing" onclick="openLB('../assets/focus_breathing.jpg','呼吸式对焦 Focus Breathing')" loading="lazy"><div class="ic-body"><div class="tc-name">呼吸式对焦</div><div class="tc-def">对焦变化时画面视角轻微变化，像镜头在"呼吸"。</div></div></div>
+          <div class="img-card"><img class="ic-img" src="../assets/lens_splitdiopter.png" alt="分离焦点" onclick="openLB('../assets/lens_splitdiopter.png','分离焦点 Split Focus')" loading="lazy"><div class="ic-body"><div class="tc-name">分离焦点</div><div class="tc-def">两个不同距离主体同时清晰，由分裂焦点镜实现。</div></div></div>
+        </div>
+      </div>
+
+      <!-- 景深 -->
+      <div style="margin-top: 40px;">
+        <div class="sub-label">景深 Depth of Field · 清晰范围的厚度</div>
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-4">
+          <div class="img-card"><img class="ic-img" src="../assets/img_shallowdof2.jpg" alt="浅景深" onclick="openLB('../assets/img_shallowdof2.jpg','浅景深 Shallow DOF · 背景虚化')" loading="lazy"><div class="ic-body"><div class="tc-en">Shallow DOF</div><div class="tc-name">浅景深</div><div class="tc-def">只有焦点附近清晰，前后景明显虚化。实现：大光圈 + 中长焦/长焦（50/85/100/135mm）+ 靠近主体 + 主体离背景远。又称背景虚化、大光圈、浅焦。</div><div class="tc-effect"><b>Prompt 关键词</b> extremely shallow depth of field, f/1.2, 85mm, cinematic bokeh, subject isolation</div></div></div>
+          <div class="img-card"><img class="ic-img" src="../assets/img_deepdof.jpg" alt="深景深" onclick="openLB('../assets/img_deepdof.jpg','深景深 Deep Focus · 前中后景同样清晰')" loading="lazy"><div class="ic-body"><div class="tc-en">Deep Focus</div><div class="tc-name">深景深</div><div class="tc-def">前景、中景、背景大范围保持清晰。实现：小光圈 + 广角/标准（18/24/28/35/50mm）+ 焦点落中间距离。又称深焦、小光圈、大景深。</div><div class="tc-effect"><b>场景</b> 空间关系、群像、建筑、深焦调度</div></div></div>
+          <div class="img-card"><img class="ic-img" src="../assets/lens_standard.png" alt="中等景深" onclick="openLB('../assets/lens_standard.png','中等景深 · 35mm 背景略虚但可辨认')" loading="lazy"><div class="ic-body"><div class="tc-en">Moderate / Selective</div><div class="tc-name">中等景深 · 选择性景深</div><div class="tc-def">中等：主体清晰、背景略虚但环境可辨（35–70mm 中光圈）。选择性：极有限清晰范围只让某个局部清晰，焦点精确落在眼睛/手指/物件。</div><div class="tc-effect"><b>场景</b> 既突出人物，又保留环境叙事</div></div></div>
+          <div class="img-card"><img class="ic-img" src="../assets/lens_tiltshift.png" alt="微缩景深" onclick="openLB('../assets/lens_tiltshift.png','微缩景深 · 移轴局部清晰带')" loading="lazy"><div class="ic-body"><div class="tc-en">Miniature / Layered</div><div class="tc-name">微缩景深 · 分层景深</div><div class="tc-def">微缩：只有一条局部清晰带，真实场景像玩具模型（移轴或后期 + 高机位俯拍）。分层：前中后景不同清晰程度，制造纵深和观看引导。</div><div class="tc-effect"><b>场景</b> 玩具城市、纵深构图</div></div></div>
+        </div>
+      </div>
+
+      <!-- 曝光金三角 -->
+      <div style="margin-top: 44px;">
+        <div class="sub-label">曝光金三角 · 快门 / ISO / 光圈互相制约</div>
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-4">
+          <div class="type-card">
+            <div class="tc-en">Aperture</div><div class="tc-name">光圈 f 值</div>
+            <div style="display: flex; flex-direction: column; gap: 6px; margin-top: 8px;">
+              <div class="sunk kv"><span>f/0.95–1.4</span><span>超大 · 极浅景深梦幻</span></div>
+              <div class="sunk kv"><span>f/1.8–2.8</span><span>大 · 人像夜景</span></div>
+              <div class="sunk kv"><span>f/4–5.6</span><span>中 · 日常叙事</span></div>
+              <div class="sunk kv"><span>f/8–11</span><span>小 · 深焦群像</span></div>
+              <div class="sunk kv"><span>f/16–22</span><span>极小 · 星芒/损锐度</span></div>
+            </div>
+          </div>
+          <div class="type-card">
+            <div class="tc-en">ISO</div><div class="tc-name">感光度</div>
+            <div style="display: flex; flex-direction: column; gap: 6px; margin-top: 8px;">
+              <div class="sunk kv"><span>≤ 200</span><span>纯净 · 商业级画质</span></div>
+              <div class="sunk kv"><span>200–800</span><span>均衡 · 电影叙事常用</span></div>
+              <div class="sunk kv"><span>1600–3200</span><span>可见噪点 · 氛围感</span></div>
+              <div class="sunk kv"><span>6400+</span><span>粗砺 · 牺牲细节换叙事</span></div>
+            </div>
+            <div class="tc-effect"><b>画纸比喻</b> ISO 高 = 画纸易吸水，颜料互相染色；ISO 低 = 画面干净</div>
+          </div>
+          <div class="type-card">
+            <div class="tc-en">Shutter Speed</div><div class="tc-name">快门</div>
+            <div style="display: flex; flex-direction: column; gap: 6px; margin-top: 8px;">
+              <div class="sunk kv"><span>≤ 1/30s</span><span>慢门 · 光轨拖影</span></div>
+              <div class="sunk kv"><span>≥ 1s</span><span>长曝光 · 雾化丝绸</span></div>
+              <div class="sunk kv"><span>1/60–1/125s</span><span>180° 快门黄金区间</span></div>
+              <div class="sunk kv"><span>1/500–1/1000s</span><span>高速 · 定格奔跑</span></div>
+              <div class="sunk kv"><span>≥ 1/2000s</span><span>超高速 · 子弹水滴</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 曝光类型 -->
+      <div style="margin-top: 44px;">
+        <div class="sub-label">曝光类型 · 明暗即情绪</div>
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+          <div class="img-card"><img class="ic-img" src="../assets/exp_normal.jpg" alt="正常曝光" onclick="openLB('../assets/exp_normal.jpg','正常曝光 Normal Exposure')" loading="lazy"><div class="ic-body"><div class="tc-name">正常曝光</div><div class="tc-def">亮度自然可读，高光暗部都保留细节——写实、平衡、日常。</div></div></div>
+          <div class="img-card"><img class="ic-img" src="../assets/exp_under.jpg" alt="欠曝" onclick="openLB('../assets/exp_under.jpg','欠曝 Underexposure')" loading="lazy"><div class="ic-body"><div class="tc-name">欠曝</div><div class="tc-def">画面整体偏暗，暗部细节减少——压抑、悬疑、夜景。</div></div></div>
+          <div class="img-card"><img class="ic-img" src="../assets/exp_over.jpg" alt="过曝" onclick="openLB('../assets/exp_over.jpg','过曝 Overexposure')" loading="lazy"><div class="ic-body"><div class="tc-name">过曝</div><div class="tc-def">画面偏亮，高光细节丢失——梦境、回忆、炫目、神圣。</div></div></div>
+          <div class="img-card"><img class="ic-img" src="../assets/exp_highcontrast.jpg" alt="高反差" onclick="openLB('../assets/exp_highcontrast.jpg','高反差 High Contrast')" loading="lazy"><div class="ic-body"><div class="tc-name">高反差</div><div class="tc-def">明暗差异强——黑色电影、硬朗、紧张。</div></div></div>
+          <div class="img-card"><img class="ic-img" src="../assets/exp_lowcontrast.jpg" alt="低反差" onclick="openLB('../assets/exp_lowcontrast.jpg','低反差 Low Contrast')" loading="lazy"><div class="ic-body"><div class="tc-name">低反差</div><div class="tc-def">明暗差异弱，灰阶丰富——自然、温柔、低饱和。</div></div></div>
+          <div class="img-card"><img class="ic-img" src="../assets/exp_silhouette.jpg" alt="剪影曝光" onclick="openLB('../assets/exp_silhouette.jpg','剪影曝光 Silhouette')" loading="lazy"><div class="ic-body"><div class="tc-name">剪影曝光</div><div class="tc-def">前景主体成黑色轮廓——神秘、史诗、孤独。</div></div></div>
+          <div class="img-card"><img class="ic-img" src="../assets/exp_bloom.jpg" alt="高光溢出" onclick="openLB('../assets/exp_bloom.jpg','高光溢出 Bloom / Clipping')" loading="lazy"><div class="ic-body"><div class="tc-name">高光溢出 Bloom</div><div class="tc-def">高光过亮向外扩散——发光、梦幻、数码感。</div></div></div>
+          <div class="img-card"><img class="ic-img" src="../assets/exp_long.jpg" alt="长曝光感" onclick="openLB('../assets/exp_long.jpg','长曝光感 Long-exposure Look')" loading="lazy"><div class="ic-body"><div class="tc-name">长曝光感</div><div class="tc-def">光轨、拖影、时间累积——都市速度、时间流逝。</div></div></div>
+        </div>
+      </div>
+
+      <!-- 畸变 -->
+      <div style="margin-top: 44px;">
+        <div class="sub-label">畸变 Distortion · 现实的弯曲</div>
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+          <div class="img-card"><img class="ic-img" src="../assets/dist_wide.jpg" alt="广角透视变形" onclick="openLB('../assets/dist_wide.jpg','广角透视变形 Wide-angle Distortion')" loading="lazy"><div class="ic-body"><div class="tc-name">广角透视变形</div><div class="tc-def">近物放大远处拉远——夸张空间、动作冲击。</div></div></div>
+          <div class="img-card"><img class="ic-img" src="../assets/dist_tele.jpg" alt="长焦空间压缩" onclick="openLB('../assets/dist_tele.jpg','长焦空间压缩 Telephoto Compression')" loading="lazy"><div class="ic-body"><div class="tc-name">长焦空间压缩</div><div class="tc-def">前后景距离被压缩——拥挤、压迫、窥视。</div></div></div>
+          <div class="img-card"><img class="ic-img" src="../assets/dist_barrel.jpg" alt="桶形畸变" onclick="openLB('../assets/dist_barrel.jpg','桶形畸变 Barrel Distortion')" loading="lazy"><div class="ic-body"><div class="tc-name">桶形畸变</div><div class="tc-def">直线向外鼓起——广角/鱼眼/运动相机的夸张怪异。</div></div></div>
+          <div class="img-card"><img class="ic-img" src="../assets/dist_pincushion.jpg" alt="枕形畸变" onclick="openLB('../assets/dist_pincushion.jpg','枕形畸变 Pincushion Distortion')" loading="lazy"><div class="ic-body"><div class="tc-name">枕形畸变</div><div class="tc-def">直线向中心收缩——部分长焦或变焦镜头边缘。</div></div></div>
+          <div class="img-card"><img class="ic-img" src="../assets/dist_glitch.jpg" alt="故障畸变" onclick="openLB('../assets/dist_glitch.jpg','故障畸变 Glitch Distortion')" loading="lazy"><div class="ic-body"><div class="tc-name">故障畸变</div><div class="tc-def">数字撕裂错位色块——赛博、惊悚、记忆崩坏。</div></div></div>
+          <div class="img-card"><img class="ic-img" src="../assets/dist_heat.jpg" alt="热浪畸变" onclick="openLB('../assets/dist_heat.jpg','热浪畸变 Heat Haze')" loading="lazy"><div class="ic-body"><div class="tc-name">热浪畸变</div><div class="tc-def">高温空气波动扭曲——沙漠、火场、公路。</div></div></div>
+          <div class="img-card"><img class="ic-img" src="../assets/dist_underwater.jpg" alt="水下折射畸变" onclick="openLB('../assets/dist_underwater.jpg','水下折射畸变 Underwater Refraction')" loading="lazy"><div class="ic-body"><div class="tc-name">水下折射畸变</div><div class="tc-def">水体折射扭曲——水下、梦境、窒息。</div></div></div>
+        </div>
+      </div>
+
+      <!-- 曝光金三角档位 -->
+      <div style="margin-top: 44px;">
+        <div class="sub-label">光圈档位 · f 值越小光圈越大</div>
+        <div class="grid grid-cols-2 md:grid-cols-5 gap-4">
+          <div class="img-card"><img class="ic-img" src="../assets/aperture_extreme_wide.jpg" alt="超大光圈" onclick="openLB('../assets/aperture_extreme_wide.jpg','超大光圈 f/0.95-f/1.4')" loading="lazy"><div class="ic-body"><div class="tc-name">超大光圈</div><div class="tc-def">f/0.95–1.4 · 极浅景深，梦幻人像。</div></div></div>
+          <div class="img-card"><img class="ic-img" src="../assets/aperture_wide.jpg" alt="大光圈" onclick="openLB('../assets/aperture_wide.jpg','大光圈 f/1.8-f/2.8')" loading="lazy"><div class="ic-body"><div class="tc-name">大光圈</div><div class="tc-def">f/1.8–2.8 · 浅景深，人像夜景。</div></div></div>
+          <div class="img-card"><img class="ic-img" src="../assets/aperture_moderate.jpg" alt="中等光圈" onclick="openLB('../assets/aperture_moderate.jpg','中等光圈 f/4-f/5.6')" loading="lazy"><div class="ic-body"><div class="tc-name">中等光圈</div><div class="tc-def">f/4–5.6 · 平衡，日常叙事。</div></div></div>
+          <div class="img-card"><img class="ic-img" src="../assets/aperture_small.jpg" alt="小光圈" onclick="openLB('../assets/aperture_small.jpg','小光圈 f/8-f/11')" loading="lazy"><div class="ic-body"><div class="tc-name">小光圈</div><div class="tc-def">f/8–11 · 深景深，群像建筑。</div></div></div>
+          <div class="img-card"><img class="ic-img" src="../assets/aperture_extreme_small.jpg" alt="极小光圈" onclick="openLB('../assets/aperture_extreme_small.jpg','极小光圈 f/16-f/22')" loading="lazy"><div class="ic-body"><div class="tc-name">极小光圈</div><div class="tc-def">f/16–22 · 极深景深，星芒效果。</div></div></div>
+        </div>
+      </div>
+
+      <div style="margin-top: 32px;">
+        <div class="sub-label">ISO 感光度 · 越高噪点越多</div>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+          <div class="img-card"><img class="ic-img" src="../assets/iso_low.jpg" alt="低感光度" onclick="openLB('../assets/iso_low.jpg','低感光度 ISO ≤ 200')" loading="lazy"><div class="ic-body"><div class="tc-name">低感光度 ≤ 200</div><div class="tc-def">画质最纯净——商业级、影棚、风光。</div></div></div>
+          <div class="img-card"><img class="ic-img" src="../assets/iso_mid.jpg" alt="中感光度" onclick="openLB('../assets/iso_mid.jpg','中感光度 ISO 200-800')" loading="lazy"><div class="ic-body"><div class="tc-name">中感光度 200-800</div><div class="tc-def">均衡——日常拍摄、电影叙事。</div></div></div>
+          <div class="img-card"><img class="ic-img" src="../assets/iso_high.jpg" alt="高感光度" onclick="openLB('../assets/iso_high.jpg','高感光度 ISO 1600+')" loading="lazy"><div class="ic-body"><div class="tc-name">高感光度 1600+</div><div class="tc-def">可见噪点成语言——弱光、情绪、氛围。</div></div></div>
+        </div>
+      </div>
+
+      <div style="margin-top: 32px;">
+        <div class="sub-label">快门速度 · 决定运动表现</div>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+          <div class="img-card"><img class="ic-img" src="../assets/shutter_slow.jpg" alt="低速快门" onclick="openLB('../assets/shutter_slow.jpg','低速快门 ≤ 1/30s')" loading="lazy"><div class="ic-body"><div class="tc-name">低速快门 ≤ 1/30s</div><div class="tc-def">运动被拖成轨迹——光轨、水流丝绸化。</div></div></div>
+          <div class="img-card"><img class="ic-img" src="../assets/shutter_mid.jpg" alt="中速快门" onclick="openLB('../assets/shutter_mid.jpg','中速快门 1/30-1/250s')" loading="lazy"><div class="ic-body"><div class="tc-name">中速快门 1/30-1/250s</div><div class="tc-def">自然动感——180° 快门规则，电影感。</div></div></div>
+          <div class="img-card"><img class="ic-img" src="../assets/shutter_fast.jpg" alt="高速快门" onclick="openLB('../assets/shutter_fast.jpg','高速快门 ≥ 1/500s')" loading="lazy"><div class="ic-body"><div class="tc-name">高速快门 ≥ 1/500s</div><div class="tc-def">凝固瞬间——运动、水滴、爆炸。</div></div></div>
+        </div>
+      </div>
+
+      <!-- 其他成像特征 -->
+      <div style="margin-top: 44px;">
+        <div class="sub-label">其他成像特征速查 · "缺陷"即质感</div>
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+          <div class="img-card"><img class="ic-img" src="../assets/img_bokeh2.png" alt="散景" onclick="openLB('../assets/img_bokeh2.png','散景 Bokeh')" loading="lazy"><div class="ic-body"><div class="tc-name">散景 Bokeh</div><div class="tc-def">焦外光斑形态；变形镜头的椭圆散景是标志。</div></div></div>
+          <div class="img-card"><img class="ic-img" src="../assets/img_flare.png" alt="眩光" onclick="openLB('../assets/img_flare.png','眩光 Lens Flare')" loading="lazy"><div class="ic-body"><div class="tc-name">眩光 Lens Flare</div><div class="tc-def">强光直入镜头的光斑光环——逆光、科幻、广告感。</div></div></div>
+          <div class="img-card"><img class="ic-img" src="../assets/img_glitch.png" alt="色差" onclick="openLB('../assets/img_glitch.png','色差 Chromatic Aberration')" loading="lazy"><div class="ic-body"><div class="tc-name">色差</div><div class="tc-def">边缘高反差区红绿蓝错位——复古、故障、迷幻。</div></div></div>
+          <div class="img-card"><img class="ic-img" src="../assets/img_motionblur.png" alt="运动模糊" onclick="openLB('../assets/img_motionblur.png','运动模糊 Motion Blur')" loading="lazy"><div class="ic-body"><div class="tc-name">运动模糊</div><div class="tc-def">快门记录运动的拖影；完全没有反而生硬。</div></div></div>
+          <div class="img-card"><img class="ic-img" src="../assets/img_barrel.png" alt="暗角" onclick="openLB('../assets/img_barrel.png','暗角 Vignetting（同图可见桶形畸变）')" loading="lazy"><div class="ic-body"><div class="tc-name">暗角</div><div class="tc-def">边缘比中心暗——视线引导、复古、压抑。</div></div></div>
+          <div class="img-card"><img class="ic-img" src="../assets/img_filmgrain.png" alt="胶片颗粒" onclick="openLB('../assets/img_filmgrain.png','胶片颗粒 Film Grain')" loading="lazy"><div class="ic-body"><div class="tc-name">胶片颗粒</div><div class="tc-def">有机细密颗粒——复古、90 年代质感。</div></div></div>
+          <div class="img-card"><img class="ic-img" src="../assets/fx_digital_noise.jpg" alt="数字噪点 Digital Noise" onclick="openLB('../assets/fx_digital_noise.jpg','数字噪点 Digital Noise')" loading="lazy"><div class="ic-body"><div class="tc-name">数字噪点</div><div class="tc-def">电子粗糙杂点——低质画面、监控感。</div></div></div>
+          <div class="img-card"><img class="ic-img" src="../assets/fx_rolling_shutter.jpg" alt="果冻效应 Rolling Shutter" onclick="openLB('../assets/fx_rolling_shutter.jpg','果冻效应 Rolling Shutter')" loading="lazy"><div class="ic-body"><div class="tc-name">果冻效应</div><div class="tc-def">卷帘快门致运动物体变形——手机/无人机感。</div></div></div>
+          <div class="img-card"><img class="ic-img" src="../assets/fx_scanlines.jpg" alt="扫描线 Scan Lines" onclick="openLB('../assets/fx_scanlines.jpg','扫描线 Scan Lines')" loading="lazy"><div class="ic-body"><div class="tc-name">扫描线</div><div class="tc-def">CRT 横向线条——复古电视、录像带。</div></div></div>
+          <div class="img-card"><img class="ic-img" src="../assets/fx_lens_water.jpg" alt="镜头污渍 Lens Water" onclick="openLB('../assets/fx_lens_water.jpg','镜头污渍 Lens Water')" loading="lazy"><div class="ic-body"><div class="tc-name">镜头污渍 / 雨滴</div><div class="tc-def">朦胧斑点与折射——手持感、雨夜临场感。</div></div></div>
+          <div class="img-card"><img class="ic-img" src="../assets/fx_halation.jpg" alt="高光辉散 Halation" onclick="openLB('../assets/fx_halation.jpg','高光辉散 Halation')" loading="lazy"><div class="ic-body"><div class="tc-name">高光辉散 Halation</div><div class="tc-def">亮部边缘自然发光，区别于镜头内反射的眩光。</div></div></div>
+          <div class="img-card"><img class="ic-img" src="../assets/fx_flicker.jpg" alt="荧光灯频闪 Fluorescent Flicker" onclick="openLB('../assets/fx_flicker.jpg','荧光灯频闪 Fluorescent Flicker')" loading="lazy"><div class="ic-body"><div class="tc-name">画面闪烁 Flicker</div><div class="tc-def">亮度不稳定闪动——不安、年代感、惊悚。</div></div></div>
+          <div class="img-card"><img class="ic-img" src="../assets/fx_radial_blur.jpg" alt="径向模糊" onclick="openLB('../assets/fx_radial_blur.jpg','径向模糊 Radial Blur')" loading="lazy"><div class="ic-body"><div class="tc-name">径向模糊</div><div class="tc-def">从中心向外放射——冲击、眩晕、能量爆发。</div></div></div>
+          <div class="img-card"><img class="ic-img" src="../assets/fx_shutter_smear.jpg" alt="快门拖影" onclick="openLB('../assets/fx_shutter_smear.jpg','快门拖影 Shutter Smear')" loading="lazy"><div class="ic-body"><div class="tc-name">快门拖影</div><div class="tc-def">慢快门连续渐变残影——醉酒、迷幻、舞蹈。</div></div></div>
+          <div class="img-card"><img class="ic-img" src="../assets/fx_compression.jpg" alt="数字压缩噪声" onclick="openLB('../assets/fx_compression.jpg','数字压缩噪声 Compression Artifacts')" loading="lazy"><div class="ic-body"><div class="tc-name">数字压缩噪声</div><div class="tc-def">块状破碎、边缘振铃——低码率、监控、伪纪录。</div></div></div>
+          <div class="img-card"><img class="ic-img" src="../assets/fx_ghosting.jpg" alt="拖影" onclick="openLB('../assets/fx_ghosting.jpg','拖影 Ghosting')" loading="lazy"><div class="ic-body"><div class="tc-name">拖影 Ghosting</div><div class="tc-def">半透明分层残影——灵异、记忆重叠、眩晕。</div></div></div>
+          <div class="img-card"><img class="ic-img" src="../assets/fx_focus_breathing.jpg" alt="镜头呼吸" onclick="openLB('../assets/fx_focus_breathing.jpg','镜头呼吸 Focus Breathing')" loading="lazy"><div class="ic-body"><div class="tc-name">镜头呼吸</div><div class="tc-def">焦点变化时画面轻微缩放——真实光学质感。</div></div></div>
+          <div class="img-card"><img class="ic-img" src="../assets/fx_edge_falloff.jpg" alt="边缘衰减" onclick="openLB('../assets/fx_edge_falloff.jpg','边缘衰减 Edge Falloff')" loading="lazy"><div class="ic-body"><div class="tc-name">边缘衰减</div><div class="tc-def">中心锐边缘软——老镜头、胶片、复古。</div></div></div>
+          <div class="img-card"><img class="ic-img" src="../assets/fx_low_sharpness.jpg" alt="低清晰度" onclick="openLB('../assets/fx_low_sharpness.jpg','低清晰度 Low Sharpness')" loading="lazy"><div class="ic-body"><div class="tc-name">低清晰度</div><div class="tc-def">整体钝化——90 年代 DV、低保真、怀旧。</div></div></div>
+          <div class="img-card"><img class="ic-img" src="../assets/fx_sharpening.jpg" alt="边缘锐化" onclick="openLB('../assets/fx_sharpening.jpg','边缘锐化 Sharpening Artifacts')" loading="lazy"><div class="ic-body"><div class="tc-name">边缘锐化</div><div class="tc-def">硬边白边——廉价数码、监控、过度后期。</div></div></div>
+        </div>
+      </div>
+
+      <!-- 示例图 + Prompt -->
+      <div class="grid grid-cols-1 lg:grid-cols-5 gap-10" style="margin-top: 48px;">
+        <div class="lg:col-span-2">
+          <div class="sub-label">成像示例</div>
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
+            <figure class="fig"><img src="../assets/img_exposure_triangle.jpg"><figcaption>曝光金三角</figcaption></figure>
+            <figure class="fig"><img src="../assets/img_shallow_dof.jpg"><figcaption>浅景深虚化</figcaption></figure>
+            <figure class="fig"><img src="../assets/img_silhouette.png"><figcaption>剪影曝光</figcaption></figure>
+            <figure class="fig"><img src="../assets/img_glitch.png"><figcaption>故障畸变</figcaption></figure>
+          </div>
+        </div>
+        <div class="lg:col-span-3">
+          <div class="sub-label">AI 视频生成 Prompt 精选</div>
+          <div style="display: flex; flex-direction: column; gap: 12px;">
+            <div class="prompt-box"><div class="p-label">浅景深（完整版）</div><p>黄昏时分的城市街道，一位年轻女子站在路边安静地看向远方。镜头采用 85mm 长焦镜头与超大光圈拍摄，极浅景深效果。摄影机缓慢向前推进，焦点始终锁定在女子的眼睛和面部细节上。前景行人与路边花朵形成柔和虚化，背景霓虹灯、车流灯光完全融化成梦幻般的彩色散景光斑（Bokeh）。暖金色夕阳勾勒出人物轮廓光。电影级摄影，真实光学景深，细腻焦点过渡。</p></div>
+            <div class="prompt-box"><div class="p-label">焦点转移</div><p>前景桌上的咖啡杯一开始清晰，背景人物模糊；随后焦点缓慢从咖啡杯转移到背景中沉默的男人脸上，室内安静，浅景深，情绪压抑。</p></div>
+            <div class="prompt-box"><div class="p-label">剪影曝光</div><p>夕阳下的山脊上，一个人站在风中，背景天空明亮金红，人物完全成为黑色轮廓，衣摆被风吹动，画面孤独而史诗。</p></div>
+            <div class="prompt-box"><div class="p-label">长曝光</div><p>夜晚高架桥上车辆快速经过，车灯形成红白色光轨，建筑稳定清晰，天空深蓝，画面呈现时间流动和都市速度感。</p></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-10" style="margin-top: 48px;">
+        <div>
+          <div class="sub-label">常见错误</div>
+          <ul class="tick err-list">
+            <li><b>景深想要却得不到</b> — 只写"背景虚化"不够，要给焦段 + 光圈 + 距离的组合逻辑</li>
+            <li><b>曝光三角只提一个</b> — 说 ISO 3200 却忘了设定暗光场景，逻辑不自洽</li>
+            <li><b>颗粒与噪点混用</b> — 胶片颗粒是有机质感，数字噪点是电子粗糙</li>
+            <li><b>畸变没有物理来源</b> — 水下折射不写水体，热浪畸变不写高温</li>
+            <li><b>追求"完美画质"</b> — 低清、噪点、污渍、闪烁恰恰是真实感的来源</li>
+          </ul>
+        </div>
+        <div style="display: flex; align-items: center;">
+          <div class="quote-final" style="width: 100%;">
+            <p class="q1">"成像属性 = 画面的皮肤与质感"</p>
+            <p class="q2">焦点决定看哪里，景深决定看清多少，曝光决定亮暗情绪，畸变与颗粒决定这画面可不可信。</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer style="background: var(--color-bg-secondary); border-top: 1px solid var(--color-border-default); padding: 48px 0;">
+  <div class="max-w-7xl mx-auto px-6 lg:px-8 flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
+    <div>
+      <p style="font-family: var(--font-display); color: var(--color-brand); font-size: 18px; margin: 0 0 6px 0;">Visual Aesthetics · 摄影属性</p>
+      <p style="font-size: 12px; color: var(--color-text-tertiary); margin: 0;">内容蒸馏自内部文档《【摄影属性】》 · 配套 Prompt 面向 AI 视频生成场景</p>
+    </div>
+    <a href="all-in-one.html#multimodal-light" style="font-size: 13px; color: var(--color-text-secondary); text-decoration: none; border: 1px solid var(--color-border-brand); border-radius: var(--radius-full); padding: 10px 22px; transition: color .2s;" onmouseover="this.style.color='var(--color-brand)'" onmouseout="this.style.color='var(--color-text-secondary)'">← 返回多模态光影</a>
+  </div>
+</footer>
+
+<div id="lightbox" class="lb-backdrop" onclick="closeLB()">
+  <button class="lb-close" onclick="event.stopPropagation(); closeLB()" title="关闭">&times;</button>
+  <img id="lb-img" src="" alt="">
+  <div id="lb-cap" class="lb-cap"></div>
+</div>
+<script>
+function openLB(src, cap){
+  document.getElementById('lb-img').src = src;
+  document.getElementById('lb-cap').textContent = cap || '';
+  document.getElementById('lightbox').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+function closeLB(){
+  document.getElementById('lightbox').classList.remove('open');
+  document.body.style.overflow = '';
+}
+document.addEventListener('keydown', function(e){ if(e.key === 'Escape') closeLB(); });
+</script>
+<link rel="stylesheet" href="../assets/glow-hover-v2.css?v=2">
+<script src="../assets/glow-hover-v2.js?v=2"></script>
+</body>
+</html>

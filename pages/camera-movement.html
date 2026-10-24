@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="zh-CN" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>镜头调度 — Visual Aesthetics</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4.3.1/dist/index.global.js"></script>
+    <style>
+:root {
+  --color-brand: #C9A96E; --color-brand-light: #DBC99E; --color-brand-dark: #A68B5B;
+  --color-bg-primary: #0A0A0A; --color-bg-secondary: #141414; --color-bg-surface: #1A1A1A;
+  --color-bg-elevated: #222222; --color-bg-sunken: #111111;
+  --color-text-primary: #F0EDE8; --color-text-secondary: #9B9590; --color-text-tertiary: #6B6662;
+  --color-text-inverse: #0A0A0A;
+  --color-border-default: rgba(255,255,255,0.08); --color-border-strong: rgba(255,255,255,0.15);
+  --color-border-brand: rgba(201,169,110,0.3);
+  --radius-sm: 2px; --radius-md: 8px; --radius-lg: 12px; --radius-full: 9999px;
+  --font-display: 'Playfair Display', 'Noto Serif SC', 'Georgia', serif;
+  --font-body: 'Inter', 'Noto Sans SC', 'Helvetica Neue', sans-serif;
+}
+html { scroll-behavior: smooth; }
+body { background: var(--color-bg-primary); color: var(--color-text-primary); font-family: var(--font-body); margin: 0; }
+.nav-link:hover { color: var(--color-brand) !important; }
+.type-card { background: var(--color-bg-surface); border: 1px solid var(--color-border-default); border-radius: var(--radius-lg); padding: 20px 22px; transition: border-color .25s, transform .25s; display: block; }
+.type-card:hover { border-color: var(--color-border-brand); transform: translateY(-2px); }
+.type-card .tc-name { font-family: var(--font-display); font-size: 18px; color: var(--color-text-primary); margin-bottom: 2px; }
+.type-card .tc-en { font-size: 11px; color: var(--color-brand); text-transform: uppercase; letter-spacing: .08em; margin-bottom: 10px; }
+.type-card .tc-def { font-size: 13.5px; color: var(--color-text-secondary); line-height: 1.75; }
+.type-card .tc-effect { margin-top: 10px; font-size: 12px; color: var(--color-text-tertiary); border-top: 1px solid var(--color-border-default); padding-top: 10px; }
+.type-card .tc-effect b { color: var(--color-brand); font-weight: 500; }
+.prompt-box { background: var(--color-bg-sunken); border-left: 3px solid var(--color-brand); border-radius: 0 var(--radius-md) var(--radius-md) 0; padding: 14px 18px; }
+.prompt-box .p-label { font-size: 11px; color: var(--color-brand); text-transform: uppercase; letter-spacing: .1em; margin-bottom: 8px; font-weight: 600; }
+.prompt-box p { font-size: 13.5px; color: var(--color-text-secondary); line-height: 1.85; margin: 0; }
+.note-box { background: var(--color-bg-sunken); border-left: 3px solid var(--color-brand); padding: 14px 18px; border-radius: 0 var(--radius-sm) var(--radius-sm) 0; }
+.note-box p { font-size: 14px; color: var(--color-text-secondary); line-height: 1.8; margin: 0; font-style: italic; }
+table.dt { width: 100%; border-collapse: collapse; font-size: 13.5px; }
+table.dt th { text-align: left; color: var(--color-brand); font-weight: 600; font-size: 11px; text-transform: uppercase; letter-spacing: .1em; padding: 10px 14px; border-bottom: 1px solid var(--color-border-strong); }
+table.dt td { padding: 11px 14px; color: var(--color-text-secondary); border-bottom: 1px solid var(--color-border-default); line-height: 1.7; vertical-align: top; }
+table.dt tr:last-child td { border-bottom: none; }
+table.dt td b, table.dt td strong { color: var(--color-text-primary); font-weight: 500; }
+.sec-label { display: flex; align-items: center; gap: 12px; margin-bottom: 10px; }
+.sec-label .bar { width: 32px; height: 1.5px; background: var(--color-brand); }
+.sec-label p { font-size: 12px; text-transform: uppercase; letter-spacing: .2em; color: var(--color-brand); font-weight: 500; margin: 0; }
+.module-hero { position: relative; overflow: hidden; min-height: 420px; }
+.module-hero img.mh { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; filter: brightness(0.5) saturate(1.05); }
+.module-hero .mh-grad { position: absolute; inset: 0; background: linear-gradient(to right, rgba(10,10,10,0.92) 20%, rgba(10,10,10,0.4) 70%, transparent); }
+.sub-label { font-size: 12px; color: var(--color-brand); text-transform: uppercase; letter-spacing: .08em; margin-bottom: 10px; font-weight: 600; }
+ul.tick { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 9px; }
+ul.tick li { font-size: 14px; color: var(--color-text-secondary); line-height: 1.7; padding-left: 16px; position: relative; }
+ul.tick li::before { content: "•"; position: absolute; left: 0; color: var(--color-brand); }
+ul.tick li b, ul.tick li strong { color: var(--color-text-primary); font-weight: 500; }
+.module-anchor { scroll-margin-top: 90px; }
+/* === image card (上图下文) === */
+.img-card { background: var(--color-bg-surface); border: 1px solid var(--color-border-default); border-radius: var(--radius-lg); overflow: hidden; transition: border-color .25s, transform .25s; }
+.img-card:hover { transform: translateY(-3px); }
+.img-card .ic-img { width: 100%; height: 170px; object-fit: cover; display: block; cursor: zoom-in; filter: brightness(0.92) saturate(1.02); transition: filter .3s; }
+.img-card:hover .ic-img { filter: brightness(1) saturate(1.05); }
+.img-card .ic-body { padding: 16px 18px 18px; }
+.img-card .tc-en { font-size: 11px; color: var(--color-brand); text-transform: uppercase; letter-spacing: .08em; margin-bottom: 6px; }
+.img-card .tc-name { font-family: var(--font-display); font-size: 17px; color: var(--color-text-primary); margin-bottom: 8px; }
+.img-card .tc-def { font-size: 13px; color: var(--color-text-secondary); line-height: 1.75; }
+.img-card .tc-effect { margin-top: 10px; font-size: 12px; color: var(--color-text-tertiary); border-top: 1px solid var(--color-border-default); padding-top: 10px; }
+.img-card .tc-effect b { color: var(--color-brand); font-weight: 500; }
+.img-card .tc-prompt { margin-top: 10px; font-size: 12px; color: var(--color-text-tertiary); background: var(--color-bg-sunken); border-radius: var(--radius-md); padding: 10px 12px; line-height: 1.7; }
+.img-card .tc-prompt b { color: var(--color-brand); font-weight: 600; display: block; font-size: 10px; text-transform: uppercase; letter-spacing: .1em; margin-bottom: 4px; }
+/* === lightbox === */
+.lb-backdrop { position: fixed; inset: 0; z-index: 200; background: rgba(0,0,0,0.88); backdrop-filter: blur(8px); display: none; align-items: center; justify-content: center; padding: 40px; cursor: zoom-out; }
+.lb-backdrop.open { display: flex; }
+.lb-backdrop img, .lb-backdrop video { max-width: 92vw; max-height: 88vh; object-fit: contain; border-radius: var(--radius-md); box-shadow: 0 24px 80px rgba(0,0,0,0.6); }
+.lb-backdrop video { cursor: default; }
+.lb-cap { position: fixed; bottom: 28px; left: 50%; transform: translateX(-50%); color: var(--color-text-secondary); font-size: 13px; letter-spacing: .04em; background: rgba(10,10,10,0.6); padding: 8px 20px; border-radius: var(--radius-full); border: 1px solid var(--color-border-default); }
+.lb-close { position: fixed; top: 22px; right: 28px; width: 40px; height: 40px; border-radius: 50%; border: 1px solid var(--color-border-strong); background: rgba(10,10,10,0.6); color: var(--color-text-primary); font-size: 22px; line-height: 1; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: border-color .2s, color .2s; }
+.lb-close:hover { border-color: var(--color-brand); color: var(--color-brand); }
+    </style>
+</head>
+<body>
+
+<!-- ===== HEADER ===== -->
+<header class="fixed top-0 left-0 right-0 z-50" style="background: rgba(10,10,10,0.85); backdrop-filter: blur(20px); border-bottom: 1px solid var(--color-border-default);">
+  <nav class="max-w-7xl mx-auto px-6 lg:px-8 h-16 flex items-center justify-between">
+    <a href="all-in-one.html#index" class="flex items-center gap-2" style="font-family: var(--font-display); color: var(--color-brand); font-size: 20px; font-weight: 600; text-decoration: none; letter-spacing: 0.02em;">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><path d="M12 2v20M2 12h20" opacity="0.3"/><circle cx="12" cy="12" r="4" fill="currentColor" opacity="0.4"/></svg>
+      Visual Aesthetics
+    </a>
+    <div class="hidden md:flex items-center gap-5">
+      <a href="all-in-one.html#index" class="nav-link" style="color: var(--color-text-secondary); font-size: 12px; text-decoration: none; letter-spacing: 0.04em; text-transform: uppercase; transition: color 0.2s;">首页</a>
+      <a href="all-in-one.html#courses" class="nav-link" style="color: var(--color-text-secondary); font-size: 12px; text-decoration: none; letter-spacing: 0.04em; text-transform: uppercase; transition: color 0.2s;">课程中心</a>
+      <a href="all-in-one.html#multimodal-light" class="nav-link" style="color: var(--color-text-secondary); font-size: 12px; text-decoration: none; letter-spacing: 0.04em; text-transform: uppercase; transition: color 0.2s;">多模态光影</a>
+      <a href="all-in-one.html#lens-language" class="nav-link" style="color: var(--color-text-secondary); font-size: 12px; text-decoration: none; letter-spacing: 0.04em; text-transform: uppercase; transition: color 0.2s;">镜头语言</a>
+      <a href="all-in-one.html#composition" class="nav-link" style="color: var(--color-text-secondary); font-size: 12px; text-decoration: none; letter-spacing: 0.04em; text-transform: uppercase; transition: color 0.2s;">构图组织</a>
+      <a href="photography-attrs.html" class="nav-link" style="color: var(--color-text-secondary); font-size: 12px; text-decoration: none; letter-spacing: 0.04em; text-transform: uppercase; transition: color 0.2s;">摄影属性</a>
+      <a href="camera-movement.html" class="nav-link" style="color: var(--color-brand); font-size: 12px; text-decoration: none; letter-spacing: 0.04em; text-transform: uppercase;">镜头调度</a>
+    </div>
+  </nav>
+</header>
+
+<main class="pt-16 min-h-screen">
+
+  <!-- ===== HERO ===== -->
+  <section class="module-hero" style="display: flex; align-items: center;">
+    <img class="mh" src="../assets/hero-main.jpg" alt="镜头调度">
+    <div class="mh-grad"></div>
+    <div class="relative z-10 max-w-7xl mx-auto px-6 lg:px-8 py-24 w-full">
+      <div class="max-w-2xl">
+        <div class="flex flex-wrap items-center gap-3 mb-8">
+          <span style="display: inline-flex; align-items: center; gap: 6px; padding: 6px 16px; border: 1px solid var(--color-border-brand); border-radius: var(--radius-full); font-size: 12px; color: var(--color-brand); letter-spacing: 0.06em; text-transform: uppercase;">4 大模块</span>
+          <span style="display: inline-flex; align-items: center; gap: 6px; padding: 6px 16px; border: 1px solid var(--color-border-brand); border-radius: var(--radius-full); font-size: 12px; color: var(--color-brand); letter-spacing: 0.06em; text-transform: uppercase;">基础 → 复杂 → 导演级</span>
+          <span style="display: inline-flex; align-items: center; gap: 6px; padding: 6px 16px; border: 1px solid var(--color-border-brand); border-radius: var(--radius-full); font-size: 12px; color: var(--color-brand); letter-spacing: 0.06em; text-transform: uppercase;">AI Prompt 蒸馏版</span>
+        </div>
+        <h1 style="font-family: var(--font-display); font-size: clamp(40px, 7vw, 76px); font-weight: 600; line-height: 1.1; margin: 0 0 20px 0; letter-spacing: -0.01em;">镜头调度</h1>
+        <p style="font-size: clamp(15px, 2vw, 19px); color: var(--color-text-secondary); line-height: 1.8; margin: 0 0 14px 0; max-width: 580px; font-weight: 300;">
+          摄影机本身的运镜类型、运动方向、路径与连续性——决定观众<strong style="color: var(--color-brand); font-weight: 500;">如何进入画面、如何跟随主体、如何感知空间变化</strong>。
+        </p>
+        <p style="font-size: 13px; color: var(--color-text-tertiary); line-height: 1.7; margin: 0; max-width: 560px;">
+          镜头本身如何制造节奏、压迫、沉浸或冲击。范畴包括：固定、推、拉、摇、移、跟、升降、环绕、俯冲、FPV 穿越、变焦、长镜头、一镜到底与组合运镜。
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== 暴力速辨 ===== -->
+  <section style="background: var(--color-bg-secondary); padding: 56px 0;">
+    <div class="max-w-7xl mx-auto px-6 lg:px-8">
+      <div class="sec-label"><div class="bar"></div><p>暴力速辨 · 30 秒分清运镜</p></div>
+      <div class="overflow-x-auto" style="margin-top: 24px;">
+        <table class="dt">
+          <thead><tr><th>术语</th><th>摄影机位置</th><th>焦距</th><th>镜头方向</th><th>一句话</th></tr></thead>
+          <tbody>
+            <tr><td><b>推 Push-in</b></td><td>改变（向主体）</td><td>不变</td><td>不变</td><td>摄影机往前走，主体变大</td></tr>
+            <tr><td><b>拉 Pull-out</b></td><td>改变（远离主体）</td><td>不变</td><td>不变</td><td>摄影机往后退，环境进来</td></tr>
+            <tr><td><b>变焦 Zoom</b></td><td>不变</td><td><b>改变</b></td><td>不变</td><td>机位不动，画面放大缩小</td></tr>
+            <tr><td><b>摇 Pan / Tilt</b></td><td>不变</td><td>不变</td><td><b>改变</b></td><td>原地"转头"，横摇/俯仰</td></tr>
+            <tr><td><b>移 / 跟 / 升降</b></td><td>在空间中移动</td><td>不变</td><td>可变</td><td>整个摄影机换位</td></tr>
+            <tr><td><b>固定 Static</b></td><td>不动</td><td>不变</td><td>不变</td><td>让画面内部自己发生变化</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== 知识地图 ===== -->
+  <section style="background: var(--color-bg-secondary); padding: 0 0 56px 0;">
+    <div class="max-w-7xl mx-auto px-6 lg:px-8">
+      <div class="sec-label"><div class="bar"></div><p>知识地图</p></div>
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-4" style="margin-top: 24px;">
+        <a href="#mod-basic" class="type-card" style="text-decoration: none;">
+          <div class="tc-en">Module 01</div><div class="tc-name">基础运镜</div>
+          <div class="tc-def">静态、方向运动、焦距变化——15 种基本语法。</div>
+        </a>
+        <a href="#mod-complex" class="type-card" style="text-decoration: none;">
+          <div class="tc-en">Module 02</div><div class="tc-name">复杂运镜</div>
+          <div class="tc-def">复合运动、空间路径、连续调度——运镜的组合拳。</div>
+        </a>
+        <a href="#mod-director" class="type-card" style="text-decoration: none;">
+          <div class="tc-en">Module 03</div><div class="tc-name">导演运镜</div>
+          <div class="tc-def">希区柯克到王家卫——14 种作者级签名镜头。</div>
+        </a>
+        <a href="#mod-highimpact" class="type-card" style="text-decoration: none;">
+          <div class="tc-en">Module 04</div><div class="tc-name">高表现力镜头</div>
+          <div class="tc-def">子弹时间、对冲、俯冲——视觉炸裂的修辞重音。</div>
+        </a>
+      </div>
+    </div>
+  </section>
+<!-- ===== MODULE 01: 基础运镜 ===== -->
+  <section id="mod-basic" class="module-anchor" style="padding: 90px 0 70px 0; background: var(--color-bg-primary);">
+    <div class="max-w-7xl mx-auto px-6 lg:px-8">
+      <div class="sec-label"><div class="bar"></div><p>Module 01 · Basic Movements</p></div>
+      <h2 style="font-family: var(--font-display); font-size: clamp(30px, 4.5vw, 52px); font-weight: 500; line-height: 1.15; margin: 0 0 14px 0;">基础运镜</h2>
+      <p style="font-size: 15px; line-height: 1.85; color: var(--color-text-secondary); max-width: 760px; margin: 0;">
+        运镜的基本语法：<strong style="color: var(--color-text-primary);">静态镜头</strong>让画面内部自己说话，<strong style="color: var(--color-text-primary);">方向运动</strong>改变摄影机在空间中的位置，<strong style="color: var(--color-text-primary);">焦距变化</strong>则在机位不动的前提下改变观看关系。
+      </p>
+
+      <div style="margin-top: 44px;">
+        <div class="sub-label">静态镜头</div>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+          <div class="img-card"><img class="ic-img" src="../assets/posters/kling_static.jpg" alt="固定镜头" onclick="openLV('https://v2-kling.kechuangai.com/bs2/upload-ylab-stunt/057692dc-03d5-4bd4-9229-c2fdfd9aeded-gxa2Bm0FYDm4vnKHM7Ph1A-output.mp4?x-kcdn-pid=112452','固定镜头 Static Shot · 可灵原视频（点击播放）','../assets/posters/kling_static.jpg')" loading="lazy"><div class="ic-body"><div class="tc-en">Static Shot</div><div class="tc-name">固定镜头</div><div class="tc-def">摄影机位置、角度、焦距基本不变，稳定记录画面内部变化。冷静、客观、克制，把注意力交给表演和空间关系。</div><div class="tc-effect"><b>场景</b> 对话、观察、压抑、舞台式调度</div></div></div>
+          <div class="img-card"><img class="ic-img" src="../assets/posters/kling_staticlong.jpg" alt="静止长镜头" onclick="openLV('https://v2-kling.kechuangai.com/bs2/upload-ylab-stunt/2e9f9864-e2d7-4d07-b514-e008e97aa6f0-EqCpWtZreL8S5-OPm5ClTQ-output.mp4?x-kcdn-pid=112452','静止长镜头 Static Long Take · 可灵原视频（点击播放）','../assets/posters/kling_staticlong.jpg')" loading="lazy"><div class="ic-body"><div class="tc-en">Static Long Take</div><div class="tc-name">静止长镜头</div><div class="tc-def">摄影机保持长时间静止。制造时间沉浸感、观察感和无法逃离的现场压力。</div><div class="tc-effect"><b>场景</b> 现实主义、慢电影、情绪延宕</div></div></div>
+          <div class="img-card"><img class="ic-img" src="../assets/posters/kling_locked.jpg" alt="锁定机位" onclick="openLV('https://v2-kling.kechuangai.com/bs2/upload-ylab-stunt/b3139617-a594-41d0-a621-a4d574c5d69e-r5jCT3wLzAEDPuCoTQi0Zg-output.mp4?x-kcdn-pid=112452','锁定机位 Locked-off Shot · 可灵原视频（点击播放）','../assets/posters/kling_locked.jpg')" loading="lazy"><div class="ic-body"><div class="tc-en">Locked-off Shot</div><div class="tc-name">锁定机位</div><div class="tc-def">摄影机完全固定在稳定平台上，没有任何人为晃动，比普通固定镜头更强调"机械式不动"。</div><div class="tc-effect"><b>场景</b> 监控、证据影像、非人称凝视</div></div></div>
+        </div>
+      </div>
+
+      <div style="margin-top: 40px;">
+        <div class="sub-label">方向运动 · 摄影机在空间中移动</div>
+        <div class="grid grid-cols-2 md:grid-cols-3 gap-4">
+          <div class="img-card"><img class="ic-img" src="../assets/posters/kling_pushin.jpg" alt="推镜头" onclick="openLV('https://v2-kling.kechuangai.com/bs2/upload-ylab-stunt/a3e0f774-ab7c-481c-8aa4-0e1dc17a4062-qAk6R3lFHYAByNzSPJzUSA-output.mp4?x-kcdn-pid=112452','推镜头 Push-in · 旧剧院芭蕾（点击播放原视频）','../assets/posters/kling_pushin.jpg')" loading="lazy"><div class="ic-body"><div class="tc-en">Push-in / Dolly In</div><div class="tc-name">推镜头</div><div class="tc-def">摄影机向主体靠近，主体在画面中逐渐变大。让观众被带向主体，增强紧张感、亲密感或关键时刻的重量。</div><div class="tc-effect"><b>用途</b> 情绪逼近、心理压迫、信息强调、人物觉醒</div></div></div>
+          <div class="img-card"><img class="ic-img" src="../assets/posters/kling_pullout.jpg" alt="拉镜头" onclick="openLV('https://v2-kling.kechuangai.com/bs2/upload-ylab-stunt/c1ef4a3a-58af-45f5-9bdb-c76f6df1b780-VdFV6nqW8tzUcbe5HXwWpQ-output.mp4?x-kcdn-pid=112452','拉镜头 Pull-out · 可灵原视频（点击播放）','../assets/posters/kling_pullout.jpg')" loading="lazy"><div class="ic-body"><div class="tc-en">Pull-out / Dolly Out</div><div class="tc-name">拉镜头</div><div class="tc-def">摄影机远离主体，主体逐渐变小，环境信息逐步增加。人物与环境关系被重新理解。</div><div class="tc-effect"><b>用途</b> 揭示空间、孤独感、情绪抽离、结尾余韵</div></div></div>
+          <div class="img-card"><img class="ic-img" src="../assets/posters/kling_pantilt.jpg" alt="摇镜头" onclick="openLV('https://v2-kling.kechuangai.com/bs2/upload-ylab-stunt/8bf5e701-530a-4bdf-9927-29917de2776a-8F5gogdz-nK8luNlpxhagQ-output.mp4?x-kcdn-pid=112452','摇镜头 Pan/Tilt · 砖砌火车站（点击播放原视频）','../assets/posters/kling_pantilt.jpg')" loading="lazy"><div class="ic-body"><div class="tc-en">Pan / Tilt</div><div class="tc-name">摇镜头</div><div class="tc-def">摄影机位置不变，以自身为轴线旋转镜头方向。横向是 Pan 横摇，上下是 Tilt 俯仰摇。</div><div class="tc-effect"><b>用途</b> 观察空间、追随目光、揭示信息</div></div></div>
+          <div class="img-card"><img class="ic-img" src="../assets/posters/kling_tracking.jpg" alt="移镜头" onclick="openLV('https://v2-kling.kechuangai.com/bs2/upload-ylab-stunt/ccc22dde-3aef-4605-a959-d88e28113172-pRTtpe-UD6ehvcd4qrViJg-output.mp4?x-kcdn-pid=112452','移镜头 Tracking · 现代美术馆（点击播放原视频）','../assets/posters/kling_tracking.jpg')" loading="lazy"><div class="ic-body"><div class="tc-en">Tracking / Trucking</div><div class="tc-name">移镜头</div><div class="tc-def">摄影机在空间中横向、纵向或斜向平移，方向通常与主体或环境平行。平稳、流动、具有空间浏览感。</div><div class="tc-effect"><b>用途</b> 空间关系、并排行动、街道流动</div></div></div>
+          <div class="img-card"><img class="ic-img" src="../assets/posters/kling_follow.jpg" alt="跟镜头" onclick="openLV('https://v2-kling.kechuangai.com/bs2/upload-ylab-stunt/e2d0d15a-0b8c-4491-807c-311108ec4984-fIxDpu104xuxM7SBMcXkng-output.mp4?x-kcdn-pid=112452','跟镜头 Follow · 拱廊市集（点击播放原视频）','../assets/posters/kling_follow.jpg')" loading="lazy"><div class="ic-body"><div class="tc-en">Follow Shot</div><div class="tc-name">跟镜头</div><div class="tc-def">摄影机跟随主体运动，保持相对稳定的距离和方向，可从前、后、侧、斜后方跟随。</div><div class="tc-effect"><b>用途</b> 行动场景、沉浸叙事、角色进入新空间</div></div></div>
+          <div class="img-card"><img class="ic-img" src="../assets/posters/kling_craneup.jpg" alt="升镜头" onclick="openLV('https://v2-kling.kechuangai.com/bs2/upload-ylab-stunt/e40b7972-917c-490e-98bb-22776afddecd-5ub8K7lX2EoLyR12DB8bKw-output.mp4?x-kcdn-pid=112452','升镜头 Crane Up · 圆形图书馆（点击播放原视频）','../assets/posters/kling_craneup.jpg')" loading="lazy"><div class="ic-body"><div class="tc-en">Crane Up / Pedestal Up</div><div class="tc-name">升镜头</div><div class="tc-def">摄影机从低处向高处垂直上升，常与推/拉组合。从局部上升到整体，扩大视野和情绪格局。</div><div class="tc-effect"><b>用途</b> 揭示规模、仪式感、史诗感</div></div></div>
+          <div class="img-card"><img class="ic-img" src="../assets/posters/kling_cranedown.jpg" alt="降镜头" onclick="openLV('https://v2-kling.kechuangai.com/bs2/upload-ylab-stunt/fef31ea4-a58c-4807-9e04-a645759c3985-eSdOYQXuRAGFR6lzD9BaUw-output.mp4?x-kcdn-pid=112452','降镜头 Crane Down · 雪山木屋村落（点击播放原视频）','../assets/posters/kling_cranedown.jpg')" loading="lazy"><div class="ic-body"><div class="tc-en">Crane Down / Pedestal Down</div><div class="tc-name">降镜头</div><div class="tc-def">摄影机从高处向低处垂直下降。把观众从整体空间带到具体人物或事件现场。</div><div class="tc-effect"><b>用途</b> 从环境进入人物、压迫降临感</div></div></div>
+          <div class="img-card"><img class="ic-img" src="../assets/posters/kling_lateral.jpg" alt="平移镜头" onclick="openLV('https://v2-kling.kechuangai.com/bs2/upload-ylab-stunt/c09bf091-a12b-409b-aba8-5386872bf013-bhMtYDDUBnj5bxnabtDd9w-output.mp4?x-kcdn-pid=112452','平移镜头 Lateral Move · 可灵原视频（点击播放）','../assets/posters/kling_lateral.jpg')" loading="lazy"><div class="ic-body"><div class="tc-en">Lateral Move / Slide</div><div class="tc-name">平移镜头</div><div class="tc-def">摄影机沿水平轴平稳移动，不明显改变与主体的前后距离。有序、流畅、带浏览和揭示感。</div><div class="tc-effect"><b>用途</b> 并列关系、空间层次、群像展示</div></div></div>
+          <div class="img-card"><img class="ic-img" src="../assets/posters/kling_whippan.jpg" alt="甩镜头" onclick="openLV('https://v2-kling.kechuangai.com/bs2/upload-ylab-stunt/3b03f1c6-a18e-4c3b-a7a5-b76a79c35b58-lQJ-d0gzQynSRbs6JlloPg-output.mp4?x-kcdn-pid=112452','甩镜头 Whip Pan · 夜间拳击馆（点击播放原视频）','../assets/posters/kling_whippan.jpg')" loading="lazy"><div class="ic-body"><div class="tc-en">Whip Pan / Whip Tilt</div><div class="tc-name">甩镜头</div><div class="tc-def">镜头方向以极快速度甩动，是摇镜头的高速强节奏版本。制造强烈运动模糊、节奏突变和注意力瞬间跳转。</div><div class="tc-effect"><b>用途</b> 动作衔接、惊吓、喜剧反应、转场</div></div></div>
+        </div>
+      </div>
+
+      <div style="margin-top: 40px;">
+        <div class="sub-label">焦距变化 · 机位不动</div>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+          <div class="img-card"><img class="ic-img" src="../assets/posters/kling_zoom.jpg" alt="变焦调度" onclick="openLV('https://v2-kling.kechuangai.com/bs2/upload-ylab-stunt/1f4be381-6005-4803-8128-9ec485a19b77-fVgUFxivXUBOQkQGx4id4A-output.mp4?x-kcdn-pid=112452','变焦调度 Zoom Movement · 可灵原视频（点击播放）','../assets/posters/kling_zoom.jpg')" loading="lazy"><div class="ic-body"><div class="tc-en">Zoom Movement</div><div class="tc-name">变焦调度</div><div class="tc-def">摄影机位置不变，通过改变焦距让画面放大或缩小。带有"被观察/被锁定"的感觉。</div><div class="tc-effect"><b>用途</b> 纪录观察、突发强调、新闻抓拍</div></div></div>
+          <div class="img-card"><img class="ic-img" src="../assets/posters/kling_pushzoom.jpg" alt="前推变焦" onclick="openLV('https://v2-kling.kechuangai.com/bs2/upload-ylab-stunt/e7964c91-a06b-4450-b8fa-39cfe6677199-1OBUwJnZ2vCdRvWX6ngbFw-output.mp4?x-kcdn-pid=112452','前推变焦 Push Zoom · 可灵原视频（点击播放）','../assets/posters/kling_pushzoom.jpg')" loading="lazy"><div class="ic-body"><div class="tc-en">Push Zoom / Slow Zoom-in</div><div class="tc-name">前推变焦</div><div class="tc-def">摄影机不移动，只通过变焦放大主体。比普通变焦更慢，像心理注意力逐渐集中。</div><div class="tc-effect"><b>用途</b> 复古电影、心理压迫、人物揭示</div></div></div>
+          <div class="img-card"><img class="ic-img" src="../assets/posters/kling_zoomout.jpg" alt="后拉变焦" onclick="openLV('https://v2-kling.kechuangai.com/bs2/upload-ylab-stunt/65ab9e52-ae44-48e0-a3ac-ae36c5b4d1ef--U6wbU42BgAJU6y8KzAL_A-output.mp4?x-kcdn-pid=112452','后拉变焦 Zoom-out · 可灵原视频（点击播放）','../assets/posters/kling_zoomout.jpg')" loading="lazy"><div class="ic-body"><div class="tc-en">Zoom-out</div><div class="tc-name">后拉变焦</div><div class="tc-def">摄影机位置不变，缩短焦距让画面从局部扩大到整体。让观众突然意识到主体所处的真实空间。</div><div class="tc-effect"><b>用途</b> 揭示上下文、反讽、从细节退回环境</div></div></div>
+        </div>
+      </div>
+
+      <div class="prompt-box" style="margin-top: 36px;">
+        <div class="p-label">Prompt 示例 · 推镜头</div>
+        <p>夜晚办公室，镜头从中景缓慢推向一名坐在桌前的男人，他刚读完一封信，手指停在纸面上，表情逐渐僵住。背景文件柜和窗外城市灯光慢慢被排出画面，最终停在他的脸部近景，氛围安静而压迫。</p>
+      </div>
+    </div>
+  </section>
+<!-- ===== MODULE 02: 复杂运镜 ===== -->
+  <section id="mod-complex" class="module-anchor" style="padding: 90px 0 70px 0; background: var(--color-bg-secondary);">
+    <div class="max-w-7xl mx-auto px-6 lg:px-8">
+      <div class="sec-label"><div class="bar"></div><p>Module 02 · Complex Movements</p></div>
+      <h2 style="font-family: var(--font-display); font-size: clamp(30px, 4.5vw, 52px); font-weight: 500; line-height: 1.15; margin: 0 0 14px 0;">复杂运镜</h2>
+      <p style="font-size: 15px; line-height: 1.85; color: var(--color-text-secondary); max-width: 760px; margin: 0;">
+        两个以上基础运镜的组合、穿越空间的自由路径、以及一个镜头里组织多个事件阶段的连续调度——运镜的组合拳。
+      </p>
+
+      <div style="margin-top: 44px;">
+        <div class="sub-label">复合运动型 · 基础运镜的组合</div>
+        <div class="overflow-x-auto">
+          <table class="dt">
+            <thead><tr><th style="min-width:150px;">组合</th><th>定义</th><th style="min-width:200px;">情绪/效果</th></tr></thead>
+            <tbody>
+              <tr><td><b>推进 + 摇镜</b></td><td>向主体靠近同时镜头方向横摇或俯仰摇 <a href="javascript:void(0)" onclick="openLB('../assets/mov_pushin_pan.gif','推进+摇镜 · 缓缓前推同时左摇，动图')" style="color: var(--color-brand); text-decoration: none; font-size: 12px;">[动图]</a></td><td>从空间进入人物、逐步揭示隐藏信息</td></tr>
+              <tr><td><b>后拉 + 上升</b></td><td>一边远离主体一边向上升起 <a href="javascript:void(0)" onclick="openLB('../assets/mov_pullout_craneup.gif','后拉+上升 · 揭示人物所在地理环境，动图')" style="color: var(--color-brand); text-decoration: none; font-size: 12px;">[动图]</a></td><td>结尾、灾后、孤独、命运感、大场面揭示</td></tr>
+              <tr><td><b>后拉 + 下降</b></td><td>一边远离主体一边向下移动</td><td>人物被压低、被现实吞没，比"后拉+上升"更沉重</td></tr>
+              <tr><td><b>跟拍 + 升降</b></td><td>跟随主体同时随主体上升或下降</td><td>奔跑、上楼，保持连续性同时强化垂直动作</td></tr>
+              <tr><td><b>跟拍 + 横移</b></td><td>跟随主体同时保持横向或斜向移动</td><td>更强调环境从两侧流动经过</td></tr>
+              <tr><td><b>环绕 + 上升</b></td><td>围绕主体旋转同时逐渐升高</td><td>英雄登场、觉醒、仪式，主体被视觉中心化</td></tr>
+              <tr><td><b>环绕 + 下降</b></td><td>围绕主体旋转同时逐渐下降</td><td>压迫、审判、坠落、心理失控</td></tr>
+              <tr><td><b>推进 + 变焦</b></td><td>向主体推进同时改变焦距，反向配合形成空间拉伸/压缩</td><td>心理震荡、惊悚、空间关系异常</td></tr>
+              <tr><td><b>后拉 + 变焦</b></td><td>后退同时改变焦距</td><td>揭示环境、失重、孤立或反讽感</td></tr>
+              <tr><td><b>甩镜 + 推进</b></td><td>快速甩动同时推进；经典形态即 Dolly Zoom</td><td>主体被锁住，背景异常变形，心理冲击强烈</td></tr>
+              <tr><td><b>升降 + 俯仰摇</b></td><td>垂直上升/下降同时镜头俯仰调整方向</td><td>建筑、巨物、人物登场，强化高度差与规模感</td></tr>
+              <tr><td><b>多动作组合</b></td><td>一个镜头中连续三种以上基础运动，路径必须清楚</td><td>炫技、流畅、展示复杂空间的视觉爽感</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div style="margin-top: 44px;">
+        <div class="sub-label">空间路径型 · 穿过 / 绕过 / 进入不同空间</div>
+        <div class="grid grid-cols-2 md:grid-cols-3 gap-4">
+          <div class="img-card"><img class="ic-img" src="../assets/posters/kling_orbit.jpg" alt="环绕运镜" onclick="openLV('https://v2-kling.kechuangai.com/bs2/upload-ylab-stunt/3122c14f-9bff-4fe6-9626-ccc93816f23e-8kCk1l28_-ZrwpSMm-awHA-output.mp4?x-kcdn-pid=112452','环绕运镜 Orbit Shot · 可灵原视频（点击播放）','../assets/posters/kling_orbit.jpg')" loading="lazy"><div class="ic-body"><div class="tc-en">Orbit Shot</div><div class="tc-name">环绕运镜</div><div class="tc-def">围绕主体做圆形或半圆形运动，主体保持在画面中心。人物被强化成视觉中心。</div><div class="tc-effect"><b>场景</b> 英雄登场、对峙、舞台表演</div></div></div>
+          <div class="img-card"><img class="ic-img" src="../assets/posters/kling_arcreveal.jpg" alt="半环绕揭示" onclick="openLV('https://v2-kling.kechuangai.com/bs2/upload-ylab-stunt/065731c4-669c-4c3e-94d5-03afd9a71ffb-HmPKgIefa0uhvcd4qrViJg-output.mp4?x-kcdn-pid=112452','半环绕揭示 Arc Reveal · 可灵原视频（点击播放）','../assets/posters/kling_arcreveal.jpg')" loading="lazy"><div class="ic-body"><div class="tc-en">Arc Reveal</div><div class="tc-name">半环绕揭示</div><div class="tc-def">沿弧线绕一小段，不完成完整环绕，重点是通过绕行逐渐揭示信息。悬疑片高频。</div><div class="tc-effect"><b>场景</b> 悬疑、犯罪、危险信息延迟释放</div></div></div>
+          <div class="img-card"><img class="ic-img" src="../assets/posters/kling_trackthrough.jpg" alt="跟随穿行运镜" onclick="openLV('https://v2-kling.kechuangai.com/bs2/upload-ylab-stunt/9afd9186-fb4f-4669-8ec8-2d08675ac00f-8DVazPjJ6R1mdwgTSrw0pg-output.mp4?x-kcdn-pid=112452','跟随穿行运镜 Tracking Through · 可灵原视频（点击播放）','../assets/posters/kling_trackthrough.jpg')" loading="lazy"><div class="ic-body"><div class="tc-en">Tracking Through Space</div><div class="tc-name">跟随穿行运镜</div><div class="tc-def">跟随主体穿过连续空间，"人带着镜头走"，空间在运动中一层层打开。</div><div class="tc-effect"><b>场景</b> 沉浸叙事、空间身份感</div></div></div>
+          <div class="img-card"><img class="ic-img" src="../assets/posters/kling_fpv.jpg" alt="FPV穿越" onclick="openLV('https://v2-kling.kechuangai.com/bs2/upload-ylab-stunt/b603fd5b-a55f-44bb-82bb-2ef4ab2eb52a-lziahMl9llWMCd7Gt1ichA-output.mp4?x-kcdn-pid=112452','FPV 穿越机运镜 · 可灵原视频（点击播放）','../assets/posters/kling_fpv.jpg')" loading="lazy"><div class="ic-body"><div class="tc-en">FPV Fly-through</div><div class="tc-name">FPV 穿越机运镜</div><div class="tc-def">模拟第一人称穿越机视角，低空高速贴近物体穿过复杂空间。速度凌厉、破水平。</div><div class="tc-effect"><b>场景</b> 城市楼群、赛博空间、极限运动</div></div></div>
+          <div class="img-card"><img class="ic-img" src="../assets/posters/kling_passthrough.jpg" alt="穿墙穿物运镜" onclick="openLV('https://v2-kling.kechuangai.com/bs2/upload-ylab-stunt/9e59678f-346d-4d99-88b7-c69f6586b9b4-V41N6UisarndASTfVAvCoA-output.mp4?x-kcdn-pid=112452','穿墙/穿物运镜 Object-passing · 可灵原视频（点击播放）','../assets/posters/kling_passthrough.jpg')" loading="lazy"><div class="ic-body"><div class="tc-en">Object-passing Shot</div><div class="tc-name">穿墙 / 穿物运镜</div><div class="tc-def">摄影机看似穿过墙体、玻璃、水面、人体，形成不可能的空间穿透。特效化运镜（CG/VFX/AIGC）。</div><div class="tc-effect"><b>场景</b> 产品广告、科幻、大卫·芬奇式"不可见摄影机"</div></div></div>
+          <div class="img-card"><img class="ic-img" src="../assets/posters/kling_dive.jpg" alt="俯冲镜头" onclick="openLV('https://v2-kling.kechuangai.com/bs2/upload-ylab-stunt/c878f62f-1ef1-41a9-ba60-35984c3994e6-5EjtTRtdhc3su1VRmLqFjA-output.mp4?x-kcdn-pid=112452','俯冲镜头 Dive Shot · 可灵原视频（点击播放）','../assets/posters/kling_dive.jpg')" loading="lazy"><div class="ic-body"><div class="tc-en">Dive Shot</div><div class="tc-name">俯冲镜头</div><div class="tc-def">从高处快速向下冲向目标："高低落差 + 快速下坠 + 锁定目标"。</div><div class="tc-effect"><b>场景</b> 城市开场、战场俯冲、游戏化镜头</div></div></div>
+          <div class="img-card"><img class="ic-img" src="../assets/posters/kling_passby.jpg" alt="擦身/越过镜头" onclick="openLV('https://v2-kling.kechuangai.com/bs2/upload-ylab-stunt/483a651a-8841-41a6-97b8-549f43f72c38-Af1ptfi29-f5bxnabtDd9w-output.mp4?x-kcdn-pid=112452','擦身/越过镜头 Passing-by · 可灵原视频（点击播放）','../assets/posters/kling_passby.jpg')" loading="lazy"><div class="ic-body"><div class="tc-en">Passing-by / Overpass</div><div class="tc-name">擦身 / 越过镜头</div><div class="tc-def">与主体或障碍物近距离交错：擦身从旁边掠过，越过从上方跨过。强调危险距离和空间突破。</div><div class="tc-effect"><b>场景</b> 赛车、跑酷、战争、体育</div></div></div>
+          <div class="img-card"><img class="ic-img" src="../assets/posters/kling_intext.jpg" alt="室内外连续转换" onclick="openLV('https://v2-kling.kechuangai.com/bs2/upload-ylab-stunt/dc3254e1-4756-447d-a99b-fd3aece1b9cb-BiN8UqKUC3AlQPmZFSfMAw-output.mp4?x-kcdn-pid=112452','室内外连续转换 Interior-exterior · 可灵原视频（点击播放）','../assets/posters/kling_intext.jpg')" loading="lazy"><div class="ic-body"><div class="tc-en">Interior-exterior Continuous</div><div class="tc-name">室内外连续转换</div><div class="tc-def">不切镜跨越空间边界，运动连续、光线和声音过渡自然。AIGC 易在门窗边界出错，值得单列。</div><div class="tc-effect"><b>场景</b> 长跟拍子型、空间身份转换</div></div></div>
+          <div class="img-card"><img class="ic-img" src="../assets/posters/kling_multispace.jpg" alt="多空间连续穿越" onclick="openLV('https://v2-kling.kechuangai.com/bs2/upload-ylab-stunt/8d727915-4621-48ee-939e-1ccdd80f9ccd-7vIkLyDPnrkS5-OPm5ClTQ-output.mp4?x-kcdn-pid=112452','多空间连续穿越 Multi-space · 可灵原视频（点击播放）','../assets/posters/kling_multispace.jpg')" loading="lazy"><div class="ic-body"><div class="tc-en">Multi-space Transition</div><div class="tc-name">多空间连续穿越</div><div class="tc-def">一个连续运动串联多个空间：运动方向一致 + 转场遮挡物承接 + 新空间无缝出现。</div><div class="tc-effect"><b>场景</b> 产品广告、奇幻旅程、梦境</div></div></div>
+        </div>
+      </div>
+
+      <div style="margin-top: 44px;">
+        <div class="sub-label">连续调度型 · 一个镜头组织多个事件阶段</div>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div class="img-card"><img class="ic-img" src="../assets/posters/kling_longtrack.jpg" alt="长跟拍" onclick="openLV('https://v2-kling.kechuangai.com/bs2/upload-ylab-stunt/f4601ed3-efbb-4ea7-b5a0-2e938d044a3b-7bzQ1NvGfhRmdwgTSrw0pg-output.mp4?x-kcdn-pid=112452','长跟拍 · 海滨酒店后厨（点击播放原视频）','../assets/posters/kling_longtrack.jpg')" loading="lazy"><div class="ic-body"><div class="tc-en">Long Tracking Shot</div><div class="tc-name">长跟拍</div><div class="tc-def">长时间跟随主体移动，主体行动路径就是镜头的组织线索。比普通跟镜头持续更久、空间更多、路径更自由。</div><div class="tc-prompt"><b>Prompt</b>夜晚城市街头，镜头从男主斜后方长时间跟随，他推门进入拥挤酒吧，穿过舞池、吧台和后厨通道，全程不切镜，空间连续清楚。</div></div></div>
+          <div class="img-card"><img class="ic-img" src="../assets/posters/kling_onetake.jpg" alt="复杂一镜到底 Complex One Take" onclick="openLV('https://v2-kling.kechuangai.com/bs2/upload-ylab-stunt/1e42e081-d612-4ec6-a9e9-305097de7566-ur0TkSD5Zi75bxnabtDd9w-output.mp4?x-kcdn-pid=112452','复杂一镜到底 Complex One Take · 可灵原视频（点击播放）','../assets/posters/kling_onetake.jpg')" loading="lazy"><div class="ic-body"><div class="tc-en">Complex One Take</div><div class="tc-name">复杂一镜到底</div><div class="tc-def">整个段落看似一个连续镜头，内部包含行走、空间转换、动作变化和事件转折。参考《1917》《鸟人》。</div><div class="tc-prompt"><b>Prompt</b>一战战场清晨，镜头跟随两名士兵从泥泞战壕出发，穿过交通壕、废弃农舍和弹坑地带，途中遇到伤兵和坍塌路障，镜头始终连续运动，紧迫、无法逃离。</div></div></div>
+          <div class="img-card"><img class="ic-img" src="../assets/posters/kling_fakeone.jpg" alt="伪一镜到底 Fake One Take" onclick="openLV('https://v2-kling.kechuangai.com/bs2/upload-ylab-stunt/f6e450d4-eb8c-4673-b7ae-193eeee278d8-ur0TkSD5Zi4LyR12DB8bKw-output.mp4?x-kcdn-pid=112452','伪一镜到底 Fake One Take · 可灵原视频（点击播放）','../assets/posters/kling_fakeone.jpg')" loading="lazy"><div class="ic-body"><div class="tc-en">Fake / Simulated One Take</div><div class="tc-name">伪一镜到底</div><div class="tc-def">看似连续长镜头，实际由隐藏剪辑、遮挡转场、暗场、运动模糊或 CG 拼接而成。核心是制造时空不断裂的观看幻觉。</div><div class="tc-prompt"><b>Prompt</b>酒店走廊，镜头跟随服务员推餐车前行，经过一根立柱时画面被完全遮挡，穿出遮挡后已是夜晚的另一条走廊，运动方向和速度一致，几乎察觉不到剪辑点。</div></div></div>
+          <div class="img-card"><img class="ic-img" src="../assets/posters/kling_multistage.jpg" alt="多阶段连续镜头 Multi-stage" onclick="openLV('https://v2-kling.kechuangai.com/bs2/upload-ylab-stunt/a0b5582e-88c1-46b7-bd01-ccc5f48bf126-005HB5ic_sH5bxnabtDd9w-output.mp4?x-kcdn-pid=112452','多阶段连续镜头 Multi-stage · 可灵原视频（点击播放）','../assets/posters/kling_multistage.jpg')" loading="lazy"><div class="ic-body"><div class="tc-en">Multi-stage Continuous Shot</div><div class="tc-name">多阶段连续镜头</div><div class="tc-def">一个镜头内部多个连续阶段，通过"阶段节点"设计：起点、转向点、遮挡点、动作爆发点、终点。</div><div class="tc-prompt"><b>Prompt</b>深夜医院走廊，镜头先平稳跟随护士推病床，远处尖叫后进入奔跑状态，推开手术室门转入冷蓝灯光，最后停在手术台旁一只沾血的手机上，三段式连续调度。</div></div></div>
+          <div class="img-card"><div style="height:170px;display:flex;align-items:center;justify-content:center;background:var(--color-bg-sunken);color:var(--color-text-tertiary);font-size:12px;flex-direction:column;gap:8px;"><span>服务员 → 厨师 · 接力转移</span><span style="font-size:10px;color:var(--color-brand);">Kling 视频待嵌入</span></div><div class="ic-body"><div class="tc-en">Relay Tracking Shot</div><div class="tc-name">接力跟拍</div><div class="tc-def">连续运动中从跟随一个主体自然转为跟随另一个主体，通过擦肩、遮挡、物件交接或运动承接完成切换。</div><div class="tc-effect"><b>场景</b> 餐厅传菜、接力赛跑、物品传递、人群中的目标切换</div><div class="tc-prompt"><b>Prompt</b>繁忙餐厅，摄影机先跟拍服务员端餐盘穿过大厅，到后厨门口将餐盘递给厨师，镜头顺势转向改跟厨师进入后厨，穿过灶台和蒸汽，接力转移自然。</div></div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+<!-- ===== MODULE 03: 导演运镜 ===== -->
+  <section id="mod-director" class="module-anchor" style="padding: 90px 0 70px 0; background: var(--color-bg-primary);">
+    <div class="max-w-7xl mx-auto px-6 lg:px-8">
+      <div class="sec-label"><div class="bar"></div><p>Module 03 · Signature Shots</p></div>
+      <h2 style="font-family: var(--font-display); font-size: clamp(30px, 4.5vw, 52px); font-weight: 500; line-height: 1.15; margin: 0 0 14px 0;">经典导演运镜</h2>
+      <p style="font-size: 15px; line-height: 1.85; color: var(--color-text-secondary); max-width: 760px; margin: 0;">
+        从希区柯克到王家卫——这些运镜已经成为导演的作者签名。写 Prompt 时报出"名字 + 效果"，比描述运动本身更有效。
+      </p>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4" style="margin-top: 44px;">
+        <div class="img-card"><img class="ic-img" src="../assets/posters/kling_dollyzoom.jpg" alt="希区柯克变焦 Dolly Zoom" onclick="openLV('https://v2-kling.kechuangai.com/bs2/upload-ylab-stunt/e1e82ec4-9264-4568-9d4e-19d8778dc554-f2NtWgfQ-pBMAyhtSYzKJw-output.mp4?x-kcdn-pid=112452','希区柯克变焦 Dolly Zoom · 可灵原视频（点击播放）','../assets/posters/kling_dollyzoom.jpg')" loading="lazy"><div class="ic-body"><div class="tc-en">Dolly Zoom / Vertigo Shot</div><div class="tc-name">希区柯克变焦</div><div class="tc-def">摄影机位移与焦距反向同步变化，主体大小稳定而背景被拉伸或压缩。表现眩晕、恐惧、心理崩塌、顿悟。</div><div class="tc-prompt"><b>Prompt</b>高楼楼梯间，男人扶着栏杆突然眩晕，镜头对准脸部中近景，摄影机缓慢向前推进同时反向变焦，脸部大小几乎不变，身后楼梯和墙面被异常拉远，空间强烈扭曲。</div></div></div>
+        <div class="img-card"><img class="ic-img" src="../assets/posters/kling_crashzoom.jpg" alt="急速变焦 Crash Zoom" onclick="openLV('https://v2-kling.kechuangai.com/bs2/upload-ylab-stunt/2b42b06b-68e7-4bff-a804-1ce8e37fa6a2-uMVg7RIAMY5usqlOHq4HpA-output.mp4?x-kcdn-pid=112452','急速变焦 Crash Zoom · 可灵原视频（点击播放）','../assets/posters/kling_crashzoom.jpg')" loading="lazy"><div class="ic-body"><div class="tc-en">Crash Zoom / Snap Zoom</div><div class="tc-name">昆汀式快速变焦</div><div class="tc-def">镜头突然极快速拉近或拉远，夸张直接地强调眼神、武器或反应。复古类型片、黑色幽默、人物杀意。</div><div class="tc-prompt"><b>Prompt</b>西部小镇酒馆，众人安静喝酒，角落枪手突然抬眼看向门口，镜头从中景瞬间快速变焦到他的眼睛，背景猛地压缩，音乐骤停，70 年代西部片复古暴力感。</div></div></div>
+        <div class="img-card"><div style="height:170px;display:flex;align-items:center;justify-content:center;background:var(--color-bg-sunken);color:var(--color-text-tertiary);font-size:12px;flex-direction:column;gap:8px;"><span>人物自然入画 · 信息突增</span><span style="font-size:10px;color:var(--color-brand);">Kling 视频待嵌入</span></div><div class="ic-body"><div class="tc-en">Spielberg Entrance</div><div class="tc-name">斯皮尔伯格闯入镜头</div><div class="tc-def">通过推进、横移或构图预留，让人物自然闯入画面改变叙事重心。镜头不切，人物入画，信息突然增加。</div><div class="tc-effect"><b>场景</b> 新闻现场、突发事件、人物登场、信息揭示</div><div class="tc-prompt"><b>Prompt</b>白天新闻现场，镜头先拍远处离场人群，随后轻微后退，主持人从画面右侧自然闯入前景开始讲述，背景事件仍在继续，临场感和信息揭示感强烈。</div></div></div>
+        <div class="img-card"><img class="ic-img" src="../assets/posters/kling_scorsese.jpg" alt="斯科塞斯长跟拍 Scorsese" onclick="openLV('https://v2-kling.kechuangai.com/bs2/upload-ylab-stunt/8194a33c-9b81-4377-9c46-2662ff64941e-yj5jZg3fjHAndHOQFXSrRw-output.mp4?x-kcdn-pid=112452','斯科塞斯长跟拍 Scorsese · 可灵原视频（点击播放）','../assets/posters/kling_scorsese.jpg')" loading="lazy"><div class="ic-body"><div class="tc-en">Scorsese Long Tracking</div><div class="tc-name">斯科塞斯长跟拍</div><div class="tc-def">长时间跟随人物穿过连续空间，用一条运动路径展示人物身份、权力和空间权限。最典型即《好家伙》长跟拍。</div><div class="tc-prompt"><b>Prompt</b>纽约夜晚，年轻黑帮成员带女伴从餐厅后门进入，摄影机从身后长时间跟拍，穿过楼梯、厨房、服务员通道，一路人人点头让路，最终停在特意搬出的前排桌位旁。</div></div></div>
+        <div class="img-card"><img class="ic-img" src="../assets/posters/kling_kubrick.jpg" alt="库布里克走廊跟拍 Kubrick" onclick="openLV('https://v2-kling.kechuangai.com/bs2/upload-ylab-stunt/a6c40b9b-e465-410e-ad17-374ac071d7ec-wc2eIgfov0w2Taf3UbzKsQ-output.mp4?x-kcdn-pid=112452','库布里克走廊跟拍 Kubrick · 可灵原视频（点击播放）','../assets/posters/kling_kubrick.jpg')" loading="lazy"><div class="ic-body"><div class="tc-en">Kubrick Steadicam Tracking</div><div class="tc-name">库布里克走廊跟拍</div><div class="tc-def">高度稳定地跟随主体穿过封闭空间，配合低位机位、中心构图、几何线条。镜头像"无声地滑行"。</div><div class="tc-prompt"><b>Prompt</b>空荡酒店走廊，低机位稳定跟随小男孩骑三轮车前进，摄影机贴近地面保持固定距离，地毯几何纹样和拐角一段段掠过，轮声回响，冷静、稳定、压迫。</div></div></div>
+        <div class="img-card"><img class="ic-img" src="../assets/posters/kling_doubledolly.jpg" alt="斯派克·李双滑轨 Double Dolly" onclick="openLV('https://v2-kling.kechuangai.com/bs2/upload-ylab-stunt/87bd5465-4bb6-4b9a-9c5d-bbb3e09ae334--rVzm-3FCCGHF4k0U54RCA-output.mp4?x-kcdn-pid=112452','斯派克·李双滑轨 Double Dolly · 可灵原视频（点击播放）','../assets/posters/kling_doubledolly.jpg')" loading="lazy"><div class="ic-body"><div class="tc-en">Double Dolly Shot</div><div class="tc-name">斯派克·李双滑轨</div><div class="tc-def">人物和摄影机同时在移动平台上前进，人物像被无形力量推着"漂浮"穿过空间。被命运推着走的时刻。</div><div class="tc-prompt"><b>Prompt</b>阴天街道，男人穿深色大衣正面看向前方，摄影机和人物一起平稳前移，脚步几乎不可见，身体像被推着漂浮前进，街道背景缓慢后退，庄严、宿命、超现实。</div></div></div>
+        <div class="img-card"><img class="ic-img" src="../assets/posters/kling_hero360.jpg" alt="英雄 360° 环绕 Hero Shot" onclick="openLV('https://v2-kling.kechuangai.com/bs2/upload-ylab-stunt/79e9e5bd-da64-4bca-a173-166011b8a3eb-SVFLrP50su2kGcPTPJvXbQ-output.mp4?x-kcdn-pid=112452','英雄 360° 环绕 Hero Shot · 可灵原视频（点击播放）','../assets/posters/kling_hero360.jpg')" loading="lazy"><div class="ic-body"><div class="tc-en">360 Hero Shot</div><div class="tc-name">英雄运镜（Michael Bay 360）</div><div class="tc-def">低机位围绕主体做 180°–360° 环绕，配合仰拍、逆光、慢动作、爆炸、眩光，把主体拍得纪念碑化。</div><div class="tc-prompt"><b>Prompt</b>夕阳港口，特工从黑色跑车旁站起，低机位围绕他和车身缓慢旋转近一圈，远处集装箱爆炸，橙色火光和眩光扫过，风吹动衣角，英雄化、商业动作片质感。</div></div></div>
+        <div class="img-card"><img class="ic-img" src="../assets/posters/kling_cuaron.jpg" alt="卡隆式沉浸长镜头 Cuarón" onclick="openLV('https://v2-kling.kechuangai.com/bs2/upload-ylab-stunt/d0cb35ed-eb41-40bd-92e9-4b1281c55896-UFJ_-H8wDY9usqlOHq4HpA-output.mp4?x-kcdn-pid=112452','卡隆式沉浸长镜头 Cuarón · 可灵原视频（点击播放）','../assets/posters/kling_cuaron.jpg')" loading="lazy"><div class="ic-body"><div class="tc-en">Cuarón Immersive Long Take</div><div class="tc-name">卡隆式沉浸长镜头</div><div class="tc-def">长时间贴近人物在不中断的运动中穿过战争、灾难、骚乱现场，把混乱环境拍成实时经验。</div><div class="tc-prompt"><b>Prompt</b>近未来城市骚乱，摄影机贴近女主侧后方持续跟随，穿过浓烟、警车、奔跑人群和倒塌路障，时而被人群遮挡，时而转向爆炸方向，临场手持感和空间连续性。</div></div></div>
+        <div class="img-card"><img class="ic-img" src="../assets/posters/kling_slowdrift.jpg" alt="王家卫式慢镜头 Slow Drift" onclick="openLV('https://v2-kling.kechuangai.com/bs2/upload-ylab-stunt/e11a13f2-d0f4-47e2-b922-67a5962edebe-FvFuNs51XCCdRvWX6ngbFw-output.mp4?x-kcdn-pid=112452','王家卫式慢镜头 Slow Drift · 可灵原视频（点击播放）','../assets/posters/kling_slowdrift.jpg')" loading="lazy"><div class="ic-body"><div class="tc-en">Slow Drift Tracking</div><div class="tc-name">王家卫式慢镜头</div><div class="tc-def">慢速跟随、侧移、漂移贴近人物，与长焦压缩、前景遮挡、霓虹、狭窄空间共同形成情绪流动。</div><div class="tc-prompt"><b>Prompt</b>1960 年代香港公寓走廊，镜头慢速侧移跟随穿旗袍的女人走过狭窄楼道，暖黄灯光和暗红阴影缓慢掠过，她低头经过男人身边，两人无话，轻微慢动作，暧昧与错过。</div></div></div>
+        <div class="img-card"><img class="ic-img" src="../assets/posters/kling_stepprint.jpg" alt="王家卫抽帧镜头 Step-printed" onclick="openLV('https://v2-kling.kechuangai.com/bs2/upload-ylab-stunt/f9c00991-7bbf-4af1-894c-23047e0dee24-PVOfuUO82iX5bxnabtDd9w-output.mp4?x-kcdn-pid=112452','王家卫抽帧镜头 Step-printed · 可灵原视频（点击播放）','../assets/posters/kling_stepprint.jpg')" loading="lazy"><div class="ic-body"><div class="tc-en">Step-printed Slow Motion</div><div class="tc-name">王家卫抽帧镜头</div><div class="tc-def">抽帧、重复帧、慢快门制造不顺滑的慢动作：跳帧、拖影、残影、时间断裂感。比普通升格更迷离破碎。</div><div class="tc-prompt"><b>Prompt</b>夜晚香港街头，王家卫式抽帧镜头，穿白衬衫的男人穿过霓虹人群，动作带轻微跳帧、拖影和残影，背景行人快速模糊掠过，红绿霓虹拉出光痕，孤独、迷离。</div></div></div>
+        <div class="img-card"><img class="ic-img" src="../assets/posters/kling_slomo.jpg" alt="升格镜头 Slow Motion" onclick="openLV('https://v2-kling.kechuangai.com/bs2/upload-ylab-stunt/7cd914e3-e62b-4781-a880-ed557a5d9bb4-o2vJ2sXmX_MS5-OPm5ClTQ-output.mp4?x-kcdn-pid=112452','升格镜头 Slow Motion · 可灵原视频（点击播放）','../assets/posters/kling_slomo.jpg')" loading="lazy"><div class="ic-body"><div class="tc-en">Slow Motion / Overcranking</div><div class="tc-name">升格镜头</div><div class="tc-def">高帧率拍摄（60/120/240fps）正常速度播放，动作变慢、细节放大。时间处理技法，常与推/环绕/跟拍结合。</div><div class="tc-prompt"><b>Prompt</b>雨夜街头，黑衣女人在车灯前缓慢转身，升格镜头，雨滴在空中清晰悬浮，湿发和衣角缓慢摆动，镜头轻微向前推进，电影级情绪张力和高光时刻感。</div></div></div>
+        <div class="img-card"><img class="ic-img" src="../assets/posters/kling_undercranking.jpg" alt="降格镜头" onclick="openLV('https://v2-kling.kechuangai.com/bs2/upload-ylab-stunt/af715cfb-121c-415b-ad2a-192ed70c4931-RA2MPYcEk7y8luNlpxhagQ-output.mp4?x-kcdn-pid=112452','降格镜头 · 石板街邮差（点击播放原视频）','../assets/posters/kling_undercranking.jpg')" loading="lazy"><div class="ic-body"><div class="tc-en">Fast Motion / Undercranking</div><div class="tc-name">降格镜头</div><div class="tc-def">低帧率拍摄正常速度播放，动作更快更跳跃。与延时不同：仍保留人物动作，只是夸张、滑稽、机械化。</div><div class="tc-prompt"><b>Prompt</b>复古黑白默片风格街头追逐，两个西装男人在窄巷慌张奔跑，降格镜头，动作明显加速略带跳帧，路人快速闪避，帽子飞起又落下，侧向跟随，滑稽荒诞。</div></div></div>
+        <div class="img-card"><img class="ic-img" src="../assets/posters/kling_wes.jpg" alt="韦斯·安德森横移 Wes Anderson" onclick="openLV('https://v2-kling.kechuangai.com/bs2/upload-ylab-stunt/c6f0e7bb-1446-425a-9d2b-6cd1945215b4--VCenghfJ-sevEXxp4jRpQ-output.mp4?x-kcdn-pid=112452','韦斯·安德森横移 Wes Anderson · 可灵原视频（点击播放）','../assets/posters/kling_wes.jpg')" loading="lazy"><div class="ic-body"><div class="tc-en">Symmetrical Lateral Tracking</div><div class="tc-name">韦斯·安德森横移</div><div class="tc-def">严格对称、平面化、舞台式构图中横向滑移，空间像玩具盒或剖面房间依次展示。精密、幽默。</div><div class="tc-prompt"><b>Prompt</b>色彩鲜明的复古酒店剖面，镜头正面视角从左向右平稳横移，依次经过前台、电话间、行李房和电梯口，人物像舞台演员正面站位，构图严格对称，玩具盒质感。</div></div></div>
+        <div class="img-card"><img class="ic-img" src="../assets/posters/kling_bullettime.jpg" alt="子弹时间" onclick="openLV('https://v2-kling.kechuangai.com/bs2/upload-ylab-stunt/c9f4367e-eae9-48a6-b98e-67c8b155a338-OHOE_dcfJ9M1wzZLLk4grg-output.mp4?x-kcdn-pid=112452','子弹时间 Bullet Time · 可灵原视频','../assets/posters/kling_bullettime.jpg')" loading="lazy"><div class="ic-body"><div class="tc-en">Bullet Time</div><div class="tc-name">子弹时间</div><div class="tc-def">主体动作极慢流动，镜头在极慢时间中环绕、穿行、侧移。不同于"时间冻结"——视角仍在运动。《黑客帝国》签名镜头。</div><div class="tc-prompt"><b>Prompt</b>枪战现场，子弹射出瞬间时间近乎凝固，镜头以子弹时间方式围绕后仰躲避的男人做 180° 环绕，弹壳悬浮空中，玻璃碎片缓慢飞散，科幻动作片质感。</div></div></div>
+      </div>
+
+      <div style="margin-top: 44px;">
+        <div class="sub-label">补充概念 · 原文范畴点名但未展开</div>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+          <div class="img-card"><img class="ic-img" src="../assets/posters/kling_handheld.jpg" alt="手持镜头" onclick="openLV('https://v2-kling.kechuangai.com/bs2/upload-ylab-stunt/ef01503a-c5ae-4016-afa4-2d50950f9e6a-e1fc5wTBcYU1wzZLLk4grg-output.mp4?x-kcdn-pid=112452','手持镜头 Handheld · 可灵原视频（点击播放）','../assets/posters/kling_handheld.jpg')" loading="lazy"><div class="ic-body"><div class="tc-en">Handheld Shot</div><div class="tc-name">手持镜头</div><div class="tc-def">摄影师手持或肩扛拍摄，画面带自然晃动和呼吸感。晃动越大越失控，越小越真实。</div><div class="tc-effect"><b>场景</b> 纪实、新闻、战争、追逐</div></div></div>
+          <div class="img-card"><img class="ic-img" src="../assets/posters/kling_gimbal.jpg" alt="稳定器跟拍" onclick="openLV('https://v2-kling.kechuangai.com/bs2/upload-ylab-stunt/8c159c5e-a0bc-46cb-96bd-b47520518829-QaUKGHQyGMq9aMU5fuSTUw-output.mp4?x-kcdn-pid=112452','稳定器跟拍 Gimbal · 可灵原视频（点击播放）','../assets/posters/kling_gimbal.jpg')" loading="lazy"><div class="ic-body"><div class="tc-en">Gimbal / Stabilized</div><div class="tc-name">稳定器跟拍</div><div class="tc-def">三轴稳定器让运动镜头顺滑稳定，消除步伐震动。介于手持的真实感和轨道的机械感之间。</div><div class="tc-effect"><b>场景</b> 婚礼、旅拍、行走叙事</div></div></div>
+          <div class="type-card"><div class="tc-en">Roll / Dutch Roll</div><div class="tc-name">Z 轴旋转镜头</div><div class="tc-def">摄影机沿镜头光轴自身旋转，地平线动态倾斜甚至翻转。与荷兰角（静态倾斜）不同，这是动态过程。</div><div class="tc-effect"><b>场景</b> 眩晕、梦境、太空失重、动作翻滚</div></div>
+        </div>
+      </div>
+
+      <div style="margin-top: 40px;">
+        <div class="sub-label">运镜 × 叙事意图速查</div>
+        <div class="overflow-x-auto">
+          <table class="dt">
+            <thead><tr><th>叙事意图</th><th>推荐运镜</th><th>避免</th></tr></thead>
+            <tbody>
+              <tr><td><b>客观陈述、压抑</b></td><td>固定、锁定机位</td><td>手持乱晃</td></tr>
+              <tr><td><b>情绪逼近、觉醒</b></td><td>缓慢推镜头</td><td>快速变焦</td></tr>
+              <tr><td><b>孤独、结尾余韵</b></td><td>后拉 + 上升</td><td>推进</td></tr>
+              <tr><td><b>紧张追逐</b></td><td>手持跟拍、甩镜</td><td>稳定器匀速</td></tr>
+              <tr><td><b>英雄高光</b></td><td>低机位环绕、升格</td><td>高机位俯拍</td></tr>
+              <tr><td><b>悬疑揭示</b></td><td>半环绕揭示、后拉变焦</td><td>甩镜</td></tr>
+              <tr><td><b>纪实新闻</b></td><td>手持、变焦抓拍</td><td>轨道匀速</td></tr>
+              <tr><td><b>梦幻迷离</b></td><td>慢速漂移、抽帧</td><td>锁定机位</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="note-box" style="margin-top: 36px;">
+        <p>运镜节奏提示：匀速=客观克制；缓入缓出=优雅；急启急停=暴力突然。运镜要有"动机"（motivated movement）——跟随动作、揭示信息、转移注意力，而不是为动而动。Prompt 里写明"缓慢""突然加速""匀速"等节奏词，比只写运镜类型更能控制生成效果。</p>
+      </div>
+    </div>
+  </section>
+<!-- ===== MODULE 04: 高表现力镜头 ===== -->
+  <section id="mod-highimpact" class="module-anchor" style="padding: 90px 0 70px 0; background: var(--color-bg-secondary);">
+    <div class="max-w-7xl mx-auto px-6 lg:px-8">
+      <div class="sec-label"><div class="bar"></div><p>Module 04 · High-impact Shots</p></div>
+      <h2 style="font-family: var(--font-display); font-size: clamp(30px, 4.5vw, 52px); font-weight: 500; line-height: 1.15; margin: 0 0 14px 0;">高表现力镜头</h2>
+      <p style="font-size: 15px; line-height: 1.85; color: var(--color-text-secondary); max-width: 760px; margin: 0;">
+        自带强烈视觉能量的修辞重音——打破常规观看逻辑（时间凝固、空间压缩、视角对冲、速度极端化），用在角色觉醒、危险爆发、命运反转、英雄高光这些决定性瞬间。基础运镜是叙事语法，高表现力镜头是<strong style="color: var(--color-brand);">重音符号</strong>。
+      </p>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4" style="margin-top: 44px;">
+        <!-- 1. 子弹时间 -->
+        <div class="img-card"><img class="ic-img" src="../assets/posters/kling_bullettime.jpg" alt="子弹时间" onclick="openLV('https://v2-kling.kechuangai.com/bs2/upload-ylab-stunt/c9f4367e-eae9-48a6-b98e-67c8b155a338-OHOE_dcfJ9M1wzZLLk4grg-output.mp4?x-kcdn-pid=112452','子弹时间 Bullet Time · 可灵原视频','../assets/posters/kling_bullettime.jpg')" loading="lazy"><div class="ic-body"><div class="tc-en">Bullet Time</div><div class="tc-name">子弹时间</div><div class="tc-def">镜头在空间维度上高速巡航，画面主体在时间维度上近乎凝固，形成强烈反差。当动作被静止或极度放慢时，观众视角能围绕目标自由高速位移（旋转/环绕/平移）。</div><div class="tc-effect"><b>适用情境</b> 高速瞬间与危险场面（子弹飞行、爆炸碎片、格斗踢腿）、人物高光与决定性时刻（起跳、转身、出拳）、动态美感与形体线条（舞蹈、武术、体操）、超现实科幻氛围（时间暂停、异能发动）、关键信息与细节展示（产品旋转特写、液体滴落）</div><div class="tc-prompt"><b>参考</b>《黑客帝国》《剑鱼行动》《X 战警：逆转未来》《X 战警：第一战》</div></div></div>
+        
+        <!-- 2. 升格镜头 -->
+        <div class="img-card"><img class="ic-img" src="../assets/posters/kling_slomo.jpg" alt="升格镜头 Slow Motion" onclick="openLV('https://v2-kling.kechuangai.com/bs2/upload-ylab-stunt/7cd914e3-e62b-4781-a880-ed557a5d9bb4-o2vJ2sXmX_MS5-OPm5ClTQ-output.mp4?x-kcdn-pid=112452','升格镜头 Slow Motion · 可灵原视频（点击播放）','../assets/posters/kling_slomo.jpg')" loading="lazy"><div class="ic-body"><div class="tc-en">Slow Motion</div><div class="tc-name">升格镜头</div><div class="tc-def">通过提高拍摄时的帧率，并在正常帧率下播放，使画面呈现慢动作效果。时间被延展、运动被拆解、细节被放大，让原本转瞬即逝的动态变得清晰流畅，呈现超越肉眼体验的连贯和丝滑。</div><div class="tc-effect"><b>适用情境</b> 动作拆解与情感渲染、运动美学展现、产品质感细节、情绪高潮时刻</div><div class="tc-prompt"><b>参考</b>《瞬息全宇宙》《一代宗师》《生化危机：战神再生》</div><div class="tc-note" style="margin-top:8px;padding:8px 12px;background:rgba(201,168,76,0.08);border-radius:6px;font-size:11px;color:var(--color-brand);">💡 与子弹时间的区别：升格采用固定镜头或调度幅度较小，子弹时间镜头调度动态极大</div></div></div>
+        
+        <!-- 3. 希区柯克变焦 -->
+        <div class="img-card"><img class="ic-img" src="../assets/posters/kling_dollyzoom.jpg" alt="希区柯克变焦" onclick="openLV('https://v2-kling.kechuangai.com/bs2/upload-ylab-stunt/e1e82ec4-9264-4568-9d4e-19d8778dc554-f2NtWgfQ-pBMAyhtSYzKJw-output.mp4?x-kcdn-pid=112452','希区柯克变焦 Dolly Zoom · 可灵原视频（点击播放）','../assets/posters/kling_dollyzoom.jpg')" loading="lazy"><div class="ic-body"><div class="tc-en">Dolly Zoom</div><div class="tc-name">希区柯克变焦</div><div class="tc-def">摄影机物理位移与镜头焦距变化反向同步进行，保持被摄主体在画面中大小不变，但背景空间发生剧烈透视变化。推入变焦（Zoom Out + Dolly In）：背景迅速向四周炸裂扩张，主体仿佛被世界孤立；拉出变焦（Zoom In + Dolly Out）：背景迅速向主体挤压、塌陷，产生幽闭恐惧和压迫感。</div><div class="tc-effect"><b>适用情境</b> 心理惊悚与眩晕（恐高、药物幻觉、精神错乱）、真相揭晓时刻（角色突然得知毁灭性真相）、命运的孤立感（被世界抛弃的孤独或恐惧）、戏剧反转的临界点（时空停滞错觉，暗示情节突变）</div><div class="tc-prompt"><b>参考</b>《大白鲨》《I 型起源》《致命快感》《料理鼠王》《低俗小说》</div></div></div>
+        
+        <!-- 4. Z轴旋转镜头 -->
+        <div class="img-card"><img class="ic-img" src="../assets/posters/kling_zaxis.jpg" alt="Z 轴旋转镜头 Z-axis Roll" onclick="openLV('https://v2-kling.kechuangai.com/bs2/upload-ylab-stunt/035a25f3-14bc-4ba6-a7f5-59ddd526b785-XOT7NU_hmr8G14uXFOWyvA-output.mp4?x-kcdn-pid=112452','Z 轴旋转镜头 Z-axis Roll · 可灵原视频（点击播放）','../assets/posters/kling_zaxis.jpg')" loading="lazy"><div class="ic-body"><div class="tc-en">Z-axis Rotation / Barrel Roll</div><div class="tc-name">Z 轴旋转镜头</div><div class="tc-def">摄影机绕镜头光轴（连接镜头中心与景物中心的虚构直线）进行顺时针或逆时针旋转拍摄，画面呈现水平地平线倾斜、景物自转的视觉效果。小幅度倾斜（45°以内）产生不稳定构图，暗示环境或人物心理失衡；大幅度连续旋转（90°以上）产生"天旋地转"效果，彻底剥离观众的重力感，产生迷幻、失重或极度混乱的沉浸体验。</div><div class="tc-effect"><b>适用情境</b> 心理状态的崩塌（极度恐惧、疯狂、醉酒、药物幻觉）、权力关系的倒置（叙事剧烈反转，英雄战败、反派夺权）、超现实与异次元（时空扭曲、重力改变、进入梦境）、战斗与运动张力（战机翻滚、极速追逐、FPV 无人机视角）</div><div class="tc-prompt"><b>参考</b>《2001 太空漫游》《蜘蛛侠 3》《黑豹》</div></div></div>
+        
+        <!-- 5. 俯冲镜头 -->
+        <div class="img-card"><img class="ic-img" src="../assets/posters/kling_dive.jpg" alt="俯冲镜头" onclick="openLV('https://v2-kling.kechuangai.com/bs2/upload-ylab-stunt/c878f62f-1ef1-41a9-ba60-35984c3994e6-5EjtTRtdhc3su1VRmLqFjA-output.mp4?x-kcdn-pid=112452','俯冲镜头 Vertical Dive · 可灵原视频（点击播放）','../assets/posters/kling_dive.jpg')" loading="lazy"><div class="ic-body"><div class="tc-en">Vertical Dive / Plunge Shot</div><div class="tc-name">俯冲镜头</div><div class="tc-def">穿越机模拟物体从高处坠落，急速俯冲至地面的调度方式。打破常规的人眼平视视角，瞬间抓住观众注意力，通过对空间的极端压缩，让观众感到"避无可避"的压迫感，强制拉近观众与主体的距离。同时，从上帝视角到主体细节的快速切换，能够加快视觉节奏。</div><div class="tc-effect"><b>适用情境</b> 混乱与秩序（有规律的线条布局、整齐划一的群体动作、复杂迷宫、混乱街道）、博弈布局（上帝视角展现多个主体在空间中的对峙位置，像棋子一样排布）、致命的一击（刺客从高处跃下、子弹飞向目标、雨滴落在地面的瞬间）、孤独与渺小（一个人躺在空旷的空间，镜头俯冲，强调孤独感）</div><div class="tc-prompt"><b>参考</b>《哪吒之魔童降世》</div></div></div>
+        
+        <!-- 6. 穿越机镜头 -->
+        <div class="img-card"><img class="ic-img" src="../assets/posters/kling_fpv.jpg" alt="FPV穿越机" onclick="openLV('https://v2-kling.kechuangai.com/bs2/upload-ylab-stunt/b603fd5b-a55f-44bb-82bb-2ef4ab2eb52a-lziahMl9llWMCd7Gt1ichA-output.mp4?x-kcdn-pid=112452','FPV 穿越机镜头 · 可灵原视频（点击播放）','../assets/posters/kling_fpv.jpg')" loading="lazy"><div class="ic-body"><div class="tc-en">FPV Drone Shot</div><div class="tc-name">穿越机镜头</div><div class="tc-def">使用穿越机（FPV Drone）拍摄，具有极高动态自由度和沉浸感的特殊视角镜头，拥有极宽的视野，炫酷的动感和速度感，极致的穿梭能力。区别于保持水平构图的稳定慢速的普通航拍镜头（Aerial/Drone Shot），FPV 镜头运动速度更快，通常会破水平。</div><div class="tc-effect"><b>适用情境</b> 极限运动（配合滑雪、赛车、山地车的运动，贴近同速拍摄，产生临场感）、工业/地产巡览（一镜到底穿过厂房或豪宅，展现空间结构的整体性）、自然风光（贴地飞过水面、山脊，强调自然地理的壮丽）、文艺文旅调性（展示城市地标、网红建筑、古镇街巷、建筑穿廊等空间地貌）、情绪的高潮（表现角色极度兴奋、混乱或处于超能力状态下的视觉）</div><div class="tc-prompt"><b>参考</b>《亡命救护车》</div></div></div>
+        
+        <!-- 7. 对冲镜头 -->
+        <div class="img-card"><img class="ic-img" src="../assets/posters/kling_counter.jpg" alt="对冲镜头 Counter-Movement" onclick="openLV('https://v2-kling.kechuangai.com/bs2/upload-ylab-stunt/87ba8847-511a-48ed-bcd2-8f54bd34969d-dsGZEgYbRSdv8B84jPMpdg-output.mp4?x-kcdn-pid=112452','对冲镜头 Counter-Movement · 可灵原视频（点击播放）','../assets/posters/kling_counter.jpg')" loading="lazy"><div class="ic-body"><div class="tc-en">Counter-Movement Shot</div><div class="tc-name">对冲镜头</div><div class="tc-def">广角拍摄，摄影机与主体同时向对方急速运动，二者方向相对，双倍位移产生"视觉炸裂"，强调瞬时爆发、强烈的空间挤压、视觉侵略性。</div><div class="tc-effect"><b>适用情境</b> 惊悚/恐惧（怪物突然扑向镜头，镜头同时迎上去，模拟受害者那一瞬间的惊恐退缩或迎头撞击）、觉醒/愤怒（主角下定决心，满腔怒火冲向反派，镜头迎面推入，表现其力量感和冲劲）、速度感极致（赛车场景中，车头与相机对冲，制造一种死里逃生的窒息感）</div><div class="tc-prompt"><b>参考</b>《疯狂的麦克斯 4：狂暴之路》《飞驰人生 2》《黑客》</div></div></div>
+        
+        <!-- 8. 延时镜头 -->
+        <div class="img-card"><img class="ic-img" src="../assets/posters/kling_timelapse.jpg" alt="延时镜头 Time-lapse" onclick="openLV('https://v2-kling.kechuangai.com/bs2/upload-ylab-stunt/04ef0499-fdf1-4921-8dfc-5f59c871edda-A_5SFRxWa9w2Taf3UbzKsQ-output.mp4?x-kcdn-pid=112452','延时镜头 Time-lapse · 可灵原视频（点击播放）','../assets/posters/kling_timelapse.jpg')" loading="lazy"><div class="ic-body"><div class="tc-en">Time-lapse</div><div class="tc-name">延时镜头</div><div class="tc-def">以极低的频率拍摄画面（例如每秒 1 张，甚至几分钟 1 张），然后以正常的帧率（24fps/30fps）播放，将漫长的过程压缩在短时间内发生，产生疯狂生长、时间飞逝的视觉奇观。</div><div class="tc-effect"><b>适用情境</b> 痕迹叠加（空间容器不变，内部元素通过数量的增减来体现时间刻度，如植物从发芽到枯萎）、状态更替（表现同一事物在不同状态间的跨越，强调过程的剧烈压缩，如极昼到极夜的光影推移）、节奏错位（将慢速运动物提速，使其与背景产生频率落差，揭示肉眼无法察觉的规律，如人群如潮水般涌入地铁）、主体剥离（保持主角相对静止，让周遭环境极速流逝，制造凝固感，如独自坐在车站的长椅、盯着一杯逐渐冷却的咖啡、守候一扇迟迟不开的门）</div><div class="tc-prompt"><b>创作逻辑</b> 表达自然律令的宏大、人类改造世界的效率、时移世易的沧桑；或表达孤独、执着、被环境抛弃的疏离、心理的煎熬</div></div></div>
+        
+        <!-- 9. 180°环绕揭示 -->
+        <div class="img-card"><img class="ic-img" src="../assets/posters/kling_180reveal.jpg" alt="180° 环绕揭示 Orbital Reveal" onclick="openLV('https://v2-kling.kechuangai.com/bs2/upload-ylab-stunt/8a64c78c-612d-4ba7-8a69-bc979c023153-vyBWOxVx-RW4vnKHM7Ph1A-output.mp4?x-kcdn-pid=112452','180° 环绕揭示 Orbital Reveal · 可灵原视频（点击播放）','../assets/posters/kling_180reveal.jpg')" loading="lazy"><div class="ic-body"><div class="tc-en">180° Orbital Reveal / Arc Shot</div><div class="tc-name">180° 环绕揭示镜头</div><div class="tc-def">摄影机前跟拍摄主体反应，随着主体动作/视线变化，环绕 180° 至过肩后跟镜头，拍摄主体眼前情景及主体动作。在时空连贯的情况下，展现主体反应和主体所见。</div><div class="tc-effect"><b>适用情境</b> 主体正走向一个宏大景观、危险边缘或改变命运的场所；在商业广告中，这种镜头能给模特或主讲人增加出场光环</div><div class="tc-prompt"><b>特点</b> 一镜到底的环绕揭示，从主观视角到客观视角的流畅转换</div></div></div>
+        
+        <!-- 10. 急速变焦 -->
+        <div class="img-card"><img class="ic-img" src="../assets/posters/kling_crashzoom.jpg" alt="急速变焦" onclick="openLV('https://v2-kling.kechuangai.com/bs2/upload-ylab-stunt/2b42b06b-68e7-4bff-a804-1ce8e37fa6a2-uMVg7RIAMY5usqlOHq4HpA-output.mp4?x-kcdn-pid=112452','急速变焦 Crash Zoom · 可灵原视频（点击播放）','../assets/posters/kling_crashzoom.jpg')" loading="lazy"><div class="ic-body"><div class="tc-en">Crash Zoom</div><div class="tc-name">急速变焦镜头</div><div class="tc-def">一种突发性、高强度、非匀速的极端变焦运镜手法，在极短时间完成大幅度焦段变化，刻意摒弃顺滑变焦逻辑，用粗暴、冲击感极强的画面收缩，瞬间制造视觉张力和紧张压迫感。</div><div class="tc-effect"><b>适用情境</b> 强化情绪反应（捕捉角色瞬间的震惊、恐惧或顿悟，当角色发现秘密时，Crash Zoom 怼到脸上能瞬间放大这种情绪）、强调关键细节（在混乱的场景中，通过急推将观众的注意力从宏观环境强制拉拽到一个微观物品上）、制造喜剧效果（周星驰等喜剧电影中经常使用，通过夸张的视角切换来营造荒诞或讽刺的节奏感）、动作片的能量（增加画面的动能，使剪辑节奏显得更加凌厉）</div><div class="tc-prompt"><b>参考</b>《被解救的姜戈》《食神》《爱美丽》《老男孩》《杀死比尔》《闪灵》《布达佩斯大饭店》《两杆大烟枪》</div></div></div>
+      </div>
+
+      <div style="margin-top: 44px;">
+        <div class="sub-label">速查 · 十种镜头的能量类型</div>
+        <div class="overflow-x-auto">
+          <table class="dt">
+            <thead><tr><th>镜头</th><th>操控维度</th><th>核心效果</th><th>一句话记忆</th></tr></thead>
+            <tbody>
+              <tr><td><b>子弹时间</b></td><td>时间 × 空间</td><td>时间凝固 + 空间巡航</td><td>时间停了，镜头还在飞</td></tr>
+              <tr><td><b>升格镜头</b></td><td>时间</td><td>时间延展、细节放大</td><td>把一秒钟拉长成一首诗</td></tr>
+              <tr><td><b>希区柯克变焦</b></td><td>空间透视</td><td>主体不变、背景塌陷/炸裂</td><td>人被世界孤立的那一下</td></tr>
+              <tr><td><b>Z 轴旋转</b></td><td>重力方向</td><td>天旋地转、剥离重力</td><td>世界翻了</td></tr>
+              <tr><td><b>俯冲镜头</b></td><td>垂直空间</td><td>上帝视角砸向主体</td><td>避无可避</td></tr>
+              <tr><td><b>FPV 穿越机</b></td><td>空间路径</td><td>高速穿梭、破水平</td><td>像鸟一样钻进空间缝隙</td></tr>
+              <tr><td><b>对冲镜头</b></td><td>相对速度</td><td>双倍位移、视觉炸裂</td><td>镜头和主体对撞</td></tr>
+              <tr><td><b>延时镜头</b></td><td>时间压缩</td><td>漫长过程瞬间完成</td><td>时间飞逝、主体剥离</td></tr>
+              <tr><td><b>180° 环绕揭示</b></td><td>视角转换</td><td>反应与所见同框</td><td>先看他的脸，再看他的世界</td></tr>
+              <tr><td><b>急速变焦</b></td><td>焦距速度</td><td>粗暴收缩、情绪怼脸</td><td>砰地一下怼到你脸上</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== FOOTER ===== -->
+  <footer style="padding: 48px 0; background: var(--color-bg-primary); border-top: 1px solid var(--color-border-default);">
+    <div class="max-w-7xl mx-auto px-6 lg:px-8 flex flex-col md:flex-row items-center justify-between gap-4">
+      <p style="font-size: 12px; color: var(--color-text-tertiary); margin: 0;">Visual Aesthetics · 镜头调度 · 蒸馏自内部《镜头调度》《高表现力镜头》文档</p>
+      <a href="all-in-one.html#index" style="font-size: 12px; color: var(--color-brand); text-decoration: none; letter-spacing: 0.08em; text-transform: uppercase;">返回首页 →</a>
+    </div>
+  </footer>
+</main>
+
+<div id="lightbox" class="lb-backdrop" onclick="closeLB()">
+  <button class="lb-close" onclick="event.stopPropagation(); closeLB()" title="关闭">&times;</button>
+  <img id="lb-img" src="" alt="" style="display:none;">
+  <video id="lb-video" controls autoplay loop muted playsinline style="display:none;" onclick="event.stopPropagation()"></video>
+  <div id="lb-cap" class="lb-cap"></div>
+</div>
+<script>
+function openLB(src, cap){
+  var img = document.getElementById('lb-img'), vid = document.getElementById('lb-video');
+  vid.pause(); vid.removeAttribute('src'); vid.load(); vid.style.display = 'none';
+  img.src = src; img.style.display = '';
+  document.getElementById('lb-cap').textContent = cap || '';
+  document.getElementById('lightbox').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+function openLV(src, cap, poster){
+  var img = document.getElementById('lb-img'), vid = document.getElementById('lb-video');
+  img.removeAttribute('src'); img.style.display = 'none';
+  vid.poster = poster || ''; vid.src = src; vid.style.display = ''; vid.play().catch(function(){});
+  document.getElementById('lb-cap').textContent = cap || '';
+  document.getElementById('lightbox').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+function closeLB(){
+  var vid = document.getElementById('lb-video');
+  vid.pause(); vid.removeAttribute('src'); vid.load();
+  document.getElementById('lightbox').classList.remove('open');
+  document.body.style.overflow = '';
+}
+document.addEventListener('keydown', function(e){ if(e.key === 'Escape') closeLB(); });
+</script>
+<link rel="stylesheet" href="../assets/glow-hover-v2.css?v=2">
+<script src="../assets/glow-hover-v2.js?v=2"></script>
+</body>
+</html>

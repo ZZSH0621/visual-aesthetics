@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>高表现力镜头 · 设计探索</title>
+<style>
+:root{--bg:#0a0a0a;--bg2:#111;--bg3:#161616;--border:#222;--text:#e8e0d0;--text2:#888;--brand:#c9a84c}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'SF Pro Display',-apple-system,sans-serif;background:var(--bg);color:var(--text);line-height:1.6}
+.header{text-align:center;padding:60px 20px 40px}
+.header-tag{font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--brand);margin-bottom:8px}
+.header h1{font-size:36px;font-weight:700}
+.header p{font-size:14px;color:var(--text2);margin-top:8px}
+
+/* 镜头选择器 */
+.lens-picker{display:flex;flex-wrap:wrap;justify-content:center;gap:8px;padding:20px;max-width:900px;margin:0 auto}
+.lens-btn{padding:8px 18px;border-radius:20px;border:1px solid var(--border);background:var(--bg2);color:var(--text2);font-size:13px;cursor:pointer;transition:all .25s}
+.lens-btn:hover{border-color:var(--brand);color:var(--text)}
+.lens-btn.active{background:var(--brand);color:#0a0a0a;border-color:var(--brand);font-weight:600}
+
+/* 演示区 */
+.demo-area{max-width:900px;margin:0 auto;padding:0 20px 60px}
+.demo-canvas{position:relative;width:100%;height:360px;background:#1a1a2e;border-radius:16px;overflow:hidden;border:1px solid var(--border);margin-bottom:24px}
+.demo-canvas-label{position:absolute;top:12px;left:16px;font-size:10px;color:rgba(255,255,255,.3);letter-spacing:.1em;text-transform:uppercase;z-index:10}
+.demo-grid{position:absolute;inset:0;background:repeating-linear-gradient(0deg,transparent,transparent 39px,rgba(255,255,255,.03) 40px),repeating-linear-gradient(90deg,transparent,transparent 39px,rgba(255,255,255,.03) 40px)}
+
+/* 动画主体 */
+.subject{position:absolute;width:40px;height:40px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:16px;font-weight:700;z-index:5}
+.camera-hint{position:absolute;bottom:12px;right:16px;font-size:10px;color:rgba(255,255,255,.3);z-index:10}
+
+/* 动画定义 */
+@keyframes bulletTime{0%{transform:rotateY(0) scale(1)}25%{transform:rotateY(90deg) scale(1.1)}50%{transform:rotateY(180deg) scale(1)}75%{transform:rotateY(270deg) scale(1.1)}100%{transform:rotateY(360deg) scale(1)}}
+@keyframes slowMo{0%{left:10%;top:50%}100%{left:80%;top:50%}}
+@keyframes dollyZoom{0%{transform:scale(1);filter:perspective(500px) translateZ(0)}50%{transform:scale(1.3);filter:perspective(200px) translateZ(50px)}100%{transform:scale(1);filter:perspective(500px) translateZ(0)}}
+@keyframes barrelRoll{0%{transform:rotate(0)}100%{transform:rotate(360deg)}}
+@keyframes dive{0%{top:-10%;transform:scale(3);opacity:0}30%{opacity:1}100%{top:50%;transform:scale(1);opacity:1}}
+@keyframes fpv{0%{left:-5%;top:30%;transform:rotate(-5deg)}25%{left:30%;top:60%;transform:rotate(8deg)}50%{left:60%;top:20%;transform:rotate(-12deg)}75%{left:80%;top:50%;transform:rotate(5deg)}100%{left:105%;top:30%;transform:rotate(-3deg)}}
+@keyframes counter{0%{left:5%;transform:scale(1)}50%{left:45%;transform:scale(2)}100%{left:85%;transform:scale(1)}}
+@keyframes timelapse{0%{opacity:0;transform:scale(0.5)}20%{opacity:1;transform:scale(0.6)}40%{transform:scale(0.7)}60%{transform:scale(0.85)}80%{transform:scale(1)}100%{transform:scale(1.1);opacity:0.8}}
+@keyframes arc{0%{left:10%;top:70%}25%{left:5%;top:40%}50%{left:30%;top:15%}75%{left:70%;top:15%}100%{left:90%;top:70%}}
+@keyframes crashZoom{0%{transform:scale(1)}15%{transform:scale(1.8)}20%{transform:scale(1.7)}100%{transform:scale(1.7)}}
+
+/* 信息卡 */
+.info-card{background:var(--bg2);border:1px solid var(--border);border-radius:12px;padding:28px}
+.info-header{display:flex;align-items:baseline;gap:12px;margin-bottom:16px}
+.info-num{font-size:32px;font-weight:800;opacity:.15;font-family:monospace}
+.info-title{font-size:22px;font-weight:700}
+.info-en{font-size:13px;color:var(--text2);font-style:italic}
+.info-def{font-size:14px;color:var(--text2);line-height:1.8;margin-bottom:16px;padding-left:16px;border-left:3px solid var(--brand)}
+.info-scenes{display:flex;flex-wrap:wrap;gap:6px}
+.info-scene-tag{font-size:11px;padding:4px 12px;border-radius:12px;background:var(--bg3);color:var(--text2);border:1px solid var(--border)}
+.info-note{margin-top:16px;padding:12px 16px;background:rgba(201,168,76,.08);border-radius:8px;font-size:12px;color:var(--brand)}
+
+/* 对比条 */
+.compare-bar{display:flex;gap:2px;margin-top:20px;border-radius:6px;overflow:hidden;height:6px}
+.compare-seg{height:100%;transition:flex-grow .3s}
+.compare-seg.good{background:#2ecc71}
+.compare-seg.bad{background:#e74c3c}
+
+@media(max-width:600px){.lens-picker{gap:6px}.lens-btn{padding:6px 12px;font-size:12px}}
+
+/* ── 场景调度 ── */
+.staging-grid{display:grid;grid-template-columns:240px 1fr;gap:24px;align-items:start}
+.staging-nav{position:sticky;top:80px;background:var(--bg2);border:1px solid var(--border);border-radius:8px;overflow:hidden;max-height:70vh;overflow-y:auto}
+.staging-nav-title{padding:12px 16px;font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--text2);background:var(--bg3);border-bottom:1px solid var(--border)}
+.staging-nav-item{display:block;width:100%;padding:9px 16px;background:none;border:none;color:var(--text2);font-size:13px;text-align:left;cursor:pointer;border-bottom:1px solid var(--border);transition:all .2s}
+.staging-nav-item:hover{color:var(--text);background:var(--bg3)}
+.staging-nav-item.active{color:var(--brand);background:rgba(201,168,76,.08);border-left:2px solid var(--brand)}
+.staging-nav-group{font-size:10px;color:var(--text2);padding:8px 16px 4px;letter-spacing:.1em;text-transform:uppercase;border-top:1px solid var(--border);margin-top:4px}
+.staging-demo{background:var(--bg2);border:1px solid var(--border);border-radius:12px;overflow:hidden}
+.staging-canvas{position:relative;width:100%;height:300px;background:linear-gradient(180deg,#1a1a2e,#16213e,#0f3460);display:flex;align-items:center;justify-content:center}
+.staging-canvas-label{position:absolute;top:12px;left:16px;font-size:10px;color:rgba(255,255,255,.3);letter-spacing:.1em;text-transform:uppercase}
+.staging-svg{max-width:90%;max-height:80%}
+.staging-info{padding:24px 28px}
+.staging-name{font-size:20px;font-weight:700;margin-bottom:4px}
+.staging-en{font-size:12px;color:var(--text2);font-style:italic;margin-bottom:14px}
+.staging-def{font-size:14px;color:var(--text2);line-height:1.8;margin-bottom:14px}
+.staging-keywords{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:14px}
+.staging-kw{font-size:11px;padding:3px 10px;border-radius:12px;background:var(--bg3);color:var(--text2);border:1px solid var(--border)}
+.staging-prompt{background:var(--bg3);border-radius:8px;padding:14px;margin-top:10px}
+.staging-prompt-label{font-size:11px;color:var(--brand);font-weight:600;letter-spacing:.08em;margin-bottom:6px}
+.staging-prompt-text{font-size:12px;color:var(--text2);line-height:1.7;font-family:monospace}
+
+/* ── 色彩与光影 ── */
+.color-relations{display:flex;flex-direction:column;gap:12px}
+.color-rel-card{background:var(--bg2);border:1px solid var(--border);border-radius:10px;padding:16px 20px;cursor:pointer;transition:all .25s;display:grid;grid-template-columns:auto 1fr auto;gap:14px;align-items:center}
+.color-rel-card:hover,.color-rel-card.active{border-color:var(--brand);background:rgba(201,168,76,.05)}
+.color-rel-swatches{display:flex;gap:4px}
+.color-rel-swatch{width:24px;height:24px;border-radius:6px;border:1px solid rgba(255,255,255,.1)}
+.color-rel-name{font-size:14px;font-weight:600}
+.color-rel-desc{font-size:12px;color:var(--text2);margin-top:2px}
+.color-rel-arrow{color:var(--text2);font-size:16px;transition:transform .2s}
+.color-rel-card:hover .color-rel-arrow{transform:translateX(4px)}
+.tone-matrix{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;max-width:480px;margin:0 auto}
+.tone-cell{aspect-ratio:1;border-radius:8px;display:flex;flex-direction:column;align-items:center;justify-content:center;cursor:pointer;transition:all .3s;border:2px solid transparent}
+.tone-cell:hover{transform:scale(1.05);border-color:var(--brand);z-index:2}
+.tone-cell-label{font-size:13px;font-weight:700;text-shadow:0 1px 4px rgba(0,0,0,.5)}
+.tone-cell-sub{font-size:9px;opacity:.7}
+@media(max-width:900px){.staging-grid{grid-template-columns:1fr}.staging-nav{position:static}}
+
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="header-tag">Design Exploration</div>
+  <h1>新板块设计探索</h1>
+  <p>场景调度 · 色彩与光影 · 高表现力镜头</p>
+</div>
+
+<!-- Tab 切换 -->
+<div style="display:flex;justify-content:center;gap:0;border-bottom:1px solid var(--border);margin-bottom:32px">
+  <button class="page-tab active" onclick="showTab('shots')" style="padding:12px 28px;font-size:14px;font-weight:600;color:var(--brand);background:none;border:none;border-bottom:2px solid var(--brand);cursor:pointer">高表现力镜头</button>
+  <button class="page-tab" onclick="showTab('staging')" style="padding:12px 28px;font-size:14px;font-weight:600;color:var(--text2);background:none;border:none;border-bottom:2px solid transparent;cursor:pointer">场景调度</button>
+  <button class="page-tab" onclick="showTab('color')" style="padding:12px 28px;font-size:14px;font-weight:600;color:var(--text2);background:none;border:none;border-bottom:2px solid transparent;cursor:pointer">色彩与光影</button>
+</div>
+
+<div class="page-panel" id="panel-shots" style="display:block">
+<div class="lens-picker" id="lensPicker"></div>
+
+<div class="demo-area">
+  <div class="demo-canvas" id="demoCanvas">
+    <div class="demo-grid"></div>
+    <span class="demo-canvas-label" id="canvasLabel">CAMERA SIMULATION</span>
+    <span class="camera-hint">动画为示意，非实际拍摄效果</span>
+  </div>
+  <div class="info-card" id="infoCard"></div>
+</div>
+
+</div><!-- /panel-shots -->
+
+<!-- ══════ 场景调度 ══════ -->
+<div class="page-panel" id="panel-staging" style="display:none">
+<div style="max-width:1100px;margin:0 auto;padding:0 20px 60px">
+  <div class="staging-grid">
+    <div class="staging-nav">
+      <div class="staging-nav-title">调度类型 · 59条</div>
+      <div class="staging-nav-group">人物关系</div>
+      <button class="staging-nav-item active" onclick="showStaging('position',this)">位置关系</button>
+      <button class="staging-nav-item" onclick="showStaging('distance',this)">距离关系</button>
+      <button class="staging-nav-item" onclick="showStaging('facing',this)">朝向关系</button>
+      <button class="staging-nav-item" onclick="showStaging('movement',this)">运动变化</button>
+      <button class="staging-nav-item" onclick="showStaging('structure',this)">组合结构</button>
+      <div class="staging-nav-group">动作调度</div>
+      <button class="staging-nav-item" onclick="showStaging('fight',this)">对抗动作</button>
+      <button class="staging-nav-item" onclick="showStaging('chase',this)">位移动作</button>
+      <button class="staging-nav-item" onclick="showStaging('dance',this)">舞蹈队形</button>
+      <div class="staging-nav-group">群像调度</div>
+      <button class="staging-nav-item" onclick="showStaging('crowd',this)">人群流动</button>
+      <button class="staging-nav-item" onclick="showStaging('surround',this)">包围阵型</button>
+      <div class="staging-nav-group">空间调度</div>
+      <button class="staging-nav-item" onclick="showStaging('multispace',this)">多空间</button>
+    </div>
+    <div class="staging-demo">
+      <div class="staging-canvas">
+        <span class="staging-canvas-label">TOP-DOWN VIEW · 俯视调度图</span>
+        <svg class="staging-svg" viewBox="0 0 400 200" id="stagingSvg"></svg>
+      </div>
+      <div class="staging-info">
+        <div class="staging-name" id="stgName"></div>
+        <div class="staging-en" id="stgEn"></div>
+        <div class="staging-def" id="stgDef"></div>
+        <div class="staging-keywords" id="stgKw"></div>
+        <div class="staging-prompt">
+          <div class="staging-prompt-label">PROMPT 示例</div>
+          <div class="staging-prompt-text" id="stgPrompt"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</div><!-- /panel-staging -->
+
+<!-- ══════ 色彩与光影 ══════ -->
+<div class="page-panel" id="panel-color" style="display:none">
+<div style="max-width:1100px;margin:0 auto;padding:0 20px 60px">
+  <h3 style="font-size:20px;font-weight:700;margin-bottom:20px;color:var(--text)">色彩关系 · 6 种</h3>
+  <div class="color-relations" id="colorRelations"></div>
+
+  <h3 style="font-size:20px;font-weight:700;margin:48px 0 8px;text-align:center;color:var(--text)">色彩调性九宫格</h3>
+  <p style="font-size:12px;color:var(--text2);text-align:center;margin-bottom:24px">明度（高/中/低）× 跨度（长/中/短），9 种调性组合</p>
+  <div style="display:grid;grid-template-columns:36px 1fr;gap:10px;max-width:520px;margin:0 auto">
+    <div style="display:flex;flex-direction:column;justify-content:space-between;padding:16px 0;font-size:10px;color:var(--text2);text-align:center">
+      <span>高（亮）</span><span>中</span><span>低（暗）</span>
+    </div>
+    <div>
+      <div class="tone-matrix">
+        <div class="tone-cell" style="background:linear-gradient(135deg,#f8f8f0,#e8e0c8,#1a1a1a)"><span class="tone-cell-label" style="color:#333">高长调</span><span class="tone-cell-sub" style="color:#666">明亮+全跨度</span></div>
+        <div class="tone-cell" style="background:linear-gradient(135deg,#f0ead0,#d4c8a0,#b8a880)"><span class="tone-cell-label" style="color:#333">高中调</span><span class="tone-cell-sub" style="color:#666">明亮+中跨度</span></div>
+        <div class="tone-cell" style="background:linear-gradient(135deg,#f5f0e0,#e8dfc8)"><span class="tone-cell-label" style="color:#333">高短调</span><span class="tone-cell-sub" style="color:#666">明亮+窄跨度</span></div>
+        <div class="tone-cell" style="background:linear-gradient(135deg,#d4c8a0,#888,#2a2a2a)"><span class="tone-cell-label">中长调</span><span class="tone-cell-sub">中等+全跨度</span></div>
+        <div class="tone-cell" style="background:linear-gradient(135deg,#a09070,#887860,#685848)"><span class="tone-cell-label">中中调</span><span class="tone-cell-sub">中等+中跨度</span></div>
+        <div class="tone-cell" style="background:linear-gradient(135deg,#a89880,#988870)"><span class="tone-cell-label">中短调</span><span class="tone-cell-sub">中等+窄跨度</span></div>
+        <div class="tone-cell" style="background:linear-gradient(135deg,#4a3a2a,#1a1a1a,#0a0a0a)"><span class="tone-cell-label">低长调</span><span class="tone-cell-sub">暗+全跨度</span></div>
+        <div class="tone-cell" style="background:linear-gradient(135deg,#2a2018,#1a1510,#0f0c08)"><span class="tone-cell-label">低中调</span><span class="tone-cell-sub">暗+中跨度</span></div>
+        <div class="tone-cell" style="background:linear-gradient(135deg,#1a1510,#151210)"><span class="tone-cell-label">低短调</span><span class="tone-cell-sub">暗+窄跨度</span></div>
+      </div>
+      <div style="display:flex;justify-content:space-between;padding:0 16px;font-size:10px;color:var(--text2);margin-top:6px">
+        <span>长（宽跨度）</span><span>中</span><span>短（窄跨度）</span>
+      </div>
+    </div>
+  </div>
+</div>
+</div><!-- /panel-color -->
+
+<script>
+const SHOTS=[
+{id:1,name:"子弹时间",en:"Bullet Time",color:"#e74c3c",
+ def:"镜头在空间维度上高速巡航，画面主体在时间维度上近乎凝固，形成强烈反差。当动作被静止或极度放慢时，观众视角能围绕目标自由高速位移。",
+ scenes:["高速瞬间","人物高光","动态美感","超现实","产品展示"],
+ note:"子弹时间 vs 升格：子弹时间镜头调度幅度极大，升格镜头调度幅度较小",
+ anim:"bulletTime",icon:"⏱"},
+{id:2,name:"升格镜头",en:"Slow Motion",color:"#f39c12",
+ def:"提高拍摄帧率，正常帧率播放，时间被延展、运动被拆解、细节被放大，呈现超越肉眼体验的连贯和丝滑。",
+ scenes:["动作拆解","情感渲染","运动美学","产品质感"],
+ note:"与子弹时间的区别在于：升格采用固定镜头或调度幅度较小",
+ anim:"slowMo",icon:"🐌"},
+{id:3,name:"希区柯克变焦",en:"Dolly Zoom",color:"#9b59b6",
+ def:"摄影机物理位移与镜头焦距变化反向同步，主体大小不变但背景空间发生剧烈透视变化。推入变焦=背景炸裂扩张；拉出变焦=背景挤压塌陷。",
+ scenes:["心理惊悚","真相揭晓","命运孤立感","戏剧反转"],
+ note:"《大白鲨》经典应用——表现角色突然意识到危险的心理冲击",
+ anim:"dollyZoom",icon:"🔭"},
+{id:4,name:"Z轴旋转镜头",en:"Z-axis Rotation / Barrel Roll",color:"#3498db",
+ def:"摄影机绕镜头光轴旋转，画面地平线倾斜、景物自转。小幅度（<45°）暗示心理失衡；大幅度（>90°）产生天旋地转的失重感。",
+ scenes:["心理崩塌","权力倒置","超现实","FPV战斗"],
+ note:"《2001太空漫游》《蜘蛛侠3》经典应用",
+ anim:"barrelRoll",icon:"🌀"},
+{id:5,name:"俯冲镜头",en:"Vertical Dive / Plunge Shot",color:"#1abc9c",
+ def:"模拟物体从高处坠落，急速俯冲至地面。极端压缩空间，产生'避无可避'的压迫感，从上帝视角快速切换到主体细节。",
+ scenes:["混乱与秩序","博弈布局","致命一击","孤独渺小"],
+ note:"穿越机常用技法，打破人眼平视视角",
+ anim:"dive",icon:"⬇"},
+{id:6,name:"穿越机镜头",en:"FPV Drone Shot",color:"#2ecc71",
+ def:"极高动态自由度和沉浸感，极宽视野，极致穿梭能力。区别于普通航拍：速度更快、会破水平、动感更强。",
+ scenes:["极限运动","工业巡览","自然风光","文旅","情绪高潮"],
+ note:"《亡命救护车》大量穿越机追逐镜头",
+ anim:"fpv",icon:"🚁"},
+{id:7,name:"对冲镜头",en:"Counter-Movement Shot",color:"#e67e22",
+ def:"摄影机与主体同时向对方急速运动，双倍位移产生视觉炸裂，强调瞬时爆发和空间挤压。",
+ scenes:["惊悚恐惧","觉醒愤怒","速度感极致"],
+ note:"《疯狂的麦克斯4》《飞驰人生2》中的迎面冲击",
+ anim:"counter",icon:"💥"},
+{id:8,name:"延时镜头",en:"Time-lapse",color:"#f1c40f",
+ def:"极低频率拍摄，正常帧率播放，将漫长过程压缩在短时间内，产生疯狂生长、时间飞逝的视觉奇观。",
+ scenes:["痕迹叠加","状态更替","节奏错位","主体剥离"],
+ note:"保持主体静止+环境极速流逝=凝固感/孤独感",
+ anim:"timelapse",icon:"⏩"},
+{id:9,name:"180°环绕揭示",en:"180° Orbital Reveal / Arc Shot",color:"#e91e63",
+ def:"摄影机前跟拍摄主体反应，环绕180°至过肩后跟镜头，在时空连贯的情况下展现主体反应和所见。",
+ scenes:["宏大景观揭示","广告出场光环"],
+ note:"一镜到底的环绕揭示，从主观视角到客观视角的流畅转换",
+ anim:"arc",icon:"🔄"},
+{id:10,name:"急速变焦",en:"Crash Zoom",color:"#c0392b",
+ def:"突发性、高强度、非匀速极端变焦，在极短时间完成大幅焦段变化，用粗暴的画面收缩制造视觉张力。",
+ scenes:["情绪放大","强调细节","喜剧效果","动作能量"],
+ note:"周星驰喜剧、《姜戈》《杀死比尔》中的标志性手法",
+ anim:"crashZoom",icon:"🔍"}
+];
+
+// 生成选择器按钮
+const picker=document.getElementById('lensPicker');
+SHOTS.forEach((s,i)=>{
+  const btn=document.createElement('button');
+  btn.className='lens-btn'+(i===0?' active':'');
+  btn.textContent=`${s.icon} ${s.name}`;
+  btn.onclick=()=>selectShot(i,btn);
+  picker.appendChild(btn);
+});
+
+function selectShot(idx,btn){
+  document.querySelectorAll('.lens-btn').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  const s=SHOTS[idx];
+  
+  // 更新演示画布
+  const canvas=document.getElementById('demoCanvas');
+  // 移除旧的 subject
+  canvas.querySelectorAll('.subject').forEach(el=>el.remove());
+  
+  // 创建新 subject
+  const sub=document.createElement('div');
+  sub.className='subject';
+  sub.style.background=s.color;
+  sub.style.color='#fff';
+  sub.textContent=s.icon;
+  
+  // 根据动画类型设置初始位置和动画
+  const anims={
+    bulletTime:{style:'left:45%;top:40%;width:80px;height:80px;font-size:32px;',anim:'bulletTime 4s ease-in-out infinite'},
+    slowMo:{style:'left:10%;top:45%;width:50px;height:50px;font-size:22px;',anim:'slowMo 6s linear infinite'},
+    dollyZoom:{style:'left:42%;top:38%;width:60px;height:60px;font-size:26px;',anim:'dollyZoom 3s ease-in-out infinite'},
+    barrelRoll:{style:'left:42%;top:35%;width:60px;height:60px;font-size:26px;',anim:'barrelRoll 3s linear infinite'},
+    dive:{style:'left:42%;top:-10%;width:50px;height:50px;font-size:22px;',anim:'dive 2.5s ease-in infinite'},
+    fpv:{style:'left:-5%;top:30%;width:45px;height:45px;font-size:20px;',anim:'fpv 4s ease-in-out infinite'},
+    counter:{style:'left:5%;top:40%;width:50px;height:50px;font-size:22px;',anim:'counter 2s ease-in-out infinite'},
+    timelapse:{style:'left:42%;top:38%;width:60px;height:60px;font-size:26px;',anim:'timelapse 5s linear infinite'},
+    arc:{style:'left:10%;top:70%;width:45px;height:45px;font-size:20px;',anim:'arc 4s ease-in-out infinite'},
+    crashZoom:{style:'left:42%;top:38%;width:60px;height:60px;font-size:26px;',anim:'crashZoom 2.5s ease-out infinite'}
+  };
+  
+  const a=anims[s.anim];
+  sub.style.cssText+=a.style;
+  sub.style.animation=a.anim;
+  canvas.appendChild(sub);
+  
+  // 更新信息卡
+  document.getElementById('infoCard').innerHTML=`
+    <div class="info-header">
+      <span class="info-num">${String(s.id).padStart(2,'0')}</span>
+      <div>
+        <div class="info-title" style="color:${s.color}">${s.name}</div>
+        <div class="info-en">${s.en}</div>
+      </div>
+    </div>
+    <div class="info-def">${s.def}</div>
+    <div style="font-size:11px;color:var(--text2);margin-bottom:6px;letter-spacing:.1em;text-transform:uppercase">适用情境</div>
+    <div class="info-scenes">${s.scenes.map(t=>`<span class="info-scene-tag">${t}</span>`).join('')}</div>
+    ${s.note?`<div class="info-note">💡 ${s.note}</div>`:''}
+    <div style="margin-top:16px;display:flex;align-items:center;gap:8px">
+      <span style="font-size:11px;color:#2ecc71">Good ×3</span>
+      <div class="compare-bar" style="flex:1"><div class="compare-seg good" style="flex-grow:3"></div><div class="compare-seg bad" style="flex-grow:3"></div></div>
+      <span style="font-size:11px;color:#e74c3c">Bad ×3</span>
+    </div>
+    <div style="margin-top:8px;font-size:11px;color:var(--text2)">视频案例存于内部文档，暂无法外链嵌入</div>
+  `;
+}
+
+// 初始化第一个
+selectShot(0, picker.children[0]);
+
+// ══════ Tab 切换 ══════
+function showTab(id){
+  document.querySelectorAll('.page-tab').forEach(function(t){
+    t.style.color='var(--text2)';t.style.borderBottomColor='transparent';
+  });
+  document.querySelectorAll('.page-panel').forEach(function(p){p.style.display='none'});
+  event.target.style.color='var(--brand)';event.target.style.borderBottomColor='var(--brand)';
+  document.getElementById('panel-'+id).style.display='block';
+}
+
+// ══════ 场景调度数据 ══════
+var STAGING={
+position:{n:"位置关系",e:"Positional Relationship",d:"描述人物在空间中的相对位置：前后、左右、高低、中心边缘、前景背景。重点是人物分别处在空间哪里。",kw:["前后","左右","高低","中心","边缘","前景","中景","背景"],p:"审讯室里，嫌疑人坐在中景中央，主审警探站在前景左侧，另一名警员站在背景门口，三人形成清楚的前后位置关系。",s:'<rect x="20" y="20" width="360" height="160" rx="4" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="1" stroke-dasharray="4"/><circle cx="80" cy="140" r="12" fill="#c9a84c" opacity="0.9"/><text x="80" y="165" text-anchor="middle" fill="#c9a84c" font-size="10">前景</text><circle cx="200" cy="100" r="12" fill="#e8e0d0" opacity="0.7"/><text x="200" y="125" text-anchor="middle" fill="#e8e0d0" font-size="10">中景</text><circle cx="320" cy="60" r="12" fill="#888" opacity="0.5"/><text x="320" y="85" text-anchor="middle" fill="#888" font-size="10">背景</text><line x1="80" y1="140" x2="200" y2="100" stroke="rgba(201,168,76,0.3)" stroke-width="1" stroke-dasharray="4"/><line x1="200" y1="100" x2="320" y2="60" stroke="rgba(201,168,76,0.3)" stroke-width="1" stroke-dasharray="4"/>'},
+distance:{n:"距离关系",e:"Distance Relationship",d:"关注人物之间距离：人物之间离得多远，以及这种距离表达什么关系。",kw:["靠近","远离","贴近","隔开","保持距离","身体接触"],p:"豪宅楼梯间，父亲从楼梯上方缓慢走下两级，逐渐靠近女儿，女儿后退一步，两人距离被压缩。",s:'<rect x="20" y="20" width="360" height="160" rx="4" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="1" stroke-dasharray="4"/><circle cx="140" cy="80" r="14" fill="#f1948a" opacity="0.9"/><text x="140" y="70" text-anchor="middle" fill="#f1948a" font-size="10">父</text><circle cx="260" cy="120" r="12" fill="#82e0aa" opacity="0.9"/><text x="260" y="105" text-anchor="middle" fill="#82e0aa" font-size="10">女</text><line x1="154" y1="86" x2="246" y2="114" stroke="#f1948a" stroke-width="2" stroke-dasharray="6" opacity="0.5"/><text x="200" y="90" text-anchor="middle" fill="#f1948a" font-size="9">距离压缩</text>'},
+facing:{n:"朝向关系",e:"Facing Direction",d:"人物身体、脸、视线和行动方向之间的关系。面对面、背对背、并肩、回避等。",kw:["面对面","背对背","并肩","侧身","回头","回避"],p:"餐厅包间里，夫妻面对面站在餐桌两侧争吵，母亲背对他们坐在窗边不说话。",s:'<rect x="20" y="20" width="360" height="160" rx="4" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="1" stroke-dasharray="4"/><circle cx="120" cy="100" r="14" fill="#e74c3c" opacity="0.9"/><text x="120" y="85" text-anchor="middle" fill="#e74c3c" font-size="10">夫</text><circle cx="200" cy="100" r="14" fill="#e74c3c" opacity="0.9"/><text x="200" y="85" text-anchor="middle" fill="#e74c3c" font-size="10">妻</text><circle cx="330" cy="50" r="12" fill="#888" opacity="0.6"/><text x="330" y="35" text-anchor="middle" fill="#888" font-size="10">母(背对)</text><line x1="134" y1="100" x2="186" y2="100" stroke="#e74c3c" stroke-width="2" opacity="0.4"/>'},
+movement:{n:"运动变化",e:"Movement & Change",d:"人物在时间中的进入、离开、换位、靠近、后退等动态变化。",kw:["进入","离开","打断","换位","靠近","后退","分开"],p:"餐厅包间里，两人低声交谈，后景门突然被推开，一个穿黑西装的男人进入，所有人立刻沉默。",s:'<rect x="20" y="20" width="360" height="160" rx="4" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="1" stroke-dasharray="4"/><circle cx="150" cy="100" r="12" fill="#4ecdc4" opacity="0.8"/><text x="150" y="85" text-anchor="middle" fill="#4ecdc4" font-size="10">A</text><circle cx="200" cy="100" r="12" fill="#4ecdc4" opacity="0.8"/><text x="200" y="85" text-anchor="middle" fill="#4ecdc4" font-size="10">B</text><circle cx="350" cy="100" r="12" fill="#f39c12" opacity="0.9"/><text x="350" y="85" text-anchor="middle" fill="#f39c12" font-size="10">C(进入)</text><path d="M 350 100 L 260 100" stroke="#f39c12" stroke-width="2" fill="none"/><path d="M 150 110 Q 140 140 120 150" stroke="#4ecdc4" stroke-width="1" fill="none" stroke-dasharray="4" opacity="0.5"/>'},
+structure:{n:"组合结构",e:"Group Structure",d:"三人以上形成的整体关系结构：包围、半包围、三角、阵营、层级。",kw:["包围","半包围","三角","阵营","层级","孤立"],p:"审讯室里，嫌疑人坐在中央铁椅上，三名警探分别站在前方、左侧和身后，形成半包围结构。",s:'<rect x="20" y="20" width="360" height="160" rx="4" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="1" stroke-dasharray="4"/><circle cx="200" cy="100" r="14" fill="#e74c3c" opacity="0.9"/><text x="200" y="104" text-anchor="middle" fill="#fff" font-size="10">嫌</text><circle cx="200" cy="55" r="10" fill="#45b7d1" opacity="0.8"/><circle cx="140" cy="100" r="10" fill="#45b7d1" opacity="0.8"/><circle cx="200" cy="145" r="10" fill="#45b7d1" opacity="0.8"/><circle cx="340" cy="60" r="8" fill="#888" opacity="0.4"/><ellipse cx="180" cy="100" rx="80" ry="55" fill="none" stroke="rgba(69,183,209,0.2)" stroke-width="1" stroke-dasharray="4"/>'},
+fight:{n:"对抗动作",e:"Combat Choreography",d:"近身搏斗：拳脚、推搡、格挡、闪避、反击和身体碰撞。",kw:["拳脚","推搡","格挡","闪避","反击"],p:"狭小厨房里，两名男子近身搏斗，一个人用锅盖挡住迎面一拳。",s:'<rect x="20" y="20" width="360" height="160" rx="4" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="1" stroke-dasharray="4"/><circle cx="150" cy="90" r="16" fill="#e74c3c" opacity="0.9"/><text x="150" y="75" text-anchor="middle" fill="#e74c3c" font-size="10">A(攻)</text><circle cx="220" cy="100" r="16" fill="#3498db" opacity="0.9"/><text x="220" y="85" text-anchor="middle" fill="#3498db" font-size="10">B(守)</text><path d="M 166 88 L 204 96" stroke="#e74c3c" stroke-width="3" opacity="0.6"/>'},
+chase:{n:"位移动作",e:"Displacement",d:"人物在空间中的位置移动：走向、跑向、追赶、逃离。",kw:["走向","跑向","追赶","逃离"],p:"走廊尽头，女子快步走向出口，身后传来脚步声，她加快步伐变成奔跑。",s:'<rect x="20" y="20" width="360" height="160" rx="4" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="1" stroke-dasharray="4"/><path d="M 50 100 L 350 100" stroke="rgba(255,255,255,0.05)" stroke-width="30"/><circle cx="120" cy="100" r="12" fill="#82e0aa" opacity="0.9"/><text x="120" y="85" text-anchor="middle" fill="#82e0aa" font-size="10">她</text><circle cx="60" cy="100" r="10" fill="#e74c3c" opacity="0.7"/><text x="60" y="85" text-anchor="middle" fill="#e74c3c" font-size="9">追</text><text x="320" y="90" text-anchor="middle" fill="#4ecdc4" font-size="10">出口</text>'},
+dance:{n:"舞蹈队形",e:"Dance Formation",d:"多人按编排形成的舞蹈队形变化：横排、竖排、斜线、圆形、V形。",kw:["横排","竖排","斜线","圆形","V形","对称"],p:"舞台中央，八名舞者从横排队形变换为V字形。",s:'<rect x="20" y="20" width="360" height="160" rx="4" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="1" stroke-dasharray="4"/><circle cx="200" cy="150" r="10" fill="#c9a84c"/><text x="200" y="170" text-anchor="middle" fill="#c9a84c" font-size="9">领舞</text><circle cx="170" cy="120" r="8" fill="#bb8fce" opacity="0.8"/><circle cx="230" cy="120" r="8" fill="#bb8fce" opacity="0.8"/><circle cx="140" cy="90" r="8" fill="#bb8fce" opacity="0.7"/><circle cx="260" cy="90" r="8" fill="#bb8fce" opacity="0.7"/><circle cx="110" cy="60" r="8" fill="#bb8fce" opacity="0.5"/><circle cx="290" cy="60" r="8" fill="#bb8fce" opacity="0.5"/>'},
+crowd:{n:"人群流动",e:"Crowd Flow",d:"人群在空间中的整体流动方向和节奏：行进、涌动、聚集、散开。",kw:["行进","涌动","聚集","散开","分流"],p:"地铁站早高峰，人群从闸机口涌出，分成两个方向流向不同站台。",s:'<rect x="20" y="20" width="360" height="160" rx="4" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="1" stroke-dasharray="4"/><rect x="160" y="75" width="80" height="50" rx="4" fill="rgba(201,168,76,0.2)" stroke="#c9a84c" stroke-width="1"/><text x="200" y="104" text-anchor="middle" fill="#c9a84c" font-size="9">闸机</text><circle cx="80" cy="50" r="4" fill="#4ecdc4" opacity="0.6"/><circle cx="110" cy="45" r="4" fill="#4ecdc4" opacity="0.5"/><circle cx="140" cy="55" r="4" fill="#4ecdc4" opacity="0.4"/><circle cx="300" cy="145" r="4" fill="#4ecdc4" opacity="0.6"/><circle cx="330" cy="150" r="4" fill="#4ecdc4" opacity="0.5"/><path d="M 200 75 Q 150 40 80 40" stroke="rgba(78,205,196,0.3)" stroke-width="1" fill="none" stroke-dasharray="4"/>'},
+surround:{n:"包围阵型",e:"Encirclement",d:"一方被多方从各个方向围住，形成封闭或半封闭的包围圈。",kw:["包围","围困","半包围","合拢"],p:"巷子里，主角被五六个人从前后两方向围住。",s:'<rect x="20" y="20" width="360" height="160" rx="4" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="1" stroke-dasharray="4"/><circle cx="200" cy="100" r="12" fill="#e74c3c" opacity="0.9"/><text x="200" y="104" text-anchor="middle" fill="#fff" font-size="10">主</text><circle cx="255" cy="100" r="8" fill="#e74c3c" opacity="0.5"/><circle cx="145" cy="100" r="8" fill="#e74c3c" opacity="0.5"/><circle cx="227" cy="52" r="8" fill="#e74c3c" opacity="0.5"/><circle cx="172" cy="52" r="8" fill="#e74c3c" opacity="0.5"/><circle cx="227" cy="148" r="8" fill="#e74c3c" opacity="0.5"/><circle cx="172" cy="148" r="8" fill="#e74c3c" opacity="0.5"/><circle cx="200" cy="100" r="55" fill="none" stroke="rgba(231,76,60,0.2)" stroke-width="1" stroke-dasharray="4"/>'},
+multispace:{n:"多空间",e:"Multi-Space",d:"场景中同时存在三个以上的独立空间区域，人物在不同空间之间穿梭或被隔离。",kw:["多房间","多楼层","内外","穿越","连接"],p:"三层别墅：一层客厅有人聚会，二层走廊有人独自走动，三层天台有人打电话。",s:'<rect x="20" y="20" width="360" height="160" rx="4" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="1" stroke-dasharray="4"/><rect x="40" y="120" width="140" height="50" rx="4" fill="rgba(201,168,76,0.15)" stroke="#c9a84c" stroke-width="1"/><text x="110" y="148" text-anchor="middle" fill="#c9a84c" font-size="10">一层</text><rect x="40" y="65" width="140" height="50" rx="4" fill="rgba(69,183,209,0.15)" stroke="#45b7d1" stroke-width="1"/><text x="110" y="93" text-anchor="middle" fill="#45b7d1" font-size="10">二层</text><rect x="40" y="10" width="140" height="50" rx="4" fill="rgba(187,143,206,0.15)" stroke="#bb8fce" stroke-width="1"/><text x="110" y="38" text-anchor="middle" fill="#bb8fce" font-size="10">三层</text><path d="M 200 145 L 200 90 L 200 35" stroke="rgba(255,255,255,0.15)" stroke-width="1" stroke-dasharray="4"/><text x="215" y="100" fill="#888" font-size="9">楼梯</text>'}
+};
+
+function showStaging(key,btn){
+  var d=STAGING[key];if(!d)return;
+  document.querySelectorAll('.staging-nav-item').forEach(function(b){b.classList.remove('active')});
+  if(btn)btn.classList.add('active');
+  document.getElementById('stgName').textContent=d.n;
+  document.getElementById('stgEn').textContent=d.e;
+  document.getElementById('stgDef').textContent=d.d;
+  document.getElementById('stgPrompt').textContent=d.p;
+  document.getElementById('stagingSvg').innerHTML=d.s;
+  document.getElementById('stgKw').innerHTML=d.kw.map(function(k){return '<span class="staging-kw">'+k+'</span>'}).join('');
+}
+
+// ══════ 色彩关系数据 ══════
+var COLORS=[
+{name:"单色 / 统一色彩",en:"Monochrome",desc:"画面以一种颜色为绝对主导，其他颜色只作为深浅明暗变化",swatches:["#2c5f2e","#4a8f4d","#97c88f"]},
+{name:"邻近色 / 相近色",en:"Analogous",desc:"色相环上相邻的颜色，视觉和谐不冲突",swatches:["#e74c3c","#e67e22","#f39c12"]},
+{name:"三原色组合",en:"Triadic",desc:"红黄蓝同时出现，画面色彩丰富饱和",swatches:["#e74c3c","#f1c40f","#3498db"]},
+{name:"互补色 / 对比色",en:"Complementary",desc:"色相相对的颜色制造视觉冲突，蓝橙对比最经典",swatches:["#e67e22","#2980b9"]},
+{name:"局部强调色",en:"Accent Color",desc:"整体色彩统一克制，一小块高饱和颜色作为视觉锚点",swatches:["#2c3e50","#e74c3c"]},
+{name:"色彩分区",en:"Color Zoning",desc:"画面被分成两个以上明确色彩区域，每个区域有自己的主色",swatches:["#e67e22","#2980b9"]}
+];
+
+document.getElementById('colorRelations').innerHTML=COLORS.map(function(c,i){
+  return '<div class="color-rel-card'+(i===3?' active':'')+'" onclick="this.parentNode.querySelectorAll(\'.color-rel-card\').forEach(function(el){el.classList.remove(\'active\')});this.classList.add(\'active\')">'+
+    '<div class="color-rel-swatches">'+c.swatches.map(function(s){return '<div class="color-rel-swatch" style="background:'+s+'"></div>'}).join('')+'</div>'+
+    '<div><div class="color-rel-name">'+c.name+'</div><div class="color-rel-desc">'+c.desc+'</div></div>'+
+    '<span class="color-rel-arrow">&rarr;</span></div>';
+}).join('');
+
+// 初始化场景调度
+showStaging('position', document.querySelector('.staging-nav-item'));
+
+</script>
+</body>
+</html>
